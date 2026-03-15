@@ -624,3 +624,45 @@ body {
     height: min(60px, 15vw);
   }
 }
+/* =========================
+   모바일 화면 대응
+========================= */
+
+@media (max-width: 480px) {
+
+  body{
+    background:#000;
+  }
+
+  .page-bg{
+    display:none;
+  }
+
+  .phone{
+
+    width:100vw;
+    height:100dvh;
+
+    border-radius:0;
+    box-shadow:none;
+
+  }
+
+  .dynamic-island{
+    top:calc(10px + env(safe-area-inset-top));
+  }
+
+  .home-apps{
+
+    padding-left:max(18px, env(safe-area-inset-left));
+    padding-right:max(18px, env(safe-area-inset-right));
+
+  }
+
+  .dock{
+
+    width:calc(100% - 32px);
+
+  }
+
+}
