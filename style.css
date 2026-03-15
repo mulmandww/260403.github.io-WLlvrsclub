@@ -705,6 +705,14 @@ body {
   transform-origin: top center;
 }
 
+.passcode-screen .home-indicator {
+  bottom: calc(6px + var(--safe-bottom));
+}
+
+.keypad {
+  transform: translateY(-4px);
+}
+
   /* 모바일에서만 passcode 자물쇠 다시 그림 */
   .passcode-lock.lock-icon {
     width: 24px;
