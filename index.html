@@ -138,73 +138,127 @@
       <div class="home-indicator"></div>
     </section>
 
-    <!-- ========================= -->
-    <!-- 3. 홈화면 -->
-    <!-- ========================= -->
-    <section class="screen home-screen" id="homeScreen">
-      <div class="wallpaper wallpaper-home"></div>
+<section class="screen home-screen" id="homeScreen">
+  <div class="wallpaper wallpaper-home"></div>
 
-      <div class="home-apps">
-        <button class="app-icon" type="button">
-          <img src="assets/icons/messages.png" alt="Messages" />
-          <span>Messages</span>
-        </button>
+  <!-- 홈 앱 4x6 -->
+  <div class="home-apps">
 
-        <button class="app-icon" type="button">
-          <img src="assets/icons/photos.png" alt="Photos" />
-          <span>Photos</span>
-        </button>
+    <!-- 1줄 -->
+    <button class="app-icon dummy-app" type="button" aria-label="설정">
+      <img src="assets/icons/settings.png" alt="설정" />
+      <span>설정</span>
+    </button>
 
-        <button class="app-icon" type="button">
-          <img src="assets/icons/instagram.png" alt="Instagram" />
-          <span>Instagram</span>
-        </button>
+    <button class="app-icon dummy-app" type="button" aria-label="파일">
+      <img src="assets/icons/files.png" alt="파일" />
+      <span>파일</span>
+    </button>
 
-        <button class="app-icon" type="button">
-          <img src="assets/icons/memo.png" alt="Memo" />
-          <span>Memo</span>
-        </button>
+    <button class="app-icon open-app" type="button" data-screen="memoScreen" aria-label="메모">
+      <img src="assets/icons/memo.png" alt="메모" />
+      <span>메모</span>
+    </button>
 
-        <button class="app-icon" type="button">
-          <img src="assets/icons/messages.png" alt="Calendar" />
-          <span>Calendar</span>
-        </button>
+    <button class="app-icon open-app" type="button" data-screen="calendarScreen" aria-label="캘린더">
+      <img src="assets/icons/calendar.png" alt="캘린더" />
+      <span>캘린더</span>
+    </button>
 
-        <button class="app-icon" type="button">
-          <img src="assets/icons/photos.png" alt="Gallery" />
-          <span>Gallery</span>
-        </button>
+    <!-- 2줄 -->
+    <button class="app-icon popup-app" type="button" data-popup="weather" aria-label="날씨">
+      <img src="assets/icons/weather.png" alt="날씨" />
+      <span>날씨</span>
+    </button>
 
-        <button class="app-icon" type="button">
-          <img src="assets/icons/instagram.png" alt="Notes" />
-          <span>Notes</span>
-        </button>
+    <button class="app-icon dummy-app" type="button" aria-label="계산기">
+      <img src="assets/icons/calculator.png" alt="계산기" />
+      <span>계산기</span>
+    </button>
 
-        <button class="app-icon" type="button">
-          <img src="assets/icons/memo.png" alt="Files" />
-          <span>Files</span>
-        </button>
-      </div>
+    <button class="app-icon dummy-app" type="button" aria-label="카메라">
+      <img src="assets/icons/camera.png" alt="카메라" />
+      <span>카메라</span>
+    </button>
 
-      <div class="dock">
-        <button class="dock-icon" type="button">
-          <img src="assets/icons/messages.png" alt="Phone" />
-        </button>
-        <button class="dock-icon" type="button">
-          <img src="assets/icons/photos.png" alt="Safari" />
-        </button>
-        <button class="dock-icon" type="button">
-          <img src="assets/icons/instagram.png" alt="Music" />
-        </button>
-        <button class="dock-icon" type="button">
-          <img src="assets/icons/memo.png" alt="Settings" />
-        </button>
-      </div>
+    <button class="app-icon open-app" type="button" data-screen="photosScreen" aria-label="사진">
+      <img src="assets/icons/photos.png" alt="사진" />
+      <span>사진</span>
+    </button>
 
-      <div class="home-indicator"></div>
-    </section>
-  </main>
+    <!-- 3줄 -->
+    <button class="app-icon dummy-app" type="button" aria-label="시계">
+      <img src="assets/icons/clock.png" alt="시계" />
+      <span>시계</span>
+    </button>
 
-  <script src="script.js"></script>
-</body>
-</html>
+    <button class="app-icon dummy-app" type="button" aria-label="카카오맵">
+      <img src="assets/icons/kakaomap.png" alt="카카오맵" />
+      <span>카카오맵</span>
+    </button>
+
+    <button class="app-icon popup-app" type="button" data-popup="youtube" aria-label="YouTube">
+      <img src="assets/icons/youtube.png" alt="YouTube" />
+      <span>YouTube</span>
+    </button>
+
+    <button class="app-icon open-app" type="button" data-screen="instagramScreen" aria-label="Instagram">
+      <img src="assets/icons/instagram.png" alt="Instagram" />
+      <span>Instagram</span>
+    </button>
+
+    <!-- 4줄 -->
+    <button class="app-icon dummy-app" type="button" aria-label="App Store">
+      <img src="assets/icons/appstore.png" alt="App Store" />
+      <span>App Store</span>
+    </button>
+
+    <button class="app-icon popup-app" type="button" data-popup="melon" aria-label="Melon">
+      <img src="assets/icons/melon.png" alt="Melon" />
+      <span>Melon</span>
+    </button>
+
+    <button class="app-icon popup-app" type="button" data-popup="x" aria-label="X">
+      <img src="assets/icons/x.png" alt="X" />
+      <span>X</span>
+    </button>
+
+    <div class="app-empty"></div>
+
+    <!-- 5줄 -->
+    <div class="app-empty"></div>
+    <div class="app-empty"></div>
+    <div class="app-empty"></div>
+    <div class="app-empty"></div>
+
+    <!-- 6줄 -->
+    <div class="app-empty"></div>
+    <div class="app-empty"></div>
+    <div class="app-empty"></div>
+    <div class="app-empty"></div>
+
+  </div>
+
+  <!-- Dock -->
+  <div class="dock">
+    <button class="dock-icon open-app" type="button" data-screen="phoneScreen" aria-label="전화">
+      <img src="assets/icons/phone.png" alt="전화" />
+      <span>전화</span>
+    </button>
+
+    <button class="dock-icon open-app" type="button" data-screen="messagesScreen" aria-label="메시지">
+      <img src="assets/icons/messages.png" alt="메시지" />
+      <span>메시지</span>
+    </button>
+
+    <button class="dock-icon open-app" type="button" data-screen="kakaoScreen" aria-label="카카오톡">
+      <img src="assets/icons/kakaotalk.png" alt="카카오톡" />
+      <span>카카오톡</span>
+    </button>
+
+    <button class="dock-icon popup-app" type="button" data-popup="music" aria-label="음악">
+      <img src="assets/icons/music.png" alt="음악" />
+      <span>음악</span>
+    </button>
+  </div>
+</section>
