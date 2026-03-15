@@ -8,6 +8,10 @@
   --phone-height: 844px;
 }
 
+/* ============================= */
+/* RESET */
+/* ============================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -39,7 +43,24 @@ body {
     sans-serif;
 }
 
-/* 웹페이지 전체 배경 */
+button {
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================= */
+/* WEB BACKGROUND */
+/* ============================= */
+
 .page-bg {
   position: fixed;
   inset: 0;
@@ -52,7 +73,10 @@ body {
   pointer-events: none;
 }
 
-/* 아이폰 본체 */
+/* ============================= */
+/* PHONE FRAME */
+/* ============================= */
+
 .phone {
   position: relative;
   z-index: 1;
@@ -66,7 +90,10 @@ body {
     0 28px 80px rgba(0, 0, 0, 0.55);
 }
 
-/* 다이나믹 아일랜드 */
+/* ============================= */
+/* DYNAMIC ISLAND */
+/* ============================= */
+
 .dynamic-island {
   position: absolute;
   top: calc(10px + var(--safe-top));
@@ -79,7 +106,10 @@ body {
   z-index: 50;
 }
 
-/* 상태바 */
+/* ============================= */
+/* STATUS BAR */
+/* ============================= */
+
 .statusbar {
   position: absolute;
   top: calc(17px + var(--safe-top));
@@ -106,7 +136,7 @@ body {
   gap: 9px;
 }
 
-/* 신호 */
+/* signal */
 .signal {
   display: flex;
   align-items: end;
@@ -127,11 +157,12 @@ body {
 .signal i:nth-child(3) { height: 12px; }
 .signal i:nth-child(4) { height: 15px; }
 
-/* 와이파이 */
+/* wifi */
 .wifi {
   position: relative;
   width: 20px;
   height: 14px;
+  overflow: visible;
 }
 
 .wifi::before,
@@ -157,14 +188,6 @@ body {
   height: 10px;
 }
 
-.wifi {
-  overflow: visible;
-}
-
-.wifi:has(*) {
-  overflow: visible;
-}
-
 .wifi-dot {
   position: absolute;
   left: 50%;
@@ -176,7 +199,7 @@ body {
   background: #fff;
 }
 
-/* 배터리 */
+/* battery */
 .battery {
   position: relative;
   width: 27px;
@@ -206,7 +229,10 @@ body {
   background: #fff;
 }
 
-/* 공통 화면 */
+/* ============================= */
+/* COMMON SCREEN */
+/* ============================= */
+
 .screen {
   position: absolute;
   inset: 0;
@@ -230,7 +256,6 @@ body {
 
 .wallpaper-passcode {
   background: url("assets/wallpapers/lock.jpg") center / cover no-repeat;
-  transform: scale(1.04);
 }
 
 .wallpaper-home {
@@ -243,12 +268,15 @@ body {
   left: 0;
   width: 100%;
   height: calc(148px + var(--safe-top));
-  background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.42), transparent);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.42), transparent);
   z-index: 1;
   pointer-events: none;
 }
 
-/* 잠금화면 */
+/* ============================= */
+/* LOCK SCREEN */
+/* ============================= */
+
 .lock-screen {
   z-index: 5;
   cursor: pointer;
@@ -303,7 +331,7 @@ body {
   font-weight: 600;
   letter-spacing: -0.3px;
   margin-bottom: 2px;
-  text-shadow: 0 1px 10px rgba(0,0,0,0.25);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
 }
 
 .lock-time {
@@ -311,7 +339,7 @@ body {
   line-height: 0.95;
   font-weight: 200;
   letter-spacing: -4px;
-  text-shadow: 0 1px 18px rgba(0,0,0,0.22);
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.22);
 }
 
 .swipe-up-area {
@@ -328,10 +356,10 @@ body {
 .swipe-up-text {
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
   text-align: center;
   white-space: nowrap;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.24);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.24);
 }
 
 .lock-bottom-actions {
@@ -365,7 +393,7 @@ body {
   width: 10px;
   height: 15px;
   border-radius: 2px;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .round-action.flashlight::after {
@@ -377,7 +405,7 @@ body {
   width: 14px;
   height: 5px;
   border-radius: 2px;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .round-action.camera::before {
@@ -389,7 +417,7 @@ body {
   width: 24px;
   height: 16px;
   border-radius: 4px;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .round-action.camera::after {
@@ -400,7 +428,7 @@ body {
   transform: translateX(-50%);
   width: 8px;
   height: 8px;
-  border: 2px solid rgba(0,0,0,0.88);
+  border: 2px solid rgba(0, 0, 0, 0.88);
   border-radius: 50%;
 }
 
@@ -412,12 +440,15 @@ body {
   width: 134px;
   height: 5px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.96);
+  background: rgba(255, 255, 255, 0.96);
   z-index: 4;
   pointer-events: none;
 }
 
-/* 암호 입력 */
+/* ============================= */
+/* PASSCODE SCREEN */
+/* ============================= */
+
 .passcode-screen {
   z-index: 6;
 }
@@ -426,7 +457,7 @@ body {
   position: absolute;
   inset: 0;
   backdrop-filter: blur(18px);
-  background: rgba(0,0,0,0.08);
+  background: rgba(0, 0, 0, 0.08);
   z-index: 1;
   pointer-events: none;
 }
@@ -449,7 +480,7 @@ body {
   font-size: 26px;
   font-weight: 600;
   margin-bottom: 22px;
-  text-shadow: 0 1px 10px rgba(0,0,0,0.22);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.22);
 }
 
 .passcode-dots {
@@ -462,13 +493,13 @@ body {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 3px solid rgba(255,255,255,0.95);
+  border: 3px solid rgba(255, 255, 255, 0.95);
   background: transparent;
   transition: background 0.15s ease;
 }
 
 .passcode-dot.filled {
-  background: rgba(255,255,255,0.95);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .keypad {
@@ -486,15 +517,12 @@ body {
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   color: #fff;
   box-shadow: none;
-  border: none;
 }
 
 .key:active {
@@ -536,7 +564,10 @@ body {
   100% { transform: translateX(0); }
 }
 
-/* 홈화면 */
+/* ============================= */
+/* HOME SCREEN */
+/* ============================= */
+
 .home-screen {
   z-index: 4;
 }
@@ -567,14 +598,14 @@ body {
   height: 60px;
   border-radius: 16px;
   object-fit: cover;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
 }
 
 .app-icon span {
   margin-top: 5px;
   font-size: 11px;
   font-weight: 500;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.22);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.22);
 }
 
 .dock {
@@ -586,7 +617,7 @@ body {
   width: min(346px, calc(100% - 32px));
   height: 88px;
   border-radius: 28px;
-  background: rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(22px);
   display: flex;
   align-items: center;
@@ -601,12 +632,18 @@ body {
 }
 
 /* ============================= */
-/* MOBILE FINAL FIX */
+/* MOBILE ONLY */
 /* ============================= */
 
 @media screen and (max-width: 480px) {
+  body {
+    background: #000;
+  }
 
-  /* 전체 화면 모바일 기준 */
+  .page-bg {
+    display: none;
+  }
+
   .phone {
     width: 100vw;
     height: 100svh;
@@ -614,10 +651,7 @@ body {
     box-shadow: none;
   }
 
-  /* ===================== */
-  /* 잠금화면 중앙 요소 위로 */
-  /* ===================== */
-
+  /* lock screen */
   .lock-content {
     padding-top: calc(70px + env(safe-area-inset-top));
   }
@@ -630,20 +664,31 @@ body {
     font-size: clamp(72px, 18vw, 92px);
   }
 
-  /* 손전등 / 카메라 위치 */
   .lock-bottom-actions {
     bottom: calc(70px + env(safe-area-inset-bottom));
   }
 
-  /* 위로 스와이프 안내 */
   .swipe-up-area {
     bottom: calc(34px + env(safe-area-inset-bottom));
   }
 
-  /* ===================== */
-  /* 비밀번호 입력 화면 */
-  /* ===================== */
+  .wallpaper-lock {
+    background-image: url("assets/wallpapers/lock.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #000;
+  }
 
+  .wallpaper-passcode {
+    background-image: url("assets/wallpapers/lock.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #000;
+  }
+
+  /* passcode screen */
   .passcode-screen {
     overflow: hidden;
   }
@@ -654,7 +699,6 @@ body {
     transform-origin: top center;
   }
 
-  /* 자물쇠 아이콘 */
   .passcode-lock.lock-icon {
     width: 24px;
     height: 26px;
@@ -679,6 +723,7 @@ body {
     position: absolute;
     left: 50%;
     top: 10px;
+    bottom: auto;
     transform: translateX(-50%);
     width: 20px;
     height: 15px;
@@ -686,20 +731,14 @@ body {
     background: #fff;
   }
 
-  /* 암호 입력 텍스트 */
   .passcode-title {
     font-size: 24px;
     margin-bottom: 18px;
   }
 
-  /* 점 표시 */
   .passcode-dots {
     margin-bottom: 34px;
   }
-
-  /* ===================== */
-  /* 숫자 키패드 */
-  /* ===================== */
 
   .keypad {
     grid-template-columns: repeat(3, min(88px, 22vw));
@@ -707,7 +746,8 @@ body {
     transform: translateY(-6px);
   }
 
-  .key {
+  .key,
+  .key-empty {
     width: min(88px, 22vw);
     height: min(88px, 22vw);
   }
@@ -721,12 +761,54 @@ body {
     letter-spacing: 1.6px;
   }
 
-  /* ===================== */
-  /* 홈 인디케이터 */
-  /* ===================== */
-
   .passcode-screen .home-indicator {
     bottom: calc(2px + env(safe-area-inset-bottom)) !important;
   }
 
+  /* home */
+  .home-apps {
+    row-gap: 20px;
+    column-gap: 10px;
+    padding-left: max(18px, var(--safe-left));
+    padding-right: max(18px, var(--safe-right));
+  }
+
+  .app-icon img,
+  .dock-icon img {
+    width: min(60px, 15vw);
+    height: min(60px, 15vw);
+  }
+}
+
+/* ============================= */
+/* DESKTOP PASSCODE FIX */
+/* 웹에서 비밀번호 화면 안 작아지게 */
+/* ============================= */
+
+@media screen and (min-width: 481px) {
+  .passcode-wrap {
+    padding-top: calc(112px + var(--safe-top)) !important;
+    transform: none !important;
+  }
+
+  .keypad {
+    grid-template-columns: repeat(3, 94px) !important;
+    gap: 18px 14px !important;
+    transform: none !important;
+  }
+
+  .key,
+  .key-empty {
+    width: 94px !important;
+    height: 94px !important;
+  }
+
+  .key .num {
+    font-size: 34px !important;
+  }
+
+  .key .letters {
+    font-size: 9px !important;
+    letter-spacing: 2px !important;
+  }
 }
