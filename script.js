@@ -1,6 +1,3 @@
-/* =========================
-   화면 요소
-========================= */
 const lockScreen = document.getElementById("lockScreen");
 const passcodeScreen = document.getElementById("passcodeScreen");
 const homeScreen = document.getElementById("homeScreen");
@@ -10,7 +7,6 @@ const lockTime = document.getElementById("lockTime");
 const statusTime = document.getElementById("status-time");
 
 const swipeUpArea = document.getElementById("swipeUpArea");
-const swipeHandle = document.getElementById("swipeHandle");
 
 const passcodeWrap = document.getElementById("passcodeWrap");
 const dots = [
@@ -20,9 +16,10 @@ const dots = [
   document.getElementById("dot4"),
 ];
 
-/* =========================
-   실시간 날짜/시간
-========================= */
+const PASSWORD = "4399";
+let currentInput = "";
+
+/* 날짜/시간 */
 function updateDateTime() {
   const now = new Date();
 
@@ -43,25 +40,28 @@ function updateDateTime() {
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
-/* =========================
-   잠금화면 -> 위로 스와이프
-   모바일/PC 둘 다 작동
-========================= */
+/* 위로 스와이프 */
 let startY = 0;
 let currentY = 0;
 let dragging = false;
 
-function onSwipeStart(clientY) {
-  dragging = true;
-  startY = clientY;
-  currentY = clientY;
+function pointerYFromEvent(event) {
+  if (event.touches && event.touches[0]) return event.touches[0].clientY;
+  if (event.changedTouches && event.changedTouches[0]) return event.changedTouches[0].clientY;
+  return event.clientY;
 }
 
-function onSwipeMove(clientY) {
-  if (!dragging) return;
-  currentY = clientY;
+function onSwipeStart(event) {
+  dragging = true;
+  startY = pointerYFromEvent(event);
+  currentY = startY;
+}
 
-  const diff = startY - currentY; /* 위로 올리면 + */
+function onSwipeMove(event) {
+  if (!dragging) return;
+
+  currentY = pointerYFromEvent(event);
+  const diff = startY - currentY;
   const clamped = Math.max(0, Math.min(diff, 90));
 
   swipeUpArea.style.transform = `translateX(-50%) translateY(${-clamped}px)`;
@@ -82,29 +82,13 @@ function onSwipeEnd() {
   }
 }
 
-swipeUpArea.addEventListener("mousedown", (e) => {
-  onSwipeStart(e.clientY);
-});
+swipeUpArea.addEventListener("touchstart", onSwipeStart, { passive: true });
+window.addEventListener("touchmove", onSwipeMove, { passive: true });
+window.addEventListener("touchend", onSwipeEnd);
 
-window.addEventListener("mousemove", (e) => {
-  onSwipeMove(e.clientY);
-});
-
-window.addEventListener("mouseup", () => {
-  onSwipeEnd();
-});
-
-swipeUpArea.addEventListener("touchstart", (e) => {
-  onSwipeStart(e.touches[0].clientY);
-}, { passive: true });
-
-window.addEventListener("touchmove", (e) => {
-  onSwipeMove(e.touches[0].clientY);
-}, { passive: true });
-
-window.addEventListener("touchend", () => {
-  onSwipeEnd();
-});
+swipeUpArea.addEventListener("mousedown", onSwipeStart);
+window.addEventListener("mousemove", onSwipeMove);
+window.addEventListener("mouseup", onSwipeEnd);
 
 function openPasscodeScreen() {
   lockScreen.classList.remove("active");
@@ -113,12 +97,7 @@ function openPasscodeScreen() {
   swipeUpArea.style.opacity = "1";
 }
 
-/* =========================
-   암호 입력
-========================= */
-const PASSWORD = "4399";
-let currentInput = "";
-
+/* 암호 입력 */
 function updateDots() {
   dots.forEach((dot, index) => {
     if (index < currentInput.length) {
