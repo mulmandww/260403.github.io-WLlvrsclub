@@ -649,3 +649,37 @@ body {
     height: min(60px, 15vw);
   }
 }
+
+/* ============================= */
+/* MOBILE FIX (iPhone view) */
+/* ============================= */
+
+@media (max-width: 480px) {
+
+  /* 손전등 / 카메라 버튼 더 아래 */
+  .lock-bottom-actions {
+    bottom: calc(72px + var(--safe-bottom));
+  }
+
+
+  /* 잠금화면 배경 안 잘리게 */
+  .wallpaper-lock {
+    background-image: url("assets/wallpapers/lock.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #000;
+  }
+
+
+  /* 비밀번호 화면 배경 */
+  .wallpaper-passcode {
+    background-image: url("assets/wallpapers/lock.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #000;
+    transform: none;
+  }
+
+}
