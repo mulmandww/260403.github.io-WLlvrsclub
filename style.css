@@ -684,101 +684,57 @@ body {
 
 }
 
-@media (max-width: 480px) {
-  body {
-    background: #000;
-  }
-
-  .page-bg {
-    display: none;
-  }
-
+  /* 모바일 Safari에서 화면 잘림 방지 */
   .phone {
-    width: 100vw;
-    height: 100dvh;
-    border-radius: 0;
-    box-shadow: none;
+    height: 100svh;
   }
 
-  .lock-time {
-    font-size: clamp(76px, 19vw, 96px);
+  /* 비밀번호 입력 화면 전체를 살짝 축소해서 잘림 방지 */
+  .passcode-screen {
+    overflow: hidden;
   }
 
-  .lock-bottom-actions {
-    bottom: calc(72px + var(--safe-bottom));
-  }
-
-  .wallpaper-lock {
-    background-image: url("assets/wallpapers/lock.jpg");
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: #000;
-  }
-
-  .wallpaper-passcode {
-    background-image: url("assets/wallpapers/lock.jpg");
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: #000;
-    transform: none;
-  }
-
-  /* 비밀번호 화면 전체 위로 */
   .passcode-wrap {
-    padding-top: calc(72px + var(--safe-top));
+    width: 100%;
+    padding-top: calc(58px + var(--safe-top));
+    transform: scale(0.88);
+    transform-origin: top center;
   }
 
-  .passcode-lock {
-    margin-bottom: 20px;
-  }
-
-  .passcode-title {
-    margin-bottom: 18px;
-    font-size: 24px;
-  }
-
-  .passcode-dots {
-    margin-bottom: 38px;
-  }
-
-  .keypad {
-    grid-template-columns: repeat(3, min(88px, 22.5vw));
-    gap: 14px 12px;
-    margin-top: 0;
-    transform: translateY(-6px);
-  }
-
-  .key,
-  .text-action {
-    width: min(88px, 22.5vw);
-    height: min(88px, 22.5vw);
-  }
-
-  .key .num {
-    font-size: clamp(28px, 7.2vw, 32px);
-  }
-
-  .key .letters {
-    font-size: 8px;
-    letter-spacing: 1.6px;
-  }
-
+  /* 0 버튼 / 홈 인디케이터 간섭 줄이기 */
   .passcode-screen .home-indicator {
-    bottom: calc(20px + var(--safe-bottom));
+    bottom: calc(14px + var(--safe-bottom));
   }
 
-  .home-apps {
-    row-gap: 20px;
-    column-gap: 10px;
-    padding-left: max(18px, var(--safe-left));
-    padding-right: max(18px, var(--safe-right));
+  /* 모바일에서만 passcode 자물쇠 다시 그림 */
+  .passcode-lock.lock-icon {
+    width: 24px;
+    height: 26px;
+    margin-bottom: 18px;
   }
 
-  .app-icon img,
-  .dock-icon img {
-    width: min(60px, 15vw);
-    height: min(60px, 15vw);
+  .passcode-lock.lock-icon::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 9px;
+    border: 3px solid #fff;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
   }
-}
+
+  .passcode-lock.lock-icon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    bottom: auto;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 15px;
+    border-radius: 4px;
+    background: #fff;
+  }
