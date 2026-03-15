@@ -6,7 +6,6 @@
 
   --phone-width: 390px;
   --phone-height: 844px;
-  --text-white: rgba(255, 255, 255, 0.98);
 }
 
 * {
@@ -17,19 +16,6 @@
 }
 
 html,
-body{
-
-font-family:
--apple-system,
-BlinkMacSystemFont,
-"SF Pro Display",
-"SF Pro Text",
-"Apple SD Gothic Neo",
-"Noto Sans KR",
-sans-serif;
-
-}
-
 body {
   width: 100%;
   height: 100%;
@@ -41,10 +27,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  background: #111;
   color: #fff;
-  background: #101114;
-  touch-action: manipulation;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    sans-serif;
 }
 
 /* 웹페이지 전체 배경 */
@@ -57,6 +49,7 @@ body {
     url("assets/wallpapers/background.jpg") center / cover no-repeat;
   transform: scale(1.05);
   filter: blur(12px);
+  pointer-events: none;
 }
 
 /* 아이폰 본체 */
@@ -113,7 +106,7 @@ body {
   gap: 9px;
 }
 
-/* 신호 아이콘 */
+/* 신호 */
 .signal {
   display: flex;
   align-items: end;
@@ -134,7 +127,7 @@ body {
 .signal i:nth-child(3) { height: 12px; }
 .signal i:nth-child(4) { height: 15px; }
 
-/* 와이파이 아이콘 */
+/* 와이파이 */
 .wifi {
   position: relative;
   width: 18px;
@@ -164,7 +157,7 @@ body {
   height: 10px;
 }
 
-/* 배터리 아이콘 */
+/* 배터리 */
 .battery {
   position: relative;
   width: 27px;
@@ -209,6 +202,7 @@ body {
   position: absolute;
   inset: 0;
   z-index: 0;
+  pointer-events: none;
 }
 
 .wallpaper-lock {
@@ -232,13 +226,14 @@ body {
   height: calc(148px + var(--safe-top));
   background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.42), transparent);
   z-index: 1;
+  pointer-events: none;
 }
 
 /* 잠금화면 */
 .lock-screen {
   z-index: 5;
-  touch-action: none;
   cursor: pointer;
+  touch-action: none;
 }
 
 .lock-content {
@@ -249,6 +244,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding-top: calc(110px + var(--safe-top));
+  pointer-events: none;
 }
 
 .lock-icon {
@@ -299,7 +295,6 @@ body {
   text-shadow: 0 1px 18px rgba(0,0,0,0.22);
 }
 
-/* 아래 안내 문구 */
 .swipe-up-area {
   position: absolute;
   left: 50%;
@@ -315,12 +310,11 @@ body {
   font-size: 13px;
   font-weight: 500;
   color: rgba(255,255,255,0.9);
-  text-shadow: 0 1px 8px rgba(0,0,0,0.24);
   text-align: center;
   white-space: nowrap;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.24);
 }
 
-/* 하단 좌우 버튼 */
 .lock-bottom-actions {
   position: absolute;
   left: 0;
@@ -331,6 +325,7 @@ body {
   justify-content: space-between;
   padding-left: calc(30px + var(--safe-left));
   padding-right: calc(30px + var(--safe-right));
+  pointer-events: none;
 }
 
 .round-action {
@@ -400,9 +395,10 @@ body {
   border-radius: 999px;
   background: rgba(255,255,255,0.96);
   z-index: 4;
+  pointer-events: none;
 }
 
-/* 암호 입력 화면 */
+/* 암호 입력 */
 .passcode-screen {
   z-index: 6;
 }
@@ -413,6 +409,7 @@ body {
   backdrop-filter: blur(18px);
   background: rgba(0,0,0,0.08);
   z-index: 1;
+  pointer-events: none;
 }
 
 .passcode-wrap {
@@ -455,7 +452,6 @@ body {
   background: rgba(255,255,255,0.95);
 }
 
-/* 숫자 키패드 */
 .keypad {
   display: grid;
   grid-template-columns: repeat(3, 94px);
@@ -601,10 +597,6 @@ body {
     box-shadow: none;
   }
 
-  .dynamic-island {
-    top: calc(10px + var(--safe-top));
-  }
-
   .lock-time {
     font-size: clamp(76px, 19vw, 96px);
   }
@@ -636,46 +628,4 @@ body {
     width: min(60px, 15vw);
     height: min(60px, 15vw);
   }
-}
-/* =========================
-   모바일 화면 대응
-========================= */
-
-@media (max-width: 480px) {
-
-  body{
-    background:#000;
-  }
-
-  .page-bg{
-    display:none;
-  }
-
-  .phone{
-
-    width:100vw;
-    height:100dvh;
-
-    border-radius:0;
-    box-shadow:none;
-
-  }
-
-  .dynamic-island{
-    top:calc(10px + env(safe-area-inset-top));
-  }
-
-  .home-apps{
-
-    padding-left:max(18px, env(safe-area-inset-left));
-    padding-right:max(18px, env(safe-area-inset-right));
-
-  }
-
-  .dock{
-
-    width:calc(100% - 32px);
-
-  }
-
 }
