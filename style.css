@@ -1,16 +1,14 @@
-/* =====================================================
-   GLOBAL
-===================================================== */
-
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 }
 
+
+
 body{
 
-background:#0f0f0f;
+background:#111;
 
 display:flex;
 justify-content:center;
@@ -18,21 +16,22 @@ align-items:center;
 
 height:100vh;
 
-font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+font-family:-apple-system,BlinkMacSystemFont;
 
 color:white;
 
 }
 
 
-/* =====================================================
-   PHONE FRAME
-===================================================== */
+
+/* PHONE */
 
 .phone{
 
 width:390px;
 height:844px;
+
+background:black;
 
 border-radius:55px;
 
@@ -40,19 +39,13 @@ overflow:hidden;
 
 position:relative;
 
-background:black;
-
-box-shadow:
-0 0 0 10px #1a1a1a,
-0 30px 60px rgba(0,0,0,0.8);
+box-shadow:0 30px 60px rgba(0,0,0,0.8);
 
 }
 
 
 
-/* =====================================================
-   NOTCH (Dynamic Island 스타일)
-===================================================== */
+/* NOTCH */
 
 .notch{
 
@@ -70,43 +63,37 @@ background:black;
 
 border-radius:20px;
 
-z-index:50;
+z-index:10;
 
 }
 
 
 
-/* =====================================================
-   STATUS BAR
-===================================================== */
+/* STATUS BAR */
 
 .statusbar{
 
 position:absolute;
 
-top:10px;
+top:12px;
 
 width:100%;
-
-padding:0 30px;
 
 display:flex;
 
 justify-content:space-between;
 
+padding:0 30px;
+
 font-size:14px;
 
-z-index:60;
-
-font-weight:500;
+z-index:20;
 
 }
 
 
 
-/* =====================================================
-   LOCK SCREEN
-===================================================== */
+/* LOCKSCREEN */
 
 .lockscreen{
 
@@ -115,7 +102,7 @@ position:absolute;
 width:100%;
 height:100%;
 
-background:url("assets/wallpapers/lock.jpg") center/cover no-repeat;
+background:url("assets/wallpapers/lock.jpg") center/cover;
 
 display:flex;
 
@@ -125,27 +112,23 @@ align-items:center;
 
 justify-content:center;
 
-text-align:center;
-
 }
 
 
 
-/* 날짜 */
+/* DATE */
 
 .date{
 
-font-size:20px;
+font-size:22px;
 
-opacity:0.9;
-
-margin-bottom:10px;
+margin-bottom:8px;
 
 }
 
 
 
-/* 시간 */
+/* TIME */
 
 .time{
 
@@ -153,51 +136,51 @@ font-size:88px;
 
 font-weight:200;
 
-letter-spacing:-2px;
+}
+
+
+
+/* SLIDER */
+
+.slider{
+
+margin-top:80px;
+
+width:260px;
+height:50px;
+
+background:rgba(255,255,255,0.2);
+
+border-radius:25px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+position:relative;
 
 }
 
 
 
-/* 비밀번호 입력 */
+.slider span{
 
-#passcode{
-
-margin-top:40px;
-
-padding:12px 16px;
-
-width:200px;
-
-border-radius:14px;
-
-border:none;
-
-font-size:18px;
-
-text-align:center;
-
-background:rgba(255,255,255,0.8);
-
-color:black;
+opacity:0.8;
 
 }
 
 
 
-/* unlock 버튼 */
+.slider-btn{
 
-button{
+position:absolute;
 
-margin-top:12px;
+left:4px;
 
-padding:10px 20px;
+width:42px;
+height:42px;
 
-border-radius:14px;
-
-border:none;
-
-font-size:16px;
+border-radius:50%;
 
 background:white;
 
@@ -207,9 +190,102 @@ cursor:pointer;
 
 
 
-/* =====================================================
-   HOME SCREEN
-===================================================== */
+/* PASSCODE */
+
+.passcode-screen{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+background:url("assets/wallpapers/lock.jpg") center/cover;
+
+display:none;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+
+
+.passcode-title{
+
+font-size:22px;
+
+margin-bottom:30px;
+
+}
+
+
+
+/* DOTS */
+
+.dots{
+
+display:flex;
+
+gap:14px;
+
+margin-bottom:40px;
+
+}
+
+
+
+.dot{
+
+width:14px;
+height:14px;
+
+border-radius:50%;
+
+border:2px solid white;
+
+}
+
+
+
+/* KEYPAD */
+
+.keypad{
+
+display:grid;
+
+grid-template-columns:repeat(3,80px);
+
+gap:20px;
+
+}
+
+
+
+.keypad button{
+
+width:80px;
+height:80px;
+
+border-radius:50%;
+
+border:none;
+
+font-size:28px;
+
+background:rgba(255,255,255,0.15);
+
+color:white;
+
+backdrop-filter:blur(10px);
+
+}
+
+
+
+/* HOME */
 
 .home{
 
@@ -218,7 +294,7 @@ position:absolute;
 width:100%;
 height:100%;
 
-background:url("assets/wallpapers/home.jpg") center/cover no-repeat;
+background:url("assets/wallpapers/home.jpg") center/cover;
 
 display:none;
 
@@ -228,9 +304,7 @@ padding-top:120px;
 
 
 
-/* =====================================================
-   APP GRID (아이폰 4열)
-===================================================== */
+/* APPS */
 
 .app-grid{
 
@@ -246,8 +320,6 @@ padding:0 28px;
 
 
 
-/* 앱 */
-
 .app{
 
 display:flex;
@@ -260,8 +332,6 @@ align-items:center;
 
 
 
-/* 아이콘 */
-
 .app img{
 
 width:62px;
@@ -269,31 +339,21 @@ height:62px;
 
 border-radius:18px;
 
-object-fit:cover;
-
-box-shadow:0 4px 12px rgba(0,0,0,0.4);
-
 }
 
 
-
-/* 앱 이름 */
 
 .app p{
 
-margin-top:6px;
-
 font-size:11px;
 
-font-weight:500;
+margin-top:6px;
 
 }
 
 
 
-/* =====================================================
-   DOCK
-===================================================== */
+/* DOCK */
 
 .dock{
 
@@ -324,41 +384,11 @@ align-items:center;
 
 
 
-/* dock 아이콘 */
-
 .dock img{
 
 width:62px;
 height:62px;
 
 border-radius:18px;
-
-object-fit:cover;
-
-}
-
-
-
-/* =====================================================
-   SHAKE ANIMATION (비밀번호 틀림)
-===================================================== */
-
-@keyframes shake{
-
-0%{transform:translateX(0);}
-
-25%{transform:translateX(-8px);}
-
-50%{transform:translateX(8px);}
-
-75%{transform:translateX(-8px);}
-
-100%{transform:translateX(0);}
-
-}
-
-.shake{
-
-animation:shake 0.4s;
 
 }
