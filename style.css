@@ -1,16 +1,44 @@
-/* =========================
-   기본 리셋
-========================= */
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  --phone-width: 390px;
+  --phone-height: 844px;
+  --text-white: rgba(255, 255, 255, 0.98);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  color: #fff;
+  background: #101114;
+  touch-action: manipulation;
 }
 
 button {
   font: inherit;
   border: none;
   background: none;
+  color: inherit;
   cursor: pointer;
 }
 
@@ -20,60 +48,34 @@ img {
   height: 100%;
 }
 
-/* =========================
-   웹 전체 배경
-   여기 이미지 바꾸면 폰 뒤 배경 바뀜
-========================= */
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  color: #fff;
-  overflow: hidden;
-  background: #101114;
-}
-
 .page-bg {
   position: fixed;
   inset: 0;
+  z-index: 0;
   background:
     linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.38)),
     url("assets/wallpapers/background.jpg") center / cover no-repeat;
   transform: scale(1.05);
   filter: blur(12px);
-  z-index: 0;
 }
 
-/* =========================
-   아이폰 본체
-========================= */
+/* 아이폰 본체 */
 .phone {
   position: relative;
-  width: 390px;
-  height: 844px;
+  z-index: 1;
+  width: var(--phone-width);
+  height: var(--phone-height);
   border-radius: 42px;
   overflow: hidden;
   background: #000;
   box-shadow:
     0 0 0 10px #0c0c0d,
     0 28px 80px rgba(0, 0, 0, 0.55);
-  z-index: 1;
 }
 
-/* =========================
-   Dynamic Island
-========================= */
 .dynamic-island {
   position: absolute;
-  top: 10px;
+  top: calc(10px + var(--safe-top));
   left: 50%;
   transform: translateX(-50%);
   width: 126px;
@@ -83,15 +85,13 @@ body {
   z-index: 50;
 }
 
-/* =========================
-   공통 상태바
-========================= */
 .statusbar {
   position: absolute;
-  top: 17px;
+  top: calc(17px + var(--safe-top));
   left: 0;
   width: 100%;
-  padding: 0 22px;
+  padding-left: calc(22px + var(--safe-left));
+  padding-right: calc(22px + var(--safe-right));
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -111,7 +111,6 @@ body {
   gap: 9px;
 }
 
-/* 신호 */
 .signal {
   display: flex;
   align-items: end;
@@ -132,7 +131,6 @@ body {
 .signal i:nth-child(3) { height: 12px; }
 .signal i:nth-child(4) { height: 15px; }
 
-/* 와이파이 */
 .wifi {
   position: relative;
   width: 18px;
@@ -162,11 +160,6 @@ body {
   height: 10px;
 }
 
-.wifi span {
-  display: none;
-}
-
-/* 배터리 */
 .battery {
   position: relative;
   width: 27px;
@@ -196,9 +189,6 @@ body {
   background: #fff;
 }
 
-/* =========================
-   공통 화면
-========================= */
 .screen {
   position: absolute;
   inset: 0;
@@ -233,14 +223,12 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 148px;
+  height: calc(148px + var(--safe-top));
   background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.42), transparent);
   z-index: 1;
 }
 
-/* =========================
-   잠금화면
-========================= */
+/* 잠금화면 */
 .lock-screen {
   z-index: 5;
 }
@@ -252,7 +240,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 110px;
+  padding-top: calc(110px + var(--safe-top));
 }
 
 .lock-icon {
@@ -303,16 +291,16 @@ body {
   text-shadow: 0 1px 18px rgba(0,0,0,0.22);
 }
 
-/* 아래에서 위로 올리기 영역 */
 .swipe-up-area {
   position: absolute;
   left: 50%;
-  bottom: 22px;
-  transform: translateX(-50%);
+  bottom: calc(22px + var(--safe-bottom));
+  transform: translateX(-50%) translateY(0);
   width: 220px;
   height: 52px;
   z-index: 4;
   touch-action: none;
+  user-select: none;
 }
 
 .swipe-up-text {
@@ -339,16 +327,16 @@ body {
   background: rgba(255,255,255,0.95);
 }
 
-/* 하단 좌우 버튼 */
 .lock-bottom-actions {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 110px;
+  bottom: calc(110px + var(--safe-bottom));
   z-index: 3;
   display: flex;
   justify-content: space-between;
-  padding: 0 30px;
+  padding-left: calc(30px + var(--safe-left));
+  padding-right: calc(30px + var(--safe-right));
 }
 
 .round-action {
@@ -408,11 +396,10 @@ body {
   border-radius: 50%;
 }
 
-/* 홈 인디케이터 */
 .home-indicator {
   position: absolute;
   left: 50%;
-  bottom: 8px;
+  bottom: calc(8px + var(--safe-bottom));
   transform: translateX(-50%);
   width: 134px;
   height: 5px;
@@ -421,9 +408,7 @@ body {
   z-index: 4;
 }
 
-/* =========================
-   암호 입력 화면
-========================= */
+/* 암호입력 */
 .passcode-screen {
   z-index: 6;
 }
@@ -443,7 +428,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 112px;
+  padding-top: calc(112px + var(--safe-top));
 }
 
 .passcode-lock {
@@ -476,7 +461,6 @@ body {
   background: rgba(255,255,255,0.95);
 }
 
-/* 키패드 */
 .keypad {
   display: grid;
   grid-template-columns: repeat(3, 94px);
@@ -523,19 +507,9 @@ body {
   width: 94px;
   height: 94px;
   color: rgba(255,255,255,0.96);
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
   align-self: center;
-}
-
-.emergency {
-  font-size: 15px;
-  justify-self: center;
-}
-
-.cancel {
-  font-size: 15px;
-  justify-self: center;
 }
 
 .passcode-wrap.shake {
@@ -551,9 +525,7 @@ body {
   100% { transform: translateX(0); }
 }
 
-/* =========================
-   홈화면
-========================= */
+/* 홈화면 */
 .home-screen {
   z-index: 4;
 }
@@ -565,7 +537,11 @@ body {
   grid-template-columns: repeat(4, 1fr);
   row-gap: 22px;
   column-gap: 14px;
-  padding: 112px 22px 0;
+  padding:
+    calc(112px + var(--safe-top))
+    calc(22px + var(--safe-right))
+    0
+    calc(22px + var(--safe-left));
 }
 
 .app-icon {
@@ -593,10 +569,10 @@ body {
 .dock {
   position: absolute;
   left: 50%;
-  bottom: 24px;
+  bottom: calc(24px + var(--safe-bottom));
   transform: translateX(-50%);
   z-index: 3;
-  width: 346px;
+  width: min(346px, calc(100% - 32px));
   height: 88px;
   border-radius: 28px;
   background: rgba(255,255,255,0.18);
@@ -613,18 +589,56 @@ body {
   object-fit: cover;
 }
 
-/* =========================
-   반응형
-========================= */
+/* 모바일 최적화 */
 @media (max-width: 480px) {
-  .phone {
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
-    box-shadow: none;
+  body {
+    background: #000;
   }
 
   .page-bg {
     display: none;
+  }
+
+  .phone {
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .dynamic-island {
+    top: calc(10px + var(--safe-top));
+  }
+
+  .lock-time {
+    font-size: clamp(76px, 19vw, 96px);
+  }
+
+  .keypad {
+    grid-template-columns: repeat(3, min(94px, 24vw));
+    gap: 16px 12px;
+  }
+
+  .key,
+  .text-action {
+    width: min(94px, 24vw);
+    height: min(94px, 24vw);
+  }
+
+  .key .num {
+    font-size: clamp(30px, 8vw, 34px);
+  }
+
+  .home-apps {
+    row-gap: 20px;
+    column-gap: 10px;
+    padding-left: max(18px, var(--safe-left));
+    padding-right: max(18px, var(--safe-right));
+  }
+
+  .app-icon img,
+  .dock-icon img {
+    width: min(60px, 15vw);
+    height: min(60px, 15vw);
   }
 }
