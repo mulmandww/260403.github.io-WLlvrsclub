@@ -34,20 +34,7 @@ body {
   touch-action: manipulation;
 }
 
-button {
-  font: inherit;
-  border: none;
-  background: none;
-  color: inherit;
-  cursor: pointer;
-}
-
-img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
+/* 웹페이지 전체 배경 */
 .page-bg {
   position: fixed;
   inset: 0;
@@ -73,6 +60,7 @@ img {
     0 28px 80px rgba(0, 0, 0, 0.55);
 }
 
+/* 다이나믹 아일랜드 */
 .dynamic-island {
   position: absolute;
   top: calc(10px + var(--safe-top));
@@ -85,6 +73,7 @@ img {
   z-index: 50;
 }
 
+/* 상태바 */
 .statusbar {
   position: absolute;
   top: calc(17px + var(--safe-top));
@@ -111,6 +100,7 @@ img {
   gap: 9px;
 }
 
+/* 신호 아이콘 */
 .signal {
   display: flex;
   align-items: end;
@@ -131,6 +121,7 @@ img {
 .signal i:nth-child(3) { height: 12px; }
 .signal i:nth-child(4) { height: 15px; }
 
+/* 와이파이 아이콘 */
 .wifi {
   position: relative;
   width: 18px;
@@ -160,6 +151,7 @@ img {
   height: 10px;
 }
 
+/* 배터리 아이콘 */
 .battery {
   position: relative;
   width: 27px;
@@ -189,6 +181,7 @@ img {
   background: #fff;
 }
 
+/* 공통 화면 */
 .screen {
   position: absolute;
   inset: 0;
@@ -231,6 +224,7 @@ img {
 /* 잠금화면 */
 .lock-screen {
   z-index: 5;
+  touch-action: manipulation;
 }
 
 .lock-content {
@@ -291,42 +285,28 @@ img {
   text-shadow: 0 1px 18px rgba(0,0,0,0.22);
 }
 
+/* 아래 안내 문구 */
 .swipe-up-area {
   position: absolute;
   left: 50%;
-  bottom: calc(22px + var(--safe-bottom));
-  transform: translateX(-50%) translateY(0);
-  width: 220px;
-  height: 52px;
+  bottom: calc(26px + var(--safe-bottom));
+  transform: translateX(-50%);
+  width: 240px;
+  height: 24px;
   z-index: 4;
-  touch-action: none;
-  user-select: none;
+  pointer-events: none;
 }
 
 .swipe-up-text {
-  position: absolute;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
   font-size: 13px;
   font-weight: 500;
   color: rgba(255,255,255,0.9);
   text-shadow: 0 1px 8px rgba(0,0,0,0.24);
+  text-align: center;
   white-space: nowrap;
-  opacity: 0.9;
 }
 
-.swipe-handle {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 134px;
-  height: 5px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.95);
-}
-
+/* 하단 좌우 버튼 */
 .lock-bottom-actions {
   position: absolute;
   left: 0;
@@ -408,7 +388,7 @@ img {
   z-index: 4;
 }
 
-/* 암호입력 */
+/* 암호 입력 화면 */
 .passcode-screen {
   z-index: 6;
 }
@@ -461,6 +441,7 @@ img {
   background: rgba(255,255,255,0.95);
 }
 
+/* 숫자 키패드 */
 .keypad {
   display: grid;
   grid-template-columns: repeat(3, 94px);
@@ -589,7 +570,7 @@ img {
   object-fit: cover;
 }
 
-/* 모바일 최적화 */
+/* 모바일 대응 */
 @media (max-width: 480px) {
   body {
     background: #000;
