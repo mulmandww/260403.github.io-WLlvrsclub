@@ -564,72 +564,130 @@ img {
   height: 94px;
 }
 
-/* ============================= */
-/* HOME SCREEN */
-/* ============================= */
+<section class="screen home-screen" id="homeScreen">
+  <div class="wallpaper wallpaper-home"></div>
 
-.home-screen {
-  z-index: 4;
-}
+  <!-- 홈 앱 4x6 -->
+  <div class="home-apps">
 
-.home-apps {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  row-gap: 22px;
-  column-gap: 14px;
-  padding:
-    calc(112px + var(--safe-top))
-    calc(22px + var(--safe-right))
-    0
-    calc(22px + var(--safe-left));
-}
+    <!-- 1줄 -->
+    <button class="app-icon dummy-app" type="button" aria-label="설정">
+      <img src="assets/icons/settings.png" alt="설정" />
+      <span>설정</span>
+    </button>
 
-.app-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #fff;
-}
+    <button class="app-icon dummy-app" type="button" aria-label="파일">
+      <img src="assets/icons/files.png" alt="파일" />
+      <span>파일</span>
+    </button>
 
-.app-icon img {
-  width: 60px;
-  height: 60px;
-  border-radius: 16px;
-  object-fit: cover;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
-}
+    <button class="app-icon open-app" type="button" data-screen="memoScreen" aria-label="메모">
+      <img src="assets/icons/memo.png" alt="메모" />
+      <span>메모</span>
+    </button>
 
-.app-icon span {
-  margin-top: 5px;
-  font-size: 11px;
-  font-weight: 500;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.22);
-}
+    <button class="app-icon open-app" type="button" data-screen="calendarScreen" aria-label="캘린더">
+      <img src="assets/icons/calendar.png" alt="캘린더" />
+      <span>캘린더</span>
+    </button>
 
-.dock {
-  position: absolute;
-  left: 50%;
-  bottom: calc(24px + var(--safe-bottom));
-  transform: translateX(-50%);
-  z-index: 3;
-  width: min(346px, calc(100% - 32px));
-  height: 88px;
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(22px);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
+    <!-- 2줄 -->
+    <button class="app-icon popup-app" type="button" data-popup="weather" aria-label="날씨">
+      <img src="assets/icons/weather.png" alt="날씨" />
+      <span>날씨</span>
+    </button>
 
-.dock-icon img {
-  width: 60px;
-  height: 60px;
-  border-radius: 16px;
-  object-fit: cover;
-}
+    <button class="app-icon dummy-app" type="button" aria-label="계산기">
+      <img src="assets/icons/calculator.png" alt="계산기" />
+      <span>계산기</span>
+    </button>
+
+    <button class="app-icon dummy-app" type="button" aria-label="카메라">
+      <img src="assets/icons/camera.png" alt="카메라" />
+      <span>카메라</span>
+    </button>
+
+    <button class="app-icon open-app" type="button" data-screen="photosScreen" aria-label="사진">
+      <img src="assets/icons/photos.png" alt="사진" />
+      <span>사진</span>
+    </button>
+
+    <!-- 3줄 -->
+    <button class="app-icon dummy-app" type="button" aria-label="시계">
+      <img src="assets/icons/clock.png" alt="시계" />
+      <span>시계</span>
+    </button>
+
+    <button class="app-icon dummy-app" type="button" aria-label="카카오맵">
+      <img src="assets/icons/kakaomap.png" alt="카카오맵" />
+      <span>카카오맵</span>
+    </button>
+
+    <button class="app-icon popup-app" type="button" data-popup="youtube" aria-label="YouTube">
+      <img src="assets/icons/youtube.png" alt="YouTube" />
+      <span>YouTube</span>
+    </button>
+
+    <button class="app-icon open-app" type="button" data-screen="instagramScreen" aria-label="Instagram">
+      <img src="assets/icons/instagram.png" alt="Instagram" />
+      <span>Instagram</span>
+    </button>
+
+    <!-- 4줄 -->
+    <button class="app-icon dummy-app" type="button" aria-label="App Store">
+      <img src="assets/icons/appstore.png" alt="App Store" />
+      <span>App Store</span>
+    </button>
+
+    <button class="app-icon popup-app" type="button" data-popup="melon" aria-label="Melon">
+      <img src="assets/icons/melon.png" alt="Melon" />
+      <span>Melon</span>
+    </button>
+
+    <button class="app-icon popup-app" type="button" data-popup="x" aria-label="X">
+      <img src="assets/icons/x.png" alt="X" />
+      <span>X</span>
+    </button>
+
+    <div class="app-empty"></div>
+
+    <!-- 5줄 -->
+    <div class="app-empty"></div>
+    <div class="app-empty"></div>
+    <div class="app-empty"></div>
+    <div class="app-empty"></div>
+
+    <!-- 6줄 -->
+    <div class="app-empty"></div>
+    <div class="app-empty"></div>
+    <div class="app-empty"></div>
+    <div class="app-empty"></div>
+
+  </div>
+
+  <!-- Dock -->
+  <div class="dock">
+    <button class="dock-icon open-app" type="button" data-screen="phoneScreen" aria-label="전화">
+      <img src="assets/icons/phone.png" alt="전화" />
+      <span>전화</span>
+    </button>
+
+    <button class="dock-icon open-app" type="button" data-screen="messagesScreen" aria-label="메시지">
+      <img src="assets/icons/messages.png" alt="메시지" />
+      <span>메시지</span>
+    </button>
+
+    <button class="dock-icon open-app" type="button" data-screen="kakaoScreen" aria-label="카카오톡">
+      <img src="assets/icons/kakaotalk.png" alt="카카오톡" />
+      <span>카카오톡</span>
+    </button>
+
+    <button class="dock-icon popup-app" type="button" data-popup="music" aria-label="음악">
+      <img src="assets/icons/music.png" alt="음악" />
+      <span>음악</span>
+    </button>
+  </div>
+</section>
 
 /* ============================= */
 /* MOBILE ONLY */
@@ -810,5 +868,49 @@ img {
   .key .letters {
     font-size: 9px !important;
     letter-spacing: 2px !important;
+  }
+
+  /* ===================== */
+  /* HOME SCREEN MOBILE */
+  /* ===================== */
+
+  .home-apps {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 78px;
+    column-gap: 8px;
+    row-gap: 18px;
+
+    padding-top: calc(92px + env(safe-area-inset-top));
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 132px;
+  }
+
+  .app-icon img {
+    width: min(58px, 14vw);
+    height: min(58px, 14vw);
+  }
+
+  .app-icon span {
+    margin-top: 4px;
+    font-size: 10px;
+  }
+
+  .app-empty {
+    height: 78px;
+  }
+
+  .dock {
+    width: calc(100% - 24px);
+    max-width: none;
+    height: 88px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    border-radius: 28px;
+    padding: 0 8px;
+  }
+
+  .dock-icon img {
+    width: min(58px, 14vw);
+    height: min(58px, 14vw);
   }
 }
