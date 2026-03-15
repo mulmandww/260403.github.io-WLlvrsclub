@@ -1,14 +1,12 @@
-```html
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>iPhone Web UI</title>
+<title>iPhone UI</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -20,42 +18,31 @@
 
 
 
-<!-- ========================= -->
-<!-- PHONE FRAME -->
-<!-- ========================= -->
-
 <div class="phone">
 
 
 
-<!-- ========================= -->
 <!-- NOTCH -->
-<!-- ========================= -->
 
 <div class="notch"></div>
 
 
 
-<!-- ========================= -->
 <!-- STATUS BAR -->
-<!-- ========================= -->
 
 <div class="statusbar">
 
-<span id="status-time">00:00</span>
+<div id="status-time">00:00</div>
 
-<span>📶 🔋</span>
+<div>📶 🔋</div>
 
 </div>
 
 
 
-<!-- ========================= -->
 <!-- LOCK SCREEN -->
-<!-- ========================= -->
 
 <div class="lockscreen" id="lockscreen">
-
 
 
 <div class="date" id="date">0000년 0월 0일</div>
@@ -63,133 +50,109 @@
 <div class="time" id="time">00:00</div>
 
 
+<div class="slider" id="slider">
 
-<input type="password" id="passcode" placeholder="비밀번호 입력">
+<span>밀어서 잠금해제</span>
 
-<button onclick="unlockPhone()">Unlock</button>
+<div class="slider-btn" id="sliderBtn"></div>
 
+</div>
 
 
 </div>
 
 
 
-<!-- ========================= -->
+<!-- PASSCODE SCREEN -->
+
+<div class="passcode-screen" id="passcodeScreen">
+
+
+<div class="passcode-title">
+
+암호 입력
+
+</div>
+
+
+
+<div class="dots">
+
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+<div class="dot"></div>
+
+</div>
+
+
+
+<div class="keypad">
+
+<button onclick="press(1)">1</button>
+<button onclick="press(2)">2</button>
+<button onclick="press(3)">3</button>
+
+<button onclick="press(4)">4</button>
+<button onclick="press(5)">5</button>
+<button onclick="press(6)">6</button>
+
+<button onclick="press(7)">7</button>
+<button onclick="press(8)">8</button>
+<button onclick="press(9)">9</button>
+
+<div></div>
+<button onclick="press(0)">0</button>
+<button onclick="deleteNum()">⌫</button>
+
+</div>
+
+
+</div>
+
+
+
 <!-- HOME SCREEN -->
-<!-- ========================= -->
 
 <div class="home" id="home">
-
 
 
 <div class="app-grid">
 
 
-
 <div class="app">
-
 <img src="assets/icons/messages.png">
-
 <p>Messages</p>
-
 </div>
 
-
-
 <div class="app">
-
 <img src="assets/icons/photos.png">
-
 <p>Photos</p>
-
 </div>
 
-
-
 <div class="app">
-
 <img src="assets/icons/instagram.png">
-
 <p>Instagram</p>
-
 </div>
 
-
-
 <div class="app">
-
 <img src="assets/icons/memo.png">
-
 <p>Memo</p>
-
 </div>
-
-
-
-<div class="app">
-
-<img src="assets/icons/messages.png">
-
-<p>Messages</p>
-
-</div>
-
-
-
-<div class="app">
-
-<img src="assets/icons/photos.png">
-
-<p>Photos</p>
-
-</div>
-
-
-
-<div class="app">
-
-<img src="assets/icons/instagram.png">
-
-<p>Instagram</p>
-
-</div>
-
-
-
-<div class="app">
-
-<img src="assets/icons/memo.png">
-
-<p>Memo</p>
-
-</div>
-
 
 
 </div>
 
 
-
-<!-- ========================= -->
-<!-- DOCK -->
-<!-- ========================= -->
 
 <div class="dock">
 
-
-
 <img src="assets/icons/messages.png">
-
 <img src="assets/icons/photos.png">
-
 <img src="assets/icons/instagram.png">
-
 <img src="assets/icons/memo.png">
 
-
-
 </div>
-
 
 
 </div>
@@ -205,4 +168,3 @@
 </body>
 
 </html>
-```
