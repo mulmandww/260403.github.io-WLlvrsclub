@@ -224,7 +224,8 @@ body {
 /* 잠금화면 */
 .lock-screen {
   z-index: 5;
-  touch-action: manipulation;
+  touch-action: none;
+  cursor: pointer;
 }
 
 .lock-content {
