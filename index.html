@@ -1,17 +1,15 @@
+```html
 <!DOCTYPE html>
-
 <html lang="ko">
 
 <head>
 
 <meta charset="UTF-8">
 
-<!-- 모바일 화면 대응 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>WLvrsclub iPhone</title>
+<title>iPhone Web UI</title>
 
-<!-- 외부 CSS 연결 -->
 <link rel="stylesheet" href="style.css">
 
 </head>
@@ -22,177 +20,53 @@
 
 
 
-<!-- =============================== -->
-<!-- iPhone 전체 틀 -->
-<!-- =============================== -->
+<!-- ========================= -->
+<!-- PHONE FRAME -->
+<!-- ========================= -->
 
 <div class="phone">
 
 
 
-    <!-- =============================== -->
-    <!-- 잠금화면 -->
-    <!-- =============================== -->
+<!-- ========================= -->
+<!-- NOTCH -->
+<!-- ========================= -->
 
-    <div class="lockscreen">
+<div class="notch"></div>
 
-        <!-- 현재 시간 표시 -->
-        <div class="time" id="time">
-            00:00
-        </div>
 
 
-        <!-- 안내 텍스트 -->
-        <div class="unlock-text">
-            Enter Passcode
-        </div>
+<!-- ========================= -->
+<!-- STATUS BAR -->
+<!-- ========================= -->
 
+<div class="statusbar">
 
+<span id="status-time">00:00</span>
 
-        <!-- =============================== -->
-        <!-- 비밀번호 점 표시 (●●●●) -->
-        <!-- =============================== -->
+<span>📶 🔋</span>
 
-        <div class="passcode-dots">
+</div>
 
-            <span class="dot" id="dot1"></span>
-            <span class="dot" id="dot2"></span>
-            <span class="dot" id="dot3"></span>
-            <span class="dot" id="dot4"></span>
 
-        </div>
 
+<!-- ========================= -->
+<!-- LOCK SCREEN -->
+<!-- ========================= -->
 
+<div class="lockscreen" id="lockscreen">
 
-        <!-- =============================== -->
-        <!-- 숫자 키패드 -->
-        <!-- =============================== -->
 
-        <div class="keypad">
 
-            <button onclick="pressKey(1)">1</button>
-            <button onclick="pressKey(2)">2</button>
-            <button onclick="pressKey(3)">3</button>
+<div class="date" id="date">0000년 0월 0일</div>
 
-            <button onclick="pressKey(4)">4</button>
-            <button onclick="pressKey(5)">5</button>
-            <button onclick="pressKey(6)">6</button>
+<div class="time" id="time">00:00</div>
 
-            <button onclick="pressKey(7)">7</button>
-            <button onclick="pressKey(8)">8</button>
-            <button onclick="pressKey(9)">9</button>
 
-            <!-- 빈칸 -->
-            <div></div>
 
-            <button onclick="pressKey(0)">0</button>
+<input type="password" id="passcode" placeholder="비밀번호 입력">
 
-            <!-- 삭제 -->
-            <button onclick="deleteKey()">⌫</button>
-
-        </div>
-
-
-
-        <!-- 오류 메시지 -->
-        <div id="error"></div>
-
-    </div>
-
-
-
-    <!-- =============================== -->
-    <!-- 홈 화면 -->
-    <!-- =============================== -->
-
-    <div class="homescreen">
-
-
-
-        <!-- 상단 상태바 -->
-        <div class="statusbar">
-
-            <span id="status-time">09:41</span>
-
-            <span>📶 🔋</span>
-
-        </div>
-
-
-
-        <!-- =============================== -->
-        <!-- 앱 아이콘 영역 -->
-        <!-- =============================== -->
-
-        <div class="apps">
-
-
-
-            <!-- 메시지 앱 -->
-
-            <div class="app" onclick="openApp('messages')">
-
-                💬
-
-                <p>Messages</p>
-
-            </div>
-
-
-
-            <!-- 갤러리 -->
-
-            <div class="app" onclick="openApp('gallery')">
-
-                📷
-
-                <p>Gallery</p>
-
-            </div>
-
-
-
-            <!-- 인스타 -->
-
-            <div class="app" onclick="openApp('instagram')">
-
-                📸
-
-                <p>Instagram</p>
-
-            </div>
-
-
-
-            <!-- 캘린더 -->
-
-            <div class="app" onclick="openApp('calendar')">
-
-                📅
-
-                <p>Calendar</p>
-
-            </div>
-
-
-
-            <!-- 메모 -->
-
-            <div class="app" onclick="openApp('memo')">
-
-                📝
-
-                <p>Memo</p>
-
-            </div>
-
-
-
-        </div>
-
-
-
-    </div>
+<button onclick="unlockPhone()">Unlock</button>
 
 
 
@@ -200,14 +74,135 @@
 
 
 
-<!-- =============================== -->
-<!-- Javascript 연결 -->
-<!-- =============================== -->
+<!-- ========================= -->
+<!-- HOME SCREEN -->
+<!-- ========================= -->
+
+<div class="home" id="home">
+
+
+
+<div class="app-grid">
+
+
+
+<div class="app">
+
+<img src="assets/icons/messages.png">
+
+<p>Messages</p>
+
+</div>
+
+
+
+<div class="app">
+
+<img src="assets/icons/photos.png">
+
+<p>Photos</p>
+
+</div>
+
+
+
+<div class="app">
+
+<img src="assets/icons/instagram.png">
+
+<p>Instagram</p>
+
+</div>
+
+
+
+<div class="app">
+
+<img src="assets/icons/memo.png">
+
+<p>Memo</p>
+
+</div>
+
+
+
+<div class="app">
+
+<img src="assets/icons/messages.png">
+
+<p>Messages</p>
+
+</div>
+
+
+
+<div class="app">
+
+<img src="assets/icons/photos.png">
+
+<p>Photos</p>
+
+</div>
+
+
+
+<div class="app">
+
+<img src="assets/icons/instagram.png">
+
+<p>Instagram</p>
+
+</div>
+
+
+
+<div class="app">
+
+<img src="assets/icons/memo.png">
+
+<p>Memo</p>
+
+</div>
+
+
+
+</div>
+
+
+
+<!-- ========================= -->
+<!-- DOCK -->
+<!-- ========================= -->
+
+<div class="dock">
+
+
+
+<img src="assets/icons/messages.png">
+
+<img src="assets/icons/photos.png">
+
+<img src="assets/icons/instagram.png">
+
+<img src="assets/icons/memo.png">
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
 
 <script src="script.js"></script>
-
-
 
 </body>
 
 </html>
+```
