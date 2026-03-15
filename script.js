@@ -1,140 +1,151 @@
-/* =====================================================
-   iPHONE WEB UI SCRIPT
-   - 실시간 날짜 / 시간
-   - 잠금화면 비밀번호 해제
-   - 비밀번호 오류 시 shake 애니메이션
-===================================================== */
+/* REALTIME TIME */
 
+function updateTime(){
 
-/* =====================================================
-   1️⃣ 실시간 날짜 + 시간
-===================================================== */
+const now = new Date()
 
-function updateDateTime(){
+let h = now.getHours().toString().padStart(2,'0')
+let m = now.getMinutes().toString().padStart(2,'0')
 
-    const now = new Date()
+document.getElementById("time").innerText = h + ":" + m
+document.getElementById("status-time").innerText = h + ":" + m
 
-    /* 시간 */
+let y = now.getFullYear()
+let mo = now.getMonth()+1
+let d = now.getDate()
 
-    let hours = now.getHours().toString().padStart(2,'0')
-    let minutes = now.getMinutes().toString().padStart(2,'0')
-
-    /* 잠금화면 시간 */
-
-    const timeElement = document.getElementById("time")
-    if(timeElement){
-        timeElement.innerText = hours + ":" + minutes
-    }
-
-    /* 상태바 시간 */
-
-    const statusTime = document.getElementById("status-time")
-    if(statusTime){
-        statusTime.innerText = hours + ":" + minutes
-    }
-
-
-    /* 날짜 */
-
-    let year = now.getFullYear()
-    let month = now.getMonth() + 1
-    let day = now.getDate()
-
-    const dateElement = document.getElementById("date")
-    if(dateElement){
-        dateElement.innerText =
-        year + "년 " + month + "월 " + day + "일"
-    }
+document.getElementById("date").innerText =
+y+"년 "+mo+"월 "+d+"일"
 
 }
 
+setInterval(updateTime,1000)
 
-/* 페이지 열리면 바로 실행 */
-
-updateDateTime()
-
-/* 1초마다 업데이트 */
-
-setInterval(updateDateTime,1000)
+updateTime()
 
 
 
+/* SLIDE UNLOCK */
 
-/* =====================================================
-   2️⃣ 비밀번호 잠금 해제
-===================================================== */
+const sliderBtn = document.getElementById("sliderBtn")
 
-function unlockPhone(){
+let dragging=false
 
-    /* 입력한 비밀번호 */
+sliderBtn.addEventListener("mousedown",()=>{
 
-    const input = document.getElementById("passcode").value
-
-    /* 실제 비밀번호 (원하는 값으로 수정 가능) */
-
-    const correctPassword = "4399"
-
-
-    /* 비밀번호 맞으면 */
-
-    if(input === correctPassword){
-
-        document.getElementById("lockscreen").style.display = "none"
-
-        document.getElementById("home").style.display = "block"
-
-    }
-
-    /* 틀리면 */
-
-    else{
-
-        shakePhone()
-
-    }
-
-}
-
-
-
-
-/* =====================================================
-   3️⃣ 틀린 비밀번호 → 아이폰 shake 효과
-===================================================== */
-
-function shakePhone(){
-
-    const phone = document.querySelector(".phone")
-
-    phone.classList.add("shake")
-
-    setTimeout(()=>{
-
-        phone.classList.remove("shake")
-
-    },400)
-
-}
-
-
-
-
-/* =====================================================
-   4️⃣ Enter 키로 비밀번호 입력 가능
-===================================================== */
-
-const passInput = document.getElementById("passcode")
-
-if(passInput){
-
-passInput.addEventListener("keypress",function(e){
-
-    if(e.key === "Enter"){
-
-        unlockPhone()
-
-    }
+dragging=true
 
 })
+
+document.addEventListener("mousemove",(e)=>{
+
+if(!dragging) return
+
+let slider = document.getElementById("slider")
+
+let rect = slider.getBoundingClientRect()
+
+let x = e.clientX - rect.left
+
+if(x<0) x=0
+if(x>210) x=210
+
+sliderBtn.style.left = x+"px"
+
+if(x>200){
+
+unlockSlider()
+
+}
+
+})
+
+document.addEventListener("mouseup",()=>{
+
+dragging=false
+
+sliderBtn.style.left="4px"
+
+})
+
+
+
+function unlockSlider(){
+
+document.getElementById("lockscreen").style.display="none"
+
+document.getElementById("passcodeScreen").style.display="flex"
+
+}
+
+
+
+/* PASSCODE */
+
+let input=""
+
+const password="4399"
+
+
+
+function press(num){
+
+input+=num
+
+updateDots()
+
+if(input.length===4){
+
+check()
+
+}
+
+}
+
+
+
+function deleteNum(){
+
+input=input.slice(0,-1)
+
+updateDots()
+
+}
+
+
+
+function updateDots(){
+
+const dots=document.querySelectorAll(".dot")
+
+dots.forEach((d,i)=>{
+
+d.style.background=i<input.length?"white":"transparent"
+
+})
+
+}
+
+
+
+function check(){
+
+if(input===password){
+
+document.getElementById("passcodeScreen").style.display="none"
+
+document.getElementById("home").style.display="block"
+
+}
+
+else{
+
+input=""
+
+updateDots()
+
+alert("비밀번호 틀림")
+
+}
 
 }
