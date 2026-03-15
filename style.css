@@ -683,3 +683,102 @@ body {
   }
 
 }
+
+@media (max-width: 480px) {
+  body {
+    background: #000;
+  }
+
+  .page-bg {
+    display: none;
+  }
+
+  .phone {
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .lock-time {
+    font-size: clamp(76px, 19vw, 96px);
+  }
+
+  .lock-bottom-actions {
+    bottom: calc(72px + var(--safe-bottom));
+  }
+
+  .wallpaper-lock {
+    background-image: url("assets/wallpapers/lock.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #000;
+  }
+
+  .wallpaper-passcode {
+    background-image: url("assets/wallpapers/lock.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #000;
+    transform: none;
+  }
+
+  /* 비밀번호 화면 전체 위로 */
+  .passcode-wrap {
+    padding-top: calc(72px + var(--safe-top));
+  }
+
+  .passcode-lock {
+    margin-bottom: 20px;
+  }
+
+  .passcode-title {
+    margin-bottom: 18px;
+    font-size: 24px;
+  }
+
+  .passcode-dots {
+    margin-bottom: 38px;
+  }
+
+  .keypad {
+    grid-template-columns: repeat(3, min(88px, 22.5vw));
+    gap: 14px 12px;
+    margin-top: 0;
+    transform: translateY(-6px);
+  }
+
+  .key,
+  .text-action {
+    width: min(88px, 22.5vw);
+    height: min(88px, 22.5vw);
+  }
+
+  .key .num {
+    font-size: clamp(28px, 7.2vw, 32px);
+  }
+
+  .key .letters {
+    font-size: 8px;
+    letter-spacing: 1.6px;
+  }
+
+  .passcode-screen .home-indicator {
+    bottom: calc(20px + var(--safe-bottom));
+  }
+
+  .home-apps {
+    row-gap: 20px;
+    column-gap: 10px;
+    padding-left: max(18px, var(--safe-left));
+    padding-right: max(18px, var(--safe-right));
+  }
+
+  .app-icon img,
+  .dock-icon img {
+    width: min(60px, 15vw);
+    height: min(60px, 15vw);
+  }
+}
