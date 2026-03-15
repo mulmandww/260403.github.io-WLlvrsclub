@@ -502,6 +502,19 @@ img {
   background: rgba(255, 255, 255, 0.95);
 }
 
+.passcode-wrap.shake {
+  animation: iphoneShakeMargin 0.36s ease;
+}
+
+@keyframes iphoneShakeMargin {
+  0% { margin-left: 0; }
+  20% { margin-left: -10px; }
+  40% { margin-left: 10px; }
+  60% { margin-left: -8px; }
+  80% { margin-left: 8px; }
+  100% { margin-left: 0; }
+}
+
 .keypad {
   display: grid;
   grid-template-columns: repeat(3, 94px);
@@ -549,19 +562,6 @@ img {
 .key-empty {
   width: 94px;
   height: 94px;
-}
-
-.passcode-wrap.shake {
-  animation: iphoneShake 0.36s ease;
-}
-
-@keyframes iphoneShake {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-10px); }
-  40% { transform: translateX(10px); }
-  60% { transform: translateX(-8px); }
-  80% { transform: translateX(8px); }
-  100% { transform: translateX(0); }
 }
 
 /* ============================= */
