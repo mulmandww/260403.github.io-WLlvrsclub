@@ -657,7 +657,7 @@ body {
 @media (max-width: 480px) {
 
   .lock-content {
-  padding-top: calc(78px + var(--safe-top));
+  padding-top: calc(70px + var(--safe-top));
 }
   
   /* 손전등 / 카메라 버튼 더 아래 */
@@ -704,11 +704,6 @@ body {
   transform: scale(0.94);
   transform-origin: top center;
 }
-
-  /* 0 버튼 / 홈 인디케이터 간섭 줄이기 */
-  .passcode-screen .home-indicator {
-    bottom: calc(14px + var(--safe-bottom));
-  }
 
   /* 모바일에서만 passcode 자물쇠 다시 그림 */
   .passcode-lock.lock-icon {
