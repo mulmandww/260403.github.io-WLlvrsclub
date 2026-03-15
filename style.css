@@ -518,6 +518,11 @@ body {
   margin-left: 2px;
 }
 
+.key-empty {
+  width: 94px;
+  height: 94px;
+}
+
 .passcode-wrap.shake {
   animation: iphoneShake 0.36s ease;
 }
