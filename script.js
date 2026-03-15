@@ -1,3 +1,6 @@
+/* =========================
+   요소 가져오기
+========================= */
 const lockScreen = document.getElementById("lockScreen");
 const passcodeScreen = document.getElementById("passcodeScreen");
 const homeScreen = document.getElementById("homeScreen");
@@ -6,9 +9,8 @@ const lockDate = document.getElementById("lockDate");
 const lockTime = document.getElementById("lockTime");
 const statusTime = document.getElementById("status-time");
 
-const swipeUpArea = document.getElementById("swipeUpArea");
-
 const passcodeWrap = document.getElementById("passcodeWrap");
+
 const dots = [
   document.getElementById("dot1"),
   document.getElementById("dot2"),
@@ -16,11 +18,12 @@ const dots = [
   document.getElementById("dot4"),
 ];
 
+/* 비밀번호 */
 const PASSWORD = "4399";
 let currentInput = "";
 
 /* =========================
-   날짜 / 시간
+   실시간 날짜 / 시간
 ========================= */
 function updateDateTime() {
   const now = new Date();
@@ -43,86 +46,75 @@ updateDateTime();
 setInterval(updateDateTime, 1000);
 
 /* =========================
-   잠금화면 -> 암호입력
-   스와이프 + 클릭 둘 다 허용
+   잠금화면 아무데나 탭 / 위로 드래그
+   -> 암호 입력 화면으로 이동
 ========================= */
 let startY = 0;
 let currentY = 0;
 let dragging = false;
-let moved = false;
+let movedEnough = false;
 
-function pointerYFromEvent(event) {
+function getPointerY(event) {
   if (event.touches && event.touches[0]) return event.touches[0].clientY;
   if (event.changedTouches && event.changedTouches[0]) return event.changedTouches[0].clientY;
   return event.clientY;
 }
 
-function onSwipeStart(event) {
+function openPasscodeScreen() {
+  if (!lockScreen.classList.contains("active")) return;
+
+  lockScreen.classList.remove("active");
+  passcodeScreen.classList.add("active");
+}
+
+function handleStart(event) {
   dragging = true;
-  moved = false;
-  startY = pointerYFromEvent(event);
+  movedEnough = false;
+  startY = getPointerY(event);
   currentY = startY;
 }
 
-function onSwipeMove(event) {
+function handleMove(event) {
   if (!dragging) return;
 
-  currentY = pointerYFromEvent(event);
+  currentY = getPointerY(event);
   const diff = startY - currentY;
 
-  if (Math.abs(diff) > 6) {
-    moved = true;
+  if (diff > 20) {
+    movedEnough = true;
   }
-
-  const clamped = Math.max(0, Math.min(diff, 90));
-
-  swipeUpArea.style.transform = `translateX(-50%) translateY(${-clamped}px)`;
-  swipeUpArea.style.opacity = `${1 - clamped / 120}`;
 }
 
-function onSwipeEnd() {
+function handleEnd() {
   if (!dragging) return;
   dragging = false;
 
   const diff = startY - currentY;
 
-  if (diff > 70) {
+  /* 위로 드래그 */
+  if (diff > 20) {
     openPasscodeScreen();
-  } else {
-    swipeUpArea.style.transform = "translateX(-50%) translateY(0)";
-    swipeUpArea.style.opacity = "1";
+    return;
+  }
+
+  /* 그냥 탭 */
+  if (!movedEnough) {
+    openPasscodeScreen();
   }
 }
 
-function openPasscodeScreen() {
-  lockScreen.classList.remove("active");
-  passcodeScreen.classList.add("active");
-  swipeUpArea.style.transform = "translateX(-50%) translateY(0)";
-  swipeUpArea.style.opacity = "1";
-}
+/* 모바일 */
+lockScreen.addEventListener("touchstart", handleStart, { passive: true });
+lockScreen.addEventListener("touchmove", handleMove, { passive: true });
+lockScreen.addEventListener("touchend", handleEnd);
 
-/* 터치 */
-swipeUpArea.addEventListener("touchstart", onSwipeStart, { passive: true });
-window.addEventListener("touchmove", onSwipeMove, { passive: true });
-window.addEventListener("touchend", onSwipeEnd);
-
-/* 마우스 */
-swipeUpArea.addEventListener("mousedown", onSwipeStart);
-window.addEventListener("mousemove", onSwipeMove);
-window.addEventListener("mouseup", onSwipeEnd);
-
-/* 클릭하면 바로 암호입력창으로 */
-swipeUpArea.addEventListener("click", () => {
-  openPasscodeScreen();
-});
-
-/* 잠금화면 아무 곳이나 탭해도 열고 싶으면 이것도 사용 */
-lockScreen.addEventListener("dblclick", () => {
-  openPasscodeScreen();
-});
+/* PC */
+lockScreen.addEventListener("mousedown", handleStart);
+window.addEventListener("mousemove", handleMove);
+window.addEventListener("mouseup", handleEnd);
 
 /* =========================
-   암호 입력
+   점 업데이트
 ========================= */
 function updateDots() {
   dots.forEach((dot, index) => {
@@ -139,6 +131,9 @@ function resetInput() {
   updateDots();
 }
 
+/* =========================
+   숫자 입력
+========================= */
 function pressKey(num) {
   if (currentInput.length >= 4) return;
 
@@ -152,10 +147,14 @@ function pressKey(num) {
 
 function deleteKey() {
   if (currentInput.length === 0) return;
+
   currentInput = currentInput.slice(0, -1);
   updateDots();
 }
 
+/* =========================
+   비밀번호 검사
+========================= */
 function checkPassword() {
   if (currentInput === PASSWORD) {
     unlockToHome();
