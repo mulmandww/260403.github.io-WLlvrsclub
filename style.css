@@ -600,120 +600,61 @@ body {
   object-fit: cover;
 }
 
-/* 모바일 대응 */
-@media (max-width: 480px) {
-  body {
-    background: #000;
-  }
+/* ============================= */
+/* MOBILE FINAL FIX */
+/* ============================= */
 
-  .page-bg {
-    display: none;
-  }
+@media screen and (max-width: 480px) {
 
+  /* 전체 화면 모바일 기준 */
   .phone {
     width: 100vw;
-    height: 100dvh;
+    height: 100svh;
     border-radius: 0;
     box-shadow: none;
   }
 
-  .lock-time {
-    font-size: clamp(76px, 19vw, 96px);
-  }
-
-  .keypad {
-    grid-template-columns: repeat(3, min(94px, 24vw));
-    gap: 16px 12px;
-  }
-
-  .key,
-  .text-action {
-    width: min(94px, 24vw);
-    height: min(94px, 24vw);
-  }
-
-  .key .num {
-    font-size: clamp(30px, 8vw, 34px);
-  }
-
-  .home-apps {
-    row-gap: 20px;
-    column-gap: 10px;
-    padding-left: max(18px, var(--safe-left));
-    padding-right: max(18px, var(--safe-right));
-  }
-
-  .app-icon img,
-  .dock-icon img {
-    width: min(60px, 15vw);
-    height: min(60px, 15vw);
-  }
-}
-
-/* ============================= */
-/* MOBILE FIX (iPhone view) */
-/* ============================= */
-
-@media (max-width: 480px) {
+  /* ===================== */
+  /* 잠금화면 중앙 요소 위로 */
+  /* ===================== */
 
   .lock-content {
-  padding-top: calc(70px + var(--safe-top));
-}
-  
-  /* 손전등 / 카메라 버튼 더 아래 */
+    padding-top: calc(70px + env(safe-area-inset-top));
+  }
+
+  .lock-date {
+    margin-bottom: 6px;
+  }
+
+  .lock-time {
+    font-size: clamp(72px, 18vw, 92px);
+  }
+
+  /* 손전등 / 카메라 위치 */
   .lock-bottom-actions {
-    bottom: calc(72px + var(--safe-bottom));
+    bottom: calc(70px + env(safe-area-inset-bottom));
   }
 
-
-  /* 잠금화면 배경 안 잘리게 */
-  .wallpaper-lock {
-    background-image: url("assets/wallpapers/lock.jpg");
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: #000;
+  /* 위로 스와이프 안내 */
+  .swipe-up-area {
+    bottom: calc(34px + env(safe-area-inset-bottom));
   }
 
+  /* ===================== */
+  /* 비밀번호 입력 화면 */
+  /* ===================== */
 
-  /* 비밀번호 화면 배경 */
-  .wallpaper-passcode {
-    background-image: url("assets/wallpapers/lock.jpg");
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: #000;
-    transform: none;
-  }
-
-}
-
-  /* 모바일 Safari에서 화면 잘림 방지 */
-  .phone {
-    height: 100svh;
-  }
-
-  /* 비밀번호 입력 화면 전체를 살짝 축소해서 잘림 방지 */
   .passcode-screen {
     overflow: hidden;
   }
 
-.passcode-wrap {
-  width: 100%;
-  padding-top: calc(64px + var(--safe-top));
-  transform: scale(0.94);
-  transform-origin: top center;
-}
+  .passcode-wrap {
+    padding-top: calc(60px + env(safe-area-inset-top));
+    transform: scale(0.94);
+    transform-origin: top center;
+  }
 
-.passcode-screen .home-indicator {
-  bottom: calc(6px + var(--safe-bottom));
-}
-
-.keypad {
-  transform: translateY(-4px);
-}
-
-  /* 모바일에서만 passcode 자물쇠 다시 그림 */
+  /* 자물쇠 아이콘 */
   .passcode-lock.lock-icon {
     width: 24px;
     height: 26px;
@@ -738,10 +679,54 @@ body {
     position: absolute;
     left: 50%;
     top: 10px;
-    bottom: auto;
     transform: translateX(-50%);
     width: 20px;
     height: 15px;
     border-radius: 4px;
     background: #fff;
   }
+
+  /* 암호 입력 텍스트 */
+  .passcode-title {
+    font-size: 24px;
+    margin-bottom: 18px;
+  }
+
+  /* 점 표시 */
+  .passcode-dots {
+    margin-bottom: 34px;
+  }
+
+  /* ===================== */
+  /* 숫자 키패드 */
+  /* ===================== */
+
+  .keypad {
+    grid-template-columns: repeat(3, min(88px, 22vw));
+    gap: 14px 12px;
+    transform: translateY(-6px);
+  }
+
+  .key {
+    width: min(88px, 22vw);
+    height: min(88px, 22vw);
+  }
+
+  .key .num {
+    font-size: clamp(28px, 7vw, 32px);
+  }
+
+  .key .letters {
+    font-size: 8px;
+    letter-spacing: 1.6px;
+  }
+
+  /* ===================== */
+  /* 홈 인디케이터 */
+  /* ===================== */
+
+  .passcode-screen .home-indicator {
+    bottom: calc(2px + env(safe-area-inset-bottom)) !important;
+  }
+
+}
