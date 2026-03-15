@@ -48,17 +48,11 @@ setInterval(updateDateTime, 1000);
 /* =========================
    잠금화면 아무데나 탭 / 위로 드래그
    -> 암호 입력 화면으로 이동
+   pointer 이벤트로 통일
 ========================= */
 let startY = 0;
 let currentY = 0;
-let dragging = false;
-let movedEnough = false;
-
-function getPointerY(event) {
-  if (event.touches && event.touches[0]) return event.touches[0].clientY;
-  if (event.changedTouches && event.changedTouches[0]) return event.changedTouches[0].clientY;
-  return event.clientY;
-}
+let pointerActive = false;
 
 function openPasscodeScreen() {
   if (!lockScreen.classList.contains("active")) return;
@@ -67,69 +61,32 @@ function openPasscodeScreen() {
   passcodeScreen.classList.add("active");
 }
 
-function handleStart(event) {
-  dragging = true;
-  movedEnough = false;
-  startY = getPointerY(event);
-  currentY = startY;
-}
+lockScreen.addEventListener("pointerdown", (event) => {
+  pointerActive = true;
+  startY = event.clientY;
+  currentY = event.clientY;
+});
 
-function handleMove(event) {
-  if (!dragging) return;
+lockScreen.addEventListener("pointermove", (event) => {
+  if (!pointerActive) return;
+  currentY = event.clientY;
+});
 
-  currentY = getPointerY(event);
-  const diff = startY - currentY;
-
-  if (diff > 20) {
-    movedEnough = true;
-  }
-}
-
-function handleEnd() {
-  if (!dragging) return;
-  dragging = false;
+lockScreen.addEventListener("pointerup", () => {
+  if (!pointerActive) return;
+  pointerActive = false;
 
   const diff = startY - currentY;
 
-  /* 위로 드래그 */
-  if (diff > 20) {
-    openPasscodeScreen();
-    return;
-  }
-
-  /* 그냥 탭 */
-  if (!movedEnough) {
+  /* 위로 드래그했거나 그냥 탭했으면 열기 */
+  if (diff > 20 || Math.abs(diff) <= 20) {
     openPasscodeScreen();
   }
-}
+});
 
-/* 모바일 */
-lockScreen.addEventListener("touchstart", handleStart, { passive: true });
-lockScreen.addEventListener("touchmove", handleMove, { passive: true });
-lockScreen.addEventListener("touchend", handleEnd);
-
-/* PC */
-lockScreen.addEventListener("mousedown", handleStart);
-window.addEventListener("mousemove", handleMove);
-window.addEventListener("mouseup", handleEnd);
-
-/* =========================
-   점 업데이트
-========================= */
-function updateDots() {
-  dots.forEach((dot, index) => {
-    if (index < currentInput.length) {
-      dot.classList.add("filled");
-    } else {
-      dot.classList.remove("filled");
-    }
-  });
-}
-
-function resetInput() {
-  currentInput = "";
-  updateDots();
-}
+lockScreen.addEventListener("pointercancel", () => {
+  pointerActive = false;
+});
 
 /* =========================
    숫자 입력
