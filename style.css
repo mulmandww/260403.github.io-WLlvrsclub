@@ -656,6 +656,10 @@ body {
 
 @media (max-width: 480px) {
 
+  .lock-content {
+  padding-top: calc(78px + var(--safe-top));
+}
+  
   /* 손전등 / 카메라 버튼 더 아래 */
   .lock-bottom-actions {
     bottom: calc(72px + var(--safe-bottom));
@@ -694,12 +698,12 @@ body {
     overflow: hidden;
   }
 
-  .passcode-wrap {
-    width: 100%;
-    padding-top: calc(58px + var(--safe-top));
-    transform: scale(0.95);
-    transform-origin: top center;
-  }
+.passcode-wrap {
+  width: 100%;
+  padding-top: calc(64px + var(--safe-top));
+  transform: scale(0.94);
+  transform-origin: top center;
+}
 
   /* 0 버튼 / 홈 인디케이터 간섭 줄이기 */
   .passcode-screen .home-indicator {
