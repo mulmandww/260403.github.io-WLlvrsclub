@@ -1,135 +1,140 @@
-/* ===================== */
-/* 비밀번호 설정 */
-/* ===================== */
-
-const PASSWORD = "4399"
-
-let input = ""
-
+/* =====================================================
+   iPHONE WEB UI SCRIPT
+   - 실시간 날짜 / 시간
+   - 잠금화면 비밀번호 해제
+   - 비밀번호 오류 시 shake 애니메이션
+===================================================== */
 
 
-/* ===================== */
-/* 숫자 입력 */
-/* ===================== */
+/* =====================================================
+   1️⃣ 실시간 날짜 + 시간
+===================================================== */
 
-function pressKey(num){
+function updateDateTime(){
 
-if(input.length >= 4) return
+    const now = new Date()
 
-input += num
+    /* 시간 */
 
-updateDots()
+    let hours = now.getHours().toString().padStart(2,'0')
+    let minutes = now.getMinutes().toString().padStart(2,'0')
 
-checkPassword()
+    /* 잠금화면 시간 */
 
-}
+    const timeElement = document.getElementById("time")
+    if(timeElement){
+        timeElement.innerText = hours + ":" + minutes
+    }
 
+    /* 상태바 시간 */
 
-
-/* ===================== */
-/* 삭제 */
-/* ===================== */
-
-function deleteKey(){
-
-input = input.slice(0,-1)
-
-updateDots()
-
-}
+    const statusTime = document.getElementById("status-time")
+    if(statusTime){
+        statusTime.innerText = hours + ":" + minutes
+    }
 
 
+    /* 날짜 */
 
-/* ===================== */
-/* 점 표시 업데이트 */
-/* ===================== */
+    let year = now.getFullYear()
+    let month = now.getMonth() + 1
+    let day = now.getDate()
 
-function updateDots(){
-
-for(let i=1;i<=4;i++){
-
-const dot = document.getElementById("dot"+i)
-
-if(i <= input.length){
-
-dot.classList.add("filled")
-
-}
-
-else{
-
-dot.classList.remove("filled")
-
-}
-
-}
+    const dateElement = document.getElementById("date")
+    if(dateElement){
+        dateElement.innerText =
+        year + "년 " + month + "월 " + day + "일"
+    }
 
 }
 
 
+/* 페이지 열리면 바로 실행 */
 
-/* ===================== */
-/* 비밀번호 확인 */
-/* ===================== */
+updateDateTime()
 
-function checkPassword(){
+/* 1초마다 업데이트 */
 
-if(input.length === 4){
-
-if(input === PASSWORD){
-
-unlockPhone()
-
-}
-
-else{
-
-wrongPassword()
-
-}
-
-}
-
-}
+setInterval(updateDateTime,1000)
 
 
 
-/* ===================== */
-/* 잠금 해제 */
-/* ===================== */
+
+/* =====================================================
+   2️⃣ 비밀번호 잠금 해제
+===================================================== */
 
 function unlockPhone(){
 
-const lockscreen = document.querySelector(".lockscreen")
-const homescreen = document.querySelector(".homescreen")
+    /* 입력한 비밀번호 */
 
-lockscreen.style.display="none"
-homescreen.style.display="block"
+    const input = document.getElementById("passcode").value
+
+    /* 실제 비밀번호 (원하는 값으로 수정 가능) */
+
+    const correctPassword = "4399"
+
+
+    /* 비밀번호 맞으면 */
+
+    if(input === correctPassword){
+
+        document.getElementById("lockscreen").style.display = "none"
+
+        document.getElementById("home").style.display = "block"
+
+    }
+
+    /* 틀리면 */
+
+    else{
+
+        shakePhone()
+
+    }
 
 }
 
 
 
-/* ===================== */
-/* 틀린 비밀번호 */
-/* ===================== */
 
-function wrongPassword(){
+/* =====================================================
+   3️⃣ 틀린 비밀번호 → 아이폰 shake 효과
+===================================================== */
 
-const lockscreen = document.querySelector(".lockscreen")
-const error = document.getElementById("error")
+function shakePhone(){
 
-error.innerText = "Wrong Passcode"
+    const phone = document.querySelector(".phone")
 
-lockscreen.classList.add("shake")
+    phone.classList.add("shake")
 
-setTimeout(()=>{
+    setTimeout(()=>{
 
-lockscreen.classList.remove("shake")
+        phone.classList.remove("shake")
 
-},400)
+    },400)
 
-input=""
-updateDots()
+}
+
+
+
+
+/* =====================================================
+   4️⃣ Enter 키로 비밀번호 입력 가능
+===================================================== */
+
+const passInput = document.getElementById("passcode")
+
+if(passInput){
+
+passInput.addEventListener("keypress",function(e){
+
+    if(e.key === "Enter"){
+
+        unlockPhone()
+
+    }
+
+})
 
 }
