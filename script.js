@@ -19,7 +19,9 @@ const dots = [
 const PASSWORD = "4399";
 let currentInput = "";
 
-/* 날짜/시간 */
+/* =========================
+   날짜 / 시간
+========================= */
 function updateDateTime() {
   const now = new Date();
 
@@ -40,10 +42,14 @@ function updateDateTime() {
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
-/* 위로 스와이프 */
+/* =========================
+   잠금화면 -> 암호입력
+   스와이프 + 클릭 둘 다 허용
+========================= */
 let startY = 0;
 let currentY = 0;
 let dragging = false;
+let moved = false;
 
 function pointerYFromEvent(event) {
   if (event.touches && event.touches[0]) return event.touches[0].clientY;
@@ -53,6 +59,7 @@ function pointerYFromEvent(event) {
 
 function onSwipeStart(event) {
   dragging = true;
+  moved = false;
   startY = pointerYFromEvent(event);
   currentY = startY;
 }
@@ -62,6 +69,11 @@ function onSwipeMove(event) {
 
   currentY = pointerYFromEvent(event);
   const diff = startY - currentY;
+
+  if (Math.abs(diff) > 6) {
+    moved = true;
+  }
+
   const clamped = Math.max(0, Math.min(diff, 90));
 
   swipeUpArea.style.transform = `translateX(-50%) translateY(${-clamped}px)`;
@@ -82,14 +94,6 @@ function onSwipeEnd() {
   }
 }
 
-swipeUpArea.addEventListener("touchstart", onSwipeStart, { passive: true });
-window.addEventListener("touchmove", onSwipeMove, { passive: true });
-window.addEventListener("touchend", onSwipeEnd);
-
-swipeUpArea.addEventListener("mousedown", onSwipeStart);
-window.addEventListener("mousemove", onSwipeMove);
-window.addEventListener("mouseup", onSwipeEnd);
-
 function openPasscodeScreen() {
   lockScreen.classList.remove("active");
   passcodeScreen.classList.add("active");
@@ -97,7 +101,29 @@ function openPasscodeScreen() {
   swipeUpArea.style.opacity = "1";
 }
 
-/* 암호 입력 */
+/* 터치 */
+swipeUpArea.addEventListener("touchstart", onSwipeStart, { passive: true });
+window.addEventListener("touchmove", onSwipeMove, { passive: true });
+window.addEventListener("touchend", onSwipeEnd);
+
+/* 마우스 */
+swipeUpArea.addEventListener("mousedown", onSwipeStart);
+window.addEventListener("mousemove", onSwipeMove);
+window.addEventListener("mouseup", onSwipeEnd);
+
+/* 클릭하면 바로 암호입력창으로 */
+swipeUpArea.addEventListener("click", () => {
+  openPasscodeScreen();
+});
+
+/* 잠금화면 아무 곳이나 탭해도 열고 싶으면 이것도 사용 */
+lockScreen.addEventListener("dblclick", () => {
+  openPasscodeScreen();
+});
+
+/* =========================
+   암호 입력
+========================= */
 function updateDots() {
   dots.forEach((dot, index) => {
     if (index < currentInput.length) {
