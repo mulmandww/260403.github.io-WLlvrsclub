@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<!-- 문자 인코딩 -->
+<meta charset="UTF-8">
+
+<!-- 모바일 화면 대응 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- 사이트 제목 -->
+<title>Geonwoo iPhone</title>
+
+<!-- CSS 연결 -->
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+<!-- 아이폰 전체 틀 -->
+<div class="phone">
+
+    <!-- 아이폰 notch -->
+    <div class="notch"></div>
+
+
+    <!-- 잠금화면 -->
+    <div class="lockscreen">
+
+        <!-- 시간 표시 -->
+        <div class="time" id="time">
+            00:00
+        </div>
+
+        <!-- 잠금 해제 안내 -->
+        <div class="unlock">
+            Tap to unlock
+        </div>
+
+    </div>
+
+
+    <!-- 홈 화면 -->
+    <div class="homescreen">
+
+        <!-- 상태바 -->
+        <div class="statusbar">
+
+            <span id="time-small">00:00</span>
+
+            <span>
+                📶 🔋
+            </span>
+
+        </div>
+
+
+        <!-- 앱 영역 -->
+        <div class="apps">
+
+            <div class="app" onclick="openApp('messages')">
+                💬
+                <p>Messages</p>
+            </div>
+
+            <div class="app" onclick="openApp('gallery')">
+                📷
+                <p>Gallery</p>
+            </div>
+
+            <div class="app" onclick="openApp('instagram')">
+                📸
+                <p>Instagram</p>
+            </div>
+
+            <div class="app" onclick="openApp('calendar')">
+                📅
+                <p>Calendar</p>
+            </div>
+
+            <div class="app" onclick="openApp('memo')">
+                📝
+                <p>Memo</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- JS 연결 -->
+<script src="script.js"></script>
+
+</body>
+</html>
