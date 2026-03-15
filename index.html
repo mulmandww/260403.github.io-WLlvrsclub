@@ -1,100 +1,213 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 
 <head>
 
-<!-- 문자 인코딩 -->
 <meta charset="UTF-8">
 
 <!-- 모바일 화면 대응 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- 사이트 제목 -->
-<title>Geonwoo iPhone</title>
+<title>WLvrsclub iPhone</title>
 
-<!-- CSS 연결 -->
+<!-- 외부 CSS 연결 -->
 <link rel="stylesheet" href="style.css">
 
 </head>
 
 
+
 <body>
 
-<!-- 아이폰 전체 틀 -->
+
+
+<!-- =============================== -->
+<!-- iPhone 전체 틀 -->
+<!-- =============================== -->
+
 <div class="phone">
 
-    <!-- 아이폰 notch -->
-    <div class="notch"></div>
 
 
+    <!-- =============================== -->
     <!-- 잠금화면 -->
+    <!-- =============================== -->
+
     <div class="lockscreen">
 
-        <!-- 시간 표시 -->
+        <!-- 현재 시간 표시 -->
         <div class="time" id="time">
             00:00
         </div>
 
-        <!-- 잠금 해제 안내 -->
-        <div class="unlock">
-            Tap to unlock
+
+        <!-- 안내 텍스트 -->
+        <div class="unlock-text">
+            Enter Passcode
         </div>
+
+
+
+        <!-- =============================== -->
+        <!-- 비밀번호 점 표시 (●●●●) -->
+        <!-- =============================== -->
+
+        <div class="passcode-dots">
+
+            <span class="dot" id="dot1"></span>
+            <span class="dot" id="dot2"></span>
+            <span class="dot" id="dot3"></span>
+            <span class="dot" id="dot4"></span>
+
+        </div>
+
+
+
+        <!-- =============================== -->
+        <!-- 숫자 키패드 -->
+        <!-- =============================== -->
+
+        <div class="keypad">
+
+            <button onclick="pressKey(1)">1</button>
+            <button onclick="pressKey(2)">2</button>
+            <button onclick="pressKey(3)">3</button>
+
+            <button onclick="pressKey(4)">4</button>
+            <button onclick="pressKey(5)">5</button>
+            <button onclick="pressKey(6)">6</button>
+
+            <button onclick="pressKey(7)">7</button>
+            <button onclick="pressKey(8)">8</button>
+            <button onclick="pressKey(9)">9</button>
+
+            <!-- 빈칸 -->
+            <div></div>
+
+            <button onclick="pressKey(0)">0</button>
+
+            <!-- 삭제 -->
+            <button onclick="deleteKey()">⌫</button>
+
+        </div>
+
+
+
+        <!-- 오류 메시지 -->
+        <div id="error"></div>
 
     </div>
 
 
+
+    <!-- =============================== -->
     <!-- 홈 화면 -->
+    <!-- =============================== -->
+
     <div class="homescreen">
 
-        <!-- 상태바 -->
+
+
+        <!-- 상단 상태바 -->
         <div class="statusbar">
 
-            <span id="time-small">00:00</span>
+            <span id="status-time">09:41</span>
 
-            <span>
-                📶 🔋
-            </span>
+            <span>📶 🔋</span>
 
         </div>
 
 
-        <!-- 앱 영역 -->
+
+        <!-- =============================== -->
+        <!-- 앱 아이콘 영역 -->
+        <!-- =============================== -->
+
         <div class="apps">
 
+
+
+            <!-- 메시지 앱 -->
+
             <div class="app" onclick="openApp('messages')">
+
                 💬
+
                 <p>Messages</p>
+
             </div>
+
+
+
+            <!-- 갤러리 -->
 
             <div class="app" onclick="openApp('gallery')">
+
                 📷
+
                 <p>Gallery</p>
+
             </div>
+
+
+
+            <!-- 인스타 -->
 
             <div class="app" onclick="openApp('instagram')">
+
                 📸
+
                 <p>Instagram</p>
+
             </div>
+
+
+
+            <!-- 캘린더 -->
 
             <div class="app" onclick="openApp('calendar')">
+
                 📅
+
                 <p>Calendar</p>
+
             </div>
 
+
+
+            <!-- 메모 -->
+
             <div class="app" onclick="openApp('memo')">
+
                 📝
+
                 <p>Memo</p>
+
             </div>
+
+
 
         </div>
 
+
+
     </div>
+
+
 
 </div>
 
 
-<!-- JS 연결 -->
+
+<!-- =============================== -->
+<!-- Javascript 연결 -->
+<!-- =============================== -->
+
 <script src="script.js"></script>
 
+
+
 </body>
+
 </html>
