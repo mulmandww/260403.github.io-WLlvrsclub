@@ -2,22 +2,22 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
   <title>iPhone UI</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- 웹페이지 전체 배경 -->
   <div class="page-bg"></div>
 
-  <!-- 아이폰 본체 -->
   <main class="phone" aria-label="iPhone simulator">
-    <!-- 노치 / Dynamic Island -->
     <div class="dynamic-island"></div>
 
-    <!-- 공통 상태바 -->
     <header class="statusbar">
       <div class="status-left">SKT</div>
+
       <div class="status-right">
         <span class="signal" aria-hidden="true">
           <i></i><i></i><i></i><i></i>
@@ -29,45 +29,32 @@
       </div>
     </header>
 
-    <!-- ========================= -->
-    <!-- 1. 잠금화면 -->
-    <!-- ========================= -->
+    <!-- 잠금화면 -->
     <section class="screen lock-screen active" id="lockScreen">
-      <!-- 잠금화면 배경 이미지 자리 -->
       <div class="wallpaper wallpaper-lock"></div>
       <div class="lock-overlay-top"></div>
 
       <div class="lock-content">
         <div class="lock-icon" aria-hidden="true"></div>
-
-        <!-- 날짜 -->
         <div class="lock-date" id="lockDate">3월 15일 일요일</div>
-
-        <!-- 시간 -->
         <div class="lock-time" id="lockTime">18:56</div>
       </div>
 
-      <!-- 아래에서 위로 올리기 안내 -->
-      <div class="swipe-up-area" id="swipeUpArea" aria-label="위로 밀어서 잠금 해제">
+      <div class="swipe-up-area" id="swipeUpArea" aria-label="위로 쓸어올려 열기">
         <div class="swipe-up-text">위로 쓸어올려 열기</div>
-        <div class="swipe-handle" id="swipeHandle"></div>
+        <div class="swipe-handle"></div>
       </div>
 
-      <!-- 하단 좌우 버튼 -->
       <div class="lock-bottom-actions">
         <button class="round-action flashlight" type="button" aria-label="손전등"></button>
         <button class="round-action camera" type="button" aria-label="카메라"></button>
       </div>
 
-      <!-- 홈 인디케이터 -->
       <div class="home-indicator"></div>
     </section>
 
-    <!-- ========================= -->
-    <!-- 2. 암호 입력 화면 -->
-    <!-- ========================= -->
+    <!-- 암호 입력 -->
     <section class="screen passcode-screen" id="passcodeScreen">
-      <!-- 흐린 배경용 이미지 자리 -->
       <div class="wallpaper wallpaper-passcode"></div>
       <div class="passcode-blur"></div>
       <div class="lock-overlay-top"></div>
@@ -77,16 +64,14 @@
 
         <h1 class="passcode-title">암호 입력</h1>
 
-        <!-- 점 4개 -->
-        <div class="passcode-dots" aria-label="입력된 암호 표시">
+        <div class="passcode-dots">
           <span class="passcode-dot" id="dot1"></span>
           <span class="passcode-dot" id="dot2"></span>
           <span class="passcode-dot" id="dot3"></span>
           <span class="passcode-dot" id="dot4"></span>
         </div>
 
-        <!-- 아이폰 스타일 키패드 -->
-        <div class="keypad" aria-label="숫자 키패드">
+        <div class="keypad">
           <button class="key key-number" type="button" onclick="pressKey('1')">
             <span class="num">1</span>
           </button>
@@ -144,15 +129,11 @@
       <div class="home-indicator"></div>
     </section>
 
-    <!-- ========================= -->
-    <!-- 3. 홈화면 -->
-    <!-- ========================= -->
+    <!-- 홈화면 -->
     <section class="screen home-screen" id="homeScreen">
-      <!-- 홈화면 배경 이미지 자리 -->
       <div class="wallpaper wallpaper-home"></div>
 
       <div class="home-apps">
-        <!-- 4개씩 들어가는 아이폰형 그리드 -->
         <button class="app-icon" type="button">
           <img src="assets/icons/messages.png" alt="Messages" />
           <span>Messages</span>
@@ -194,7 +175,6 @@
         </button>
       </div>
 
-      <!-- 독 -->
       <div class="dock">
         <button class="dock-icon" type="button">
           <img src="assets/icons/messages.png" alt="Phone" />
