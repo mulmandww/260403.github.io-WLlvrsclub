@@ -1,151 +1,170 @@
-/* REALTIME TIME */
+/* =========================
+   화면 요소
+========================= */
+const lockScreen = document.getElementById("lockScreen");
+const passcodeScreen = document.getElementById("passcodeScreen");
+const homeScreen = document.getElementById("homeScreen");
 
-function updateTime(){
+const lockDate = document.getElementById("lockDate");
+const lockTime = document.getElementById("lockTime");
+const statusTime = document.getElementById("status-time");
 
-const now = new Date()
+const swipeUpArea = document.getElementById("swipeUpArea");
+const swipeHandle = document.getElementById("swipeHandle");
 
-let h = now.getHours().toString().padStart(2,'0')
-let m = now.getMinutes().toString().padStart(2,'0')
+const passcodeWrap = document.getElementById("passcodeWrap");
+const dots = [
+  document.getElementById("dot1"),
+  document.getElementById("dot2"),
+  document.getElementById("dot3"),
+  document.getElementById("dot4"),
+];
 
-document.getElementById("time").innerText = h + ":" + m
-document.getElementById("status-time").innerText = h + ":" + m
+/* =========================
+   실시간 날짜/시간
+========================= */
+function updateDateTime() {
+  const now = new Date();
 
-let y = now.getFullYear()
-let mo = now.getMonth()+1
-let d = now.getDate()
+  const hour = String(now.getHours()).padStart(2, "0");
+  const minute = String(now.getMinutes()).padStart(2, "0");
 
-document.getElementById("date").innerText =
-y+"년 "+mo+"월 "+d+"일"
+  const month = now.getMonth() + 1;
+  const day = now.getDate();
 
+  const weekdayNames = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+  const weekday = weekdayNames[now.getDay()];
+
+  lockDate.textContent = `${month}월 ${day}일 ${weekday}`;
+  lockTime.textContent = `${hour}:${minute}`;
+  statusTime.textContent = `${hour}:${minute}`;
 }
 
-setInterval(updateTime,1000)
+updateDateTime();
+setInterval(updateDateTime, 1000);
 
-updateTime()
+/* =========================
+   잠금화면 -> 위로 스와이프
+   모바일/PC 둘 다 작동
+========================= */
+let startY = 0;
+let currentY = 0;
+let dragging = false;
 
-
-
-/* SLIDE UNLOCK */
-
-const sliderBtn = document.getElementById("sliderBtn")
-
-let dragging=false
-
-sliderBtn.addEventListener("mousedown",()=>{
-
-dragging=true
-
-})
-
-document.addEventListener("mousemove",(e)=>{
-
-if(!dragging) return
-
-let slider = document.getElementById("slider")
-
-let rect = slider.getBoundingClientRect()
-
-let x = e.clientX - rect.left
-
-if(x<0) x=0
-if(x>210) x=210
-
-sliderBtn.style.left = x+"px"
-
-if(x>200){
-
-unlockSlider()
-
+function onSwipeStart(clientY) {
+  dragging = true;
+  startY = clientY;
+  currentY = clientY;
 }
 
-})
+function onSwipeMove(clientY) {
+  if (!dragging) return;
+  currentY = clientY;
 
-document.addEventListener("mouseup",()=>{
+  const diff = startY - currentY; /* 위로 올리면 + */
+  const clamped = Math.max(0, Math.min(diff, 90));
 
-dragging=false
-
-sliderBtn.style.left="4px"
-
-})
-
-
-
-function unlockSlider(){
-
-document.getElementById("lockscreen").style.display="none"
-
-document.getElementById("passcodeScreen").style.display="flex"
-
+  swipeUpArea.style.transform = `translateX(-50%) translateY(${-clamped}px)`;
+  swipeUpArea.style.opacity = `${1 - clamped / 120}`;
 }
 
+function onSwipeEnd() {
+  if (!dragging) return;
+  dragging = false;
 
+  const diff = startY - currentY;
 
-/* PASSCODE */
-
-let input=""
-
-const password="4399"
-
-
-
-function press(num){
-
-input+=num
-
-updateDots()
-
-if(input.length===4){
-
-check()
-
+  if (diff > 70) {
+    openPasscodeScreen();
+  } else {
+    swipeUpArea.style.transform = "translateX(-50%) translateY(0)";
+    swipeUpArea.style.opacity = "1";
+  }
 }
 
+swipeUpArea.addEventListener("mousedown", (e) => {
+  onSwipeStart(e.clientY);
+});
+
+window.addEventListener("mousemove", (e) => {
+  onSwipeMove(e.clientY);
+});
+
+window.addEventListener("mouseup", () => {
+  onSwipeEnd();
+});
+
+swipeUpArea.addEventListener("touchstart", (e) => {
+  onSwipeStart(e.touches[0].clientY);
+}, { passive: true });
+
+window.addEventListener("touchmove", (e) => {
+  onSwipeMove(e.touches[0].clientY);
+}, { passive: true });
+
+window.addEventListener("touchend", () => {
+  onSwipeEnd();
+});
+
+function openPasscodeScreen() {
+  lockScreen.classList.remove("active");
+  passcodeScreen.classList.add("active");
+  swipeUpArea.style.transform = "translateX(-50%) translateY(0)";
+  swipeUpArea.style.opacity = "1";
 }
 
+/* =========================
+   암호 입력
+========================= */
+const PASSWORD = "4399";
+let currentInput = "";
 
-
-function deleteNum(){
-
-input=input.slice(0,-1)
-
-updateDots()
-
+function updateDots() {
+  dots.forEach((dot, index) => {
+    if (index < currentInput.length) {
+      dot.classList.add("filled");
+    } else {
+      dot.classList.remove("filled");
+    }
+  });
 }
 
-
-
-function updateDots(){
-
-const dots=document.querySelectorAll(".dot")
-
-dots.forEach((d,i)=>{
-
-d.style.background=i<input.length?"white":"transparent"
-
-})
-
+function resetInput() {
+  currentInput = "";
+  updateDots();
 }
 
+function pressKey(num) {
+  if (currentInput.length >= 4) return;
 
+  currentInput += num;
+  updateDots();
 
-function check(){
-
-if(input===password){
-
-document.getElementById("passcodeScreen").style.display="none"
-
-document.getElementById("home").style.display="block"
-
+  if (currentInput.length === 4) {
+    setTimeout(checkPassword, 120);
+  }
 }
 
-else{
-
-input=""
-
-updateDots()
-
-alert("비밀번호 틀림")
-
+function deleteKey() {
+  if (currentInput.length === 0) return;
+  currentInput = currentInput.slice(0, -1);
+  updateDots();
 }
 
+function checkPassword() {
+  if (currentInput === PASSWORD) {
+    unlockToHome();
+  } else {
+    passcodeWrap.classList.add("shake");
+
+    setTimeout(() => {
+      passcodeWrap.classList.remove("shake");
+      resetInput();
+    }, 360);
+  }
+}
+
+function unlockToHome() {
+  passcodeScreen.classList.remove("active");
+  homeScreen.classList.add("active");
 }
