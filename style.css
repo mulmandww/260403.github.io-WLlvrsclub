@@ -1,394 +1,630 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+/* =========================
+   기본 리셋
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-
-body{
-
-background:#111;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-height:100vh;
-
-font-family:-apple-system,BlinkMacSystemFont;
-
-color:white;
-
+button {
+  font: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
-
-
-/* PHONE */
-
-.phone{
-
-width:390px;
-height:844px;
-
-background:black;
-
-border-radius:55px;
-
-overflow:hidden;
-
-position:relative;
-
-box-shadow:0 30px 60px rgba(0,0,0,0.8);
-
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-
-
-/* NOTCH */
-
-.notch{
-
-position:absolute;
-
-top:8px;
-left:50%;
-
-transform:translateX(-50%);
-
-width:160px;
-height:34px;
-
-background:black;
-
-border-radius:20px;
-
-z-index:10;
-
+/* =========================
+   웹 전체 배경
+   여기 이미지 바꾸면 폰 뒤 배경 바뀜
+========================= */
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
-
-
-/* STATUS BAR */
-
-.statusbar{
-
-position:absolute;
-
-top:12px;
-
-width:100%;
-
-display:flex;
-
-justify-content:space-between;
-
-padding:0 30px;
-
-font-size:14px;
-
-z-index:20;
-
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  color: #fff;
+  overflow: hidden;
+  background: #101114;
 }
 
-
-
-/* LOCKSCREEN */
-
-.lockscreen{
-
-position:absolute;
-
-width:100%;
-height:100%;
-
-background:url("assets/wallpapers/lock.jpg") center/cover;
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-justify-content:center;
-
+.page-bg {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.38)),
+    url("assets/wallpapers/background.jpg") center / cover no-repeat;
+  transform: scale(1.05);
+  filter: blur(12px);
+  z-index: 0;
 }
 
-
-
-/* DATE */
-
-.date{
-
-font-size:22px;
-
-margin-bottom:8px;
-
+/* =========================
+   아이폰 본체
+========================= */
+.phone {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  border-radius: 42px;
+  overflow: hidden;
+  background: #000;
+  box-shadow:
+    0 0 0 10px #0c0c0d,
+    0 28px 80px rgba(0, 0, 0, 0.55);
+  z-index: 1;
 }
 
-
-
-/* TIME */
-
-.time{
-
-font-size:88px;
-
-font-weight:200;
-
+/* =========================
+   Dynamic Island
+========================= */
+.dynamic-island {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 126px;
+  height: 34px;
+  border-radius: 20px;
+  background: #000;
+  z-index: 50;
 }
 
-
-
-/* SLIDER */
-
-.slider{
-
-margin-top:80px;
-
-width:260px;
-height:50px;
-
-background:rgba(255,255,255,0.2);
-
-border-radius:25px;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-position:relative;
-
+/* =========================
+   공통 상태바
+========================= */
+.statusbar {
+  position: absolute;
+  top: 17px;
+  left: 0;
+  width: 100%;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 60;
+  pointer-events: none;
 }
 
-
-
-.slider span{
-
-opacity:0.8;
-
+.status-left {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
 }
 
-
-
-.slider-btn{
-
-position:absolute;
-
-left:4px;
-
-width:42px;
-height:42px;
-
-border-radius:50%;
-
-background:white;
-
-cursor:pointer;
-
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: 9px;
 }
 
-
-
-/* PASSCODE */
-
-.passcode-screen{
-
-position:absolute;
-
-width:100%;
-height:100%;
-
-background:url("assets/wallpapers/lock.jpg") center/cover;
-
-display:none;
-
-flex-direction:column;
-
-align-items:center;
-
-justify-content:center;
-
+/* 신호 */
+.signal {
+  display: flex;
+  align-items: end;
+  gap: 3px;
+  height: 16px;
 }
 
-
-
-.passcode-title{
-
-font-size:22px;
-
-margin-bottom:30px;
-
+.signal i {
+  display: block;
+  width: 5px;
+  border-radius: 2px;
+  background: #fff;
+  opacity: 0.92;
 }
 
+.signal i:nth-child(1) { height: 6px; }
+.signal i:nth-child(2) { height: 9px; }
+.signal i:nth-child(3) { height: 12px; }
+.signal i:nth-child(4) { height: 15px; }
 
-
-/* DOTS */
-
-.dots{
-
-display:flex;
-
-gap:14px;
-
-margin-bottom:40px;
-
+/* 와이파이 */
+.wifi {
+  position: relative;
+  width: 18px;
+  height: 13px;
 }
 
-
-
-.dot{
-
-width:14px;
-height:14px;
-
-border-radius:50%;
-
-border:2px solid white;
-
+.wifi::before,
+.wifi::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 2px solid transparent;
+  border-top-color: #fff;
+  border-radius: 50%;
 }
 
-
-
-/* KEYPAD */
-
-.keypad{
-
-display:grid;
-
-grid-template-columns:repeat(3,80px);
-
-gap:20px;
-
+.wifi::before {
+  top: 0;
+  width: 18px;
+  height: 18px;
 }
 
-
-
-.keypad button{
-
-width:80px;
-height:80px;
-
-border-radius:50%;
-
-border:none;
-
-font-size:28px;
-
-background:rgba(255,255,255,0.15);
-
-color:white;
-
-backdrop-filter:blur(10px);
-
+.wifi::after {
+  top: 4px;
+  width: 10px;
+  height: 10px;
 }
 
-
-
-/* HOME */
-
-.home{
-
-position:absolute;
-
-width:100%;
-height:100%;
-
-background:url("assets/wallpapers/home.jpg") center/cover;
-
-display:none;
-
-padding-top:120px;
-
+.wifi span {
+  display: none;
 }
 
-
-
-/* APPS */
-
-.app-grid{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:26px;
-
-padding:0 28px;
-
+/* 배터리 */
+.battery {
+  position: relative;
+  width: 27px;
+  height: 14px;
+  border: 2px solid #fff;
+  border-radius: 4px;
 }
 
-
-
-.app{
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
+.battery::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: -4px;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: #fff;
 }
 
-
-
-.app img{
-
-width:62px;
-height:62px;
-
-border-radius:18px;
-
+.battery-level {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 17px;
+  height: 8px;
+  border-radius: 2px;
+  background: #fff;
 }
 
-
-
-.app p{
-
-font-size:11px;
-
-margin-top:6px;
-
+/* =========================
+   공통 화면
+========================= */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: none;
 }
 
-
-
-/* DOCK */
-
-.dock{
-
-position:absolute;
-
-bottom:22px;
-
-left:50%;
-
-transform:translateX(-50%);
-
-width:340px;
-height:86px;
-
-border-radius:26px;
-
-background:rgba(255,255,255,0.18);
-
-backdrop-filter:blur(25px);
-
-display:flex;
-
-justify-content:space-around;
-
-align-items:center;
-
+.screen.active {
+  display: block;
 }
 
+.wallpaper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
 
+.wallpaper-lock {
+  background: url("assets/wallpapers/lock.jpg") center / cover no-repeat;
+}
 
-.dock img{
+.wallpaper-passcode {
+  background: url("assets/wallpapers/lock.jpg") center / cover no-repeat;
+  transform: scale(1.04);
+}
 
-width:62px;
-height:62px;
+.wallpaper-home {
+  background: url("assets/wallpapers/home.jpg") center / cover no-repeat;
+}
 
-border-radius:18px;
+.lock-overlay-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 148px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.42), transparent);
+  z-index: 1;
+}
 
+/* =========================
+   잠금화면
+========================= */
+.lock-screen {
+  z-index: 5;
+}
+
+.lock-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 110px;
+}
+
+.lock-icon {
+  width: 20px;
+  height: 24px;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.lock-icon::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 10px;
+  border: 3px solid #fff;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.lock-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 14px;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.lock-date {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  margin-bottom: 2px;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.25);
+}
+
+.lock-time {
+  font-size: 96px;
+  line-height: 0.95;
+  font-weight: 200;
+  letter-spacing: -4px;
+  text-shadow: 0 1px 18px rgba(0,0,0,0.22);
+}
+
+/* 아래에서 위로 올리기 영역 */
+.swipe-up-area {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 52px;
+  z-index: 4;
+  touch-action: none;
+}
+
+.swipe-up-text {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.24);
+  white-space: nowrap;
+  opacity: 0.9;
+}
+
+.swipe-handle {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 134px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.95);
+}
+
+/* 하단 좌우 버튼 */
+.lock-bottom-actions {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 110px;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.round-action {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: rgba(112, 112, 112, 0.34);
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.round-action.flashlight::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 13px;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 15px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.95);
+}
+
+.round-action.flashlight::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 5px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.95);
+}
+
+.round-action.camera::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 16px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.95);
+}
+
+.round-action.camera::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 22px;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border: 2px solid rgba(0,0,0,0.88);
+  border-radius: 50%;
+}
+
+/* 홈 인디케이터 */
+.home-indicator {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  width: 134px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.96);
+  z-index: 4;
+}
+
+/* =========================
+   암호 입력 화면
+========================= */
+.passcode-screen {
+  z-index: 6;
+}
+
+.passcode-blur {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(18px);
+  background: rgba(0,0,0,0.08);
+  z-index: 1;
+}
+
+.passcode-wrap {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 112px;
+}
+
+.passcode-lock {
+  margin-bottom: 34px;
+}
+
+.passcode-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.22);
+}
+
+.passcode-dots {
+  display: flex;
+  gap: 26px;
+  margin-bottom: 62px;
+}
+
+.passcode-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.95);
+  background: transparent;
+  transition: background 0.15s ease;
+}
+
+.passcode-dot.filled {
+  background: rgba(255,255,255,0.95);
+}
+
+/* 키패드 */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 94px);
+  gap: 18px 14px;
+  justify-content: center;
+  align-items: center;
+}
+
+.key {
+  width: 94px;
+  height: 94px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), rgba(255,255,255,0.09));
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.08);
+}
+
+.key:active {
+  transform: scale(0.97);
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.26), rgba(255,255,255,0.14));
+}
+
+.key .num {
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 300;
+  margin-bottom: 2px;
+}
+
+.key .letters {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  opacity: 0.95;
+  margin-left: 2px;
+}
+
+.text-action {
+  width: 94px;
+  height: 94px;
+  color: rgba(255,255,255,0.96);
+  font-size: 18px;
+  font-weight: 500;
+  align-self: center;
+}
+
+.emergency {
+  font-size: 15px;
+  justify-self: center;
+}
+
+.cancel {
+  font-size: 15px;
+  justify-self: center;
+}
+
+.passcode-wrap.shake {
+  animation: iphoneShake 0.36s ease;
+}
+
+@keyframes iphoneShake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+  100% { transform: translateX(0); }
+}
+
+/* =========================
+   홈화면
+========================= */
+.home-screen {
+  z-index: 4;
+}
+
+.home-apps {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 22px;
+  column-gap: 14px;
+  padding: 112px 22px 0;
+}
+
+.app-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+
+.app-icon img {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+}
+
+.app-icon span {
+  margin-top: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.22);
+}
+
+.dock {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: 346px;
+  height: 88px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(22px);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.dock-icon img {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+/* =========================
+   반응형
+========================= */
+@media (max-width: 480px) {
+  .phone {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .page-bg {
+    display: none;
+  }
 }
