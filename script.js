@@ -290,12 +290,12 @@ const popupTextMap = {
   youtube: {
     title: "YouTube",
     text: "[입덕직캠] 알파드라이브원 건우 직캠 4K 'Cinnamon Shake' (ALD1 GEONWOO FanCam) | ALD1 DEBUT SHOW [THE FIRST ALARM]",
-    icon: "assets/icons/gw_youtube.png"
+    icon: "assets/icons/gw_youtube.jpg"
   },
   spotify: {
     title: "spotify",
     text: "톡 쏘는 Cinnamon Shake🎶",
-    icon: "assets/icons/gw_spotify.png"
+    icon: "assets/icons/gw_spotify.jpg"
   },
   x: {
     title: "X",
@@ -305,7 +305,7 @@ const popupTextMap = {
   music: {
     title: "음악",
     text: "Us - Keshi",
-    icon: "assets/icons/gw_music.png"
+    icon: "assets/icons/gw_music.jpg"
   },
   calculator: {
     title: "계산기",
