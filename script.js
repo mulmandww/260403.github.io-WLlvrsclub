@@ -16,7 +16,20 @@ const dots = [
   document.getElementById("dot2"),
   document.getElementById("dot3"),
   document.getElementById("dot4")
-];
+].filter(Boolean);
+
+/* 홈화면 앱 */
+const openAppButtons = document.querySelectorAll(".app-icon.open-app, .dock-icon.open-app");
+const popupAppButtons = document.querySelectorAll(".app-icon.popup-app, .dock-icon.popup-app");
+const dummyAppButtons = document.querySelectorAll(".app-icon.dummy-app, .dock-icon.dummy-app");
+const allTappableApps = document.querySelectorAll(".app-icon, .dock-icon");
+
+const backHomeButtons = document.querySelectorAll(".back-home");
+const appScreens = document.querySelectorAll(".app-screen");
+
+const glassPopup = document.getElementById("glassPopup");
+const glassPopupTitle = document.getElementById("glassPopupTitle");
+const glassPopupText = document.getElementById("glassPopupText");
 
 /* =========================
    비밀번호
@@ -25,22 +38,14 @@ const PASSWORD = "4399";
 let currentInput = "";
 
 /* =========================
-   화면 전환 설정
+   상태값
 ========================= */
-const SCREEN_TRANSITION_DELAY = 140;
 let isTransitioning = false;
 let isAppAnimating = false;
-let touchOpened = false;
+let touchHandled = false;
 
 /* =========================
-   공통 유틸
-========================= */
-function wait(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-/* =========================
-   실시간 날짜 / 시간
+   시간
 ========================= */
 function updateDateTime() {
   const now = new Date();
@@ -63,20 +68,28 @@ updateDateTime();
 setInterval(updateDateTime, 1000);
 
 /* =========================
-   공통 화면 전환
+   유틸
 ========================= */
-async function switchScreen(fromScreen, toScreen) {
-  if (!fromScreen || !toScreen) return;
-  if (isTransitioning) return;
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-  isTransitioning = true;
+function clearTouchClasses() {
+  allTappableApps.forEach((el) => {
+    el.classList.remove("touching", "launching");
+  });
+}
 
-  fromScreen.classList.remove("active");
-  await wait(SCREEN_TRANSITION_DELAY);
-  toScreen.classList.add("active");
+function hideAllScreens() {
+  document.querySelectorAll(".screen").forEach((screen) => {
+    screen.classList.remove("active", "opening", "closing", "app-opening");
+  });
+}
 
-  await wait(220);
-  isTransitioning = false;
+function hideAllAppScreens() {
+  appScreens.forEach((screen) => {
+    screen.classList.remove("active", "opening", "closing");
+  });
 }
 
 /* =========================
@@ -87,7 +100,20 @@ async function openPasscodeScreen() {
   if (!lockScreen.classList.contains("active")) return;
   if (isTransitioning) return;
 
-  await switchScreen(lockScreen, passcodeScreen);
+  isTransitioning = true;
+
+  lockScreen.classList.remove("active");
+  lockScreen.classList.add("closing");
+
+  await wait(220);
+
+  lockScreen.classList.remove("closing");
+  passcodeScreen.classList.add("active", "opening");
+
+  await wait(280);
+
+  passcodeScreen.classList.remove("opening");
+  isTransitioning = false;
 }
 
 /* 아무데나 탭 */
@@ -140,12 +166,10 @@ window.addEventListener("mousemove", handleMove);
 window.addEventListener("mouseup", handleEnd);
 
 /* =========================
-   점 업데이트
+   비밀번호 점
 ========================= */
 function updateDots() {
   dots.forEach((dot, index) => {
-    if (!dot) return;
-
     if (index < currentInput.length) {
       dot.classList.add("filled");
     } else {
@@ -210,7 +234,20 @@ async function unlockToHome() {
   if (!passcodeScreen.classList.contains("active")) return;
   if (isTransitioning) return;
 
-  await switchScreen(passcodeScreen, homeScreen);
+  isTransitioning = true;
+
+  passcodeScreen.classList.remove("active");
+  passcodeScreen.classList.add("closing");
+
+  await wait(240);
+
+  passcodeScreen.classList.remove("closing");
+  homeScreen.classList.add("active", "opening");
+
+  await wait(320);
+
+  homeScreen.classList.remove("opening");
+  isTransitioning = false;
 }
 
 /* =========================
@@ -231,21 +268,47 @@ keypadButtons.forEach((button) => {
 });
 
 /* =========================
-   앱 화면 관련 요소
+   팝업
 ========================= */
-const openAppButtons = document.querySelectorAll(".app-icon.open-app, .dock-icon.open-app");
-const backHomeButtons = document.querySelectorAll(".back-home");
-const appScreens = document.querySelectorAll(".app-screen");
+const popupTextMap = {
+  weather: {
+    title: "날씨",
+    text: "사실 나는 비오는 날을 좋아한다. 습도가 자동으로 올라가는 천연 가습기이기 때문이다. 하지만 오늘은 왠지 다운되는 느낌이 들었다."
+  },
+  youtube: {
+    title: "YouTube",
+    text: "[입덕직캠] 알파드라이브원 건우 직캠 4K 'Cinnamon Shake' (ALD1 GEONWOO FanCam) | ALD1 DEBUT SHOW [THE FIRST ALARM]"
+  },
+  spotify: {
+    title: "spotify",
+    text: "톡 쏘는 Cinnamon Shake🎶"
+  },
+  x: {
+    title: "X",
+    text: "❕❕❕❕❕ ··· 🤫"
+  },
+  music: {
+    title: "음악",
+    text: "Us - Keshi"
+  }
+};
 
-/* =========================
-   앱 화면 보조 함수
-========================= */
-function hideAllAppScreens() {
-  appScreens.forEach((screen) => {
-    screen.classList.remove("active", "opening");
-  });
+function showPopup(title, text) {
+  if (!glassPopup || !glassPopupTitle || !glassPopupText) return;
+
+  glassPopupTitle.textContent = title;
+  glassPopupText.textContent = text;
+  glassPopup.classList.add("show");
+
+  clearTimeout(showPopup._timer);
+  showPopup._timer = setTimeout(() => {
+    glassPopup.classList.remove("show");
+  }, 2200);
 }
 
+/* =========================
+   앱 열기 애니메이션
+========================= */
 async function openAppWithAnimation(button) {
   const targetId = button.dataset.screen;
   if (!targetId) return;
@@ -258,23 +321,25 @@ async function openAppWithAnimation(button) {
   isAppAnimating = true;
 
   button.classList.add("launching");
-  button.classList.add("touching");
   homeScreen.classList.add("app-opening");
 
-  await wait(260);
+  await wait(320);
 
   homeScreen.classList.remove("active", "app-opening");
 
   hideAllAppScreens();
   targetScreen.classList.add("active", "opening");
 
-  setTimeout(() => {
-    button.classList.remove("launching", "touching");
-    targetScreen.classList.remove("opening");
-    isAppAnimating = false;
-  }, 340);
+  await wait(360);
+
+  button.classList.remove("launching", "touching");
+  targetScreen.classList.remove("opening");
+  isAppAnimating = false;
 }
 
+/* =========================
+   앱 화면 -> 홈화면
+========================= */
 async function backToHomeFromApp() {
   if (!homeScreen) return;
   if (isTransitioning || isAppAnimating) return;
@@ -285,23 +350,27 @@ async function backToHomeFromApp() {
   isAppAnimating = true;
 
   currentAppScreen.classList.remove("active");
+  currentAppScreen.classList.add("closing");
 
-  await wait(120);
+  await wait(180);
 
-  homeScreen.classList.add("active");
+  currentAppScreen.classList.remove("closing");
+  homeScreen.classList.add("active", "opening");
 
-  setTimeout(() => {
-    isAppAnimating = false;
-  }, 220);
+  await wait(260);
+
+  homeScreen.classList.remove("opening");
+  isAppAnimating = false;
 }
 
+backHomeButtons.forEach((button) => {
+  button.addEventListener("click", backToHomeFromApp);
+});
+
 /* =========================
-   앱 버튼 입력 처리
-   모바일: touchstart -> touching
-   모바일: touchend -> 잠깐 보여주고 열기
-   PC: click -> 바로 열기
+   공통 터치 피드백
 ========================= */
-openAppButtons.forEach((button) => {
+function attachTouchFeedback(button, action) {
   button.addEventListener(
     "touchstart",
     () => {
@@ -309,7 +378,7 @@ openAppButtons.forEach((button) => {
       if (isTransitioning || isAppAnimating) return;
 
       button.classList.add("touching");
-      touchOpened = false;
+      touchHandled = false;
     },
     { passive: true }
   );
@@ -319,31 +388,59 @@ openAppButtons.forEach((button) => {
     if (isTransitioning || isAppAnimating) return;
 
     event.preventDefault();
-    touchOpened = true;
+    touchHandled = true;
 
-    await wait(90);
-    await openAppWithAnimation(button);
+    await wait(120);
+    await action(button);
   });
 
   button.addEventListener("touchcancel", () => {
     button.classList.remove("touching");
-    touchOpened = false;
+    touchHandled = false;
   });
 
   button.addEventListener("click", async (event) => {
-    if (touchOpened) {
-      touchOpened = false;
+    if (touchHandled) {
+      touchHandled = false;
       event.preventDefault();
       return;
     }
 
-    await openAppWithAnimation(button);
+    await action(button);
+  });
+}
+
+/* =========================
+   진입형 앱
+========================= */
+openAppButtons.forEach((button) => {
+  attachTouchFeedback(button, openAppWithAnimation);
+});
+
+/* =========================
+   반응형 앱
+========================= */
+popupAppButtons.forEach((button) => {
+  attachTouchFeedback(button, async (btn) => {
+    const popupKey = btn.dataset.popup;
+    const popupData = popupTextMap[popupKey];
+
+    await wait(40);
+
+    btn.classList.remove("touching");
+
+    if (popupData) {
+      showPopup(popupData.title, popupData.text);
+    }
   });
 });
 
 /* =========================
-   앱 화면 -> 홈화면 복귀
+   장식형 앱
 ========================= */
-backHomeButtons.forEach((button) => {
-  button.addEventListener("click", backToHomeFromApp);
+dummyAppButtons.forEach((button) => {
+  attachTouchFeedback(button, async (btn) => {
+    await wait(60);
+    btn.classList.remove("touching");
+  });
 });
