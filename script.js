@@ -284,7 +284,7 @@ keypadButtons.forEach((button) => {
 const popupTextMap = {
   weather: {
     title: "날씨",
-    text: "사실 나는 비오는 날을 좋아한다. 습도가 자동으로 올라가는 천연 가습기이기 때문이다.",
+    text: "사실 나는 비오는 날을 좋아한다.<br>습도가 자동으로 올라가는 천연 가습기이기 때문이다.",
     icon: "assets/icons/weather.png"
   },
   youtube: {
