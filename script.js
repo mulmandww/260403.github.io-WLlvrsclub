@@ -296,13 +296,48 @@ const popupTextMap = {
 function showPopup(title, text) {
   if (!glassPopup || !glassPopupTitle || !glassPopupText) return;
 
-  glassPopupTitle.textContent = title;
-  glassPopupText.textContent = text;
+  glassPopupTitle.textContent = title || "";
+  glassPopupText.textContent = text || "";
+
+  glassPopup.classList.remove("show");
+  void glassPopup.offsetWidth;
+
+  glassPopup.setAttribute("aria-hidden", "false");
   glassPopup.classList.add("show");
 
   clearTimeout(showPopup._timer);
   showPopup._timer = setTimeout(() => {
     glassPopup.classList.remove("show");
+    glassPopup.setAttribute("aria-hidden", "true");
+
+    setTimeout(() => {
+      glassPopupTitle.textContent = "";
+      glassPopupText.textContent = "";
+    }, 220);
+  }, 2200);
+}
+
+function showPopup(title, text) {
+  if (!glassPopup || !glassPopupTitle || !glassPopupText) return;
+
+  glassPopupTitle.textContent = title || "";
+  glassPopupText.textContent = text || "";
+
+  glassPopup.classList.remove("show");
+  void glassPopup.offsetWidth;
+
+  glassPopup.setAttribute("aria-hidden", "false");
+  glassPopup.classList.add("show");
+
+  clearTimeout(showPopup._timer);
+  showPopup._timer = setTimeout(() => {
+    glassPopup.classList.remove("show");
+    glassPopup.setAttribute("aria-hidden", "true");
+
+    setTimeout(() => {
+      glassPopupTitle.textContent = "";
+      glassPopupText.textContent = "";
+    }, 220);
   }, 2200);
 }
 
