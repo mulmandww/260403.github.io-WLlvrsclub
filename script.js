@@ -39,7 +39,7 @@ if (glassPopup) {
 }
 
 if (glassPopupTitle) glassPopupTitle.textContent = "";
-if (glassPopupText) glassPopupText.textContent = "";
+if (glassPopupText) glassPopupText.innerHTML = "";
 if (glassPopupTime) glassPopupTime.textContent = "";
 
 /* =========================
@@ -309,7 +309,7 @@ const popupTextMap = {
   },
   calculator: {
     title: "계산기",
-    text: "411×(4+3+3)+43×(3+3)+(43−4×3)=?",
+    text: "411×(4+3+3)+43×(3+3)+(43−4×3) = ?",
     icon: "assets/icons/calculator.png"
   },
 };
