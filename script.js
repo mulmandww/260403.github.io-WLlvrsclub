@@ -1,4 +1,6 @@
-/* 요소 */
+/* =========================
+   요소
+========================= */
 const lockScreen = document.getElementById("lockScreen");
 const passcodeScreen = document.getElementById("passcodeScreen");
 const homeScreen = document.getElementById("homeScreen");
@@ -16,15 +18,30 @@ const dots = [
   document.getElementById("dot4")
 ];
 
-/* 비밀번호 */
+/* =========================
+   비밀번호
+========================= */
 const PASSWORD = "4399";
 let currentInput = "";
 
-/* 화면 전환 설정 */
+/* =========================
+   화면 전환 설정
+========================= */
 const SCREEN_TRANSITION_DELAY = 140;
 let isTransitioning = false;
+let isAppAnimating = false;
+let touchOpened = false;
 
-/* 실시간 날짜/시간 */
+/* =========================
+   공통 유틸
+========================= */
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/* =========================
+   실시간 날짜 / 시간
+========================= */
 function updateDateTime() {
   const now = new Date();
 
@@ -45,11 +62,9 @@ function updateDateTime() {
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
-/* 공통 유틸 */
-function wait(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
+/* =========================
+   공통 화면 전환
+========================= */
 async function switchScreen(fromScreen, toScreen) {
   if (!fromScreen || !toScreen) return;
   if (isTransitioning) return;
@@ -64,8 +79,11 @@ async function switchScreen(fromScreen, toScreen) {
   isTransitioning = false;
 }
 
-/* 잠금화면 -> 암호입력 */
+/* =========================
+   잠금화면 -> 암호입력
+========================= */
 async function openPasscodeScreen() {
+  if (!lockScreen || !passcodeScreen) return;
   if (!lockScreen.classList.contains("active")) return;
   if (isTransitioning) return;
 
@@ -73,7 +91,9 @@ async function openPasscodeScreen() {
 }
 
 /* 아무데나 탭 */
-lockScreen.addEventListener("click", openPasscodeScreen);
+if (lockScreen) {
+  lockScreen.addEventListener("click", openPasscodeScreen);
+}
 
 /* 위로 드래그 */
 let startY = 0;
@@ -108,17 +128,24 @@ function handleEnd() {
   }
 }
 
-lockScreen.addEventListener("touchstart", handleStart, { passive: true });
-lockScreen.addEventListener("touchmove", handleMove, { passive: true });
-lockScreen.addEventListener("touchend", handleEnd);
+if (lockScreen) {
+  lockScreen.addEventListener("touchstart", handleStart, { passive: true });
+  lockScreen.addEventListener("touchmove", handleMove, { passive: true });
+  lockScreen.addEventListener("touchend", handleEnd);
 
-lockScreen.addEventListener("mousedown", handleStart);
+  lockScreen.addEventListener("mousedown", handleStart);
+}
+
 window.addEventListener("mousemove", handleMove);
 window.addEventListener("mouseup", handleEnd);
 
-/* 점 업데이트 */
+/* =========================
+   점 업데이트
+========================= */
 function updateDots() {
   dots.forEach((dot, index) => {
+    if (!dot) return;
+
     if (index < currentInput.length) {
       dot.classList.add("filled");
     } else {
@@ -132,9 +159,11 @@ function resetInput() {
   updateDots();
 }
 
-/* 숫자 입력 */
+/* =========================
+   숫자 입력
+========================= */
 function pressKey(num) {
-  if (isTransitioning) return;
+  if (isTransitioning || isAppAnimating) return;
   if (currentInput.length >= 4) return;
 
   currentInput += num;
@@ -146,29 +175,38 @@ function pressKey(num) {
 }
 
 function deleteKey() {
-  if (isTransitioning) return;
+  if (isTransitioning || isAppAnimating) return;
   if (currentInput.length === 0) return;
 
   currentInput = currentInput.slice(0, -1);
   updateDots();
 }
 
-/* 비밀번호 검사 */
+/* =========================
+   비밀번호 검사
+========================= */
 function checkPassword() {
   if (currentInput === PASSWORD) {
     unlockToHome();
   } else {
-    passcodeWrap.classList.add("shake");
+    if (passcodeWrap) {
+      passcodeWrap.classList.add("shake");
+    }
 
     setTimeout(() => {
-      passcodeWrap.classList.remove("shake");
+      if (passcodeWrap) {
+        passcodeWrap.classList.remove("shake");
+      }
       resetInput();
     }, 360);
   }
 }
 
-/* 비밀번호 -> 홈화면 */
+/* =========================
+   비밀번호 -> 홈화면
+========================= */
 async function unlockToHome() {
+  if (!passcodeScreen || !homeScreen) return;
   if (!passcodeScreen.classList.contains("active")) return;
   if (isTransitioning) return;
 
@@ -193,14 +231,15 @@ keypadButtons.forEach((button) => {
 });
 
 /* =========================
-   앱 클릭 애니메이션
+   앱 화면 관련 요소
 ========================= */
 const openAppButtons = document.querySelectorAll(".app-icon.open-app, .dock-icon.open-app");
 const backHomeButtons = document.querySelectorAll(".back-home");
 const appScreens = document.querySelectorAll(".app-screen");
 
-let isAppAnimating = false;
-
+/* =========================
+   앱 화면 보조 함수
+========================= */
 function hideAllAppScreens() {
   appScreens.forEach((screen) => {
     screen.classList.remove("active", "opening");
@@ -213,15 +252,16 @@ async function openAppWithAnimation(button) {
 
   const targetScreen = document.getElementById(targetId);
   if (!targetScreen) return;
+  if (!homeScreen || !homeScreen.classList.contains("active")) return;
   if (isTransitioning || isAppAnimating) return;
-  if (!homeScreen.classList.contains("active")) return;
 
   isAppAnimating = true;
 
   button.classList.add("launching");
+  button.classList.add("touching");
   homeScreen.classList.add("app-opening");
 
-  await wait(220);
+  await wait(260);
 
   homeScreen.classList.remove("active", "app-opening");
 
@@ -229,20 +269,14 @@ async function openAppWithAnimation(button) {
   targetScreen.classList.add("active", "opening");
 
   setTimeout(() => {
-    button.classList.remove("launching");
+    button.classList.remove("launching", "touching");
     targetScreen.classList.remove("opening");
     isAppAnimating = false;
   }, 340);
 }
 
-openAppButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    openAppWithAnimation(button);
-  });
-});
-
-/* 앱 화면 -> 홈화면 복귀 */
 async function backToHomeFromApp() {
+  if (!homeScreen) return;
   if (isTransitioning || isAppAnimating) return;
 
   const currentAppScreen = document.querySelector(".app-screen.active");
@@ -261,27 +295,55 @@ async function backToHomeFromApp() {
   }, 220);
 }
 
-backHomeButtons.forEach((button) => {
-  button.addEventListener("click", backToHomeFromApp);
+/* =========================
+   앱 버튼 입력 처리
+   모바일: touchstart -> touching
+   모바일: touchend -> 잠깐 보여주고 열기
+   PC: click -> 바로 열기
+========================= */
+openAppButtons.forEach((button) => {
+  button.addEventListener(
+    "touchstart",
+    () => {
+      if (!homeScreen || !homeScreen.classList.contains("active")) return;
+      if (isTransitioning || isAppAnimating) return;
+
+      button.classList.add("touching");
+      touchOpened = false;
+    },
+    { passive: true }
+  );
+
+  button.addEventListener("touchend", async (event) => {
+    if (!homeScreen || !homeScreen.classList.contains("active")) return;
+    if (isTransitioning || isAppAnimating) return;
+
+    event.preventDefault();
+    touchOpened = true;
+
+    await wait(90);
+    await openAppWithAnimation(button);
+  });
+
+  button.addEventListener("touchcancel", () => {
+    button.classList.remove("touching");
+    touchOpened = false;
+  });
+
+  button.addEventListener("click", async (event) => {
+    if (touchOpened) {
+      touchOpened = false;
+      event.preventDefault();
+      return;
+    }
+
+    await openAppWithAnimation(button);
+  });
 });
 
 /* =========================
-   MOBILE TOUCH FEEDBACK
+   앱 화면 -> 홈화면 복귀
 ========================= */
-const tappableIcons = document.querySelectorAll(".app-icon, .dock-icon");
-
-tappableIcons.forEach((icon) => {
-  icon.addEventListener("touchstart", () => {
-    icon.classList.add("touching");
-  }, { passive: true });
-
-  icon.addEventListener("touchend", () => {
-    setTimeout(() => {
-      icon.classList.remove("touching");
-    }, 120);
-  });
-
-  icon.addEventListener("touchcancel", () => {
-    icon.classList.remove("touching");
-  });
+backHomeButtons.forEach((button) => {
+  button.addEventListener("click", backToHomeFromApp);
 });
