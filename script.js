@@ -20,6 +20,10 @@ const dots = [
 const PASSWORD = "4399";
 let currentInput = "";
 
+/* 화면 전환 설정 */
+const SCREEN_TRANSITION_DELAY = 140;
+let isTransitioning = false;
+
 /* 실시간 날짜/시간 */
 function updateDateTime() {
   const now = new Date();
@@ -33,19 +37,39 @@ function updateDateTime() {
   const weekdayNames = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
   const weekday = weekdayNames[now.getDay()];
 
-  lockDate.textContent = `${month}월 ${day}일 ${weekday}`;
-  lockTime.textContent = `${hour}:${minute}`;
-  statusTime.textContent = `${hour}:${minute}`;
+  if (lockDate) lockDate.textContent = `${month}월 ${day}일 ${weekday}`;
+  if (lockTime) lockTime.textContent = `${hour}:${minute}`;
+  if (statusTime) statusTime.textContent = `${hour}:${minute}`;
 }
 
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
+/* 공통 유틸 */
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function switchScreen(fromScreen, toScreen) {
+  if (!fromScreen || !toScreen) return;
+  if (isTransitioning) return;
+
+  isTransitioning = true;
+
+  fromScreen.classList.remove("active");
+  await wait(SCREEN_TRANSITION_DELAY);
+  toScreen.classList.add("active");
+
+  await wait(220);
+  isTransitioning = false;
+}
+
 /* 잠금화면 -> 암호입력 */
-function openPasscodeScreen() {
+async function openPasscodeScreen() {
   if (!lockScreen.classList.contains("active")) return;
-  lockScreen.classList.remove("active");
-  passcodeScreen.classList.add("active");
+  if (isTransitioning) return;
+
+  await switchScreen(lockScreen, passcodeScreen);
 }
 
 /* 아무데나 탭 */
@@ -63,6 +87,7 @@ function getPointerY(event) {
 }
 
 function handleStart(event) {
+  if (isTransitioning) return;
   dragging = true;
   startY = getPointerY(event);
   currentY = startY;
@@ -109,6 +134,7 @@ function resetInput() {
 
 /* 숫자 입력 */
 function pressKey(num) {
+  if (isTransitioning) return;
   if (currentInput.length >= 4) return;
 
   currentInput += num;
@@ -120,7 +146,9 @@ function pressKey(num) {
 }
 
 function deleteKey() {
+  if (isTransitioning) return;
   if (currentInput.length === 0) return;
+
   currentInput = currentInput.slice(0, -1);
   updateDots();
 }
@@ -139,7 +167,10 @@ function checkPassword() {
   }
 }
 
-function unlockToHome() {
-  passcodeScreen.classList.remove("active");
-  homeScreen.classList.add("active");
+/* 비밀번호 -> 홈화면 */
+async function unlockToHome() {
+  if (!passcodeScreen.classList.contains("active")) return;
+  if (isTransitioning) return;
+
+  await switchScreen(passcodeScreen, homeScreen);
 }
