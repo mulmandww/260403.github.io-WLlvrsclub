@@ -528,7 +528,7 @@ img {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.16);
   backdrop-filter: blur(24px) saturate(185%);
-  -webkit-backdrop-filter: blur(24px) saturate(185%);
+  -webkit-backdrop-filter: blur(12px) saturate(185%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -923,7 +923,7 @@ img {
   }
 
   .key {
-    backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
   }
 
