@@ -1266,12 +1266,16 @@ img {
 /* MOBILE APP TOUCH EFFECT */
 /* ============================= */
 
+/* ============================= */
+/* APP TOUCH / OPEN EFFECT */
+/* ============================= */
+
 .app-icon img,
 .dock-icon img {
   transition:
-    transform 0.14s ease,
-    filter 0.14s ease,
-    opacity 0.14s ease;
+    transform 0.18s ease,
+    filter 0.18s ease,
+    opacity 0.18s ease;
 }
 
 .app-icon.touching img,
@@ -1282,5 +1286,70 @@ img {
 
 .app-icon.launching img,
 .dock-icon.launching img {
-  animation: appIconLaunch 0.34s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: appIconLaunch 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes appIconLaunch {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+  35% {
+    transform: scale(0.90);
+    opacity: 1;
+    filter: brightness(1.06);
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+    filter: brightness(1.12);
+  }
+}
+
+.home-screen.app-opening {
+  animation: homeScreenFade 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes homeScreenFade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.03);
+    filter: blur(6px);
+  }
+}
+
+.screen.opening {
+  animation: screenOpen 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.screen.closing {
+  animation: screenClose 0.22s ease forwards;
+}
+
+@keyframes screenOpen {
+  0% {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes screenClose {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.995);
+  }
 }
