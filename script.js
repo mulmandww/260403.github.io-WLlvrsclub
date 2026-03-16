@@ -174,3 +174,93 @@ async function unlockToHome() {
 
   await switchScreen(passcodeScreen, homeScreen);
 }
+
+/* =========================
+   비밀번호 버튼 탭 효과
+========================= */
+const keypadButtons = document.querySelectorAll(".key");
+
+keypadButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    button.classList.remove("tap");
+    void button.offsetWidth;
+    button.classList.add("tap");
+
+    setTimeout(() => {
+      button.classList.remove("tap");
+    }, 180);
+  });
+});
+
+/* =========================
+   앱 클릭 애니메이션
+========================= */
+const openAppButtons = document.querySelectorAll(".app-icon.open-app, .dock-icon.open-app");
+const backHomeButtons = document.querySelectorAll(".back-home");
+const appScreens = document.querySelectorAll(".app-screen");
+
+let isAppAnimating = false;
+
+function hideAllAppScreens() {
+  appScreens.forEach((screen) => {
+    screen.classList.remove("active", "opening");
+  });
+}
+
+async function openAppWithAnimation(button) {
+  const targetId = button.dataset.screen;
+  if (!targetId) return;
+
+  const targetScreen = document.getElementById(targetId);
+  if (!targetScreen) return;
+  if (isTransitioning || isAppAnimating) return;
+  if (!homeScreen.classList.contains("active")) return;
+
+  isAppAnimating = true;
+
+  button.classList.add("launching");
+  homeScreen.classList.add("app-opening");
+
+  await wait(220);
+
+  homeScreen.classList.remove("active", "app-opening");
+
+  hideAllAppScreens();
+  targetScreen.classList.add("active", "opening");
+
+  setTimeout(() => {
+    button.classList.remove("launching");
+    targetScreen.classList.remove("opening");
+    isAppAnimating = false;
+  }, 340);
+}
+
+openAppButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    openAppWithAnimation(button);
+  });
+});
+
+/* 앱 화면 -> 홈화면 복귀 */
+async function backToHomeFromApp() {
+  if (isTransitioning || isAppAnimating) return;
+
+  const currentAppScreen = document.querySelector(".app-screen.active");
+  if (!currentAppScreen) return;
+
+  isAppAnimating = true;
+
+  currentAppScreen.classList.remove("active");
+
+  await wait(120);
+
+  homeScreen.classList.add("active");
+
+  setTimeout(() => {
+    isAppAnimating = false;
+  }, 220);
+}
+
+backHomeButtons.forEach((button) => {
+  button.addEventListener("click", backToHomeFromApp);
+});
