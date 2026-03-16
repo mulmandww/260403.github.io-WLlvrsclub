@@ -264,3 +264,24 @@ async function backToHomeFromApp() {
 backHomeButtons.forEach((button) => {
   button.addEventListener("click", backToHomeFromApp);
 });
+
+/* =========================
+   MOBILE TOUCH FEEDBACK
+========================= */
+const tappableIcons = document.querySelectorAll(".app-icon, .dock-icon");
+
+tappableIcons.forEach((icon) => {
+  icon.addEventListener("touchstart", () => {
+    icon.classList.add("touching");
+  }, { passive: true });
+
+  icon.addEventListener("touchend", () => {
+    setTimeout(() => {
+      icon.classList.remove("touching");
+    }, 120);
+  });
+
+  icon.addEventListener("touchcancel", () => {
+    icon.classList.remove("touching");
+  });
+});
