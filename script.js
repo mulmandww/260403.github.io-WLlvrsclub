@@ -30,6 +30,17 @@ const appScreens = document.querySelectorAll(".app-screen");
 const glassPopup = document.getElementById("glassPopup");
 const glassPopupTitle = document.getElementById("glassPopupTitle");
 const glassPopupText = document.getElementById("glassPopupText");
+const glassPopupTime = document.getElementById("glassPopupTime");
+const glassPopupIcon = document.getElementById("glassPopupIcon");
+
+if (glassPopup) {
+  glassPopup.classList.remove("show");
+  glassPopup.setAttribute("aria-hidden", "true");
+}
+
+if (glassPopupTitle) glassPopupTitle.textContent = "";
+if (glassPopupText) glassPopupText.textContent = "";
+if (glassPopupTime) glassPopupTime.textContent = "";
 
 /* =========================
    비밀번호
@@ -273,55 +284,45 @@ keypadButtons.forEach((button) => {
 const popupTextMap = {
   weather: {
     title: "날씨",
-    text: "사실 나는 비오는 날을 좋아한다. 습도가 자동으로 올라가는 천연 가습기이기 때문이다. 하지만 오늘은 왠지 다운되는 느낌이 들었다."
+    text: "사실 나는 비오는 날을 좋아한다. 습도가 자동으로 올라가는 천연 가습기이기 때문이다. 하지만 오늘은 왠지 다운되는 느낌이 들었다.",
+    icon: "assets/icons/weather.png"
   },
   youtube: {
     title: "YouTube",
-    text: "[입덕직캠] 알파드라이브원 건우 직캠 4K 'Cinnamon Shake' (ALD1 GEONWOO FanCam) | ALD1 DEBUT SHOW [THE FIRST ALARM]"
+    text: "[입덕직캠] 알파드라이브원 건우 직캠 4K 'Cinnamon Shake' (ALD1 GEONWOO FanCam) | ALD1 DEBUT SHOW [THE FIRST ALARM]",
+    icon: "assets/icons/gw_youtube.png"
   },
   spotify: {
     title: "spotify",
-    text: "톡 쏘는 Cinnamon Shake🎶"
+    text: "톡 쏘는 Cinnamon Shake🎶",
+    icon: "assets/icons/gw_spotify.png"
   },
   x: {
     title: "X",
-    text: "❕❕❕❕❕ ··· 🤫"
+    text: "❕❕❕❕❕ ··· 🤫",
+    icon: "assets/icons/x.png"
   },
   music: {
     title: "음악",
-    text: "Us - Keshi"
+    text: "Us - Keshi",
+    icon: "assets/icons/gw_music.png"
   }
 };
 
-function showPopup(title, text) {
-  if (!glassPopup || !glassPopupTitle || !glassPopupText) return;
-
-  glassPopupTitle.textContent = title || "";
-  glassPopupText.textContent = text || "";
-
-  glassPopup.classList.remove("show");
-  void glassPopup.offsetWidth;
-
-  glassPopup.setAttribute("aria-hidden", "false");
-  glassPopup.classList.add("show");
-
-  clearTimeout(showPopup._timer);
-  showPopup._timer = setTimeout(() => {
-    glassPopup.classList.remove("show");
-    glassPopup.setAttribute("aria-hidden", "true");
-
-    setTimeout(() => {
-      glassPopupTitle.textContent = "";
-      glassPopupText.textContent = "";
-    }, 220);
-  }, 2200);
+function getCurrentNotifTime() {
+  const now = new Date();
+  const hour = String(now.getHours()).padStart(2, "0");
+  const minute = String(now.getMinutes()).padStart(2, "0");
+  return `${hour}:${minute}`;
 }
 
-function showPopup(title, text) {
-  if (!glassPopup || !glassPopupTitle || !glassPopupText) return;
+function showPopup({ title, text, icon }) {
+  if (!glassPopup || !glassPopupTitle || !glassPopupText || !glassPopupTime || !glassPopupIcon) return;
 
   glassPopupTitle.textContent = title || "";
   glassPopupText.textContent = text || "";
+  glassPopupTime.textContent = getCurrentNotifTime();
+  glassPopupIcon.src = icon || "assets/icons/messages.png";
 
   glassPopup.classList.remove("show");
   void glassPopup.offsetWidth;
@@ -337,7 +338,8 @@ function showPopup(title, text) {
     setTimeout(() => {
       glassPopupTitle.textContent = "";
       glassPopupText.textContent = "";
-    }, 220);
+      glassPopupTime.textContent = "";
+    }, 260);
   }, 2200);
 }
 
@@ -461,11 +463,10 @@ popupAppButtons.forEach((button) => {
     const popupData = popupTextMap[popupKey];
 
     await wait(40);
-
     btn.classList.remove("touching");
 
     if (popupData) {
-      showPopup(popupData.title, popupData.text);
+      showPopup(popupData);
     }
   });
 });
