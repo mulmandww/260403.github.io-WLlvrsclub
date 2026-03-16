@@ -267,15 +267,22 @@ img {
 }
 
 .wallpaper-lock {
-  background: url("assets/wallpaper/lock.jpg") center / cover no-repeat;
+  background:
+    url("assets/wallpaper/wallpaper_lock.jpg") center / cover no-repeat;
 }
 
 .wallpaper-passcode {
-  background: url("assets/wallpaper/lock.jpg") center / cover no-repeat;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
+    url("assets/wallpaper/wallpaper_lock.jpg") center / cover no-repeat;
 }
 
 .wallpaper-home {
-  background: url("assets/wallpaper/home.jpg") center / cover no-repeat;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10)),
+    url("assets/wallpaper/wallpaper_lock.jpg") center / cover no-repeat;
+  filter: blur(12px);
+  transform: scale(1.08);
 }
 
 .lock-overlay-top {
@@ -743,21 +750,35 @@ img {
     bottom: calc(34px + env(safe-area-inset-bottom));
   }
 
-  .wallpaper-lock {
-    background-image: url("assets/wallpaper/lock.jpg");
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: #000;
-  }
+ .wallpaper-lock {
+  background-image: url("assets/wallpaper/wallpaper_lock.jpg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #000;
+}
 
-  .wallpaper-passcode {
-    background-image: url("assets/wallpaper/lock.jpg");
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: #000;
-  }
+.wallpaper-passcode {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
+    url("assets/wallpaper/wallpaper_lock.jpg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #000;
+}
+
+.wallpaper-home {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10)),
+    url("assets/wallpaper/wallpaper_lock.jpg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #000;
+  filter: blur(12px);
+  transform: scale(1.08);
+}
 
   /* statusbar */
   .statusbar {
