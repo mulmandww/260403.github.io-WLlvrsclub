@@ -281,7 +281,7 @@ img {
   background:
     linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10)),
     url("assets/wallpaper/wallpaper_lock.jpg") center / cover no-repeat;
-  filter: blur(12px);
+  filter: blur(8px);
   transform: scale(1.08);
 }
 
@@ -776,7 +776,7 @@ img {
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #000;
-  filter: blur(12px);
+  filter: blur(8px);
   transform: scale(1.08);
 }
 
