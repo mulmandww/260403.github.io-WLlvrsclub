@@ -252,11 +252,21 @@ img {
 .screen {
   position: absolute;
   inset: 0;
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px) scale(0.995);
+  transition:
+    opacity 0.32s ease,
+    transform 0.32s ease,
+    visibility 0.32s ease;
 }
 
 .screen.active {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
 }
 
 .wallpaper {
@@ -752,9 +762,9 @@ img {
 
  .wallpaper-lock {
   background-image: url("assets/wallpaper/wallpaper_lock.jpg");
-  background-position: center top;
+  background-position: center center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-color: #000;
 }
 
@@ -762,9 +772,9 @@ img {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
     url("assets/wallpaper/wallpaper_lock.jpg");
-  background-position: center top;
+  background-position: center center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-color: #000;
 }
 
@@ -772,11 +782,11 @@ img {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10)),
     url("assets/wallpaper/wallpaper_lock.jpg");
-  background-position: center top;
+  background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #000;
-  filter: blur(8px);
+  filter: blur(12px);
   transform: scale(1.08);
 }
 
