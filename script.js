@@ -306,7 +306,12 @@ const popupTextMap = {
     title: "음악",
     text: "Us - Keshi",
     icon: "assets/icons/gw_music.png"
-  }
+  },
+  calculator: {
+    title: "계산기",
+    text: "411×(4+3+3)+43×(3+3)+(43−4×3)=?",
+    icon: "assets/icons/calculator.png"
+  },
 };
 
 function getCurrentNotifTime() {
