@@ -451,8 +451,7 @@ img {
 .passcode-blur {
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(18px);
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.22);
   z-index: 1;
   pointer-events: none;
 }
