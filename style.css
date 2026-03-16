@@ -928,48 +928,89 @@ img {
   }
 
   /* home */
+   /* home */
+  .home-screen {
+    overflow: hidden;
+  }
+
   .home-apps {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: repeat(6, 76px);
-    column-gap: 6px;
-    row-gap: 16px;
-    height: calc(100% - 120px);
-    padding-top: calc(88px + env(safe-area-inset-top));
-    padding-left: 12px;
-    padding-right: 12px;
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 68px);
+    justify-items: center;
+    align-items: start;
+
+    column-gap: 2px;
+    row-gap: 14px;
+
+    width: 100%;
+    height: calc(100% - 118px);
+
+    padding-top: calc(82px + env(safe-area-inset-top));
+    padding-left: 10px;
+    padding-right: 10px;
     padding-bottom: 0;
   }
 
   .app-icon,
   .app-empty {
-    height: 76px;
+    width: 100%;
+    height: 68px;
+    min-width: 0;
+  }
+
+  .app-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    color: #fff;
   }
 
   .app-icon img {
-    width: min(56px, 14vw);
-    height: min(56px, 14vw);
-    border-radius: 15px;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    object-fit: cover;
+    flex-shrink: 0;
   }
 
   .app-icon span {
     margin-top: 4px;
     font-size: 10px;
+    line-height: 1;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .app-empty {
+    visibility: hidden;
   }
 
   .dock {
-    width: calc(100% - 20px);
+    width: calc(100% - 18px);
     max-width: none;
-    height: 84px;
-    bottom: calc(10px + env(safe-area-inset-bottom));
-    border-radius: 26px;
+    height: 82px;
+    bottom: calc(8px + env(safe-area-inset-bottom));
+    border-radius: 24px;
     padding: 0 6px;
-    backdrop-filter: blur(26px) saturate(190%);
-    -webkit-backdrop-filter: blur(26px) saturate(190%);
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    justify-items: center;
   }
 
   .dock-icon img {
-    width: min(56px, 14vw);
-    height: min(56px, 14vw);
+    width: 54px;
+    height: 54px;
     border-radius: 15px;
   }
 
