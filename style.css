@@ -303,6 +303,20 @@ img {
   touch-action: none;
 }
 
+.wallpaper-lock {
+  background: url("assets/wallpaper/lock.jpg") center / cover no-repeat;
+}
+
+.wallpaper-home {
+  background: url("assets/wallpaper/home.jpg") center / cover no-repeat;
+}
+
+.page-bg {
+  background:
+    linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.38)),
+    url("assets/wallpaper/background.jpg") center / cover no-repeat;
+}
+
 .lock-content {
   position: relative;
   z-index: 2;
@@ -613,21 +627,14 @@ img {
 .home-apps {
   position: relative;
   z-index: 2;
-
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-rows: repeat(6, 88px);
   column-gap: 8px;
   row-gap: 18px;
-
   width: 100%;
   height: calc(100% - 128px);
-
-  padding:
-    calc(96px + var(--safe-top))
-    16px
-    0
-    16px;
+  padding: calc(96px + var(--safe-top)) 16px 0 16px;
 }
 
 .app-icon,
@@ -650,28 +657,6 @@ img {
   height: 60px;
   border-radius: 18px;
   object-fit: cover;
-
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.07)),
-    rgba(255,255,255,0.08);
-
-  border: 1px solid rgba(255,255,255,0.18);
-
-  backdrop-filter: blur(14px) saturate(155%);
-  -webkit-backdrop-filter: blur(14px) saturate(155%);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.18),
-    inset 0 -1px 0 rgba(255,255,255,0.04),
-    0 8px 18px rgba(0,0,0,0.16);
-
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
-}
-
-.app-icon:active img {
-  transform: scale(0.96);
 }
 
 .app-icon span {
@@ -681,17 +666,10 @@ img {
   line-height: 1.1;
   text-align: center;
   white-space: nowrap;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.22);
 }
 
 .app-empty {
   visibility: hidden;
-}
-
-.open-app:active,
-.popup-app:active,
-.dock-icon:active {
-  transform: scale(0.96);
 }
 
 /* dock */
@@ -705,48 +683,15 @@ img {
   bottom: calc(16px + var(--safe-bottom));
   transform: translateX(-50%);
   z-index: 3;
-
   width: calc(100% - 22px);
   max-width: 368px;
   height: 92px;
-
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
   justify-items: center;
-
   padding: 0 8px;
-
   border-radius: 30px;
-
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255,255,255,0.16);
-
-  backdrop-filter: blur(30px) saturate(200%);
-  -webkit-backdrop-filter: blur(30px) saturate(200%);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.22),
-    inset 0 -1px 0 rgba(255,255,255,0.04),
-    0 12px 28px rgba(0,0,0,0.14);
-
-  overflow: hidden;
-}
-
-.dock::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.22) 0%,
-      rgba(255,255,255,0.08) 20%,
-      rgba(255,255,255,0.02) 45%,
-      rgba(255,255,255,0.00) 72%
-    );
-  pointer-events: none;
 }
 
 .dock-icon {
@@ -760,18 +705,8 @@ img {
   height: 60px;
   border-radius: 18px;
   object-fit: cover;
-
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.16),
-    inset 0 -1px 0 rgba(255,255,255,0.03);
 }
 
-.dock-icon span {
-  display: none;
-}
 
 /* 홈화면에서는 흰 홈바 숨김 */
 .home-screen .home-indicator {
@@ -1009,51 +944,49 @@ img {
   /* HOME SCREEN MOBILE */
   /* ===================== */
 
-  .home-apps {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-template-rows: repeat(6, 76px);
-    column-gap: 6px;
-    row-gap: 16px;
+ .home-apps {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(6, 76px);
+  column-gap: 6px;
+  row-gap: 16px;
+  height: calc(100% - 120px);
+  padding-top: calc(88px + env(safe-area-inset-top));
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 0;
+}
 
-    height: calc(100% - 120px);
+.app-icon,
+.app-empty {
+  height: 76px;
+}
 
-    padding-top: calc(88px + env(safe-area-inset-top));
-    padding-left: 12px;
-    padding-right: 12px;
-    padding-bottom: 0;
-  }
+.app-icon img {
+  width: min(56px, 14vw);
+  height: min(56px, 14vw);
+  border-radius: 15px;
+}
 
-  .app-icon,
-  .app-empty {
-    height: 76px;
-  }
+.app-icon span {
+  margin-top: 4px;
+  font-size: 10px;
+}
 
-  .app-icon img {
-    width: min(56px, 14vw);
-    height: min(56px, 14vw);
-    border-radius: 15px;
-  }
+.dock {
+  width: calc(100% - 20px);
+  max-width: none;
+  height: 84px;
+  bottom: calc(10px + env(safe-area-inset-bottom));
+  border-radius: 26px;
+  padding: 0 6px;
+}
 
-  .app-icon span {
-    margin-top: 4px;
-    font-size: 10px;
-  }
-
-  .dock {
-    width: calc(100% - 20px);
-    max-width: none;
-    height: 84px;
-    bottom: calc(10px + env(safe-area-inset-bottom));
-    border-radius: 26px;
-    padding: 0 6px;
-  }
-
-  .dock-icon img {
-    width: min(56px, 14vw);
-    height: min(56px, 14vw);
-    border-radius: 15px;
-  }
-
+.dock-icon img {
+  width: min(56px, 14vw);
+  height: min(56px, 14vw);
+  border-radius: 15px;
+}
+  
    .key {
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
