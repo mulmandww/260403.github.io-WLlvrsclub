@@ -53,8 +53,7 @@ button {
 
 img {
   display: block;
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
 }
 
 /* ============================= */
@@ -67,7 +66,7 @@ img {
   z-index: 0;
   background:
     linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.38)),
-    url("assets/wallpapers/background.jpg") center / cover no-repeat;
+    url("assets/wallpaper/background.jpg") center / cover no-repeat;
   transform: scale(1.05);
   filter: blur(12px);
   pointer-events: none;
@@ -107,7 +106,7 @@ img {
 }
 
 /* ============================= */
-/* STATUS BAR - iPhone style */
+/* STATUS BAR */
 /* ============================= */
 
 .statusbar {
@@ -117,11 +116,9 @@ img {
   width: 100%;
   padding-left: calc(28px + var(--safe-left));
   padding-right: calc(26px + var(--safe-right));
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   z-index: 60;
   pointer-events: none;
 }
@@ -248,7 +245,6 @@ img {
   background: #fff;
 }
 
-
 /* ============================= */
 /* COMMON SCREEN */
 /* ============================= */
@@ -271,15 +267,15 @@ img {
 }
 
 .wallpaper-lock {
-  background: url("assets/wallpapers/lock.jpg") center / cover no-repeat;
+  background: url("assets/wallpaper/lock.jpg") center / cover no-repeat;
 }
 
 .wallpaper-passcode {
-  background: url("assets/wallpapers/lock.jpg") center / cover no-repeat;
+  background: url("assets/wallpaper/lock.jpg") center / cover no-repeat;
 }
 
 .wallpaper-home {
-  background: url("assets/wallpapers/home.jpg") center / cover no-repeat;
+  background: url("assets/wallpaper/home.jpg") center / cover no-repeat;
 }
 
 .lock-overlay-top {
@@ -301,20 +297,6 @@ img {
   z-index: 5;
   cursor: pointer;
   touch-action: none;
-}
-
-.wallpaper-lock {
-  background: url("assets/wallpaper/lock.jpg") center / cover no-repeat;
-}
-
-.wallpaper-home {
-  background: url("assets/wallpaper/home.jpg") center / cover no-repeat;
-}
-
-.page-bg {
-  background:
-    linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.38)),
-    url("assets/wallpaper/background.jpg") center / cover no-repeat;
 }
 
 .lock-content {
@@ -409,36 +391,23 @@ img {
   pointer-events: none;
 }
 
-/* ============================= */
-/* LOCKSCREEN BOTTOM BUTTONS */
-/* iPhone-like decorative style */
-/* ============================= */
-
 .round-action {
-
   width: 58px;
   height: 58px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: none;
   border: none;
   padding: 0;
-
 }
 
 .lock-btn-img {
-
   width: 64px;
   height: 64px;
-
   object-fit: contain;
   display: block;
-
   pointer-events: none;
-
 }
 
 .home-indicator {
@@ -473,6 +442,7 @@ img {
 
 .passcode-wrap {
   position: relative;
+  left: 0;
   z-index: 2;
   height: 100%;
   display: flex;
@@ -512,16 +482,16 @@ img {
 }
 
 .passcode-wrap.shake {
-  animation: iphoneShakeMargin 0.36s ease;
+  animation: iphoneShakeLeft 0.36s ease;
 }
 
-@keyframes iphoneShakeMargin {
-  0% { margin-left: 0; }
-  20% { margin-left: -10px; }
-  40% { margin-left: 10px; }
-  60% { margin-left: -8px; }
-  80% { margin-left: 8px; }
-  100% { margin-left: 0; }
+@keyframes iphoneShakeLeft {
+  0% { left: 0; }
+  20% { left: -10px; }
+  40% { left: 10px; }
+  60% { left: -8px; }
+  80% { left: 8px; }
+  100% { left: 0; }
 }
 
 .keypad {
@@ -532,36 +502,26 @@ img {
   align-items: center;
 }
 
-/* ============================= */
 /* PASSCODE BUTTON - TRUE GLASS */
-/* ============================= */
-
 .key {
   width: 94px;
   height: 94px;
   border-radius: 50%;
-
   position: relative;
   overflow: hidden;
-
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.16);
-
   backdrop-filter: blur(24px) saturate(185%);
   -webkit-backdrop-filter: blur(24px) saturate(185%);
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   color: #fff;
-
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.20),
     inset 0 -1px 0 rgba(255,255,255,0.04),
     0 8px 18px rgba(0,0,0,0.10);
-
   transition:
     transform 0.16s ease,
     background 0.16s ease,
@@ -600,6 +560,8 @@ img {
   line-height: 1;
   font-weight: 300;
   margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
 }
 
 .key .letters {
@@ -609,6 +571,8 @@ img {
   line-height: 1;
   opacity: 0.95;
   margin-left: 2px;
+  position: relative;
+  z-index: 1;
 }
 
 .key-empty {
@@ -672,11 +636,7 @@ img {
   visibility: hidden;
 }
 
-/* dock */
-/* ============================= */
 /* DOCK - TRUE GLASS */
-/* ============================= */
-
 .dock {
   position: absolute;
   left: 50%;
@@ -692,6 +652,31 @@ img {
   justify-items: center;
   padding: 0 8px;
   border-radius: 30px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    inset 0 -1px 0 rgba(255,255,255,0.04),
+    0 12px 28px rgba(0,0,0,0.14);
+  overflow: hidden;
+}
+
+.dock::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.22) 0%,
+      rgba(255,255,255,0.08) 20%,
+      rgba(255,255,255,0.02) 45%,
+      rgba(255,255,255,0.00) 72%
+    );
+  pointer-events: none;
 }
 
 .dock-icon {
@@ -705,14 +690,17 @@ img {
   height: 60px;
   border-radius: 18px;
   object-fit: cover;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.16),
+    inset 0 -1px 0 rgba(255,255,255,0.03);
 }
-
 
 /* 홈화면에서는 흰 홈바 숨김 */
 .home-screen .home-indicator {
   display: none !important;
 }
-
 
 /* ============================= */
 /* MOBILE ONLY */
@@ -734,7 +722,7 @@ img {
     box-shadow: none;
   }
 
-  /* lock screen */
+  /* lock */
   .lock-content {
     padding-top: calc(70px + env(safe-area-inset-top));
   }
@@ -756,7 +744,7 @@ img {
   }
 
   .wallpaper-lock {
-    background-image: url("assets/wallpapers/lock.jpg");
+    background-image: url("assets/wallpaper/lock.jpg");
     background-position: center top;
     background-repeat: no-repeat;
     background-size: contain;
@@ -764,13 +752,14 @@ img {
   }
 
   .wallpaper-passcode {
-    background-image: url("assets/wallpapers/lock.jpg");
+    background-image: url("assets/wallpaper/lock.jpg");
     background-position: center top;
     background-repeat: no-repeat;
     background-size: contain;
     background-color: #000;
   }
 
+  /* statusbar */
   .statusbar {
     top: calc(12px + env(safe-area-inset-top));
     padding-left: 28px;
@@ -825,8 +814,8 @@ img {
     width: 17px;
     height: 6px;
   }
-  
-  /* passcode screen */
+
+  /* passcode */
   .passcode-screen {
     overflow: hidden;
   }
@@ -903,10 +892,70 @@ img {
     bottom: calc(2px + env(safe-area-inset-bottom)) !important;
   }
 
+  .key {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  }
+
+  /* home */
+  .home-apps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(6, 76px);
+    column-gap: 6px;
+    row-gap: 16px;
+    height: calc(100% - 120px);
+    padding-top: calc(88px + env(safe-area-inset-top));
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 0;
+  }
+
+  .app-icon,
+  .app-empty {
+    height: 76px;
+  }
+
+  .app-icon img {
+    width: min(56px, 14vw);
+    height: min(56px, 14vw);
+    border-radius: 15px;
+  }
+
+  .app-icon span {
+    margin-top: 4px;
+    font-size: 10px;
+  }
+
+  .dock {
+    width: calc(100% - 20px);
+    max-width: none;
+    height: 84px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    border-radius: 26px;
+    padding: 0 6px;
+    backdrop-filter: blur(26px) saturate(190%);
+    -webkit-backdrop-filter: blur(26px) saturate(190%);
+  }
+
+  .dock-icon img {
+    width: min(56px, 14vw);
+    height: min(56px, 14vw);
+    border-radius: 15px;
+  }
+
+  .round-action {
+    width: 56px;
+    height: 56px;
+  }
+
+  .lock-btn-img {
+    width: 62px;
+    height: 62px;
+  }
+}
 
 /* ============================= */
 /* DESKTOP PASSCODE FIX */
-/* 웹에서 비밀번호 화면 안 작아지게 */
 /* ============================= */
 
 @media screen and (min-width: 481px) {
@@ -934,66 +983,5 @@ img {
   .key .letters {
     font-size: 9px !important;
     letter-spacing: 2px !important;
-  }
-
-  /* ===================== */
-  /* HOME SCREEN MOBILE */
-  /* ===================== */
-
-  /* ===================== */
-  /* HOME SCREEN MOBILE */
-  /* ===================== */
-
- .home-apps {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-rows: repeat(6, 76px);
-  column-gap: 6px;
-  row-gap: 16px;
-  height: calc(100% - 120px);
-  padding-top: calc(88px + env(safe-area-inset-top));
-  padding-left: 12px;
-  padding-right: 12px;
-  padding-bottom: 0;
-}
-
-.app-icon,
-.app-empty {
-  height: 76px;
-}
-
-.app-icon img {
-  width: min(56px, 14vw);
-  height: min(56px, 14vw);
-  border-radius: 15px;
-}
-
-.app-icon span {
-  margin-top: 4px;
-  font-size: 10px;
-}
-
-.dock {
-  width: calc(100% - 20px);
-  max-width: none;
-  height: 84px;
-  bottom: calc(10px + env(safe-area-inset-bottom));
-  border-radius: 26px;
-  padding: 0 6px;
-}
-
-.dock-icon img {
-  width: min(56px, 14vw);
-  height: min(56px, 14vw);
-  border-radius: 15px;
-}
-  
-   .key {
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-  }
-
-  .dock {
-    backdrop-filter: blur(26px) saturate(190%);
-    -webkit-backdrop-filter: blur(26px) saturate(190%);
   }
 }
