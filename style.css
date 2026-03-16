@@ -1095,3 +1095,125 @@ img {
     letter-spacing: 2px !important;
   }
 }
+
+/* ============================= */
+/* PASSCODE TAP EFFECT */
+/* ============================= */
+
+.key {
+  will-change: transform, background;
+}
+
+.key::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.10) 35%, rgba(255,255,255,0.00) 72%);
+  opacity: 0;
+  transform: scale(0.45);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+  pointer-events: none;
+}
+
+.key.tap {
+  transform: scale(0.955);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.key.tap::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ============================= */
+/* APP ICON TAP / LAUNCH EFFECT */
+/* ============================= */
+
+.app-icon img,
+.dock-icon img {
+  transition:
+    transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.16s ease,
+    opacity 0.16s ease;
+  will-change: transform, filter, opacity;
+}
+
+.app-icon:active img,
+.dock-icon:active img {
+  transform: scale(0.92);
+}
+
+.app-icon.launching img,
+.dock-icon.launching img {
+  animation: appIconLaunch 0.34s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes appIconLaunch {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+  35% {
+    transform: scale(0.90);
+    opacity: 1;
+    filter: brightness(1.06);
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+    filter: brightness(1.12);
+  }
+}
+
+/* 홈화면이 앱 열릴 때 살짝 뒤로 빠지는 느낌 */
+.home-screen.app-opening {
+  animation: homeScreenFade 0.34s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes homeScreenFade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.03);
+    filter: blur(6px);
+  }
+}
+
+/* 앱 화면 열리는 느낌 */
+.app-screen {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(1.035);
+}
+
+.app-screen.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.app-screen.opening {
+  animation: appScreenOpen 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes appScreenOpen {
+  0% {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
