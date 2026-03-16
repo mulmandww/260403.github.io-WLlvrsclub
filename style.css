@@ -386,12 +386,12 @@ img {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: calc(110px + var(--safe-bottom));
+  bottom: calc(86px + var(--safe-bottom));
   z-index: 3;
   display: flex;
   justify-content: space-between;
-  padding-left: calc(30px + var(--safe-left));
-  padding-right: calc(30px + var(--safe-right));
+  padding-left: calc(28px + var(--safe-left));
+  padding-right: calc(28px + var(--safe-right));
   pointer-events: none;
 }
 
