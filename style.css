@@ -1,2073 +1,812 @@
-:root {
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --safe-left: env(safe-area-inset-left, 0px);
-  --safe-right: env(safe-area-inset-right, 0px);
-
-  --phone-width: 390px;
-  --phone-height: 844px;
-}
-
-/* ============================= */
-/* RESET */
-/* ============================= */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
-
-html,
-body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-body {
-  min-height: 100dvh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #111;
-  color: #fff;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Display",
-    "SF Pro Text",
-    "Apple SD Gothic Neo",
-    "Noto Sans KR",
-    sans-serif;
-}
-
-button {
-  border: none;
-  background: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-/* ============================= */
-/* WEB BACKGROUND */
-/* ============================= */
-
-.page-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.38)),
-    url("assets/wallpaper/background.jpg") center / cover no-repeat;
-  transform: scale(1.05);
-  filter: blur(12px);
-  pointer-events: none;
-}
-
-/* ============================= */
-/* PHONE FRAME */
-/* ============================= */
-
-.phone {
-  position: relative;
-  z-index: 1;
-  width: var(--phone-width);
-  height: var(--phone-height);
-  border-radius: 42px;
-  overflow: hidden;
-  background: #000;
-  box-shadow:
-    0 0 0 10px #0c0c0d,
-    0 28px 80px rgba(0, 0, 0, 0.55);
-}
-
-/* ============================= */
-/* DYNAMIC ISLAND */
-/* ============================= */
-
-.dynamic-island {
-  position: absolute;
-  top: calc(10px + var(--safe-top));
-  left: 50%;
-  transform: translateX(-50%);
-  width: 126px;
-  height: 34px;
-  border-radius: 20px;
-  background: #000;
-  z-index: 50;
-}
-
-/* ============================= */
-/* STATUS BAR */
-/* ============================= */
-
-.statusbar {
-  position: absolute;
-  top: calc(13px + var(--safe-top));
-  left: 0;
-  width: 100%;
-  padding-left: calc(28px + var(--safe-left));
-  padding-right: calc(26px + var(--safe-right));
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 60;
-  pointer-events: none;
-}
-
-.status-left {
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: -0.4px;
-  line-height: 1;
-  color: #fff;
-}
-
-.status-right {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-/* cellular */
-.cellular {
-  display: flex;
-  align-items: end;
-  gap: 3px;
-  height: 13px;
-}
-
-.cellular i {
-  display: block;
-  width: 4px;
-  background: #fff;
-  border-radius: 2px;
-}
+/* =========================
+   요소
+========================= */
+const lockScreen = document.getElementById("lockScreen");
+const passcodeScreen = document.getElementById("passcodeScreen");
+const homeScreen = document.getElementById("homeScreen");
+
+const lockDate = document.getElementById("lockDate");
+const lockTime = document.getElementById("lockTime");
+const statusTime = document.getElementById("status-time");
+
+const passcodeWrap = document.getElementById("passcodeWrap");
+
+const dots = [
+  document.getElementById("dot1"),
+  document.getElementById("dot2"),
+  document.getElementById("dot3"),
+  document.getElementById("dot4")
+].filter(Boolean);
 
-.cellular i:nth-child(1) { height: 5px; opacity: 0.95; }
-.cellular i:nth-child(2) { height: 8px; opacity: 0.95; }
-.cellular i:nth-child(3) { height: 11px; opacity: 0.95; }
-.cellular i:nth-child(4) { height: 13px; opacity: 0.95; }
-
-/* wifi */
-.wifi {
-  position: relative;
-  width: 17px;
-  height: 12px;
-  overflow: visible;
-}
-
-.wifi::before,
-.wifi::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 2px solid transparent;
-  border-top-color: #fff;
-  border-radius: 50%;
-}
-
-.wifi::before {
-  top: -1px;
-  width: 16px;
-  height: 16px;
-}
-
-.wifi::after {
-  top: 3px;
-  width: 8px;
-  height: 8px;
-}
-
-.wifi-dot {
-  position: absolute;
-  left: 50%;
-  bottom: 1px;
-  transform: translateX(-50%);
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: #fff;
-}
-
-/* battery */
-.battery {
-  position: relative;
-  width: 26px;
-  height: 13px;
-  border: 1.8px solid #fff;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.battery::after {
-  content: "";
-  position: absolute;
-  top: 3.2px;
-  right: -3.5px;
-  width: 2px;
-  height: 5px;
-  border-radius: 1px;
-  background: #fff;
-}
+/* 홈화면 앱 */
+const openAppButtons = document.querySelectorAll(".app-icon.open-app, .dock-icon.open-app");
+const popupAppButtons = document.querySelectorAll(".app-icon.popup-app, .dock-icon.popup-app");
+const dummyAppButtons = document.querySelectorAll(".app-icon.dummy-app, .dock-icon.dummy-app");
+const allTappableApps = document.querySelectorAll(".app-icon, .dock-icon");
 
-.battery-level {
-  position: absolute;
-  top: 1.8px;
-  left: 1.8px;
-  width: 18px;
-  height: 7px;
-  border-radius: 2px;
-  background: #fff;
-}
+const backHomeButtons = document.querySelectorAll(".back-home");
+const appScreens = document.querySelectorAll(".app-screen");
 
-/* ============================= */
-/* APP SCREEN STATUSBAR OVERRIDE */
-/* ============================= */
-
-.phone:has(.app-screen.active) .status-left {
-  color: #111;
-}
+const calendarLiveWeekday = document.getElementById("calendarLiveWeekday");
+const calendarLiveDate = document.getElementById("calendarLiveDate");
 
-.phone:has(.app-screen.active) .cellular i {
-  background: #111;
-}
+const glassPopup = document.getElementById("glassPopup");
+const glassPopupTitle = document.getElementById("glassPopupTitle");
+const glassPopupText = document.getElementById("glassPopupText");
+const glassPopupTime = document.getElementById("glassPopupTime");
+const glassPopupIcon = document.getElementById("glassPopupIcon");
 
-.phone:has(.app-screen.active) .wifi::before,
-.phone:has(.app-screen.active) .wifi::after {
-  border-top-color: #111;
+if (glassPopup) {
+  glassPopup.classList.remove("show");
+  glassPopup.setAttribute("aria-hidden", "true");
 }
+if (glassPopupTitle) glassPopupTitle.textContent = "";
+if (glassPopupText) glassPopupText.textContent = "";
+if (glassPopupTime) glassPopupTime.textContent = "";
 
-.phone:has(.app-screen.active) .wifi-dot {
-  background: #111;
-}
+/* =========================
+   비밀번호
+========================= */
+const PASSWORD = "4399";
+let currentInput = "";
 
-.phone:has(.app-screen.active) .battery {
-  border-color: #111;
-}
+/* =========================
+   상태값
+========================= */
+let isTransitioning = false;
+let isAppAnimating = false;
+let touchHandled = false;
 
-.phone:has(.app-screen.active) .battery::after,
-.phone:has(.app-screen.active) .battery-level {
-  background: #111;
-}
+/* =========================
+   시간
+========================= */
+function updateDateTime() {
+  const now = new Date();
 
-/* ============================= */
-/* COMMON SCREEN */
-/* ============================= */
-
-.screen {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translateY(10px) scale(0.995);
-  transition:
-    opacity 0.32s ease,
-    transform 0.32s ease,
-    visibility 0.32s ease;
-}
+  const hour = String(now.getHours()).padStart(2, "0");
+  const minute = String(now.getMinutes()).padStart(2, "0");
 
-.screen.active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateY(0) scale(1);
-}
+  const month = now.getMonth() + 1;
+  const day = now.getDate();
+  const dayIndex = now.getDay();
 
-.screen.opening {
-  animation: screenOpen 0.34s cubic-bezier(0.22, 1, 0.36, 1);
-}
+  const weekdayNames = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+  const weekday = weekdayNames[dayIndex];
 
-.screen.closing {
-  animation: screenClose 0.22s ease forwards;
-}
+  if (lockDate) lockDate.textContent = `${month}월 ${day}일 ${weekday}`;
+  if (lockTime) lockTime.textContent = `${hour}:${minute}`;
+  if (statusTime) statusTime.textContent = `${hour}:${minute}`;
 
-@keyframes screenOpen {
-  0% {
-    opacity: 0;
-    transform: scale(1.02);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
+  if (calendarLiveWeekday) {
+    calendarLiveWeekday.textContent = weekday;
+    calendarLiveWeekday.classList.toggle("is-holiday", dayIndex === 0 || dayIndex === 6);
   }
-}
 
-@keyframes screenClose {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.995);
+  if (calendarLiveDate) {
+    calendarLiveDate.textContent = String(day);
   }
-}
-
-.wallpaper {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.wallpaper-lock {
-  background: url("assets/wallpaper/wallpaper_lock.jpg") center / cover no-repeat;
-}
-
-.wallpaper-passcode {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
-    url("assets/wallpaper/wallpaper_lock.jpg") center / cover no-repeat;
-}
-
-.wallpaper-home {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10)),
-    url("assets/wallpaper/wallpaper_lock.jpg") center / cover no-repeat;
-  filter: blur(8px);
-  transform: scale(1.08);
-}
-
-.lock-overlay-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: calc(148px + var(--safe-top));
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.42), transparent);
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* ============================= */
-/* LOCK SCREEN */
-/* ============================= */
-
-.lock-screen {
-  z-index: 5;
-  cursor: pointer;
-  touch-action: none;
-}
-
-.lock-content {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: calc(110px + var(--safe-top));
-  pointer-events: none;
-}
-
-.lock-icon {
-  width: 20px;
-  height: 24px;
-  position: relative;
-  margin-bottom: 24px;
-}
-
-.lock-icon::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 10px;
-  border: 3px solid #fff;
-  border-bottom: none;
-  border-radius: 10px 10px 0 0;
-}
-
-.lock-icon::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 18px;
-  height: 14px;
-  border-radius: 4px;
-  background: #fff;
-}
-
-.lock-date {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
-  margin-bottom: 2px;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
-}
-
-.lock-time {
-  font-size: 96px;
-  line-height: 0.95;
-  font-weight: 200;
-  letter-spacing: -4px;
-  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.22);
-}
-
-.swipe-up-area {
-  position: absolute;
-  left: 50%;
-  bottom: calc(26px + var(--safe-bottom));
-  transform: translateX(-50%);
-  width: 240px;
-  height: 24px;
-  z-index: 4;
-  pointer-events: none;
-}
-
-.swipe-up-text {
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-  text-align: center;
-  white-space: nowrap;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.24);
-}
-
-.lock-bottom-actions {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: calc(86px + var(--safe-bottom));
-  z-index: 3;
-  display: flex;
-  justify-content: space-between;
-  padding-left: calc(28px + var(--safe-left));
-  padding-right: calc(28px + var(--safe-right));
-  pointer-events: none;
-}
-
-.round-action {
-  width: 58px;
-  height: 58px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  padding: 0;
-}
-
-.lock-btn-img {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  display: block;
-  pointer-events: none;
-}
-
-.home-indicator {
-  position: absolute;
-  left: 50%;
-  bottom: calc(8px + var(--safe-bottom));
-  transform: translateX(-50%);
-  width: 134px;
-  height: 5px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.96);
-  z-index: 4;
-  pointer-events: none;
-}
-
-/* ============================= */
-/* PASSCODE SCREEN */
-/* ============================= */
-
-.passcode-screen {
-  z-index: 6;
-}
-
-.passcode-blur {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.22);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.passcode-wrap {
-  position: relative;
-  left: 0;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: calc(112px + var(--safe-top));
-}
-
-.passcode-lock {
-  margin-bottom: 34px;
-}
-
-.passcode-title {
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 22px;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.22);
-}
-
-.passcode-dots {
-  display: flex;
-  gap: 26px;
-  margin-bottom: 62px;
-}
-
-.passcode-dot {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.95);
-  background: transparent;
-  transition: background 0.15s ease;
-}
-
-.passcode-dot.filled {
-  background: rgba(255, 255, 255, 0.95);
-}
-
-.passcode-wrap.shake {
-  animation: iphoneShakeLeft 0.36s ease;
-}
-
-@keyframes iphoneShakeLeft {
-  0% { left: 0; }
-  20% { left: -10px; }
-  40% { left: 10px; }
-  60% { left: -8px; }
-  80% { left: 8px; }
-  100% { left: 0; }
-}
-
-.keypad {
-  display: grid;
-  grid-template-columns: repeat(3, 94px);
-  gap: 18px 14px;
-  justify-content: center;
-  align-items: center;
-}
-
-.key {
-  width: 94px;
-  height: 94px;
-  border-radius: 50%;
-  position: relative;
-  overflow: hidden;
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.18);
-  backdrop-filter: blur(10px) saturate(150%);
-  -webkit-backdrop-filter: blur(10px) saturate(150%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.25),
-    inset 0 -1px 0 rgba(255,255,255,0.06),
-    0 6px 14px rgba(0,0,0,0.12);
-  transition:
-    transform 0.15s ease,
-    background 0.15s ease,
-    border-color 0.15s ease;
-  will-change: transform, background;
-}
-
-.key::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.28) 0%,
-      rgba(255,255,255,0.12) 20%,
-      rgba(255,255,255,0.04) 40%,
-      rgba(255,255,255,0.00) 70%
-    );
-  pointer-events: none;
-}
-
-.key::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at center, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.10) 35%, rgba(255,255,255,0.00) 72%);
-  opacity: 0;
-  transform: scale(0.45);
-  transition:
-    opacity 0.18s ease,
-    transform 0.18s ease;
-  pointer-events: none;
-}
-
-.key:active {
-  transform: scale(0.96);
-  background: rgba(255,255,255,0.16);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.30),
-    inset 0 -1px 0 rgba(255,255,255,0.10),
-    0 4px 10px rgba(0,0,0,0.14);
 }
+updateDateTime();
+setInterval(updateDateTime, 1000);
 
-.key.tap {
-  transform: scale(0.955);
-  background: rgba(255, 255, 255, 0.12);
+/* =========================
+   유틸
+========================= */
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-.key.tap::after {
-  opacity: 1;
-  transform: scale(1);
+function hideAllAppScreens() {
+  appScreens.forEach((screen) => {
+    screen.classList.remove("active", "opening", "closing");
+  });
 }
 
-.key .num {
-  font-size: 34px;
-  line-height: 1;
-  font-weight: 300;
-  margin-bottom: 4px;
-  position: relative;
-  z-index: 1;
-}
-
-.key .letters {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  line-height: 1;
-  opacity: 0.95;
-  margin-left: 2px;
-  position: relative;
-  z-index: 1;
-}
+/* =========================
+   잠금화면 -> 암호입력
+========================= */
+async function openPasscodeScreen() {
+  if (!lockScreen || !passcodeScreen) return;
+  if (!lockScreen.classList.contains("active")) return;
+  if (isTransitioning) return;
 
-.key-empty {
-  width: 94px;
-  height: 94px;
-}
-
-/* ============================= */
-/* HOME SCREEN */
-/* ============================= */
-
-.home-screen {
-  z-index: 4;
-}
+  isTransitioning = true;
 
-.home-apps {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-rows: repeat(6, 88px);
-  column-gap: 8px;
-  row-gap: 18px;
-  width: 100%;
-  height: calc(100% - 128px);
-  padding: calc(96px + var(--safe-top)) 16px 0 16px;
-}
+  lockScreen.classList.remove("active");
+  lockScreen.classList.add("closing");
 
-.app-icon,
-.app-empty {
-  width: 100%;
-  min-width: 0;
-  height: 88px;
-}
+  await wait(220);
 
-.app-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  color: #fff;
-}
+  lockScreen.classList.remove("closing");
+  passcodeScreen.classList.add("active", "opening");
 
-.app-icon img {
-  width: 60px;
-  height: 60px;
-  border-radius: 18px;
-  object-fit: cover;
-}
+  await wait(280);
 
-.app-icon span {
-  margin-top: 5px;
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 1.1;
-  text-align: center;
-  white-space: nowrap;
+  passcodeScreen.classList.remove("opening");
+  isTransitioning = false;
 }
 
-.app-empty {
-  visibility: hidden;
+if (lockScreen) {
+  lockScreen.addEventListener("click", openPasscodeScreen);
 }
 
-/* ============================= */
-/* LIVE CALENDAR ICON */
-/* ============================= */
-
-.calendar-app-icon .calendar-icon-wrap {
-  position: relative;
-  width: 60px;
-  height: 60px;
-  flex: 0 0 60px;
-}
+/* 위로 드래그 */
+let startY = 0;
+let currentY = 0;
+let dragging = false;
 
-.calendar-app-icon .calendar-icon-wrap img {
-  width: 60px;
-  height: 60px;
-  border-radius: 18px;
-  object-fit: cover;
-  display: block;
+function getPointerY(event) {
+  if (event.touches && event.touches[0]) return event.touches[0].clientY;
+  if (event.changedTouches && event.changedTouches[0]) return event.changedTouches[0].clientY;
+  return event.clientY;
 }
 
-.calendar-app-icon .calendar-live-weekday {
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  text-align: center;
-  font-size: 10px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-  white-space: nowrap;
-  z-index: 2;
-  pointer-events: none;
-  color: #111;
+function handleStart(event) {
+  if (isTransitioning) return;
+  dragging = true;
+  startY = getPointerY(event);
+  currentY = startY;
 }
 
-.calendar-app-icon .calendar-live-weekday.is-holiday {
-  color: #ff3b30;
+function handleMove(event) {
+  if (!dragging) return;
+  currentY = getPointerY(event);
 }
 
-.calendar-app-icon .calendar-live-date {
-  position: absolute;
-  top: 17px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  text-align: center;
-  font-size: 28px;
-  line-height: 1;
-  font-weight: 400;
-  letter-spacing: -1.2px;
-  z-index: 2;
-  pointer-events: none;
-  color: #111;
-}
+function handleEnd() {
+  if (!dragging) return;
+  dragging = false;
 
-/* ============================= */
-/* DOCK */
-/* ============================= */
-
-.dock {
-  position: absolute;
-  left: 50%;
-  bottom: calc(16px + var(--safe-bottom));
-  transform: translateX(-50%);
-  z-index: 3;
-  width: calc(100% - 22px);
-  max-width: 368px;
-  height: 92px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  align-items: center;
-  justify-items: center;
-  padding: 0 8px;
-  border-radius: 30px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255,255,255,0.16);
-  backdrop-filter: blur(30px) saturate(200%);
-  -webkit-backdrop-filter: blur(30px) saturate(200%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.22),
-    inset 0 -1px 0 rgba(255,255,255,0.04),
-    0 12px 28px rgba(0,0,0,0.14);
-  overflow: hidden;
+  const diff = startY - currentY;
+  if (diff > 20) {
+    openPasscodeScreen();
+  }
 }
 
-.dock::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.22) 0%,
-      rgba(255,255,255,0.08) 20%,
-      rgba(255,255,255,0.02) 45%,
-      rgba(255,255,255,0.00) 72%
-    );
-  pointer-events: none;
-}
+if (lockScreen) {
+  lockScreen.addEventListener("touchstart", handleStart, { passive: true });
+  lockScreen.addEventListener("touchmove", handleMove, { passive: true });
+  lockScreen.addEventListener("touchend", handleEnd);
 
-.dock-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  lockScreen.addEventListener("mousedown", handleStart);
 }
 
-.dock-icon img {
-  width: 60px;
-  height: 60px;
-  border-radius: 18px;
-  object-fit: cover;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.16),
-    inset 0 -1px 0 rgba(255,255,255,0.03);
-}
+window.addEventListener("mousemove", handleMove);
+window.addEventListener("mouseup", handleEnd);
 
-.home-screen .home-indicator {
-  display: none !important;
+/* =========================
+   비밀번호 점
+========================= */
+function updateDots() {
+  dots.forEach((dot, index) => {
+    if (index < currentInput.length) {
+      dot.classList.add("filled");
+    } else {
+      dot.classList.remove("filled");
+    }
+  });
 }
 
-/* ============================= */
-/* APP TOUCH / OPEN EFFECT */
-/* ============================= */
-
-.app-icon img,
-.dock-icon img {
-  transition:
-    transform 0.18s ease,
-    filter 0.18s ease,
-    opacity 0.18s ease;
-  will-change: transform, filter, opacity;
+function resetInput() {
+  currentInput = "";
+  updateDots();
 }
 
-.app-icon.touching img,
-.dock-icon.touching img {
-  transform: scale(0.88);
-  filter: brightness(0.92);
-}
+/* =========================
+   숫자 입력
+========================= */
+function pressKey(num) {
+  if (isTransitioning || isAppAnimating) return;
+  if (currentInput.length >= 4) return;
 
-.app-icon.launching img,
-.dock-icon.launching img {
-  animation: appIconLaunch 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
+  currentInput += num;
+  updateDots();
 
-@keyframes appIconLaunch {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-    filter: brightness(1);
-  }
-  35% {
-    transform: scale(0.90);
-    opacity: 1;
-    filter: brightness(1.06);
-  }
-  100% {
-    transform: scale(1.55);
-    opacity: 0;
-    filter: brightness(1.12);
+  if (currentInput.length === 4) {
+    setTimeout(checkPassword, 120);
   }
 }
 
-.home-screen.app-opening {
-  animation: homeScreenFade 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes homeScreenFade {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0px);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.03);
-    filter: blur(6px);
-  }
-}
+function deleteKey() {
+  if (isTransitioning || isAppAnimating) return;
+  if (currentInput.length === 0) return;
 
-/* ============================= */
-/* APP SCREEN BASIC */
-/* ============================= */
-
-.app-screen {
-  background: #fff;
-  color: #000;
-  z-index: 20;
+  currentInput = currentInput.slice(0, -1);
+  updateDots();
 }
 
-.app-ui {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+/* =========================
+   비밀번호 검사
+========================= */
+function checkPassword() {
+  if (currentInput === PASSWORD) {
+    unlockToHome();
+  } else {
+    if (passcodeWrap) {
+      passcodeWrap.classList.add("shake");
+    }
 
-.app-header {
-  position: relative;
-  height: calc(92px + var(--safe-top));
-  padding-top: calc(18px + var(--safe-top));
-  padding-left: 16px;
-  padding-right: 16px;
-
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-
-  border-bottom: 1px solid #eee;
-  background: #fff;
+    setTimeout(() => {
+      if (passcodeWrap) {
+        passcodeWrap.classList.remove("shake");
+      }
+      resetInput();
+    }, 360);
+  }
 }
 
-/* iPhone-style glass back button */
-.app-back-btn {
-  position: absolute;
-  top: calc(30px + var(--safe-top));
-  left: 16px;
+/* =========================
+   비밀번호 -> 홈화면
+========================= */
+async function unlockToHome() {
+  if (!passcodeScreen || !homeScreen) return;
+  if (!passcodeScreen.classList.contains("active")) return;
+  if (isTransitioning) return;
 
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
+  isTransitioning = true;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  passcodeScreen.classList.remove("active");
+  passcodeScreen.classList.add("closing");
 
-  background: rgba(240, 240, 240, 0.72);
-  border: 1px solid rgba(255,255,255,0.5);
+  await wait(240);
 
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  passcodeScreen.classList.remove("closing");
+  homeScreen.classList.add("active", "opening");
 
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    0 4px 12px rgba(0,0,0,0.08);
+  await wait(320);
 
-  z-index: 3;
+  homeScreen.classList.remove("opening");
+  isTransitioning = false;
 }
 
-.back-arrow {
-  display: block;
-  width: 11px;
-  height: 11px;
-  border-left: 2.6px solid #111;
-  border-bottom: 2.6px solid #111;
-  transform: rotate(45deg);
-  margin-left: 3px;
-}
-
-.app-back-btn:active {
-  transform: scale(0.96);
-  background: rgba(232, 232, 232, 0.82);
-}
-
-.app-content {
-  flex: 1;
-  overflow-y: auto;
-}
-
-/* ============================= */
-/* IOS TOP NOTIFICATION POPUP */
-/* ============================= */
-
-.notif-popup {
-  position: absolute;
-  top: calc(14px + var(--safe-top));
-  left: 50%;
-  transform: translateX(-50%) translateY(-18px);
-  width: calc(100% - 18px);
-  max-width: 372px;
-  min-height: 72px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255,255,255,0.16);
-  backdrop-filter: blur(30px) saturate(200%);
-  -webkit-backdrop-filter: blur(30px) saturate(200%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.22),
-    inset 0 -1px 0 rgba(255,255,255,0.04),
-    0 12px 28px rgba(0,0,0,0.14);
-  z-index: 300;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition:
-    opacity 0.26s ease,
-    transform 0.26s ease,
-    visibility 0.26s ease;
-  overflow: hidden;
-}
+/* =========================
+   비밀번호 버튼 탭 효과
+========================= */
+const keypadButtons = document.querySelectorAll(".key");
+keypadButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    button.classList.remove("tap");
+    void button.offsetWidth;
+    button.classList.add("tap");
 
-.notif-popup::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.22) 0%,
-      rgba(255,255,255,0.08) 20%,
-      rgba(255,255,255,0.02) 45%,
-      rgba(255,255,255,0.00) 72%
-    );
-  pointer-events: none;
-}
+    setTimeout(() => {
+      button.classList.remove("tap");
+    }, 180);
+  });
+});
 
-.notif-popup.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
+/* =========================
+   팝업
+========================= */
+const popupTextMap = {
+  weather: {
+    title: "날씨",
+    text: "사실 나는 비오는 날을 좋아한다. 습도가 자동으로 올라가는 천연 가습기이기 때문이다.",
+    icon: "assets/icons/weather.png"
+  },
+  youtube: {
+    title: "YouTube",
+    text: "[MPD직캠] 알파드라이브원 건우 직캠 4K 'Cinnamon Shake' (ALPHA DRIVE ONE···",
+    icon: "assets/icons/gw_youtube.jpg"
+  },
+  spotify: {
+    title: "spotify",
+    text: "톡 쏘는 Cinnamon Shake🎶",
+    icon: "assets/icons/gw_spotify.jpg"
+  },
+  x: {
+    title: "X",
+    text: "❕❕❕❕❕ ··· 🤫",
+    icon: "assets/icons/x.png"
+  },
+  music: {
+    title: "음악",
+    text: "Us - Keshi",
+    icon: "assets/icons/gw_music.jpg"
+  },
+  calculator: {
+    title: "계산기",
+    text: "411×(4+3+3)+43×(3+3)+(43−4×3) = ?",
+    icon: "assets/icons/calculator.png"
+  }
+};
 
-.notif-left {
-  position: relative;
-  z-index: 1;
-  flex: 0 0 40px;
-  width: 40px;
-  height: 40px;
+function getCurrentNotifTime() {
+  const now = new Date();
+  const hour = String(now.getHours()).padStart(2, "0");
+  const minute = String(now.getMinutes()).padStart(2, "0");
+  return `${hour}:${minute}`;
 }
 
-.notif-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  object-fit: cover;
-  display: block;
-}
+function showPopup({ title, text, icon }) {
+  if (!glassPopup || !glassPopupTitle || !glassPopupText || !glassPopupTime || !glassPopupIcon) return;
 
-.notif-center {
-  position: relative;
-  z-index: 1;
-  flex: 1;
-  min-width: 0;
-}
+  glassPopupTitle.textContent = title || "";
+  glassPopupText.textContent = text || "";
+  glassPopupTime.textContent = getCurrentNotifTime();
+  glassPopupIcon.src = icon || "assets/icons/messages.png";
 
-.notif-topline {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 2px;
-}
+  glassPopup.classList.remove("show");
+  void glassPopup.offsetWidth;
 
-.notif-app {
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+  glassPopup.setAttribute("aria-hidden", "false");
+  glassPopup.classList.add("show");
 
-.notif-time {
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.72);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
+  clearTimeout(showPopup._timer);
+  showPopup._timer = setTimeout(() => {
+    glassPopup.classList.remove("show");
+    glassPopup.setAttribute("aria-hidden", "true");
 
-.notif-text {
-  font-size: 13px;
-  line-height: 1.3;
-  color: rgba(255,255,255,0.94);
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+    setTimeout(() => {
+      glassPopupTitle.textContent = "";
+      glassPopupText.textContent = "";
+      glassPopupTime.textContent = "";
+    }, 260);
+  }, 2200);
 }
-
-/* ============================= */
-/* MOBILE ONLY */
-/* ============================= */
-
-@media screen and (max-width: 480px) {
-  body {
-    background: #000;
-  }
-
-  .page-bg {
-    display: none;
-  }
-
-  .phone {
-    width: 100vw;
-    height: 100svh;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  /* app screen statusbar - mobile force */
-  .phone:has(.app-screen.active) .statusbar {
-    display: flex !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-
-  .phone:has(.app-screen.active) .status-left {
-    color: #111 !important;
-  }
-
-  .phone:has(.app-screen.active) .cellular i {
-    background: #111 !important;
-  }
-
-  .phone:has(.app-screen.active) .wifi::before,
-  .phone:has(.app-screen.active) .wifi::after {
-    border-top-color: #111 !important;
-  }
-
-  .phone:has(.app-screen.active) .wifi-dot {
-    background: #111 !important;
-  }
-
-  .phone:has(.app-screen.active) .battery {
-    border-color: #111 !important;
-  }
-
-  .phone:has(.app-screen.active) .battery::after,
-  .phone:has(.app-screen.active) .battery-level {
-    background: #111 !important;
-  }
-
-  /* lock */
-  .lock-content {
-    padding-top: calc(70px + env(safe-area-inset-top));
-  }
-
-  .lock-date {
-    margin-bottom: 6px;
-  }
-
-  .lock-time {
-    font-size: clamp(72px, 18vw, 92px);
-  }
-
-  .lock-bottom-actions {
-    bottom: calc(70px + env(safe-area-inset-bottom));
-  }
-
-  .swipe-up-area {
-    bottom: calc(34px + env(safe-area-inset-bottom));
-  }
-
-  .wallpaper-lock {
-    background-image: url("assets/wallpaper/wallpaper_lock.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: #000;
-  }
-
-  .wallpaper-passcode {
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
-      url("assets/wallpaper/wallpaper_lock.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: #000;
-  }
-
-  .wallpaper-home {
-    background-image:
-      linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10)),
-      url("assets/wallpaper/wallpaper_lock.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: #000;
-    filter: blur(12px);
-    transform: scale(1.08);
-  }
-
-  /* statusbar */
-  .statusbar {
-    top: calc(12px + env(safe-area-inset-top));
-    padding-left: 28px;
-    padding-right: 24px;
-  }
-
-  .status-left {
-    font-size: 15px;
-    letter-spacing: -0.45px;
-  }
-
-  .status-right {
-    gap: 6px;
-  }
-
-  .cellular {
-    height: 12px;
-    gap: 2.5px;
-  }
-
-  .cellular i {
-    width: 3.8px;
-  }
-
-  .cellular i:nth-child(1) { height: 4px; }
-  .cellular i:nth-child(2) { height: 7px; }
-  .cellular i:nth-child(3) { height: 10px; }
-  .cellular i:nth-child(4) { height: 12px; }
-
-  .wifi {
-    width: 16px;
-    height: 11px;
-  }
-
-  .wifi::before {
-    width: 15px;
-    height: 15px;
-  }
-
-  .wifi::after {
-    top: 3px;
-    width: 8px;
-    height: 8px;
-  }
 
-  .battery {
-    width: 25px;
-    height: 12px;
-  }
-
-  .battery-level {
-    width: 17px;
-    height: 6px;
-  }
-
-  /* passcode */
-  .passcode-screen {
-    overflow: hidden;
-  }
-
-  .passcode-wrap {
-    padding-top: calc(60px + env(safe-area-inset-top));
-    transform: scale(0.94);
-    transform-origin: top center;
-  }
-
-  .passcode-lock.lock-icon {
-    width: 24px;
-    height: 26px;
-    margin-bottom: 18px;
-  }
-
-  .passcode-lock.lock-icon::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    width: 12px;
-    height: 9px;
-    border: 3px solid #fff;
-    border-bottom: none;
-    border-radius: 10px 10px 0 0;
-  }
-
-  .passcode-lock.lock-icon::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 10px;
-    bottom: auto;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 15px;
-    border-radius: 4px;
-    background: #fff;
-  }
-
-  .passcode-title {
-    font-size: 24px;
-    margin-bottom: 18px;
-  }
-
-  .passcode-dots {
-    margin-bottom: 34px;
-  }
-
-  .keypad {
-    grid-template-columns: repeat(3, min(88px, 22vw));
-    gap: 14px 12px;
-    transform: translateY(-6px);
-  }
-
-  .key,
-  .key-empty {
-    width: min(88px, 22vw);
-    height: min(88px, 22vw);
-  }
-
-  .key .num {
-    font-size: clamp(28px, 7vw, 32px);
-  }
-
-  .key .letters {
-    font-size: 8px;
-    letter-spacing: 1.6px;
-  }
-
-  .passcode-screen .home-indicator {
-    bottom: calc(2px + env(safe-area-inset-bottom)) !important;
-  }
-
-  .key {
-    backdrop-filter: blur(8px) saturate(140%);
-    -webkit-backdrop-filter: blur(8px) saturate(140%);
-  }
-
-  /* home */
-  .home-screen {
-    overflow: hidden;
-  }
-
-  .home-apps {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(6, 68px);
-    justify-items: center;
-    align-items: start;
-    column-gap: 2px;
-    row-gap: 14px;
-    width: 100%;
-    height: calc(100% - 118px);
-    padding-top: calc(82px + env(safe-area-inset-top));
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 0;
-  }
-
-  .app-icon,
-  .app-empty {
-    width: 100%;
-    height: 68px;
-    min-width: 0;
-  }
-
-  .app-icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    color: #fff;
-  }
-
-  .app-icon img {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-    object-fit: cover;
-    flex-shrink: 0;
-  }
-
-  .app-icon span {
-    margin-top: 4px;
-    font-size: 10px;
-    line-height: 1;
-    font-weight: 500;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-  }
-
-  .app-empty {
-    visibility: hidden;
-  }
-
-  /* mobile calendar fix */
-  .calendar-app-icon .calendar-icon-wrap {
-    width: 52px;
-    height: 52px;
-    flex: 0 0 52px;
-  }
-
-  .calendar-app-icon .calendar-icon-wrap img {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-  }
-
-  .calendar-app-icon .calendar-live-weekday {
-    top: 7px;
-    font-size: 8px;
-  }
-
-  .calendar-app-icon .calendar-live-date {
-    top: 17px;
-    font-size: 26px;
-    letter-spacing: -0.9px;
-  }
-
-  .calendar-app-icon > span:last-child {
-    margin-top: 4px;
-    font-size: 10px;
-    line-height: 1;
-    white-space: nowrap;
-  }
-
-  .dock {
-    width: calc(100% - 18px);
-    max-width: none;
-    height: 82px;
-    bottom: calc(8px + env(safe-area-inset-bottom));
-    border-radius: 24px;
-    padding: 0 6px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-items: center;
-    justify-items: center;
-  }
-
-  .dock-icon img {
-    width: 54px;
-    height: 54px;
-    border-radius: 15px;
-  }
-
-  .round-action {
-    width: 56px;
-    height: 56px;
-  }
-
-  .lock-btn-img {
-    width: 62px;
-    height: 62px;
-  }
-
-  .notif-popup {
-    top: calc(10px + env(safe-area-inset-top));
-    width: calc(100% - 14px);
-    border-radius: 20px;
-    padding: 11px 13px;
-    gap: 10px;
-    backdrop-filter: blur(26px) saturate(190%);
-    -webkit-backdrop-filter: blur(26px) saturate(190%);
-  }
-
-  .notif-left {
-    flex: 0 0 36px;
-    width: 36px;
-    height: 36px;
-  }
-
-  .notif-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 9px;
-  }
+/* =========================
+   앱 열기 애니메이션
+========================= */
 
-  .notif-app,
-  .notif-text {
-    font-size: 13px;
+button.addEventListener("click", async (event) => {
+  if (touchHandled) {
+    touchHandled = false;
+    event.preventDefault();
+    return;
   }
 
-  .notif-time {
-    font-size: 12px;
-  }
-
-    .app-header {
-    height: calc(88px + env(safe-area-inset-top));
-    padding-top: calc(16px + env(safe-area-inset-top));
-    padding-left: 14px;
-    padding-right: 14px;
-  }
+  // ⭐ 추가
+  button.classList.add("touching");
 
-
-  .app-back-btn {
-    top: calc(28px + env(safe-area-inset-top));
-    left: 14px;
-    width: 44px;
-    height: 44px;
-  }
-
-  .back-arrow {
-    width: 10px;
-    height: 10px;
-    border-left-width: 2.4px;
-    border-bottom-width: 2.4px;
-  }
-}
+  setTimeout(() => {
+    button.classList.remove("touching");
+  }, 150);
 
-/* ============================= */
-/* DESKTOP PASSCODE FIX */
-/* ============================= */
-
-@media screen and (min-width: 481px) {
-  .passcode-wrap {
-    padding-top: calc(112px + var(--safe-top)) !important;
-    transform: none !important;
-  }
+  await action(button);
+});
 
-  .keypad {
-    grid-template-columns: repeat(3, 94px) !important;
-    gap: 18px 14px !important;
-    transform: none !important;
-  }
+async function openAppWithAnimation(button) {
+  const targetId = button.dataset.screen;
+  if (!targetId) return;
 
-  .key,
-  .key-empty {
-    width: 94px !important;
-    height: 94px !important;
-  }
+  const targetScreen = document.getElementById(targetId);
+  if (!targetScreen) return;
+  if (!homeScreen || !homeScreen.classList.contains("active")) return;
+  if (isTransitioning || isAppAnimating) return;
 
-  .key .num {
-    font-size: 34px !important;
-  }
+  isAppAnimating = true;
 
-  .key .letters {
-    font-size: 9px !important;
-    letter-spacing: 2px !important;
+  if (targetScreen.id === "memoScreen") {
+    targetScreen.classList.remove("detail-open");
   }
-}
-
-/* ============================= */
-/* MEMO APP */
-/* ============================= */
-
-.memo-screen {
-  background: #f2f2f7;
-  color: #4a4a4a;
-}
-
-.memo-ui {
-  position: relative;
-  background: #f2f2f7;
-}
-
-.memo-page {
-  position: absolute;
-  inset: 0;
-  background: #f2f2f7;
-  transition:
-    transform 0.34s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.28s ease;
-}
-
-.memo-list-page {
-  transform: translateX(0);
-  opacity: 1;
-  z-index: 1;
-}
-
-.memo-detail-page {
-  transform: translateX(100%);
-  opacity: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.memo-screen.detail-open .memo-list-page {
-  transform: translateX(-18%);
-  opacity: 0.0;
-}
-
-.memo-screen.detail-open .memo-detail-page {
-  transform: translateX(0);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.memo-topbar {
-  position: relative;
-  height: calc(92px + var(--safe-top));
-  padding-top: calc(10px + var(--safe-top));
-}
-
-.memo-home-back,
-.memo-detail-back {
-  top: calc(28px + var(--safe-top));
-  left: 14px;
-}
-
-.memo-more-btn {
-  position: absolute;
-  top: calc(28px + var(--safe-top));
-  right: 14px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.72);
-  border: 1px solid rgba(255,255,255,0.55);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    0 4px 12px rgba(0,0,0,0.08);
-}
-
-.memo-more-dots {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 15px;
-  height: 3px;
-  transform: translate(-50%, -50%);
-}
-
-.memo-more-dots::before,
-.memo-more-dots::after,
-.memo-more-dots {
-  background:
-    radial-gradient(circle, #111 0 1.5px, transparent 1.5px);
-  background-size: 5px 3px;
-  background-repeat: repeat-x;
-}
-
-.memo-list-scroll,
-.memo-detail-scroll {
-  height: calc(100% - (92px + var(--safe-top)));
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.memo-list-scroll {
-  padding: 10px 20px 40px;
-}
-
-.memo-list-head {
-  margin-top: 10px;
-  margin-bottom: 34px;
-}
-
-.memo-list-head h1 {
-  font-size: 36px;
-  line-height: 1;
-  font-weight: 800;
-  color: #3e3e42;
-  letter-spacing: -1.2px;
-  margin-bottom: 6px;
-}
-
-.memo-list-head p {
-  font-size: 15px;
-  color: #6a6a6f;
-}
-
-.memo-section-block {
-  margin-bottom: 28px;
-}
-
-.memo-section-title {
-  font-size: 22px;
-  line-height: 1.1;
-  font-weight: 700;
-  color: #3f3f43;
-  margin-bottom: 16px;
-  letter-spacing: -0.5px;
-}
-
-.memo-card {
-  background: #fafafa;
-  border-radius: 22px;
-  overflow: hidden;
-}
-
-.memo-list-item {
-  width: 100%;
-  display: block;
-  text-align: left;
-  padding: 16px 18px 14px;
-  background: transparent;
-  color: inherit;
-}
-
-.memo-list-item + .memo-list-item {
-  border-top: 1px solid rgba(60,60,67,0.14);
-}
-
-.memo-item-title {
-  font-size: 17px;
-  line-height: 1.2;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 6px;
-  letter-spacing: -0.3px;
-}
-
-.memo-item-meta {
-  font-size: 14px;
-  color: #9a9aa0;
-  line-height: 1.2;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.memo-list-item:active {
-  background: rgba(0,0,0,0.03);
-}
-
-/* detail */
-.memo-detail-topbar {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-.memo-detail-actions {
-  position: absolute;
-  top: calc(10px + var(--safe-top));
-  right: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.memo-circle-btn,
-.memo-pill-btn {
-  background: rgba(255,255,255,0.72);
-  border: 1px solid rgba(255,255,255,0.55);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    0 4px 12px rgba(0,0,0,0.08);
-}
-
-.memo-circle-btn {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  position: relative;
-}
-
-.memo-pill-actions {
-  height: 46px;
-  border-radius: 23px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  background: rgba(255,255,255,0.72);
-  border: 1px solid rgba(255,255,255,0.55);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    0 4px 12px rgba(0,0,0,0.08);
-}
-
-.memo-pill-btn {
-  width: 46px;
-  height: 46px;
-  position: relative;
-  box-shadow: none;
-  border: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  background: transparent;
-}
-
-.memo-pill-btn + .memo-pill-btn {
-  border-left: 1px solid rgba(60,60,67,0.08);
-}
-
-.memo-undo-icon,
-.memo-share-icon {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.memo-undo-icon {
-  width: 16px;
-  height: 16px;
-  border: 2.4px solid #111;
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  transform: translate(-45%, -45%) rotate(-45deg);
-}
-
-.memo-undo-icon::before {
-  content: "";
-  position: absolute;
-  left: -4px;
-  top: 0px;
-  width: 8px;
-  height: 8px;
-  border-left: 2.4px solid #111;
-  border-bottom: 2.4px solid #111;
-  transform: rotate(45deg);
-}
-
-.memo-share-icon {
-  width: 18px;
-  height: 18px;
-  border: 2.2px solid #111;
-  border-radius: 4px;
-  border-top: none;
-}
-
-.memo-share-icon::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: -8px;
-  width: 8px;
-  height: 8px;
-  border-left: 2.2px solid #111;
-  border-top: 2.2px solid #111;
-  transform: translateX(-50%) rotate(45deg);
-}
-
-.memo-share-icon::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: -2px;
-  width: 0;
-  height: 10px;
-  border-left: 2.2px solid #111;
-  transform: translateX(-50%);
-}
-
-.memo-ellipsis {
-  font-size: 18px;
-  line-height: 1;
-  color: #111;
-  letter-spacing: 1px;
-}
-
-.memo-detail-scroll {
-  padding: 18px 22px 42px;
-}
-
-.memo-detail-date {
-  text-align: center;
-  font-size: 16px;
-  color: #8a8a8f;
-  margin-bottom: 26px;
-  letter-spacing: -0.3px;
-}
-
-.memo-detail-title {
-  font-size: 34px;
-  line-height: 1.08;
-  font-weight: 800;
-  color: #4a4a4e;
-  letter-spacing: -1.2px;
-  margin-bottom: 40px;
-}
 
-.memo-detail-body {
-  color: #55575c;
-  font-size: 17px;
-  line-height: 1.72;
-  white-space: normal;
-  word-break: keep-all;
-}
+  button.classList.add("launching");
+  homeScreen.classList.add("app-opening");
 
-.memo-detail-body p {
-  margin-bottom: 28px;
-}
+  await wait(320);
 
-.memo-detail-body a {
-  color: #d7a326;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
+  homeScreen.classList.remove("active", "app-opening");
+  hideAllAppScreens();
+  targetScreen.classList.add("active", "opening");
 
-.memo-checklist {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+  await wait(360);
 
-.memo-check-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
+  button.classList.remove("launching", "touching");
+  targetScreen.classList.remove("opening");
+  isAppAnimating = false;
 }
 
-.memo-check-circle {
-  flex: 0 0 28px;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  margin-top: 2px;
-  position: relative;
-}
+/* =========================
+   앱 화면 -> 홈화면
+========================= */
+async function backToHomeFromApp() {
+  if (!homeScreen) return;
+  if (isTransitioning || isAppAnimating) return;
 
-.memo-check-item.checked .memo-check-circle {
-  background: #ddb235;
-}
+  const currentAppScreen = document.querySelector(".app-screen.active");
+  if (!currentAppScreen) return;
 
-.memo-check-item.unchecked .memo-check-circle {
-  border: 2px solid #c8c8cc;
-  background: transparent;
-}
+  isAppAnimating = true;
 
-.memo-check-item.checked .memo-check-circle::before {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: 8px;
-  width: 9px;
-  height: 5px;
-  border-left: 2.4px solid #fff;
-  border-bottom: 2.4px solid #fff;
-  transform: rotate(-45deg);
-}
+  currentAppScreen.classList.remove("active");
+  currentAppScreen.classList.add("closing");
 
-.memo-check-text {
-  flex: 1;
-  font-size: 17px;
-  line-height: 1.55;
-  color: #55575c;
-}
+  await wait(180);
 
-.memo-text-block {
-  font-size: 17px;
-  line-height: 1.72;
-  color: #55575c;
-}
+  currentAppScreen.classList.remove("closing");
+  homeScreen.classList.add("active", "opening");
 
-.memo-text-block strong {
-  font-weight: 800;
-  color: #3f3f43;
-}
+  await wait(260);
 
-.memo-detail-back:active,
-.memo-circle-btn:active,
-.memo-pill-btn:active,
-.memo-more-btn:active {
-  transform: scale(0.96);
+  homeScreen.classList.remove("opening");
+  isAppAnimating = false;
 }
-
-/* mobile */
-@media screen and (max-width: 480px) {
-  .memo-topbar {
-    height: calc(88px + env(safe-area-inset-top));
-    padding-top: calc(8px + env(safe-area-inset-top));
-  }
-
-  .memo-home-back,
-  .memo-detail-back {
-    top: calc(28px + env(safe-area-inset-top));
-    left: 14px;
-  }
-
-  .memo-more-btn {
-    top: calc(28px + env(safe-area-inset-top));
-    right: 14px;
-    width: 44px;
-    height: 44px;
-  }
-
-  .memo-list-scroll {
-    height: calc(100% - (88px + env(safe-area-inset-top)));
-    padding: 8px 20px 36px;
-  }
-
-  .memo-detail-scroll {
-    height: calc(100% - (88px + env(safe-area-inset-top)));
-    padding: 14px 20px 38px;
-  }
-
-  .memo-list-head h1 {
-    font-size: 34px;
-  }
-
-  .memo-list-head p {
-    font-size: 14px;
-  }
-
-  .memo-section-title {
-    font-size: 20px;
-    margin-bottom: 14px;
-  }
-
-  .memo-list-item {
-    padding: 15px 16px 13px;
-  }
-
-  .memo-item-title {
-    font-size: 16px;
-  }
-
-  .memo-item-meta {
-    font-size: 13px;
-  }
-
-  .memo-detail-actions {
-    top: calc(8px + env(safe-area-inset-top));
-    right: 14px;
-    gap: 10px;
-  }
-
-  .memo-circle-btn {
-    width: 44px;
-    height: 44px;
-  }
-
-  .memo-pill-actions {
-    height: 44px;
-    border-radius: 22px;
-  }
-
-  .memo-pill-btn {
-    width: 44px;
-    height: 44px;
-  }
-
-  .memo-detail-date {
-    font-size: 15px;
-    margin-bottom: 24px;
-  }
-
-  .memo-detail-title {
-    font-size: 32px;
-    margin-bottom: 34px;
-  }
 
-  .memo-detail-body,
-  .memo-text-block,
-  .memo-check-text {
-    font-size: 16px;
-  }
-
-  .memo-check-item {
-    gap: 16px;
-  }
+backHomeButtons.forEach((button) => {
+  button.addEventListener("click", backToHomeFromApp);
+});
 
-  .memo-check-circle {
-    width: 26px;
-    height: 26px;
-    flex-basis: 26px;
-  }
-
-  .memo-check-item.checked .memo-check-circle::before {
-    left: 7px;
-    top: 7px;
-    width: 9px;
-    height: 5px;
-  }
-}
+/* =========================
+   공통 터치 피드백
+========================= */
+function attachTouchFeedback(button, action) {
+  button.addEventListener(
+    "touchstart",
+    () => {
+      if (!homeScreen || !homeScreen.classList.contains("active")) return;
+      if (isTransitioning || isAppAnimating) return;
+
+      button.classList.add("touching");
+      touchHandled = false;
+    },
+    { passive: true }
+  );
+
+  button.addEventListener("touchend", async (event) => {
+    if (!homeScreen || !homeScreen.classList.contains("active")) return;
+    if (isTransitioning || isAppAnimating) return;
+
+    event.preventDefault();
+    touchHandled = true;
+
+    await wait(120);
+    await action(button);
+  });
+
+  button.addEventListener("touchcancel", () => {
+    button.classList.remove("touching");
+    touchHandled = false;
+  });
+
+  button.addEventListener("click", async (event) => {
+    if (touchHandled) {
+      touchHandled = false;
+      event.preventDefault();
+      return;
+    }
+
+    await action(button);
+  });
+}
+
+/* 진입형 앱 */
+openAppButtons.forEach((button) => {
+  attachTouchFeedback(button, openAppWithAnimation);
+});
+
+/* 반응형 앱 */
+popupAppButtons.forEach((button) => {
+  attachTouchFeedback(button, async (btn) => {
+    const popupKey = btn.dataset.popup;
+    const popupData = popupTextMap[popupKey];
+
+    await wait(40);
+    btn.classList.remove("touching");
+
+    if (popupData) {
+      showPopup(popupData);
+    }
+  });
+});
+
+/* 장식형 앱 */
+dummyAppButtons.forEach((button) => {
+  attachTouchFeedback(button, async (btn) => {
+    await wait(60);
+    btn.classList.remove("touching");
+  });
+});
+
+/* =========================
+   MEMO APP
+========================= */
+(function initMemoApp() {
+  const memoScreen = document.getElementById("memoScreen");
+  const memoPinnedCard = document.getElementById("memoPinnedCard");
+  const memo7DaysCard = document.getElementById("memo7DaysCard");
+  const memo30DaysCard = document.getElementById("memo30DaysCard");
+  const memoFebruaryCard = document.getElementById("memoFebruaryCard");
+  const memo2025Card = document.getElementById("memo2025Card");
+
+  const memoDetailTitle = document.getElementById("memoDetailTitle");
+  const memoDetailDate = document.getElementById("memoDetailDate");
+  const memoDetailBody = document.getElementById("memoDetailBody");
+  const memoDetailBack = document.querySelector(".memo-detail-back");
+
+  if (!memoScreen) return;
+
+  const memoData = {
+    pinned: [
+      { id: "idpw", title: "아이디/비번", meta: "2025. 11. 04.  티빙 네이버 로그인" },
+      { id: "cardnum", title: "카드번호", meta: "2025. 02. 20.  우리은행" }
+    ],
+    week7: [
+      { id: "guangzhou", title: "광저우", meta: "토요일  옷 / 아우터" }
+    ],
+    days30: [
+      { id: "shopping", title: "장보기", meta: "2026. 03. 24.  항정살" },
+      { id: "japan", title: "일본", meta: "2026. 03. 16.  돈키호테" },
+      { id: "longbirthday", title: "롱이생일!", meta: "2026. 03. 10  선물 후보" },
+      { id: "paris", title: "파리", meta: "2026.03.01  옷 / 아우터(+코트)" }
+    ],
+    february: [
+      { id: "shanghai", title: "상하이", meta: "2026. 02. 26.  옷" },
+      { id: "partyshopping", title: "막방 기념 파티-장보기", meta: "2025. 02. 08.  삼겹살 8인분 몇키로?" }
+    ],
+    year2025: [
+      { id: "mama2025", title: "MAMA2025", meta: "2025. 11. 24.  스킨케어(+브링그린)" },
+      { id: "aglio", title: "알리오올리오 레시피", meta: "2025. 10. 20.  올리브오일 / 면 / 마늘 / 페페론치노" },
+      { id: "todo", title: "할 것", meta: "2025. 9. 30.  보플 영상 모니터링? 다시 보기" },
+      { id: "packing", title: "숙소 짐싸기", meta: "2025. 09. 26.  침구? (이불/베개/매트리스-?)" }
+    ]
+  };
+
+  const memoDetailData = {
+    guangzhou: {
+      date: "2026년 3월 28일 21:35",
+      title: "광저우",
+      type: "checklist",
+      items: [
+        { text: "옷 / 아우터", checked: true },
+        { text: "잠옷 / 양말 / 속옷", checked: true },
+        { text: "운동화 / 슬리퍼", checked: true },
+        { text: "츄리닝", checked: true },
+        { text: "모자", checked: true },
+        { text: "세면도구(쓰고 넣기)", checked: false },
+        { text: "스킨케어(쓰고 넣기)", checked: false },
+        { text: "붓기빼기", checked: true },
+        { text: "충전기 / 에어팟 / 맥스", checked: false },
+        { text: "영양제 / 약", checked: true },
+        { text: "입 테이프", checked: true },
+        { text: "악세사리(팔찌/반지 등 꺼내두기)", checked: true },
+        { text: "선글라스", checked: true },
+        { text: "기타 .. 생각나면 추가", checked: false }
+      ]
+    },
+    shopping: {
+      date: "2026년 3월 24일 13:31",
+      title: "장보기",
+      type: "checklist",
+      items: [
+        { text: "항정살", checked: false },
+        { text: "통마늘", checked: false },
+        { text: "청양고추", checked: false },
+        { text: "파스타면(링귀니)", checked: false },
+        { text: "과자", checked: false },
+        { text: "딸기(있나?)", checked: false },
+        { text: "우삼겹 팩", checked: false },
+        { text: "양파", checked: false },
+        { text: "바나나우유", checked: false },
+        { text: "콘푸라이트", checked: false },
+        { text: "칼빔면", checked: false }
+      ]
+    },
+    japan: {
+      date: "2026년 3월 16일 22:16",
+      title: "일본",
+      type: "text",
+      html: `
+        <div class="memo-text-block">
+          <p>- 돈키호테</p>
+          <p>안약 / 휴족시간 / 과자 유명한거 / 온열안대 / 컵라면</p>
+          <p>- 기념품?</p>
+          <p>인형 같은거</p>
+          <p><a href="#">https://youtu.be/1c7_NYeUF1g?si=9J2VeKzTrzUdON_g</a></p>
+        </div>
+      `
+    },
+    longbirthday: {
+      date: "2026년 3월 10일 13:43",
+      title: "롱이생일!",
+      type: "text",
+      html: `
+        <div class="memo-text-block">
+          <p>- 선물 후보</p>
+          <p>귀걸이<br>반지(너무티남)<br>옷?<br><strong>향수 - 파리 가서 구매</strong><br><strong>케이크 - 롱이한테 물어보기 딸기생크림케이크</strong></p>
+          <p>Tea & Rock'n Roll - 그린, 베르가못, 레더</p>
+          <p>축하메시지<br>우리 씬롱이! 항상 어른스럽고 듬직한 아이지만<br>오늘만큼은 그 누구보다 환하게 웃는 네 모습을 보고싶다 :3<br>생일 너무너무 축하해!!</p>
+          <p>편지 따로 준비? 아니면 카톡으로?</p>
+          <p><strong>선물 챙겨서 자정 전에 롱이 방으로 가기!! 서프라이즈</strong><br>+ 낮에 어머님 연락 같이 드리기</p>
+          <p>점심 - 장수면 컨텐츠, 미역국 같이 끓여서 먹기<br>저녁 - 스케줄 끝나고 회사에서-시간 맞춰서 주문해두기</p>
+        </div>
+      `
+    },
+    paris: {
+      date: "2026년 3월 1일 00:26",
+      title: "파리",
+      type: "checklist",
+      items: [
+        { text: "옷 / 아우터(+코트)", checked: true },
+        { text: "잠옷 / 양말 / 속옷", checked: true },
+        { text: "운동화 / 슬리퍼", checked: true },
+        { text: "집업", checked: true },
+        { text: "모자 - ?", checked: true },
+        { text: "세면도구(쓰고 넣기)", checked: false },
+        { text: "스킨케어(쓰고 넣기)", checked: false },
+        { text: "붓기빼기", checked: true },
+        { text: "충전기 / 에어팟 / 맥스", checked: false },
+        { text: "영양제 / 약", checked: true },
+        { text: "입 테이프", checked: true },
+        { text: "선글라스", checked: true },
+        { text: "필름카메라", checked: true }
+      ],
+      extraHtml: `<p>도착해서 롱이랑 영통하기<br>+ 롱이 선물 찾아보기</p>`
+    },
+    shanghai: {
+      date: "2026년 2월 26일 23:10",
+      title: "상하이",
+      type: "checklist",
+      items: [
+        { text: "옷", checked: true },
+        { text: "잠옷 / 양말 / 속옷", checked: true },
+        { text: "운동화 / 슬리퍼", checked: true },
+        { text: "편한 옷 상하이", checked: true },
+        { text: "모자", checked: true },
+        { text: "세면도구(쓰고 넣기)", checked: false },
+        { text: "스킨케어(쓰고 넣기)", checked: false },
+        { text: "붓기빼기", checked: true },
+        { text: "충전기 / 에어팟 / 맥스", checked: false },
+        { text: "영양제 / 약", checked: true },
+        { text: "입 테이프", checked: true },
+        { text: "선글라스", checked: true },
+        { text: "목도리", checked: true }
+      ]
+    },
+    partyshopping: {
+      date: "2026년 2월 8일 16:13",
+      title: "막방 기념 파티-장보기",
+      type: "checklist",
+      items: [
+        { text: "삼겹살 8인분 몇키로?", checked: false },
+        { text: "통마늘", checked: false },
+        { text: "청양고추", checked: false },
+        { text: "쌈장", checked: false },
+        { text: "비빔면(or 칼빔면)", checked: false },
+        { text: "쌈채소/버섯/양파", checked: false },
+        { text: "제로콜라", checked: false },
+        { text: "맥주", checked: false },
+        { text: "바나나우유", checked: false },
+        { text: "콘푸라이트", checked: false },
+        { text: "딸기", checked: false },
+        { text: "불닭소스", checked: false },
+        { text: "훠궈 재료 - 청경채/목이버섯/", checked: false }
+      ]
+    },
+    mama2025: {
+      date: "2025년 11월 24일 20:41",
+      title: "MAMA2025",
+      type: "checklist",
+      items: [
+        { text: "스킨케어(+브링그린)", checked: false },
+        { text: "세면도구", checked: false },
+        { text: "운동화 / 슬리퍼", checked: false },
+        { text: "트레이닝복", checked: false },
+        { text: "모자", checked: false },
+        { text: "옷 / 겉옷", checked: false },
+        { text: "잠옷 / 양말 / 속옷", checked: false },
+        { text: "붓기빼기", checked: false },
+        { text: "충전기 / 에어팟 / 맥스", checked: false },
+        { text: "영양제 / 약", checked: false },
+        { text: "입 테이프", checked: false },
+        { text: "선글라스 / 안경", checked: false },
+        { text: "목도리", checked: false },
+        { text: "가방(메신저백/", checked: false }
+      ],
+      extraHtml: `<p>캐리어 싸는거 브이로그 찍기</p>`
+    },
+    aglio: {
+      date: "2025년 10월 20일 11:28",
+      title: "알리오올리오 레시피",
+      type: "text",
+      html: `
+        <div class="memo-text-block">
+          <p>올리브오일 / 면 / 마늘 / 페페론치노</p>
+          <p>면 8분 익히기(소금 살짝)<br>올리브오일 2/3컵(10큰술 정도), 다진마늘 1티스푼, 편마늘(4개 정도), 페페론치노 볶기<br>면, 면수 2국자 넣고 볶기 / 소금으로 간</p>
+          <p>1인분 기준</p>
+        </div>
+      `
+    },
+    todo: {
+      date: "2025년 9월 30일 23:45",
+      title: "할 것",
+      type: "checklist",
+      items: [
+        { text: "보플 영상 모니터링? 다시 보기", checked: true },
+        { text: "옷장 정리", checked: true },
+        { text: "챌린지, 신곡 안무 카피", checked: false },
+        { text: "PT", checked: false },
+        { text: "중국어 공부", checked: false },
+        { text: "보컬룸 - 발성연습", checked: false },
+        { text: "", checked: false }
+      ],
+      extraHtml: `
+        <p>보플-티빙<br>3회 후반 - 첫만남 롱이 파트<br>4회 후반 - 위플래쉬<br>7회 후반 - 락<br>9회 - 럭키마초 / 체인스<br>10회, 11회</p>
+        <p>유튜브 클립 모음<br><a href="#">https://youtube.com/playlist?list=PLTZxf74YKwfYCaAnRlOr3nDqvWD_2rvwm&si=pMevfXZR-hBa2bPc</a></p>
+      `
+    },
+    packing: {
+      date: "2025년 9월 26일 10:19",
+      title: "숙소 짐싸기",
+      type: "checklist",
+      items: [
+        { text: "침구? (이불/베개/매트리스-?)", checked: false },
+        { text: "옷", checked: true },
+        { text: "신발", checked: true },
+        { text: "악세사리/모자/목도리/안경/가방 등", checked: true },
+        { text: "화장품/스킨케어/헤어롤 등", checked: true },
+        { text: "세면도구/화장실", checked: false },
+        { text: "전자기기(에어팟, 맥스, 멀티탭, 충전기 등)", checked: false },
+        { text: "상비약, 영양제", checked: true },
+        { text: "텀블러", checked: true },
+        { text: "쓰레기통/돌돌이/", checked: false },
+        { text: "책(자료, 책, 앨범 등 지류)", checked: true },
+        { text: "가습기", checked: true }
+      ]
+    }
+  };
+
+  function createMemoListItems(items) {
+    return items.map((item) => `
+      <button class="memo-list-item" type="button" data-memo-id="${item.id}">
+        <div class="memo-item-title">${item.title}</div>
+        <div class="memo-item-meta">${item.meta}</div>
+      </button>
+    `).join("");
+  }
+
+  function renderMemoLists() {
+    if (memoPinnedCard) memoPinnedCard.innerHTML = createMemoListItems(memoData.pinned);
+    if (memo7DaysCard) memo7DaysCard.innerHTML = createMemoListItems(memoData.week7);
+    if (memo30DaysCard) memo30DaysCard.innerHTML = createMemoListItems(memoData.days30);
+    if (memoFebruaryCard) memoFebruaryCard.innerHTML = createMemoListItems(memoData.february);
+    if (memo2025Card) memo2025Card.innerHTML = createMemoListItems(memoData.year2025);
+  }
+
+  function renderChecklist(items) {
+    return `
+      <div class="memo-checklist">
+        ${items.map((item) => `
+          <div class="memo-check-item ${item.checked ? "checked" : "unchecked"}">
+            <div class="memo-check-circle"></div>
+            <div class="memo-check-text">${item.text || "&nbsp;"}</div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  function openMemoDetail(memoId) {
+    const memo = memoDetailData[memoId];
+    if (!memo || !memoDetailTitle || !memoDetailDate || !memoDetailBody) return;
+
+    memoDetailDate.textContent = memo.date;
+    memoDetailTitle.textContent = memo.title;
+
+    if (memo.type === "checklist") {
+      memoDetailBody.innerHTML = renderChecklist(memo.items) + (memo.extraHtml ? memo.extraHtml : "");
+    } else {
+      memoDetailBody.innerHTML = memo.html;
+    }
+
+    memoScreen.classList.add("detail-open");
+  }
+
+  function closeMemoDetail(event) {
+    if (event) event.stopPropagation();
+    memoScreen.classList.remove("detail-open");
+  }
+
+  memoScreen.addEventListener("click", (event) => {
+    const item = event.target.closest(".memo-list-item");
+    if (item && memoScreen.classList.contains("active")) {
+      openMemoDetail(item.dataset.memoId);
+    }
+  });
+
+  if (memoDetailBack) {
+    memoDetailBack.addEventListener("click", closeMemoDetail);
+  }
+
+  renderMemoLists();
+})();
