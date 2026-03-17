@@ -934,7 +934,7 @@ img {
 /* iPhone-style glass back button */
 .app-back-btn {
   position: absolute;
-  top: calc(30px + var(--safe-top));
+  top: calc(48px + var(--safe-top));
   left: 16px;
   width: 46px;
   height: 46px;
@@ -1502,7 +1502,7 @@ img {
   }
 
   .app-back-btn {
-    top: calc(28px + env(safe-area-inset-top));
+    top: calc(48px + env(safe-area-inset-top));
     left: 14px;
     width: 44px;
     height: 44px;
@@ -1603,13 +1603,13 @@ img {
 
 .memo-home-back,
 .memo-detail-back {
-  top: calc(28px + var(--safe-top));
+  top: calc(48px + var(--safe-top));
   left: 14px;
 }
 
 .memo-more-btn {
   position: absolute;
-  top: calc(28px + var(--safe-top));
+  top: calc(48px + var(--safe-top));
   right: 14px;
   width: 44px;
   height: 44px;
@@ -1736,7 +1736,7 @@ img {
 
 .memo-detail-actions {
   position: absolute;
-  top: calc(28px + var(--safe-top));
+  top: calc(48px + var(--safe-top));
   right: 16px;
   display: flex;
   align-items: center;
@@ -1796,44 +1796,65 @@ img {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
 }
 
+/* 되돌리기 아이콘 */
 .memo-undo-icon {
-  width: 16px;
-  height: 16px;
-  border: 2.4px solid #111;
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  transform: translate(-45%, -45%) rotate(-45deg);
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
 }
 
 .memo-undo-icon::before {
   content: "";
   position: absolute;
-  left: -4px;
-  top: 0px;
-  width: 8px;
-  height: 8px;
+  left: 4px;
+  top: 5px;
+  width: 11px;
+  height: 11px;
+  border: 2.4px solid #111;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  transform: rotate(-45deg);
+}
+
+.memo-undo-icon::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 4px;
+  width: 7px;
+  height: 7px;
   border-left: 2.4px solid #111;
   border-bottom: 2.4px solid #111;
   transform: rotate(45deg);
 }
 
+/* 공유 아이콘 */
 .memo-share-icon {
-  width: 18px;
-  height: 18px;
-  border: 2.2px solid #111;
-  border-radius: 4px;
-  border-top: none;
+  width: 22px;
+  height: 22px;
+  transform: translate(-50%, -50%);
 }
 
 .memo-share-icon::before {
   content: "";
   position: absolute;
+  left: 4px;
+  bottom: 2px;
+  width: 14px;
+  height: 13px;
+  border: 2.2px solid #111;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+}
+
+.memo-share-icon::after {
+  content: "";
+  position: absolute;
   left: 50%;
-  top: -8px;
+  top: 1px;
   width: 8px;
   height: 8px;
   border-left: 2.2px solid #111;
@@ -1841,13 +1862,12 @@ img {
   transform: translateX(-50%) rotate(45deg);
 }
 
-.memo-share-icon::after {
-  content: "";
+.memo-share-icon span {
   position: absolute;
   left: 50%;
-  top: -2px;
+  top: 6px;
   width: 0;
-  height: 10px;
+  height: 8px;
   border-left: 2.2px solid #111;
   transform: translateX(-50%);
 }
@@ -1974,12 +1994,12 @@ img {
 
   .memo-home-back,
   .memo-detail-back {
-    top: calc(28px + env(safe-area-inset-top));
+    top: calc(48px + env(safe-area-inset-top));
     left: 14px;
   }
 
   .memo-more-btn {
-    top: calc(28px + env(safe-area-inset-top));
+    top: calc(48px + env(safe-area-inset-top));
     right: 14px;
     width: 44px;
     height: 44px;
@@ -2021,7 +2041,7 @@ img {
   }
 
   .memo-detail-actions {
-    top: calc(28px + env(safe-area-inset-top));
+    top: calc(48px + env(safe-area-inset-top));
     right: 14px;
     gap: 10px;
   }
