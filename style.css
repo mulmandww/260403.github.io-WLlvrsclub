@@ -152,25 +152,10 @@ img {
   border-radius: 2px;
 }
 
-.cellular i:nth-child(1) {
-  height: 5px;
-  opacity: 0.95;
-}
-
-.cellular i:nth-child(2) {
-  height: 8px;
-  opacity: 0.95;
-}
-
-.cellular i:nth-child(3) {
-  height: 11px;
-  opacity: 0.95;
-}
-
-.cellular i:nth-child(4) {
-  height: 13px;
-  opacity: 0.95;
-}
+.cellular i:nth-child(1) { height: 5px; opacity: 0.95; }
+.cellular i:nth-child(2) { height: 8px; opacity: 0.95; }
+.cellular i:nth-child(3) { height: 11px; opacity: 0.95; }
+.cellular i:nth-child(4) { height: 13px; opacity: 0.95; }
 
 /* wifi */
 .wifi {
@@ -246,6 +231,36 @@ img {
 }
 
 /* ============================= */
+/* APP SCREEN STATUSBAR OVERRIDE */
+/* ============================= */
+
+.phone:has(.app-screen.active) .status-left {
+  color: #111;
+}
+
+.phone:has(.app-screen.active) .cellular i {
+  background: #111;
+}
+
+.phone:has(.app-screen.active) .wifi::before,
+.phone:has(.app-screen.active) .wifi::after {
+  border-top-color: #111;
+}
+
+.phone:has(.app-screen.active) .wifi-dot {
+  background: #111;
+}
+
+.phone:has(.app-screen.active) .battery {
+  border-color: #111;
+}
+
+.phone:has(.app-screen.active) .battery::after,
+.phone:has(.app-screen.active) .battery-level {
+  background: #111;
+}
+
+/* ============================= */
 /* COMMON SCREEN */
 /* ============================= */
 
@@ -269,6 +284,36 @@ img {
   transform: translateY(0) scale(1);
 }
 
+.screen.opening {
+  animation: screenOpen 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.screen.closing {
+  animation: screenClose 0.22s ease forwards;
+}
+
+@keyframes screenOpen {
+  0% {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes screenClose {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.995);
+  }
+}
+
 .wallpaper {
   position: absolute;
   inset: 0;
@@ -277,8 +322,7 @@ img {
 }
 
 .wallpaper-lock {
-  background:
-    url("assets/wallpaper/wallpaper_lock.jpg") center / cover no-repeat;
+  background: url("assets/wallpaper/wallpaper_lock.jpg") center / cover no-repeat;
 }
 
 .wallpaper-passcode {
@@ -518,48 +562,37 @@ img {
   align-items: center;
 }
 
-/* PASSCODE BUTTON - TRUE GLASS */
-/* PASSCODE BUTTON - GLASS (iOS style) */
-
 .key {
   width: 94px;
   height: 94px;
   border-radius: 50%;
-
   position: relative;
   overflow: hidden;
-
   background: rgba(255,255,255,0.10);
   border: 1px solid rgba(255,255,255,0.18);
-
   backdrop-filter: blur(10px) saturate(150%);
   -webkit-backdrop-filter: blur(10px) saturate(150%);
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   color: #fff;
-
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.25),
     inset 0 -1px 0 rgba(255,255,255,0.06),
     0 6px 14px rgba(0,0,0,0.12);
-
   transition:
     transform 0.15s ease,
     background 0.15s ease,
     border-color 0.15s ease;
+  will-change: transform, background;
 }
 
-/* glass highlight */
 .key::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-
   background:
     linear-gradient(
       180deg,
@@ -568,46 +601,41 @@ img {
       rgba(255,255,255,0.04) 40%,
       rgba(255,255,255,0.00) 70%
     );
-
   pointer-events: none;
 }
 
-/* press effect */
+.key::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.10) 35%, rgba(255,255,255,0.00) 72%);
+  opacity: 0;
+  transform: scale(0.45);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+  pointer-events: none;
+}
+
 .key:active {
   transform: scale(0.96);
-
   background: rgba(255,255,255,0.16);
-
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.30),
     inset 0 -1px 0 rgba(255,255,255,0.10),
     0 4px 10px rgba(0,0,0,0.14);
 }
 
-.key::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.20) 0%,
-      rgba(255,255,255,0.08) 22%,
-      rgba(255,255,255,0.02) 48%,
-      rgba(255,255,255,0.00) 72%
-    );
-  pointer-events: none;
+.key.tap {
+  transform: scale(0.955);
+  background: rgba(255, 255, 255, 0.12);
 }
 
-.key:active {
-  transform: scale(0.965);
-  background: rgba(255, 255, 255, 0.10);
-  border-color: rgba(255,255,255,0.22);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.24),
-    inset 0 -1px 0 rgba(255,255,255,0.06),
-    0 6px 14px rgba(0,0,0,0.12);
+.key.tap::after {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .key .num {
@@ -695,16 +723,11 @@ img {
 /* LIVE CALENDAR ICON */
 /* ============================= */
 
-.calendar-app-icon {
-  align-items: center;
-}
-
 .calendar-app-icon .calendar-icon-wrap {
   position: relative;
   width: 60px;
   height: 60px;
   flex: 0 0 60px;
-  display: block;
 }
 
 .calendar-app-icon .calendar-icon-wrap img {
@@ -717,41 +740,45 @@ img {
 
 .calendar-app-icon .calendar-live-weekday {
   position: absolute;
-  top: 7px;
+  top: 8px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
   text-align: center;
-
-  font-size: 7px;
+  font-size: 10px;
   line-height: 1;
   font-weight: 700;
-  color: #ff3b30;
   letter-spacing: -0.2px;
   white-space: nowrap;
-  pointer-events: none;
   z-index: 2;
+  pointer-events: none;
+  color: #111;
+}
+
+.calendar-app-icon .calendar-live-weekday.is-holiday {
+  color: #ff3b30;
 }
 
 .calendar-app-icon .calendar-live-date {
   position: absolute;
-  top: 17px;
+  top: 18px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
   text-align: center;
-
-  font-size: 19px;
+  font-size: 31px;
   line-height: 1;
-  font-weight: 500;
-  color: #111;
-  letter-spacing: -0.8px;
-  pointer-events: none;
+  font-weight: 400;
+  letter-spacing: -1.2px;
   z-index: 2;
+  pointer-events: none;
+  color: #111;
 }
 
+/* ============================= */
+/* DOCK */
+/* ============================= */
 
-/* DOCK - TRUE GLASS */
 .dock {
   position: absolute;
   left: 50%;
@@ -812,9 +839,224 @@ img {
     inset 0 -1px 0 rgba(255,255,255,0.03);
 }
 
-/* 홈화면에서는 흰 홈바 숨김 */
 .home-screen .home-indicator {
   display: none !important;
+}
+
+/* ============================= */
+/* APP TOUCH / OPEN EFFECT */
+/* ============================= */
+
+.app-icon img,
+.dock-icon img {
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease,
+    opacity 0.18s ease;
+  will-change: transform, filter, opacity;
+}
+
+.app-icon.touching img,
+.dock-icon.touching img {
+  transform: scale(0.88);
+  filter: brightness(0.92);
+}
+
+.app-icon.launching img,
+.dock-icon.launching img {
+  animation: appIconLaunch 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes appIconLaunch {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+  35% {
+    transform: scale(0.90);
+    opacity: 1;
+    filter: brightness(1.06);
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+    filter: brightness(1.12);
+  }
+}
+
+.home-screen.app-opening {
+  animation: homeScreenFade 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes homeScreenFade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.03);
+    filter: blur(6px);
+  }
+}
+
+/* ============================= */
+/* APP SCREEN BASIC */
+/* ============================= */
+
+.app-screen {
+  background: #fff;
+  color: #000;
+  z-index: 20;
+}
+
+.app-ui {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+.app-header h1 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 auto;
+}
+
+.back-home {
+  position: absolute;
+  left: 16px;
+  font-size: 14px;
+}
+
+.app-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* ============================= */
+/* IOS TOP NOTIFICATION POPUP */
+/* ============================= */
+
+.notif-popup {
+  position: absolute;
+  top: calc(14px + var(--safe-top));
+  left: 50%;
+  transform: translateX(-50%) translateY(-18px);
+  width: calc(100% - 18px);
+  max-width: 372px;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    inset 0 -1px 0 rgba(255,255,255,0.04),
+    0 12px 28px rgba(0,0,0,0.14);
+  z-index: 300;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.26s ease,
+    transform 0.26s ease,
+    visibility 0.26s ease;
+  overflow: hidden;
+}
+
+.notif-popup::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.22) 0%,
+      rgba(255,255,255,0.08) 20%,
+      rgba(255,255,255,0.02) 45%,
+      rgba(255,255,255,0.00) 72%
+    );
+  pointer-events: none;
+}
+
+.notif-popup.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.notif-left {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+}
+
+.notif-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  object-fit: cover;
+  display: block;
+}
+
+.notif-center {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-width: 0;
+}
+
+.notif-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.notif-app {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notif-time {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.72);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.notif-text {
+  font-size: 13px;
+  line-height: 1.3;
+  color: rgba(255,255,255,0.94);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ============================= */
@@ -835,6 +1077,39 @@ img {
     height: 100svh;
     border-radius: 0;
     box-shadow: none;
+  }
+
+  /* app screen statusbar - mobile force */
+  .phone:has(.app-screen.active) .statusbar {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .phone:has(.app-screen.active) .status-left {
+    color: #111 !important;
+  }
+
+  .phone:has(.app-screen.active) .cellular i {
+    background: #111 !important;
+  }
+
+  .phone:has(.app-screen.active) .wifi::before,
+  .phone:has(.app-screen.active) .wifi::after {
+    border-top-color: #111 !important;
+  }
+
+  .phone:has(.app-screen.active) .wifi-dot {
+    background: #111 !important;
+  }
+
+  .phone:has(.app-screen.active) .battery {
+    border-color: #111 !important;
+  }
+
+  .phone:has(.app-screen.active) .battery::after,
+  .phone:has(.app-screen.active) .battery-level {
+    background: #111 !important;
   }
 
   /* lock */
@@ -858,35 +1133,35 @@ img {
     bottom: calc(34px + env(safe-area-inset-bottom));
   }
 
- .wallpaper-lock {
-  background-image: url("assets/wallpaper/wallpaper_lock.jpg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #000;
-}
+  .wallpaper-lock {
+    background-image: url("assets/wallpaper/wallpaper_lock.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #000;
+  }
 
-.wallpaper-passcode {
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
-    url("assets/wallpaper/wallpaper_lock.jpg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #000;
-}
+  .wallpaper-passcode {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
+      url("assets/wallpaper/wallpaper_lock.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #000;
+  }
 
-.wallpaper-home {
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10)),
-    url("assets/wallpaper/wallpaper_lock.jpg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #000;
-  filter: blur(12px);
-  transform: scale(1.08);
-}
+  .wallpaper-home {
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10)),
+      url("assets/wallpaper/wallpaper_lock.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #000;
+    filter: blur(12px);
+    transform: scale(1.08);
+  }
 
   /* statusbar */
   .statusbar {
@@ -1027,7 +1302,6 @@ img {
   }
 
   /* home */
-   /* home */
   .home-screen {
     overflow: hidden;
   }
@@ -1035,19 +1309,15 @@ img {
   .home-apps {
     position: relative;
     z-index: 2;
-
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, 68px);
     justify-items: center;
     align-items: start;
-
     column-gap: 2px;
     row-gap: 14px;
-
     width: 100%;
     height: calc(100% - 118px);
-
     padding-top: calc(82px + env(safe-area-inset-top));
     padding-left: 10px;
     padding-right: 10px;
@@ -1093,6 +1363,37 @@ img {
     visibility: hidden;
   }
 
+  /* mobile calendar fix */
+  .calendar-app-icon .calendar-icon-wrap {
+    width: 52px;
+    height: 52px;
+    flex: 0 0 52px;
+  }
+
+  .calendar-app-icon .calendar-icon-wrap img {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+  }
+
+  .calendar-app-icon .calendar-live-weekday {
+    top: 7px;
+    font-size: 8px;
+  }
+
+  .calendar-app-icon .calendar-live-date {
+    top: 17px;
+    font-size: 26px;
+    letter-spacing: -0.9px;
+  }
+
+  .calendar-app-icon > span:last-child {
+    margin-top: 4px;
+    font-size: 10px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
   .dock {
     width: calc(100% - 18px);
     max-width: none;
@@ -1100,7 +1401,6 @@ img {
     bottom: calc(8px + env(safe-area-inset-bottom));
     border-radius: 24px;
     padding: 0 6px;
-
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     align-items: center;
@@ -1121,6 +1421,37 @@ img {
   .lock-btn-img {
     width: 62px;
     height: 62px;
+  }
+
+  .notif-popup {
+    top: calc(10px + env(safe-area-inset-top));
+    width: calc(100% - 14px);
+    border-radius: 20px;
+    padding: 11px 13px;
+    gap: 10px;
+    backdrop-filter: blur(26px) saturate(190%);
+    -webkit-backdrop-filter: blur(26px) saturate(190%);
+  }
+
+  .notif-left {
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .notif-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+  }
+
+  .notif-app,
+  .notif-text {
+    font-size: 13px;
+  }
+
+  .notif-time {
+    font-size: 12px;
   }
 }
 
@@ -1153,491 +1484,5 @@ img {
   .key .letters {
     font-size: 9px !important;
     letter-spacing: 2px !important;
-  }
-
-   .calendar-app-icon .calendar-icon-wrap {
-    width: 54px !important;
-    height: 54px !important;
-    flex: 0 0 54px !important;
-  }
-
-  .calendar-app-icon .calendar-icon-wrap img {
-    width: 54px !important;
-    height: 54px !important;
-    border-radius: 15px !important;
-  }
-
-  .calendar-app-icon .calendar-live-weekday {
-    top: 6px !important;
-    font-size: 6px !important;
-  }
-
-  .calendar-app-icon .calendar-live-date {
-    top: 15px !important;
-    font-size: 18px !important;
-    letter-spacing: -0.6px !important;
-  }
-
-  .calendar-app-icon > span:last-child {
-    margin-top: 4px !important;
-    font-size: 10px !important;
-    line-height: 1 !important;
-    white-space: nowrap !important;
-  }
-  
-}
-
-/* ============================= */
-/* PASSCODE TAP EFFECT */
-/* ============================= */
-
-.key {
-  will-change: transform, background;
-}
-
-.key::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at center, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.10) 35%, rgba(255,255,255,0.00) 72%);
-  opacity: 0;
-  transform: scale(0.45);
-  transition:
-    opacity 0.18s ease,
-    transform 0.18s ease;
-  pointer-events: none;
-}
-
-.key.tap {
-  transform: scale(0.955);
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.key.tap::after {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* ============================= */
-/* APP ICON TAP / LAUNCH EFFECT */
-/* ============================= */
-
-.app-icon img,
-.dock-icon img {
-  transition:
-    transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1),
-    filter 0.16s ease,
-    opacity 0.16s ease;
-  will-change: transform, filter, opacity;
-}
-
-.app-icon:active img,
-.dock-icon:active img {
-  transform: scale(0.92);
-}
-
-.app-icon.launching img,
-.dock-icon.launching img {
-  animation: appIconLaunch 0.34s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes appIconLaunch {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-    filter: brightness(1);
-  }
-  35% {
-    transform: scale(0.90);
-    opacity: 1;
-    filter: brightness(1.06);
-  }
-  100% {
-    transform: scale(1.55);
-    opacity: 0;
-    filter: brightness(1.12);
-  }
-}
-
-/* 홈화면이 앱 열릴 때 살짝 뒤로 빠지는 느낌 */
-.home-screen.app-opening {
-  animation: homeScreenFade 0.34s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes homeScreenFade {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0px);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.03);
-    filter: blur(6px);
-  }
-}
-
-/* 앱 화면 열리는 느낌 */
-.app-screen {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: scale(1.035);
-}
-
-.app-screen.active {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: scale(1);
-}
-
-.app-screen.opening {
-  animation: appScreenOpen 0.34s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@keyframes appScreenOpen {
-  0% {
-    opacity: 0;
-    transform: scale(1.035);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-}
-
-
-/* ============================= */
-/* APP SCREEN BASIC */
-/* ============================= */
-
-.app-screen {
-  background: #fff;
-  color: #000;
-  z-index: 20;
-}
-
-.app-ui {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.app-header {
-  height: 64px;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  border-bottom: 1px solid #eee;
-  background: #fff;
-}
-
-.app-header h1 {
-  font-size: 17px;
-  font-weight: 600;
-  margin: 0 auto;
-}
-
-.back-home {
-  position: absolute;
-  left: 16px;
-  font-size: 14px;
-}
-
-.app-content {
-  flex: 1;
-  overflow-y: auto;
-}
-
-/* ============================= */
-/* APP SCREEN STATUSBAR OVERRIDE */
-/* ============================= */
-
-.app-screen.active ~ .statusbar,
-.phone:has(.app-screen.active) .statusbar {
-  color: #111;
-}
-
-.phone:has(.app-screen.active) .status-left {
-  color: #111;
-}
-
-.phone:has(.app-screen.active) .cellular i {
-  background: #111;
-}
-
-.phone:has(.app-screen.active) .wifi::before,
-.phone:has(.app-screen.active) .wifi::after {
-  border-top-color: #111;
-}
-
-.phone:has(.app-screen.active) .wifi-dot {
-  background: #111;
-}
-
-.phone:has(.app-screen.active) .battery {
-  border-color: #111;
-}
-
-.phone:has(.app-screen.active) .battery::after,
-.phone:has(.app-screen.active) .battery-level {
-  background: #111;
-}
-
-/* ============================= */
-/* MOBILE APP TOUCH EFFECT */
-/* ============================= */
-
-/* ============================= */
-/* APP TOUCH / OPEN EFFECT */
-/* ============================= */
-
-.app-icon img,
-.dock-icon img {
-  transition:
-    transform 0.18s ease,
-    filter 0.18s ease,
-    opacity 0.18s ease;
-}
-
-.app-icon.touching img,
-.dock-icon.touching img {
-  transform: scale(0.88);
-  filter: brightness(0.92);
-}
-
-.app-icon.launching img,
-.dock-icon.launching img {
-  animation: appIconLaunch 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes appIconLaunch {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-    filter: brightness(1);
-  }
-  35% {
-    transform: scale(0.90);
-    opacity: 1;
-    filter: brightness(1.06);
-  }
-  100% {
-    transform: scale(1.55);
-    opacity: 0;
-    filter: brightness(1.12);
-  }
-}
-
-.home-screen.app-opening {
-  animation: homeScreenFade 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes homeScreenFade {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0px);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.03);
-    filter: blur(6px);
-  }
-}
-
-.screen.opening {
-  animation: screenOpen 0.34s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.screen.closing {
-  animation: screenClose 0.22s ease forwards;
-}
-
-@keyframes screenOpen {
-  0% {
-    opacity: 0;
-    transform: scale(1.02);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes screenClose {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.995);
-  }
-}
-
-/* ============================= */
-/* IOS TOP NOTIFICATION POPUP */
-/* DOCK-LIKE TRUE GLASS */
-/* ============================= */
-
-.notif-popup {
-  position: absolute;
-  top: calc(14px + var(--safe-top));
-  left: 50%;
-  transform: translateX(-50%) translateY(-18px);
-
-  width: calc(100% - 18px);
-  max-width: 372px;
-  min-height: 72px;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  padding: 12px 14px;
-  border-radius: 22px;
-
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255,255,255,0.16);
-
-  backdrop-filter: blur(30px) saturate(200%);
-  -webkit-backdrop-filter: blur(30px) saturate(200%);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.22),
-    inset 0 -1px 0 rgba(255,255,255,0.04),
-    0 12px 28px rgba(0,0,0,0.14);
-
-  z-index: 300;
-
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-
-  transition:
-    opacity 0.26s ease,
-    transform 0.26s ease,
-    visibility 0.26s ease;
-
-  overflow: hidden;
-}
-
-.notif-popup::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.22) 0%,
-      rgba(255,255,255,0.08) 20%,
-      rgba(255,255,255,0.02) 45%,
-      rgba(255,255,255,0.00) 72%
-    );
-  pointer-events: none;
-}
-
-.notif-popup.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
-
-.notif-left {
-  position: relative;
-  z-index: 1;
-  flex: 0 0 40px;
-  width: 40px;
-  height: 40px;
-}
-
-.notif-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  object-fit: cover;
-  display: block;
-}
-
-.notif-center {
-  position: relative;
-  z-index: 1;
-  flex: 1;
-  min-width: 0;
-}
-
-.notif-topline {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 2px;
-}
-
-.notif-app {
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.notif-time {
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.72);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.notif-text {
-  font-size: 13px;
-  line-height: 1.3;
-  color: rgba(255,255,255,0.94);
-
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-@media screen and (max-width: 480px) {
-  .notif-popup {
-    top: calc(10px + env(safe-area-inset-top));
-    width: calc(100% - 14px);
-    border-radius: 20px;
-    padding: 11px 13px;
-    gap: 10px;
-
-    backdrop-filter: blur(26px) saturate(190%);
-    -webkit-backdrop-filter: blur(26px) saturate(190%);
-  }
-
-  .notif-left {
-    flex: 0 0 36px;
-    width: 36px;
-    height: 36px;
-  }
-
-  .notif-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 9px;
-  }
-
-  .notif-app,
-  .notif-text {
-    font-size: 13px;
-  }
-
-  .notif-time {
-    font-size: 12px;
   }
 }
