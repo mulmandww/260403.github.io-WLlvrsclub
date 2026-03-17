@@ -1142,28 +1142,7 @@ img {
     letter-spacing: 2px !important;
   }
 
-  .calendar-icon-wrap {
-    width: 54px;
-    height: 54px;
-    flex: 0 0 54px;
-  }
-
-  .calendar-icon-wrap img {
-    width: 54px;
-    height: 54px;
-    border-radius: 15px;
-  }
-
-  .calendar-live-weekday {
-    top: 7px;
-    font-size: 7px;
-  }
-
-  .calendar-live-date {
-    top: 15px;
-    font-size: 26px;
-  }
-  
+ 
 }
 
 /* ============================= */
