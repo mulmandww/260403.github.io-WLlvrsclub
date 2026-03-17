@@ -348,6 +348,24 @@ function showPopup({ title, text, icon }) {
 /* =========================
    앱 열기 애니메이션
 ========================= */
+
+button.addEventListener("click", async (event) => {
+  if (touchHandled) {
+    touchHandled = false;
+    event.preventDefault();
+    return;
+  }
+
+  // ⭐ 추가
+  button.classList.add("touching");
+
+  setTimeout(() => {
+    button.classList.remove("touching");
+  }, 150);
+
+  await action(button);
+});
+
 async function openAppWithAnimation(button) {
   const targetId = button.dataset.screen;
   if (!targetId) return;
