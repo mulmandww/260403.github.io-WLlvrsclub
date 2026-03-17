@@ -27,6 +27,9 @@ const allTappableApps = document.querySelectorAll(".app-icon, .dock-icon");
 const backHomeButtons = document.querySelectorAll(".back-home");
 const appScreens = document.querySelectorAll(".app-screen");
 
+const calendarLiveWeekday = document.getElementById("calendarLiveWeekday");
+const calendarLiveDate = document.getElementById("calendarLiveDate");
+
 const glassPopup = document.getElementById("glassPopup");
 const glassPopupTitle = document.getElementById("glassPopupTitle");
 const glassPopupText = document.getElementById("glassPopupText");
@@ -73,6 +76,9 @@ function updateDateTime() {
   if (lockDate) lockDate.textContent = `${month}월 ${day}일 ${weekday}`;
   if (lockTime) lockTime.textContent = `${hour}:${minute}`;
   if (statusTime) statusTime.textContent = `${hour}:${minute}`;
+
+  if (calendarLiveWeekday) calendarLiveWeekday.textContent = weekday;
+  if (calendarLiveDate) calendarLiveDate.textContent = String(day);
 }
 
 updateDateTime();
