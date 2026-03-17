@@ -1373,28 +1373,27 @@ img {
   border-left: 1px solid rgba(60,60,67,0.08);
 }
 
-.memo-undo-icon,
-.memo-share-icon {
+/* ===================== */
+/* undo icon */
+/* ===================== */
+
+.memo-undo-icon {
   position: absolute;
   left: 50%;
   top: 50%;
+  width: 18px;
+  height: 18px;
   transform: translate(-50%, -50%);
-}
-
-/* undo */
-.memo-undo-icon {
-  width: 20px;
-  height: 20px;
 }
 
 .memo-undo-icon::before {
   content: "";
   position: absolute;
-  left: 6px;
-  top: 5px;
+  left: 5px;
+  top: 4px;
   width: 10px;
   height: 10px;
-  border: 2.4px solid #111;
+  border: 2.2px solid #111;
   border-right-color: transparent;
   border-bottom-color: transparent;
   border-radius: 50%;
@@ -1404,52 +1403,77 @@ img {
 .memo-undo-icon::after {
   content: "";
   position: absolute;
-  left: 2px;
-  top: 8px;
-  width: 8px;
-  height: 8px;
-  border-left: 2.4px solid #111;
-  border-bottom: 2.4px solid #111;
+  left: 1px;
+  top: 7px;
+  width: 7px;
+  height: 7px;
+  border-left: 2.2px solid #111;
+  border-bottom: 2.2px solid #111;
   transform: rotate(45deg);
 }
 
-/* share */
+/* ===================== */
+/* share icon */
+/* ===================== */
+
 .memo-share-icon {
-  width: 20px;
-  height: 20px;
-  background:
-    linear-gradient(#111, #111) center 6px / 2.2px 9px no-repeat;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
 }
 
 .memo-share-icon::before {
   content: "";
   position: absolute;
-  left: 4px;
+  left: 3px;
   bottom: 1px;
   width: 12px;
-  height: 12px;
-  border: 2.2px solid #111;
+  height: 10px;
+  border: 2.1px solid #111;
   border-top: none;
-  border-radius: 0 0 4px 4px;
+  border-radius: 0 0 3px 3px;
 }
 
 .memo-share-icon::after {
   content: "";
   position: absolute;
   left: 50%;
-  top: 0px;
-  width: 8px;
-  height: 8px;
-  border-left: 2.2px solid #111;
-  border-top: 2.2px solid #111;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  border-left: 2.1px solid #111;
+  border-top: 2.1px solid #111;
   transform: translateX(-50%) rotate(45deg);
 }
 
+.memo-share-icon {
+  background:
+    linear-gradient(#111, #111) center 5px / 2.1px 8px no-repeat;
+}
+
+/* ===================== */
+/* ellipsis */
+/* ===================== */
+
 .memo-ellipsis {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -54%);
   font-size: 18px;
   line-height: 1;
   color: #111;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+}
+
+.memo-detail-back:active,
+.memo-circle-btn:active,
+.memo-pill-btn:active,
+.memo-more-btn:active {
+  transform: scale(0.96);
 }
 
 .memo-detail-scroll {
