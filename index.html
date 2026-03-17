@@ -1,505 +1,431 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>iPhone UI</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>iPhone UI</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-<!-- 웹 전체 배경 -->
-<div class="page-bg"></div>
-
-<!-- 아이폰 -->
-<main class="phone">
-
-<!-- 다이나믹 아일랜드 -->
-<div class="dynamic-island"></div>
-
-<!-- 상태바 -->
-<header class="statusbar">
-  <div class="status-left" id="status-time">00:00</div>
-
-  <div class="status-right">
-    <span class="cellular" aria-hidden="true">
-      <i></i><i></i><i></i><i></i>
-    </span>
-
-    <span class="wifi" aria-hidden="true">
-      <span class="wifi-dot"></span>
-    </span>
-
-    <span class="battery" aria-hidden="true">
-      <span class="battery-level"></span>
-    </span>
-  </div>
-</header>
-  
-
-<!-- ============================= -->
-<!-- 잠금화면 -->
-<!-- ============================= -->
-
-<section class="screen lock-screen active" id="lockScreen">
-
-<div class="wallpaper wallpaper-lock"></div>
-<div class="lock-overlay-top"></div>
-
-<div class="lock-content">
-
-<div class="lock-icon"></div>
-
-<div class="lock-date" id="lockDate">
-3월 15일 일요일
-</div>
-
-<div class="lock-time" id="lockTime">
-00:00
-</div>
-
-</div>
-
-<div class="swipe-up-area">
-<div class="swipe-up-text">
-위로 쓸어올려 열기
-</div>
-</div>
-
-<div class="lock-bottom-actions">
-  <button class="round-action flashlight" type="button" aria-label="손전등">
-    <img src="assets/icons/lock_flashlight.png" class="lock-btn-img" alt="손전등">
-  </button>
-
-  <button class="round-action camera" type="button" aria-label="카메라">
-    <img src="assets/icons/lock_camera.png" class="lock-btn-img" alt="카메라">
-  </button>
-</div>
-  
-<div class="home-indicator"></div>
-
-</section>
-
-
-
-<!-- ============================= -->
-<!-- 암호 입력 -->
-<!-- ============================= -->
-
-<section class="screen passcode-screen" id="passcodeScreen">
-
-<div class="wallpaper wallpaper-passcode"></div>
-<div class="passcode-blur"></div>
-<div class="lock-overlay-top"></div>
-
-
-<div class="passcode-wrap" id="passcodeWrap">
-
-<div class="lock-icon passcode-lock"></div>
-
-<h1 class="passcode-title">
-암호 입력
-</h1>
-
-
-<!-- 점 -->
-<div class="passcode-dots">
-
-<span class="passcode-dot" id="dot1"></span>
-<span class="passcode-dot" id="dot2"></span>
-<span class="passcode-dot" id="dot3"></span>
-<span class="passcode-dot" id="dot4"></span>
-
-</div>
-
-
-
-<!-- 숫자 키패드 -->
-
-<div class="keypad">
-
-<button class="key key-number" onclick="pressKey('1')">
-<span class="num">1</span>
-</button>
-
-<button class="key key-number" onclick="pressKey('2')">
-<span class="num">2</span>
-<span class="letters">ABC</span>
-</button>
-
-<button class="key key-number" onclick="pressKey('3')">
-<span class="num">3</span>
-<span class="letters">DEF</span>
-</button>
-
-<button class="key key-number" onclick="pressKey('4')">
-<span class="num">4</span>
-<span class="letters">GHI</span>
-</button>
-
-<button class="key key-number" onclick="pressKey('5')">
-<span class="num">5</span>
-<span class="letters">JKL</span>
-</button>
-
-<button class="key key-number" onclick="pressKey('6')">
-<span class="num">6</span>
-<span class="letters">MNO</span>
-</button>
-
-<button class="key key-number" onclick="pressKey('7')">
-<span class="num">7</span>
-<span class="letters">PQRS</span>
-</button>
-
-<button class="key key-number" onclick="pressKey('8')">
-<span class="num">8</span>
-<span class="letters">TUV</span>
-</button>
-
-<button class="key key-number" onclick="pressKey('9')">
-<span class="num">9</span>
-<span class="letters">WXYZ</span>
-</button>
-
-<div class="key-empty"></div>
-
-<button class="key key-number" onclick="pressKey('0')">
-<span class="num">0</span>
-</button>
-
-<div class="key-empty"></div>
-
-</div>
-
-</div>
-
-<div class="home-indicator"></div>
-
-</section>
-
-
-
-
-<!-- ============================= -->
-<!-- 홈화면 -->
-<!-- ============================= -->
-
-<section class="screen home-screen" id="homeScreen">
-  <div class="wallpaper wallpaper-home"></div>
-
-  <div class="home-apps">
-    <!-- 1줄 -->
-    <button class="app-icon dummy-app" type="button" aria-label="설정">
-      <img src="assets/icons/settings.png" alt="설정">
-      <span>설정</span>
-    </button>
-
-    <button class="app-icon dummy-app" type="button" aria-label="파일">
-      <img src="assets/icons/files.png" alt="파일">
-      <span>파일</span>
-    </button>
-
-    <button class="app-icon open-app" type="button" data-screen="memoScreen" aria-label="메모">
-      <img src="assets/icons/memo.png" alt="메모">
-      <span>메모</span>
-    </button>
-
-<button class="app-icon open-app calendar-app-icon" type="button" data-screen="calendarScreen" aria-label="캘린더">
-  <div class="calendar-icon-wrap">
-    <img src="assets/icons/calendar.png" alt="캘린더">
-    <span class="calendar-live-weekday" id="calendarLiveWeekday">화요일</span>
-    <span class="calendar-live-date" id="calendarLiveDate">17</span>
-  </div>
-  <span>캘린더</span>
-</button>
-    
-    <!-- 2줄 -->
-    <button class="app-icon popup-app" type="button" data-popup="weather" aria-label="날씨">
-      <img src="assets/icons/weather.png" alt="날씨">
-      <span>날씨</span>
-    </button>
-
-     <button class="app-icon popup-app" type="button" data-popup="calculator" aria-label="계산기">
-      <img src="assets/icons/calculator.png" alt="계산기">
-      <span>계산기</span>
-    </button>
-
-    <button class="app-icon dummy-app" type="button" aria-label="카메라">
-      <img src="assets/icons/camera.png" alt="카메라">
-      <span>카메라</span>
-    </button>
-
-    <button class="app-icon open-app" type="button" data-screen="photosScreen" aria-label="사진">
-      <img src="assets/icons/photos.png" alt="사진">
-      <span>사진</span>
-    </button>
-
-    <!-- 3줄 -->
-    <button class="app-icon dummy-app" type="button" aria-label="시계">
-      <img src="assets/icons/clock.png" alt="시계">
-      <span>시계</span>
-    </button>
-
-    <button class="app-icon dummy-app" type="button" aria-label="카카오맵">
-      <img src="assets/icons/kakaomap.png" alt="카카오맵">
-      <span>카카오맵</span>
-    </button>
-
-    <button class="app-icon popup-app" type="button" data-popup="youtube" aria-label="YouTube">
-      <img src="assets/icons/youtube.png" alt="YouTube">
-      <span>YouTube</span>
-    </button>
-
-    <button class="app-icon open-app" type="button" data-screen="instagramScreen" aria-label="Instagram">
-      <img src="assets/icons/instagram.png" alt="Instagram">
-      <span>Instagram</span>
-    </button>
-
-    <!-- 4줄 -->
-    <button class="app-icon dummy-app" type="button" aria-label="App Store">
-      <img src="assets/icons/appstore.png" alt="App Store">
-      <span>App Store</span>
-    </button>
-
-    <button class="app-icon popup-app" type="button" data-popup="spotify" aria-label="spotify">
-      <img src="assets/icons/spotify.png" alt="spotify">
-      <span>spotify</span>
-    </button>
-
-    <button class="app-icon popup-app" type="button" data-popup="x" aria-label="X">
-      <img src="assets/icons/x.png" alt="X">
-      <span>X</span>
-    </button>
-
-    <button class="app-icon dummy-app" type="button" aria-label="Safari">
-      <img src="assets/icons/safari.png" alt="Safari">
-      <span>Safari</span>
-    </button>
-
-    <!-- 5줄 -->
-    <div class="app-empty"></div>
-    <div class="app-empty"></div>
-    <div class="app-empty"></div>
-    <div class="app-empty"></div>
-
-    <!-- 6줄 -->
-    <div class="app-empty"></div>
-    <div class="app-empty"></div>
-    <div class="app-empty"></div>
-    <div class="app-empty"></div>
-  </div>
-
-  <div class="dock">
-    <button class="dock-icon open-app" type="button" data-screen="phoneScreen" aria-label="전화">
-      <img src="assets/icons/phone.png" alt="전화">
-    </button>
-
-    <button class="dock-icon open-app" type="button" data-screen="messagesScreen" aria-label="메시지">
-      <img src="assets/icons/messages.png" alt="메시지">
-    </button>
-
-    <button class="dock-icon open-app" type="button" data-screen="kakaoScreen" aria-label="카카오톡">
-      <img src="assets/icons/kakaotalk.png" alt="카카오톡">
-    </button>
-
-    <button class="dock-icon popup-app" type="button" data-popup="music" aria-label="음악">
-      <img src="assets/icons/music.png" alt="음악">
-    </button>
-  </div>
-</section>
-
-
-<!-- ========================= -->
-<!-- MEMO APP -->
-<!-- ========================= -->
-<section class="screen app-screen memo-screen" id="memoScreen">
-  <div class="app-ui memo-ui">
-
-    <!-- 리스트 화면 -->
-    <div class="memo-page memo-list-page active" id="memoListPage">
-      <div class="memo-topbar">
-        <button class="back-home app-back-btn memo-home-back" type="button" aria-label="뒤로가기">
-          <span class="back-arrow"></span>
+  <div class="page-bg"></div>
+
+  <main class="phone">
+    <div class="dynamic-island"></div>
+
+    <header class="statusbar">
+      <div class="status-left" id="status-time">00:00</div>
+
+      <div class="status-right">
+        <span class="cellular" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+        </span>
+
+        <span class="wifi" aria-hidden="true">
+          <span class="wifi-dot"></span>
+        </span>
+
+        <span class="battery" aria-hidden="true">
+          <span class="battery-level"></span>
+        </span>
+      </div>
+    </header>
+
+    <!-- 잠금화면 -->
+    <section class="screen lock-screen active" id="lockScreen">
+      <div class="wallpaper wallpaper-lock"></div>
+      <div class="lock-overlay-top"></div>
+
+      <div class="lock-content">
+        <div class="lock-icon"></div>
+
+        <div class="lock-date" id="lockDate">3월 15일 일요일</div>
+        <div class="lock-time" id="lockTime">00:00</div>
+      </div>
+
+      <div class="swipe-up-area">
+        <div class="swipe-up-text">위로 쓸어올려 열기</div>
+      </div>
+
+      <div class="lock-bottom-actions">
+        <button class="round-action flashlight" type="button" aria-label="손전등">
+          <img src="assets/icons/lock_flashlight.png" class="lock-btn-img" alt="손전등">
         </button>
 
-        <button class="memo-more-btn" type="button" aria-label="더보기">
-          <span class="memo-more-dots"></span>
+        <button class="round-action camera" type="button" aria-label="카메라">
+          <img src="assets/icons/lock_camera.png" class="lock-btn-img" alt="카메라">
         </button>
       </div>
 
-      <div class="memo-list-scroll">
-        <div class="memo-list-head">
-          <h1>메모</h1>
-          <p>114개의 메모</p>
+      <div class="home-indicator"></div>
+    </section>
+
+    <!-- 암호 입력 -->
+    <section class="screen passcode-screen" id="passcodeScreen">
+      <div class="wallpaper wallpaper-passcode"></div>
+      <div class="passcode-blur"></div>
+      <div class="lock-overlay-top"></div>
+
+      <div class="passcode-wrap" id="passcodeWrap">
+        <div class="lock-icon passcode-lock"></div>
+
+        <h1 class="passcode-title">암호 입력</h1>
+
+        <div class="passcode-dots">
+          <span class="passcode-dot" id="dot1"></span>
+          <span class="passcode-dot" id="dot2"></span>
+          <span class="passcode-dot" id="dot3"></span>
+          <span class="passcode-dot" id="dot4"></span>
         </div>
 
-        <section class="memo-section-block">
-          <h2 class="memo-section-title">고정된 메모</h2>
-          <div class="memo-card" id="memoPinnedCard"></div>
-        </section>
-
-        <section class="memo-section-block">
-          <h2 class="memo-section-title">이전 7일</h2>
-          <div class="memo-card" id="memo7DaysCard"></div>
-        </section>
-
-        <section class="memo-section-block">
-          <h2 class="memo-section-title">이전 30일</h2>
-          <div class="memo-card" id="memo30DaysCard"></div>
-        </section>
-
-        <section class="memo-section-block">
-          <h2 class="memo-section-title">2월</h2>
-          <div class="memo-card" id="memoFebruaryCard"></div>
-        </section>
-
-        <section class="memo-section-block">
-          <h2 class="memo-section-title">2025년</h2>
-          <div class="memo-card" id="memo2025Card"></div>
-        </section>
-      </div>
-    </div>
-
-    <!-- 상세 화면 -->
-    <div class="memo-page memo-detail-page" id="memoDetailPage">
-      <div class="memo-topbar memo-detail-topbar">
-        <button class="memo-detail-back app-back-btn" type="button" aria-label="뒤로가기">
-          <span class="back-arrow"></span>
-        </button>
-
-        <div class="memo-detail-actions">
-          <button class="memo-circle-btn" type="button" aria-label="되돌리기">
-            <span class="memo-undo-icon"></span>
+        <div class="keypad">
+          <button class="key key-number" type="button" onclick="pressKey('1')">
+            <span class="num">1</span>
           </button>
 
-          <div class="memo-pill-actions">
-            <button class="memo-pill-btn" type="button" aria-label="공유">
-              <span class="memo-share-icon"></span>
+          <button class="key key-number" type="button" onclick="pressKey('2')">
+            <span class="num">2</span>
+            <span class="letters">ABC</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="pressKey('3')">
+            <span class="num">3</span>
+            <span class="letters">DEF</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="pressKey('4')">
+            <span class="num">4</span>
+            <span class="letters">GHI</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="pressKey('5')">
+            <span class="num">5</span>
+            <span class="letters">JKL</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="pressKey('6')">
+            <span class="num">6</span>
+            <span class="letters">MNO</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="pressKey('7')">
+            <span class="num">7</span>
+            <span class="letters">PQRS</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="pressKey('8')">
+            <span class="num">8</span>
+            <span class="letters">TUV</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="pressKey('9')">
+            <span class="num">9</span>
+            <span class="letters">WXYZ</span>
+          </button>
+
+          <div class="key-empty"></div>
+
+          <button class="key key-number" type="button" onclick="pressKey('0')">
+            <span class="num">0</span>
+          </button>
+
+          <div class="key-empty"></div>
+        </div>
+      </div>
+
+      <div class="home-indicator"></div>
+    </section>
+
+    <!-- 홈화면 -->
+    <section class="screen home-screen" id="homeScreen">
+      <div class="wallpaper wallpaper-home"></div>
+
+      <div class="home-apps">
+        <!-- 1줄 -->
+        <button class="app-icon dummy-app" type="button" aria-label="설정">
+          <img src="assets/icons/settings.png" alt="설정">
+          <span>설정</span>
+        </button>
+
+        <button class="app-icon dummy-app" type="button" aria-label="파일">
+          <img src="assets/icons/files.png" alt="파일">
+          <span>파일</span>
+        </button>
+
+        <button class="app-icon open-app" type="button" data-screen="memoScreen" aria-label="메모">
+          <img src="assets/icons/memo.png" alt="메모">
+          <span>메모</span>
+        </button>
+
+        <button class="app-icon open-app calendar-app-icon" type="button" data-screen="calendarScreen" aria-label="캘린더">
+          <div class="calendar-icon-wrap">
+            <img src="assets/icons/calendar.png" alt="캘린더">
+            <span class="calendar-live-weekday" id="calendarLiveWeekday">화요일</span>
+            <span class="calendar-live-date" id="calendarLiveDate">17</span>
+          </div>
+          <span>캘린더</span>
+        </button>
+
+        <!-- 2줄 -->
+        <button class="app-icon popup-app" type="button" data-popup="weather" aria-label="날씨">
+          <img src="assets/icons/weather.png" alt="날씨">
+          <span>날씨</span>
+        </button>
+
+        <button class="app-icon popup-app" type="button" data-popup="calculator" aria-label="계산기">
+          <img src="assets/icons/calculator.png" alt="계산기">
+          <span>계산기</span>
+        </button>
+
+        <button class="app-icon dummy-app" type="button" aria-label="카메라">
+          <img src="assets/icons/camera.png" alt="카메라">
+          <span>카메라</span>
+        </button>
+
+        <button class="app-icon open-app" type="button" data-screen="photosScreen" aria-label="사진">
+          <img src="assets/icons/photos.png" alt="사진">
+          <span>사진</span>
+        </button>
+
+        <!-- 3줄 -->
+        <button class="app-icon dummy-app" type="button" aria-label="시계">
+          <img src="assets/icons/clock.png" alt="시계">
+          <span>시계</span>
+        </button>
+
+        <button class="app-icon dummy-app" type="button" aria-label="카카오맵">
+          <img src="assets/icons/kakaomap.png" alt="카카오맵">
+          <span>카카오맵</span>
+        </button>
+
+        <button class="app-icon popup-app" type="button" data-popup="youtube" aria-label="YouTube">
+          <img src="assets/icons/youtube.png" alt="YouTube">
+          <span>YouTube</span>
+        </button>
+
+        <button class="app-icon open-app" type="button" data-screen="instagramScreen" aria-label="Instagram">
+          <img src="assets/icons/instagram.png" alt="Instagram">
+          <span>Instagram</span>
+        </button>
+
+        <!-- 4줄 -->
+        <button class="app-icon dummy-app" type="button" aria-label="App Store">
+          <img src="assets/icons/appstore.png" alt="App Store">
+          <span>App Store</span>
+        </button>
+
+        <button class="app-icon popup-app" type="button" data-popup="spotify" aria-label="spotify">
+          <img src="assets/icons/spotify.png" alt="spotify">
+          <span>spotify</span>
+        </button>
+
+        <button class="app-icon popup-app" type="button" data-popup="x" aria-label="X">
+          <img src="assets/icons/x.png" alt="X">
+          <span>X</span>
+        </button>
+
+        <button class="app-icon dummy-app" type="button" aria-label="Safari">
+          <img src="assets/icons/safari.png" alt="Safari">
+          <span>Safari</span>
+        </button>
+
+        <!-- 5줄 -->
+        <div class="app-empty"></div>
+        <div class="app-empty"></div>
+        <div class="app-empty"></div>
+        <div class="app-empty"></div>
+
+        <!-- 6줄 -->
+        <div class="app-empty"></div>
+        <div class="app-empty"></div>
+        <div class="app-empty"></div>
+        <div class="app-empty"></div>
+      </div>
+
+      <div class="dock">
+        <button class="dock-icon open-app" type="button" data-screen="phoneScreen" aria-label="전화">
+          <img src="assets/icons/phone.png" alt="전화">
+        </button>
+
+        <button class="dock-icon open-app" type="button" data-screen="messagesScreen" aria-label="메시지">
+          <img src="assets/icons/messages.png" alt="메시지">
+        </button>
+
+        <button class="dock-icon open-app" type="button" data-screen="kakaoScreen" aria-label="카카오톡">
+          <img src="assets/icons/kakaotalk.png" alt="카카오톡">
+        </button>
+
+        <button class="dock-icon popup-app" type="button" data-popup="music" aria-label="음악">
+          <img src="assets/icons/music.png" alt="음악">
+        </button>
+      </div>
+    </section>
+
+    <!-- MEMO APP -->
+    <section class="screen app-screen memo-screen" id="memoScreen">
+      <div class="app-ui memo-ui">
+        <div class="memo-page memo-list-page active" id="memoListPage">
+          <div class="memo-topbar">
+            <button class="back-home app-back-btn memo-home-back" type="button" aria-label="뒤로가기">
+              <span class="back-arrow"></span>
             </button>
-            <button class="memo-pill-btn" type="button" aria-label="더보기">
-              <span class="memo-ellipsis">•••</span>
+
+            <button class="memo-more-btn" type="button" aria-label="더보기">
+              <span class="memo-more-dots"></span>
             </button>
+          </div>
+
+          <div class="memo-list-scroll">
+            <div class="memo-list-head">
+              <h1>메모</h1>
+              <p>114개의 메모</p>
+            </div>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">고정된 메모</h2>
+              <div class="memo-card" id="memoPinnedCard"></div>
+            </section>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">이전 7일</h2>
+              <div class="memo-card" id="memo7DaysCard"></div>
+            </section>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">이전 30일</h2>
+              <div class="memo-card" id="memo30DaysCard"></div>
+            </section>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">2월</h2>
+              <div class="memo-card" id="memoFebruaryCard"></div>
+            </section>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">2025년</h2>
+              <div class="memo-card" id="memo2025Card"></div>
+            </section>
+          </div>
+        </div>
+
+        <div class="memo-page memo-detail-page" id="memoDetailPage">
+          <div class="memo-topbar memo-detail-topbar">
+            <button class="memo-detail-back app-back-btn" type="button" aria-label="뒤로가기">
+              <span class="back-arrow"></span>
+            </button>
+
+            <div class="memo-detail-actions">
+              <button class="memo-circle-btn" type="button" aria-label="되돌리기">
+                <span class="memo-undo-icon"></span>
+              </button>
+
+              <div class="memo-pill-actions">
+                <button class="memo-pill-btn" type="button" aria-label="공유">
+                  <span class="memo-share-icon"></span>
+                </button>
+                <button class="memo-pill-btn" type="button" aria-label="더보기">
+                  <span class="memo-ellipsis">•••</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="memo-detail-scroll">
+            <div class="memo-detail-date" id="memoDetailDate"></div>
+            <h1 class="memo-detail-title" id="memoDetailTitle"></h1>
+            <div class="memo-detail-body" id="memoDetailBody"></div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="memo-detail-scroll">
-        <div class="memo-detail-date" id="memoDetailDate"></div>
-        <h1 class="memo-detail-title" id="memoDetailTitle"></h1>
-        <div class="memo-detail-body" id="memoDetailBody"></div>
+    <!-- CALENDAR APP -->
+    <section class="screen app-screen" id="calendarScreen">
+      <div class="app-ui">
+        <div class="app-header">
+          <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
+            <span class="back-arrow"></span>
+          </button>
+        </div>
+        <div class="app-content"></div>
+      </div>
+    </section>
+
+    <!-- PHOTOS APP -->
+    <section class="screen app-screen" id="photosScreen">
+      <div class="app-ui">
+        <div class="app-header">
+          <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
+            <span class="back-arrow"></span>
+          </button>
+        </div>
+        <div class="app-content"></div>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM APP -->
+    <section class="screen app-screen" id="instagramScreen">
+      <div class="app-ui">
+        <div class="app-header">
+          <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
+            <span class="back-arrow"></span>
+          </button>
+        </div>
+        <div class="app-content"></div>
+      </div>
+    </section>
+
+    <!-- PHONE APP -->
+    <section class="screen app-screen" id="phoneScreen">
+      <div class="app-ui">
+        <div class="app-header">
+          <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
+            <span class="back-arrow"></span>
+          </button>
+        </div>
+        <div class="app-content"></div>
+      </div>
+    </section>
+
+    <!-- MESSAGES APP -->
+    <section class="screen app-screen" id="messagesScreen">
+      <div class="app-ui">
+        <div class="app-header">
+          <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
+            <span class="back-arrow"></span>
+          </button>
+        </div>
+        <div class="app-content"></div>
+      </div>
+    </section>
+
+    <!-- KAKAO APP -->
+    <section class="screen app-screen" id="kakaoScreen">
+      <div class="app-ui">
+        <div class="app-header">
+          <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
+            <span class="back-arrow"></span>
+          </button>
+        </div>
+        <div class="app-content"></div>
+      </div>
+    </section>
+
+    <div class="notif-popup" id="glassPopup" aria-hidden="true">
+      <div class="notif-left">
+        <img src="assets/icons/messages.png" alt="" id="glassPopupIcon" class="notif-icon">
+      </div>
+
+      <div class="notif-center">
+        <div class="notif-topline">
+          <span class="notif-app" id="glassPopupTitle"></span>
+          <span class="notif-time" id="glassPopupTime"></span>
+        </div>
+        <div class="notif-text" id="glassPopupText"></div>
       </div>
     </div>
-
-  </div>
-</section>
-
-<!-- ========================= -->
-<!-- CALENDAR APP -->
-<!-- ========================= -->
-<section class="screen app-screen" id="calendarScreen">
-  <div class="app-ui">
-    <div class="app-header">
-<button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
-  <span class="back-arrow"></span>
-</button>
-    </div>
-    <div class="app-content"></div>
-  </div>
-</section>
-
-<!-- ========================= -->
-<!-- PHOTOS APP -->
-<!-- ========================= -->
-<section class="screen app-screen" id="photosScreen">
-  <div class="app-ui">
-    <div class="app-header">
-<button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
-  <span class="back-arrow"></span>
-</button>
-    </div>
-    <div class="app-content"></div>
-  </div>
-</section>
-
-<!-- ========================= -->
-<!-- INSTAGRAM APP -->
-<!-- ========================= -->
-<section class="screen app-screen" id="instagramScreen">
-  <div class="app-ui">
-    <div class="app-header">
-<button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
-  <span class="back-arrow"></span>
-</button>
-    </div>
-    <div class="app-content"></div>
-  </div>
-</section>
-
-<!-- ========================= -->
-<!-- PHONE APP -->
-<!-- ========================= -->
-<section class="screen app-screen" id="phoneScreen">
-  <div class="app-ui">
-    <div class="app-header">
-<button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
-  <span class="back-arrow"></span>
-</button>
-    </div>
-    <div class="app-content"></div>
-  </div>
-</section>
-
-<!-- ========================= -->
-<!-- MESSAGES APP -->
-<!-- ========================= -->
-<section class="screen app-screen" id="messagesScreen">
-  <div class="app-ui">
-    <div class="app-header">
-<button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
-  <span class="back-arrow"></span>
-</button>
-    </div>
-    <div class="app-content"></div>
-  </div>
-</section>
-
-<!-- ========================= -->
-<!-- KAKAO APP -->
-<!-- ========================= -->
-<section class="screen app-screen" id="kakaoScreen">
-  <div class="app-ui">
-    <div class="app-header">
-<button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
-  <span class="back-arrow"></span>
-</button>
-    </div>
-    <div class="app-content"></div>
-  </div>
-</section>
-  
-<div class="notif-popup" id="glassPopup" aria-hidden="true">
-  <div class="notif-left">
-    <img src="assets/icons/messages.png" alt="" id="glassPopupIcon" class="notif-icon">
-  </div>
-
-  <div class="notif-center">
-    <div class="notif-topline">
-      <span class="notif-app" id="glassPopupTitle"></span>
-      <span class="notif-time" id="glassPopupTime"></span>
-    </div>
-    <div class="notif-text" id="glassPopupText"></div>
-  </div>
-</div>
-
   </main>
-  
-<!-- JS -->
 
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
