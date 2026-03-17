@@ -1929,7 +1929,7 @@ img {
   content: "";
   position: absolute;
   left: 8px;
-  top: 6px;
+  top: 8px;
   width: 9px;
   height: 5px;
   border-left: 2.4px solid #fff;
@@ -2066,7 +2066,7 @@ img {
 
   .memo-check-item.checked .memo-check-circle::before {
     left: 7px;
-    top: 5px;
+    top: 7px;
     width: 9px;
     height: 5px;
   }
