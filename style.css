@@ -1600,16 +1600,16 @@ img {
 
 .memo-home-back,
 .memo-detail-back {
-  top: calc(10px + var(--safe-top));
-  left: 16px;
+  top: calc(28px + var(--safe-top));
+  left: 14px;
 }
 
 .memo-more-btn {
   position: absolute;
-  top: calc(10px + var(--safe-top));
-  right: 16px;
-  width: 46px;
-  height: 46px;
+  top: calc(28px + var(--safe-top));
+  right: 14px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(255,255,255,0.72);
   border: 1px solid rgba(255,255,255,0.55);
