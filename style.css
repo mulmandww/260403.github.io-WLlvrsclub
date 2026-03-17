@@ -919,24 +919,67 @@ img {
 }
 
 .app-header {
-  height: 64px;
+  position: relative;
+  height: calc(92px + var(--safe-top));
+  padding-top: calc(18px + var(--safe-top));
+  padding-left: 16px;
+  padding-right: 16px;
+
   display: flex;
-  align-items: center;
-  padding: 0 16px;
+  align-items: flex-start;
+  justify-content: center;
+
   border-bottom: 1px solid #eee;
   background: #fff;
 }
 
 .app-header h1 {
+  margin-top: 44px;
   font-size: 17px;
   font-weight: 600;
-  margin: 0 auto;
+  line-height: 1;
 }
 
-.back-home {
+/* iPhone-style glass back button */
+.app-back-btn {
   position: absolute;
+  top: calc(10px + var(--safe-top));
   left: 16px;
-  font-size: 14px;
+
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(240, 240, 240, 0.72);
+  border: 1px solid rgba(255,255,255,0.5);
+
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.5),
+    0 4px 12px rgba(0,0,0,0.08);
+
+  z-index: 3;
+}
+
+.back-arrow {
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-left: 2.6px solid #111;
+  border-bottom: 2.6px solid #111;
+  transform: rotate(45deg);
+  margin-left: 3px;
+}
+
+.app-back-btn:active {
+  transform: scale(0.96);
+  background: rgba(232, 232, 232, 0.82);
 }
 
 .app-content {
@@ -1452,6 +1495,32 @@ img {
 
   .notif-time {
     font-size: 12px;
+  }
+
+    .app-header {
+    height: calc(88px + env(safe-area-inset-top));
+    padding-top: calc(16px + env(safe-area-inset-top));
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .app-header h1 {
+    margin-top: 42px;
+    font-size: 17px;
+  }
+
+  .app-back-btn {
+    top: calc(8px + env(safe-area-inset-top));
+    left: 14px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .back-arrow {
+    width: 10px;
+    height: 10px;
+    border-left-width: 2.4px;
+    border-bottom-width: 2.4px;
   }
 }
 
