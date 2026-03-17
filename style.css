@@ -695,48 +695,61 @@ img {
 /* LIVE CALENDAR ICON */
 /* ============================= */
 
-.calendar-icon-wrap {
+.calendar-app-icon {
+  align-items: center;
+}
+
+.calendar-app-icon .calendar-icon-wrap {
   position: relative;
   width: 60px;
   height: 60px;
   flex: 0 0 60px;
+  display: block;
 }
 
-.calendar-icon-wrap img {
+.calendar-app-icon .calendar-icon-wrap img {
   width: 60px;
   height: 60px;
   border-radius: 18px;
   object-fit: cover;
+  display: block;
 }
 
-.calendar-live-weekday {
+.calendar-app-icon .calendar-live-weekday {
   position: absolute;
-  top: 8px;
+  top: 7px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 8px;
+  width: 100%;
+  text-align: center;
+
+  font-size: 7px;
   line-height: 1;
   font-weight: 700;
   color: #ff3b30;
   letter-spacing: -0.2px;
   white-space: nowrap;
-  z-index: 2;
   pointer-events: none;
+  z-index: 2;
 }
 
-.calendar-live-date {
+.calendar-app-icon .calendar-live-date {
   position: absolute;
-  top: 16px;
+  top: 17px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 29px;
+  width: 100%;
+  text-align: center;
+
+  font-size: 19px;
   line-height: 1;
-  font-weight: 300;
+  font-weight: 500;
   color: #111;
-  letter-spacing: -1px;
-  z-index: 2;
+  letter-spacing: -0.8px;
   pointer-events: none;
+  z-index: 2;
 }
+
 
 /* DOCK - TRUE GLASS */
 .dock {
@@ -1142,7 +1155,36 @@ img {
     letter-spacing: 2px !important;
   }
 
- 
+   .calendar-app-icon .calendar-icon-wrap {
+    width: 54px !important;
+    height: 54px !important;
+    flex: 0 0 54px !important;
+  }
+
+  .calendar-app-icon .calendar-icon-wrap img {
+    width: 54px !important;
+    height: 54px !important;
+    border-radius: 15px !important;
+  }
+
+  .calendar-app-icon .calendar-live-weekday {
+    top: 6px !important;
+    font-size: 6px !important;
+  }
+
+  .calendar-app-icon .calendar-live-date {
+    top: 15px !important;
+    font-size: 18px !important;
+    letter-spacing: -0.6px !important;
+  }
+
+  .calendar-app-icon > span:last-child {
+    margin-top: 4px !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+  
 }
 
 /* ============================= */
@@ -1309,6 +1351,41 @@ img {
 .app-content {
   flex: 1;
   overflow-y: auto;
+}
+
+/* ============================= */
+/* APP SCREEN STATUSBAR OVERRIDE */
+/* ============================= */
+
+.app-screen.active ~ .statusbar,
+.phone:has(.app-screen.active) .statusbar {
+  color: #111;
+}
+
+.phone:has(.app-screen.active) .status-left {
+  color: #111;
+}
+
+.phone:has(.app-screen.active) .cellular i {
+  background: #111;
+}
+
+.phone:has(.app-screen.active) .wifi::before,
+.phone:has(.app-screen.active) .wifi::after {
+  border-top-color: #111;
+}
+
+.phone:has(.app-screen.active) .wifi-dot {
+  background: #111;
+}
+
+.phone:has(.app-screen.active) .battery {
+  border-color: #111;
+}
+
+.phone:has(.app-screen.active) .battery::after,
+.phone:has(.app-screen.active) .battery-level {
+  background: #111;
 }
 
 /* ============================= */
