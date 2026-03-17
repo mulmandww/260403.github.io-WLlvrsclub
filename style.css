@@ -691,6 +691,53 @@ img {
   visibility: hidden;
 }
 
+/* ============================= */
+/* LIVE CALENDAR ICON */
+/* ============================= */
+
+.calendar-icon-wrap {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  flex: 0 0 60px;
+}
+
+.calendar-icon-wrap img {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  object-fit: cover;
+}
+
+.calendar-live-weekday {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+  color: #ff3b30;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.calendar-live-date {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 29px;
+  line-height: 1;
+  font-weight: 300;
+  color: #111;
+  letter-spacing: -1px;
+  z-index: 2;
+  pointer-events: none;
+}
+
 /* DOCK - TRUE GLASS */
 .dock {
   position: absolute;
@@ -1094,6 +1141,29 @@ img {
     font-size: 9px !important;
     letter-spacing: 2px !important;
   }
+
+  .calendar-icon-wrap {
+    width: 54px;
+    height: 54px;
+    flex: 0 0 54px;
+  }
+
+  .calendar-icon-wrap img {
+    width: 54px;
+    height: 54px;
+    border-radius: 15px;
+  }
+
+  .calendar-live-weekday {
+    top: 7px;
+    font-size: 7px;
+  }
+
+  .calendar-live-date {
+    top: 15px;
+    font-size: 26px;
+  }
+  
 }
 
 /* ============================= */
