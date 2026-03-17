@@ -69,18 +69,24 @@ function updateDateTime() {
 
   const month = now.getMonth() + 1;
   const day = now.getDate();
+  const dayIndex = now.getDay();
 
   const weekdayNames = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-  const weekday = weekdayNames[now.getDay()];
+  const weekday = weekdayNames[dayIndex];
 
   if (lockDate) lockDate.textContent = `${month}월 ${day}일 ${weekday}`;
   if (lockTime) lockTime.textContent = `${hour}:${minute}`;
   if (statusTime) statusTime.textContent = `${hour}:${minute}`;
 
-  if (calendarLiveWeekday) calendarLiveWeekday.textContent = weekday;
-  if (calendarLiveDate) calendarLiveDate.textContent = String(day);
-}
+  if (calendarLiveWeekday) {
+    calendarLiveWeekday.textContent = weekday;
+    calendarLiveWeekday.classList.toggle("is-holiday", dayIndex === 0 || dayIndex === 6);
+  }
 
+  if (calendarLiveDate) {
+    calendarLiveDate.textContent = String(day);
+  }
+}
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
