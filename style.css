@@ -1792,27 +1792,31 @@ img {
 }
 
 .memo-undo-icon,
-.memo-share-icon {
+.memo-share-icon,
+.memo-ellipsis-icon {
   position: absolute;
   left: 50%;
   top: 50%;
+  transform: translate(-50%, -50%);
 }
 
+/* ===================== */
 /* 되돌리기 아이콘 */
+/* ===================== */
+
 .memo-undo-icon {
-  width: 20px;
-  height: 20px;
-  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
 }
 
 .memo-undo-icon::before {
   content: "";
   position: absolute;
-  left: 4px;
-  top: 5px;
+  left: 6px;
+  top: 6px;
   width: 11px;
   height: 11px;
-  border: 2.4px solid #111;
+  border: 2.6px solid #111;
   border-right-color: transparent;
   border-bottom-color: transparent;
   border-radius: 50%;
@@ -1823,29 +1827,31 @@ img {
   content: "";
   position: absolute;
   left: 2px;
-  top: 4px;
-  width: 7px;
-  height: 7px;
-  border-left: 2.4px solid #111;
-  border-bottom: 2.4px solid #111;
+  top: 8px;
+  width: 9px;
+  height: 9px;
+  border-left: 2.6px solid #111;
+  border-bottom: 2.6px solid #111;
   transform: rotate(45deg);
 }
 
+/* ===================== */
 /* 공유 아이콘 */
+/* ===================== */
+
 .memo-share-icon {
   width: 22px;
   height: 22px;
-  transform: translate(-50%, -50%);
 }
 
 .memo-share-icon::before {
   content: "";
   position: absolute;
   left: 4px;
-  bottom: 2px;
+  bottom: 1px;
   width: 14px;
-  height: 13px;
-  border: 2.2px solid #111;
+  height: 12px;
+  border: 2.4px solid #111;
   border-top: none;
   border-radius: 0 0 4px 4px;
 }
@@ -1854,29 +1860,56 @@ img {
   content: "";
   position: absolute;
   left: 50%;
-  top: 1px;
+  top: 0px;
   width: 8px;
   height: 8px;
-  border-left: 2.2px solid #111;
-  border-top: 2.2px solid #111;
+  border-left: 2.4px solid #111;
+  border-top: 2.4px solid #111;
   transform: translateX(-50%) rotate(45deg);
 }
 
-.memo-share-icon span {
+.memo-share-stem {
   position: absolute;
   left: 50%;
-  top: 6px;
+  top: 4px;
   width: 0;
-  height: 8px;
-  border-left: 2.2px solid #111;
+  height: 10px;
+  border-left: 2.4px solid #111;
   transform: translateX(-50%);
 }
 
-.memo-ellipsis {
-  font-size: 18px;
-  line-height: 1;
-  color: #111;
-  letter-spacing: 1px;
+/* ===================== */
+/* 점 세 개 아이콘 */
+/* ===================== */
+
+.memo-ellipsis-icon {
+  width: 20px;
+  height: 6px;
+}
+
+.memo-ellipsis-icon::before,
+.memo-ellipsis-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #111;
+  transform: translateY(-50%);
+}
+
+.memo-ellipsis-icon::before {
+  left: 0;
+}
+
+.memo-ellipsis-icon::after {
+  right: 0;
+}
+
+.memo-ellipsis-icon {
+  background:
+    radial-gradient(circle, #111 0 3px, transparent 3px) center center / 6px 6px no-repeat;
 }
 
 .memo-detail-scroll {
