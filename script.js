@@ -574,7 +574,7 @@ dummyAppButtons.forEach((button) => {
           <p>안약 / 휴족시간 / 과자 유명한거 / 온열안대 / 컵라면</p>
           <p>- 기념품?</p>
           <p>인형 같은거</p>
-          <p><a href="#">https://youtu.be/43ilgl-PIAg?si=BUZ78RmA8mwLdiv_</a></p>
+          <p><a href="#">https://youtu.be/1c7_NYeUF1g?si=9J2VeKzTrzUdON_g</a></p>
         </div>
       `
     },
