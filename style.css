@@ -936,7 +936,7 @@ img {
 /* iPhone-style glass back button */
 .app-back-btn {
   position: absolute;
-  top: calc(16px + var(--safe-top));
+  top: calc(30px + var(--safe-top));
   left: 16px;
 
   width: 46px;
@@ -1499,7 +1499,7 @@ img {
 
 
   .app-back-btn {
-    top: calc(14px + env(safe-area-inset-top));
+    top: calc(28px + env(safe-area-inset-top));
     left: 14px;
     width: 44px;
     height: 44px;
