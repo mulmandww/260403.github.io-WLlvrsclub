@@ -933,17 +933,10 @@ img {
   background: #fff;
 }
 
-.app-header h1 {
-  margin-top: 44px;
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1;
-}
-
 /* iPhone-style glass back button */
 .app-back-btn {
   position: absolute;
-  top: calc(10px + var(--safe-top));
+  top: calc(16px + var(--safe-top));
   left: 16px;
 
   width: 46px;
