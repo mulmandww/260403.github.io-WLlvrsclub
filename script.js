@@ -286,7 +286,7 @@ const popupTextMap = {
   },
   youtube: {
     title: "YouTube",
-    text: "[입덕직캠] 알파드라이브원 건우 직캠 4K 'Cinnamon Shake' (ALD1 GEONWOO FanCam) | ALD1 DEBUT SHOW [THE FIRST ALARM]",
+    text: "[MPD직캠] 알파드라이브원 건우 직캠 4K 'Cinnamon Shake' (ALPHA DRIVE ONE GEONWOO FanCam) | @MCOUNTDOWN_2026.1.22",
     icon: "assets/icons/gw_youtube.jpg"
   },
   spotify: {
