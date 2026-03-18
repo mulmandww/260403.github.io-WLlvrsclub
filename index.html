@@ -140,7 +140,6 @@
       <div class="wallpaper wallpaper-home"></div>
 
       <div class="home-apps">
-        <!-- 1줄 -->
         <button class="app-icon dummy-app" type="button" aria-label="설정">
           <img src="assets/icons/settings.png" alt="설정">
           <span>설정</span>
@@ -165,7 +164,6 @@
           <span>캘린더</span>
         </button>
 
-        <!-- 2줄 -->
         <button class="app-icon popup-app" type="button" data-popup="weather" aria-label="날씨">
           <img src="assets/icons/weather.png" alt="날씨">
           <span>날씨</span>
@@ -186,7 +184,6 @@
           <span>사진</span>
         </button>
 
-        <!-- 3줄 -->
         <button class="app-icon dummy-app" type="button" aria-label="시계">
           <img src="assets/icons/clock.png" alt="시계">
           <span>시계</span>
@@ -207,7 +204,6 @@
           <span>Instagram</span>
         </button>
 
-        <!-- 4줄 -->
         <button class="app-icon dummy-app" type="button" aria-label="App Store">
           <img src="assets/icons/appstore.png" alt="App Store">
           <span>App Store</span>
@@ -228,13 +224,11 @@
           <span>Safari</span>
         </button>
 
-        <!-- 5줄 -->
         <div class="app-empty"></div>
         <div class="app-empty"></div>
         <div class="app-empty"></div>
         <div class="app-empty"></div>
 
-        <!-- 6줄 -->
         <div class="app-empty"></div>
         <div class="app-empty"></div>
         <div class="app-empty"></div>
@@ -260,79 +254,82 @@
       </div>
     </section>
 
-  <!-- MEMO APP -->
-<section class="screen app-screen memo-screen" id="memoScreen">
-  <div class="app-ui memo-ui">
+    <!-- MEMO APP -->
+    <section class="screen app-screen memo-screen" id="memoScreen">
+      <div class="app-ui memo-ui">
 
-    <!-- 메모 목록 -->
-    <div class="memo-page memo-list-page active" id="memoListPage">
-      <div class="memo-topbar">
-        <button class="back-home app-back-btn memo-home-back" type="button" aria-label="뒤로가기">
-          <span class="back-arrow"></span>
-        </button>
+        <!-- 메모 목록 -->
+        <div class="memo-page memo-list-page active" id="memoListPage">
+          <div class="memo-topbar">
+            <button class="back-home app-back-btn memo-home-back" type="button" aria-label="뒤로가기">
+              <span class="back-arrow"></span>
+            </button>
 
-        <button class="memo-more-btn" type="button" aria-label="더보기">
-          <span class="memo-more-dots"></span>
-        </button>
-      </div>
+            <button class="memo-more-btn" type="button" aria-label="더보기">
+              <span class="memo-more-dots"></span>
+            </button>
+          </div>
 
-      <div class="memo-list-scroll">
-        <div class="memo-list-head">
-          <h1>메모</h1>
-          <p>114개의 메모</p>
+          <div class="memo-list-scroll">
+            <div class="memo-list-head">
+              <h1>메모</h1>
+              <p>114개의 메모</p>
+            </div>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">고정된 메모</h2>
+              <div class="memo-card" id="memoPinnedCard"></div>
+            </section>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">이전 7일</h2>
+              <div class="memo-card" id="memo7DaysCard"></div>
+            </section>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">이전 30일</h2>
+              <div class="memo-card" id="memo30DaysCard"></div>
+            </section>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">2월</h2>
+              <div class="memo-card" id="memoFebruaryCard"></div>
+            </section>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">2025년</h2>
+              <div class="memo-card" id="memo2025Card"></div>
+            </section>
+          </div>
         </div>
 
-        <section class="memo-section-block">
-          <h2 class="memo-section-title">고정된 메모</h2>
-          <div class="memo-card" id="memoPinnedCard"></div>
-        </section>
+        <!-- 메모 상세 -->
+        <div class="memo-page memo-detail-page" id="memoDetailPage">
+          <div class="memo-topbar memo-detail-topbar">
+            <button class="memo-detail-back app-back-btn" type="button" aria-label="뒤로가기">
+              <span class="back-arrow"></span>
+            </button>
 
-        <section class="memo-section-block">
-          <h2 class="memo-section-title">이전 7일</h2>
-          <div class="memo-card" id="memo7DaysCard"></div>
-        </section>
+            <div class="memo-detail-actions">
+              <button class="memo-circle-btn memo-image-btn" type="button" aria-label="되돌리기">
+                <img src="assets/icons/undo.png" alt="" class="memo-action-image memo-action-image-undo">
+              </button>
 
-        <section class="memo-section-block">
-          <h2 class="memo-section-title">이전 30일</h2>
-          <div class="memo-card" id="memo30DaysCard"></div>
-        </section>
+              <button class="memo-pill-btn memo-image-btn" type="button" aria-label="공유 및 더보기">
+                <img src="assets/icons/share.png" alt="" class="memo-action-image memo-action-image-share">
+              </button>
+            </div>
+          </div>
 
-        <section class="memo-section-block">
-          <h2 class="memo-section-title">2월</h2>
-          <div class="memo-card" id="memoFebruaryCard"></div>
-        </section>
+          <div class="memo-detail-scroll">
+            <div class="memo-detail-date" id="memoDetailDate"></div>
+            <h1 class="memo-detail-title" id="memoDetailTitle"></h1>
+            <div class="memo-detail-body" id="memoDetailBody"></div>
+          </div>
+        </div>
 
-        <section class="memo-section-block">
-          <h2 class="memo-section-title">2025년</h2>
-          <div class="memo-card" id="memo2025Card"></div>
-        </section>
       </div>
-    </div>
-
-<!-- 메모 상세 -->
-<div class="memo-page memo-detail-page" id="memoDetailPage">
-  <div class="memo-topbar memo-detail-topbar">
-    <button class="memo-detail-back app-back-btn" type="button" aria-label="뒤로가기">
-      <span class="back-arrow"></span>
-    </button>
-
-    <div class="memo-detail-actions">
-      <button class="memo-circle-btn memo-image-btn" type="button" aria-label="되돌리기">
-        <img src="assets/icons/undo.png" alt="" class="memo-action-image memo-action-image-undo">
-      </button>
-
-      <button class="memo-pill-btn memo-image-btn" type="button" aria-label="공유 및 더보기">
-        <img src="assets/icons/share.png" alt="" class="memo-action-image memo-action-image-share">
-      </button>
-    </div>
-  </div>
-
-  <div class="memo-detail-scroll">
-    <div class="memo-detail-date" id="memoDetailDate"></div>
-    <h1 class="memo-detail-title" id="memoDetailTitle"></h1>
-    <div class="memo-detail-body" id="memoDetailBody"></div>
-  </div>
-</div>
+    </section>
 
     <!-- CALENDAR APP -->
     <section class="screen app-screen" id="calendarScreen">
