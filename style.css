@@ -1141,7 +1141,9 @@ img {
 
 .memo-ui {
   position: relative;
+  height: 100%;
   background: #f2f2f7;
+  overflow: hidden;
 }
 
 .memo-page {
@@ -1179,23 +1181,26 @@ img {
 
 .memo-topbar {
   position: relative;
-  height: calc(92px + var(--safe-top));
-  padding-top: calc(10px + var(--safe-top));
+  height: calc(118px + var(--safe-top));
+  flex-shrink: 0;
 }
 
 .memo-home-back,
 .memo-detail-back {
-  top: calc(48px + var(--safe-top));
+  top: calc(54px + var(--safe-top));
   left: 14px;
 }
 
 .memo-more-btn {
   position: absolute;
-  top: calc(48px + var(--safe-top));
+  top: calc(54px + var(--safe-top));
   right: 14px;
   width: 44px;
   height: 44px;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: rgba(255,255,255,0.72);
   border: 1px solid rgba(255,255,255,0.55);
   backdrop-filter: blur(18px) saturate(160%);
@@ -1206,26 +1211,17 @@ img {
 }
 
 .memo-more-dots {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 15px;
-  height: 3px;
-  transform: translate(-50%, -50%);
-}
-
-.memo-more-dots::before,
-.memo-more-dots::after,
-.memo-more-dots {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 4px;
   background:
-    radial-gradient(circle, #111 0 1.5px, transparent 1.5px);
-  background-size: 5px 3px;
-  background-repeat: repeat-x;
+    radial-gradient(circle, #111 0 1.7px, transparent 1.8px) center / 6px 4px repeat-x;
 }
 
 .memo-list-scroll,
 .memo-detail-scroll {
-  height: calc(100% - (92px + var(--safe-top)));
+  height: calc(100% - (118px + var(--safe-top)));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -1309,59 +1305,23 @@ img {
 
 /* detail */
 .memo-detail-topbar {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding-left: 16px;
-  padding-right: 16px;
+  position: relative;
 }
 
 .memo-detail-actions {
   position: absolute;
-  top: calc(48px + var(--safe-top));
+  top: calc(54px + var(--safe-top));
   right: 16px;
   display: flex;
   align-items: center;
   gap: 12px;
+  z-index: 3;
 }
 
+/* 아이콘 이미지 자체가 버튼 모양이므로 틀 제거 */
 .memo-circle-btn,
+.memo-pill-actions,
 .memo-pill-btn {
-  background: rgba(255,255,255,0.72);
-  border: 1px solid rgba(255,255,255,0.55);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    0 4px 12px rgba(0,0,0,0.08);
-}
-
-.memo-circle-btn {
-  position: relative;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-}
-
-.memo-pill-actions {
-  display: flex;
-  align-items: center;
-  height: 46px;
-  border-radius: 23px;
-  overflow: hidden;
-  background: rgba(255,255,255,0.72);
-  border: 1px solid rgba(255,255,255,0.55);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    0 4px 12px rgba(0,0,0,0.08);
-}
-
-.memo-pill-btn {
-  position: relative;
-  width: 46px;
-  height: 46px;
   background: transparent;
   border: none;
   box-shadow: none;
@@ -1369,32 +1329,58 @@ img {
   -webkit-backdrop-filter: none;
 }
 
-.memo-pill-btn + .memo-pill-btn {
-  border-left: 1px solid rgba(60,60,67,0.08);
+.memo-circle-btn {
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memo-pill-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px;
+}
+
+.memo-pill-btn {
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memo-pill-ellipsis {
+  width: 46px;
+  height: 46px;
+  border-radius: 23px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(255,255,255,0.55);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.5),
+    0 4px 12px rgba(0,0,0,0.08);
 }
 
 .memo-action-image {
   display: block;
-  width: 22px;
-  height: 22px;
+  width: 46px;
+  height: 46px;
   object-fit: contain;
   pointer-events: none;
 }
 
-.memo-detail-actions {
-  position: absolute;
-  top: calc(52px + var(--safe-top));
-  right: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.memo-detail-back:active,
-.memo-circle-btn:active,
-.memo-pill-btn:active,
-.memo-more-btn:active {
-  transform: scale(0.96);
+.memo-ellipsis {
+  font-size: 20px;
+  line-height: 1;
+  color: #111;
+  letter-spacing: 1px;
+  transform: translateY(-1px);
 }
 
 .memo-detail-scroll {
@@ -1501,6 +1487,125 @@ img {
 .memo-pill-btn:active,
 .memo-more-btn:active {
   transform: scale(0.96);
+}
+
+/* ============================= */
+/* MOBILE ONLY - MEMO */
+/* ============================= */
+
+@media screen and (max-width: 480px) {
+  .memo-topbar {
+    height: calc(112px + env(safe-area-inset-top));
+  }
+
+  .memo-home-back,
+  .memo-detail-back {
+    top: calc(54px + env(safe-area-inset-top));
+    left: 14px;
+  }
+
+  .memo-more-btn {
+    top: calc(54px + env(safe-area-inset-top));
+    right: 14px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .memo-list-scroll {
+    height: calc(100% - (112px + env(safe-area-inset-top)));
+    padding: 8px 20px 36px;
+  }
+
+  .memo-detail-scroll {
+    height: calc(100% - (112px + env(safe-area-inset-top)));
+    padding: 14px 20px 38px;
+  }
+
+  .memo-list-head h1 {
+    font-size: 34px;
+  }
+
+  .memo-list-head p {
+    font-size: 14px;
+  }
+
+  .memo-section-title {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+
+  .memo-list-item {
+    padding: 15px 16px 13px;
+  }
+
+  .memo-item-title {
+    font-size: 16px;
+  }
+
+  .memo-item-meta {
+    font-size: 13px;
+  }
+
+  .memo-detail-actions {
+    top: calc(54px + env(safe-area-inset-top));
+    right: 14px;
+    gap: 8px;
+  }
+
+  .memo-circle-btn,
+  .memo-pill-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .memo-pill-actions {
+    height: 44px;
+    gap: 6px;
+  }
+
+  .memo-action-image {
+    width: 44px;
+    height: 44px;
+  }
+
+  .memo-pill-ellipsis {
+    width: 44px;
+    height: 44px;
+    border-radius: 22px;
+  }
+
+  .memo-detail-date {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .memo-detail-title {
+    font-size: 32px;
+    margin-bottom: 34px;
+  }
+
+  .memo-detail-body,
+  .memo-text-block,
+  .memo-check-text {
+    font-size: 16px;
+  }
+
+  .memo-check-item {
+    gap: 16px;
+  }
+
+  .memo-check-circle {
+    width: 26px;
+    height: 26px;
+    flex-basis: 26px;
+  }
+
+  .memo-check-item.checked .memo-check-circle::before {
+    left: 7px;
+    top: 7px;
+    width: 9px;
+    height: 5px;
+  }
 }
 
 /* ============================= */
@@ -1904,113 +2009,5 @@ img {
     height: 10px;
     border-left-width: 2.4px;
     border-bottom-width: 2.4px;
-  }
-
-  /* memo */
-  .memo-topbar {
-    height: calc(88px + env(safe-area-inset-top));
-    padding-top: calc(8px + env(safe-area-inset-top));
-  }
-
-  .memo-home-back,
-  .memo-detail-back {
-    top: calc(48px + env(safe-area-inset-top));
-    left: 14px;
-  }
-
-  .memo-more-btn {
-    top: calc(48px + env(safe-area-inset-top));
-    right: 14px;
-    width: 44px;
-    height: 44px;
-  }
-
-  .memo-list-scroll {
-    height: calc(100% - (88px + env(safe-area-inset-top)));
-    padding: 8px 20px 36px;
-  }
-
-  .memo-detail-scroll {
-    height: calc(100% - (88px + env(safe-area-inset-top)));
-    padding: 14px 20px 38px;
-  }
-
-  .memo-list-head h1 {
-    font-size: 34px;
-  }
-
-  .memo-list-head p {
-    font-size: 14px;
-  }
-
-  .memo-section-title {
-    font-size: 20px;
-    margin-bottom: 14px;
-  }
-
-  .memo-list-item {
-    padding: 15px 16px 13px;
-  }
-
-  .memo-item-title {
-    font-size: 16px;
-  }
-
-  .memo-item-meta {
-    font-size: 13px;
-  }
-
-  .memo-detail-actions {
-    top: calc(52px + env(safe-area-inset-top));
-    right: 14px;
-    gap: 10px;
-  }
-
-  .memo-circle-btn {
-    width: 44px;
-    height: 44px;
-  }
-
-  .memo-pill-actions {
-    height: 44px;
-    border-radius: 22px;
-  }
-
-  .memo-pill-btn {
-    width: 44px;
-    height: 44px;
-  }
-
-  .memo-detail-date {
-    font-size: 15px;
-    margin-bottom: 24px;
-  }
-
-  .memo-detail-title {
-    font-size: 32px;
-    margin-bottom: 34px;
-  }
-
-  .memo-detail-body,
-  .memo-text-block,
-  .memo-check-text {
-    font-size: 16px;
-  }
-
-  .memo-check-item {
-    gap: 16px;
-  }
-
-  .memo-check-circle {
-    width: 26px;
-    height: 26px;
-    flex-basis: 26px;
-  }
-
-  .memo-check-item.checked .memo-check-circle::before {
-    left: 7px;
-    top: 7px;
-    width: 9px;
-    height: 5px;
   }
 }
