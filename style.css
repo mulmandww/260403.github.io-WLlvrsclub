@@ -1195,8 +1195,8 @@ img {
   position: absolute;
   top: calc(54px + var(--safe-top));
   right: 14px;
-  width: 44px;
-  height: 44px;
+  width: 88px;
+  height: 46px;
   border-radius: 50%;
   display: flex;
   align-items: center;
