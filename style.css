@@ -1318,53 +1318,61 @@ img {
   z-index: 3;
 }
 
-/* 아이콘 이미지 자체가 버튼 모양이므로 틀 제거 */
-.memo-circle-btn,
-.memo-pill-actions,
-.memo-pill-btn {
-  background: transparent;
+.memo-detail-actions {
+  position: absolute;
+  top: calc(54px + var(--safe-top));
+  right: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 3;
+}
+
+.memo-image-btn {
+  padding: 0;
   border: none;
+  background: transparent;
   box-shadow: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .memo-circle-btn {
   width: 46px;
   height: 46px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.memo-pill-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: 46px;
+  flex: 0 0 46px;
 }
 
 .memo-pill-btn {
-  width: 46px;
+  width: 88px;
   height: 46px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 0 0 88px;
 }
 
-.memo-pill-ellipsis {
+.memo-action-image {
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.memo-action-image-undo {
   width: 46px;
   height: 46px;
-  border-radius: 23px;
-  background: rgba(255,255,255,0.72);
-  border: 1px solid rgba(255,255,255,0.55);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    0 4px 12px rgba(0,0,0,0.08);
+}
+
+.memo-action-image-share {
+  width: 88px;
+  height: 46px;
+}
+
+.memo-detail-back:active,
+.memo-image-btn:active,
+.memo-more-btn:active {
+  transform: scale(0.96);
 }
 
 .memo-action-image {
@@ -1546,34 +1554,34 @@ img {
     font-size: 13px;
   }
 
-  .memo-detail-actions {
-    top: calc(54px + env(safe-area-inset-top));
-    right: 14px;
-    gap: 8px;
-  }
+.memo-detail-actions {
+  top: calc(54px + env(safe-area-inset-top));
+  right: 14px;
+  gap: 10px;
+}
 
-  .memo-circle-btn,
-  .memo-pill-btn {
-    width: 44px;
-    height: 44px;
-  }
+.memo-circle-btn {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+}
 
-  .memo-pill-actions {
-    height: 44px;
-    gap: 6px;
-  }
+.memo-pill-btn {
+  width: 84px;
+  height: 44px;
+  flex: 0 0 84px;
+}
 
-  .memo-action-image {
-    width: 44px;
-    height: 44px;
-  }
+.memo-action-image-undo {
+  width: 44px;
+  height: 44px;
+}
 
-  .memo-pill-ellipsis {
-    width: 44px;
-    height: 44px;
-    border-radius: 22px;
-  }
-
+.memo-action-image-share {
+  width: 84px;
+  height: 44px;
+}
+  
   .memo-detail-date {
     font-size: 15px;
     margin-bottom: 24px;
