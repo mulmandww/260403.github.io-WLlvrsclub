@@ -1087,50 +1087,6 @@ img {
 }
 
 /* ============================= */
-/* DESKTOP CLICK FEEDBACK */
-/* ============================= */
-
-@media (hover: hover) and (pointer: fine) {
-  .app-icon:active img,
-  .dock-icon:active img {
-    transform: scale(0.90);
-    filter: brightness(0.94);
-  }
-}
-
-/* ============================= */
-/* DESKTOP PASSCODE FIX */
-/* ============================= */
-
-@media screen and (min-width: 481px) {
-  .passcode-wrap {
-    padding-top: calc(112px + var(--safe-top)) !important;
-    transform: none !important;
-  }
-
-  .keypad {
-    grid-template-columns: repeat(3, 94px) !important;
-    gap: 18px 14px !important;
-    transform: none !important;
-  }
-
-  .key,
-  .key-empty {
-    width: 94px !important;
-    height: 94px !important;
-  }
-
-  .key .num {
-    font-size: 34px !important;
-  }
-
-  .key .letters {
-    font-size: 9px !important;
-    letter-spacing: 2px !important;
-  }
-}
-
-/* ============================= */
 /* MEMO APP */
 /* ============================= */
 
@@ -1359,12 +1315,6 @@ img {
   height: 46px;
 }
 
-.memo-detail-back:active,
-.memo-image-btn:active,
-.memo-more-btn:active {
-  transform: scale(0.96);
-}
-
 .memo-detail-scroll {
   padding: 18px 22px 42px;
 }
@@ -1465,6 +1415,7 @@ img {
 }
 
 .memo-detail-back:active,
+.memo-image-btn:active,
 .memo-circle-btn:active,
 .memo-pill-btn:active,
 .memo-more-btn:active {
@@ -1472,121 +1423,42 @@ img {
 }
 
 /* ============================= */
-/* MOBILE ONLY - MEMO */
+/* DESKTOP ONLY */
 /* ============================= */
 
-@media screen and (max-width: 480px) {
-  .memo-topbar {
-    height: calc(112px + env(safe-area-inset-top));
+@media (hover: hover) and (pointer: fine) {
+  .app-icon:active img,
+  .dock-icon:active img {
+    transform: scale(0.90);
+    filter: brightness(0.94);
   }
-
-  .memo-home-back,
-  .memo-detail-back {
-    top: calc(54px + env(safe-area-inset-top));
-    left: 14px;
-  }
-
-  .memo-more-btn {
-    top: calc(54px + env(safe-area-inset-top));
-    right: 14px;
-    width: 44px;
-    height: 44px;
-  }
-
-  .memo-list-scroll {
-    height: calc(100% - (112px + env(safe-area-inset-top)));
-    padding: 8px 20px 36px;
-  }
-
-  .memo-detail-scroll {
-    height: calc(100% - (112px + env(safe-area-inset-top)));
-    padding: 14px 20px 38px;
-  }
-
-  .memo-list-head h1 {
-    font-size: 34px;
-  }
-
-  .memo-list-head p {
-    font-size: 14px;
-  }
-
-  .memo-section-title {
-    font-size: 20px;
-    margin-bottom: 14px;
-  }
-
-  .memo-list-item {
-    padding: 15px 16px 13px;
-  }
-
-  .memo-item-title {
-    font-size: 16px;
-  }
-
-  .memo-item-meta {
-    font-size: 13px;
-  }
-
-.memo-detail-actions {
-  top: calc(54px + env(safe-area-inset-top));
-  right: 14px;
-  gap: 10px;
 }
 
-.memo-circle-btn {
-  width: 44px;
-  height: 44px;
-  flex: 0 0 44px;
-}
-
-.memo-pill-btn {
-  width: 84px;
-  height: 44px;
-  flex: 0 0 84px;
-}
-
-.memo-action-image-undo {
-  width: 44px;
-  height: 44px;
-}
-
-.memo-action-image-share {
-  width: 84px;
-  height: 44px;
-}
-  
-  .memo-detail-date {
-    font-size: 15px;
-    margin-bottom: 24px;
+@media screen and (min-width: 481px) {
+  .passcode-wrap {
+    padding-top: calc(112px + var(--safe-top)) !important;
+    transform: none !important;
   }
 
-  .memo-detail-title {
-    font-size: 32px;
-    margin-bottom: 34px;
+  .keypad {
+    grid-template-columns: repeat(3, 94px) !important;
+    gap: 18px 14px !important;
+    transform: none !important;
   }
 
-  .memo-detail-body,
-  .memo-text-block,
-  .memo-check-text {
-    font-size: 16px;
+  .key,
+  .key-empty {
+    width: 94px !important;
+    height: 94px !important;
   }
 
-  .memo-check-item {
-    gap: 16px;
+  .key .num {
+    font-size: 34px !important;
   }
 
-  .memo-check-circle {
-    width: 26px;
-    height: 26px;
-    flex-basis: 26px;
-  }
-
-  .memo-check-item.checked .memo-check-circle::before {
-    left: 7px;
-    top: 7px;
-    width: 9px;
-    height: 5px;
+  .key .letters {
+    font-size: 9px !important;
+    letter-spacing: 2px !important;
   }
 }
 
@@ -1610,7 +1482,7 @@ img {
     box-shadow: none;
   }
 
-  /* app screen statusbar - mobile force */
+  /* app screen statusbar */
   .phone:has(.app-screen.active) .statusbar {
     display: flex !important;
     opacity: 1 !important;
@@ -1941,6 +1813,7 @@ img {
     height: 62px;
   }
 
+  /* popup */
   .notif-popup {
     top: calc(10px + env(safe-area-inset-top));
     width: calc(100% - 14px);
@@ -1972,6 +1845,7 @@ img {
     font-size: 12px;
   }
 
+  /* app common */
   .app-header {
     height: calc(88px + env(safe-area-inset-top));
     padding-top: calc(16px + env(safe-area-inset-top));
@@ -1991,5 +1865,119 @@ img {
     height: 10px;
     border-left-width: 2.4px;
     border-bottom-width: 2.4px;
+  }
+
+  /* memo */
+  .memo-topbar {
+    height: calc(112px + env(safe-area-inset-top));
+  }
+
+  .memo-home-back,
+  .memo-detail-back {
+    top: calc(54px + env(safe-area-inset-top));
+    left: 14px;
+  }
+
+  .memo-more-btn {
+    top: calc(54px + env(safe-area-inset-top));
+    right: 14px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .memo-list-scroll {
+    height: calc(100% - (112px + env(safe-area-inset-top)));
+    padding: 8px 20px 36px;
+  }
+
+  .memo-detail-scroll {
+    height: calc(100% - (112px + env(safe-area-inset-top)));
+    padding: 14px 20px 38px;
+  }
+
+  .memo-list-head h1 {
+    font-size: 34px;
+  }
+
+  .memo-list-head p {
+    font-size: 14px;
+  }
+
+  .memo-section-title {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+
+  .memo-list-item {
+    padding: 15px 16px 13px;
+  }
+
+  .memo-item-title {
+    font-size: 16px;
+  }
+
+  .memo-item-meta {
+    font-size: 13px;
+  }
+
+  .memo-detail-actions {
+    top: calc(54px + env(safe-area-inset-top));
+    right: 14px;
+    gap: 10px;
+  }
+
+  .memo-circle-btn {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+  }
+
+  .memo-pill-btn {
+    width: 84px;
+    height: 44px;
+    flex: 0 0 84px;
+  }
+
+  .memo-action-image-undo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .memo-action-image-share {
+    width: 84px;
+    height: 44px;
+  }
+
+  .memo-detail-date {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .memo-detail-title {
+    font-size: 32px;
+    margin-bottom: 34px;
+  }
+
+  .memo-detail-body,
+  .memo-text-block,
+  .memo-check-text {
+    font-size: 16px;
+  }
+
+  .memo-check-item {
+    gap: 16px;
+  }
+
+  .memo-check-circle {
+    width: 26px;
+    height: 26px;
+    flex-basis: 26px;
+  }
+
+  .memo-check-item.checked .memo-check-circle::before {
+    left: 7px;
+    top: 7px;
+    width: 9px;
+    height: 5px;
   }
 }
