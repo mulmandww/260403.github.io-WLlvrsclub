@@ -6,10 +6,11 @@
 
   --phone-width: 390px;
   --phone-height: 844px;
-  --phone-frame-size: min(390px, calc(100vw - 24px), calc((100dvh - 24px) * 390 / 844));
-  --passcode-key-size: clamp(80px, calc(var(--phone-frame-size) * 0.225), 88px);
-  --passcode-key-gap-x: clamp(12px, calc(var(--phone-frame-size) * 0.038), 16px);
-  --passcode-key-gap-y: clamp(14px, calc(var(--phone-frame-size) * 0.046), 18px);
+  --phone-frame-size: min(
+    var(--phone-width),
+    calc(100vw - 24px),
+    calc((100dvh - 24px) * var(--phone-width) / var(--phone-height))
+  );
 }
 
 /* ============================= */
@@ -364,13 +365,6 @@ img {
   z-index: 5;
   cursor: pointer;
   touch-action: manipulation;
-}
-
-.lock-screen-hit-area {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: transparent;
 }
 
 .lock-content {

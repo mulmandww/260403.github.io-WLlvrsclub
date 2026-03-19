@@ -170,10 +170,6 @@ if (lockScreen) {
   lockScreen.addEventListener("click", openPasscodeScreen);
 }
 
-if (lockScreenHitArea) {
-  lockScreenHitArea.addEventListener("click", openPasscodeScreen);
-}
-
 lockActionButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -236,14 +232,20 @@ if (lockScreen) {
   lockScreen.addEventListener("pointercancel", cancelLockPointer);
 }
 
-if (lockScreenHitArea) {
-  lockScreenHitArea.addEventListener("pointerdown", handleLockPointerDown);
-  lockScreenHitArea.addEventListener("pointermove", handleLockPointerMove);
-  lockScreenHitArea.addEventListener("pointerup", handleLockPointerUp);
-  lockScreenHitArea.addEventListener("pointercancel", cancelLockPointer);
-}
-
 window.addEventListener("pointerup", handleLockPointerUp);
+
+document.addEventListener("keydown", (event) => {
+  if (!passcodeScreen || !passcodeScreen.classList.contains("active")) return;
+
+  if (/^[0-9]$/.test(event.key)) {
+    pressKey(event.key);
+    return;
+  }
+
+  if (event.key === "Backspace" || event.key === "Delete") {
+    deleteKey();
+  }
+});
 
 document.addEventListener("keydown", (event) => {
   if (!passcodeScreen || !passcodeScreen.classList.contains("active")) return;
