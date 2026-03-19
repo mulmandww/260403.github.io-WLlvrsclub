@@ -35,6 +35,7 @@
     <section class="screen lock-screen active" id="lockScreen">
       <div class="wallpaper wallpaper-lock"></div>
       <div class="lock-overlay-top"></div>
+      <button class="lock-screen-hit-area" id="lockScreenHitArea" type="button" aria-label="잠금 화면 열기"></button>
 
       <div class="lock-content">
         <div class="lock-icon"></div>
@@ -78,53 +79,53 @@
         </div>
 
         <div class="keypad">
-          <button class="key key-number" type="button" onclick="pressKey('1')">
+          <button class="key key-number" type="button">
             <span class="num">1</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="pressKey('2')">
+          <button class="key key-number" type="button">
             <span class="num">2</span>
             <span class="letters">ABC</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="pressKey('3')">
+          <button class="key key-number" type="button">
             <span class="num">3</span>
             <span class="letters">DEF</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="pressKey('4')">
+          <button class="key key-number" type="button">
             <span class="num">4</span>
             <span class="letters">GHI</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="pressKey('5')">
+          <button class="key key-number" type="button">
             <span class="num">5</span>
             <span class="letters">JKL</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="pressKey('6')">
+          <button class="key key-number" type="button">
             <span class="num">6</span>
             <span class="letters">MNO</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="pressKey('7')">
+          <button class="key key-number" type="button">
             <span class="num">7</span>
             <span class="letters">PQRS</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="pressKey('8')">
+          <button class="key key-number" type="button">
             <span class="num">8</span>
             <span class="letters">TUV</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="pressKey('9')">
+          <button class="key key-number" type="button">
             <span class="num">9</span>
             <span class="letters">WXYZ</span>
           </button>
 
           <div class="key-empty"></div>
 
-          <button class="key key-number" type="button" onclick="pressKey('0')">
+          <button class="key key-number" type="button">
             <span class="num">0</span>
           </button>
 
@@ -334,36 +335,66 @@
     <!-- CALENDAR APP -->
     <section class="screen app-screen" id="calendarScreen">
       <div class="app-ui">
-        <div class="app-header">
+        <div class="app-header app-header-title">
           <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
             <span class="back-arrow"></span>
           </button>
+          <div class="app-header-copy">
+            <p class="app-header-eyebrow">Calendar</p>
+            <h1 class="app-header-title-text">캘린더</h1>
+          </div>
         </div>
-        <div class="app-content"></div>
+        <div class="app-content app-placeholder-content">
+          <div class="app-placeholder-card">
+            <p class="app-placeholder-label">준비 중</p>
+            <h2>월별 일정 화면을 안정적으로 연결해둘 자리입니다.</h2>
+            <p>현재는 구조 복구를 우선해, 앱이 열릴 때 빈 화면이나 검은 화면 없이 자연스럽게 진입하도록 유지합니다.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- PHOTOS APP -->
     <section class="screen app-screen" id="photosScreen">
       <div class="app-ui">
-        <div class="app-header">
+        <div class="app-header app-header-title">
           <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
             <span class="back-arrow"></span>
           </button>
+          <div class="app-header-copy">
+            <p class="app-header-eyebrow">Photos</p>
+            <h1 class="app-header-title-text">사진</h1>
+          </div>
         </div>
-        <div class="app-content"></div>
+        <div class="app-content app-placeholder-content">
+          <div class="app-placeholder-card">
+            <p class="app-placeholder-label">준비 중</p>
+            <h2>사진 앱 자리도 안정적인 전체 화면으로 유지됩니다.</h2>
+            <p>추후 앨범/그리드 UI를 넣더라도 현재의 홈 → 앱 전환 흐름은 그대로 재사용할 수 있습니다.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- INSTAGRAM APP -->
     <section class="screen app-screen" id="instagramScreen">
       <div class="app-ui">
-        <div class="app-header">
+        <div class="app-header app-header-title">
           <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
             <span class="back-arrow"></span>
           </button>
+          <div class="app-header-copy">
+            <p class="app-header-eyebrow">Instagram</p>
+            <h1 class="app-header-title-text">Instagram</h1>
+          </div>
         </div>
-        <div class="app-content"></div>
+        <div class="app-content app-placeholder-content">
+          <div class="app-placeholder-card">
+            <p class="app-placeholder-label">준비 중</p>
+            <h2>인스타그램 화면도 깨지지 않는 전체 앱 레이어로 고정했습니다.</h2>
+            <p>실제 피드/스토리 UI를 추가하기 전까지 현재 전환과 복귀 동작을 안정적으로 보존합니다.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -373,6 +404,12 @@
 
         <!-- 키패드 -->
         <div class="phone-page phone-keypad-page active" data-phone-page="keypad">
+          <div class="phone-topbar phone-topbar-keypad">
+            <button class="back-home app-back-btn phone-app-back" type="button" aria-label="뒤로가기">
+              <span class="back-arrow"></span>
+            </button>
+          </div>
+
           <div class="phone-page-inner phone-keypad-inner">
             <div class="phone-keypad-grid">
               <button class="phone-key-btn" type="button">
@@ -516,6 +553,10 @@
         <!-- 통화 -->
         <div class="phone-page phone-recents-page" data-phone-page="recents">
           <div class="phone-topbar phone-topbar-recents">
+            <button class="back-home app-back-btn phone-app-back" type="button" aria-label="뒤로가기">
+              <span class="back-arrow"></span>
+            </button>
+
             <button class="phone-edit-btn" type="button" aria-label="편집">편집</button>
 
             <h2 class="phone-page-title">통화</h2>
@@ -566,24 +607,44 @@
     <!-- MESSAGES APP -->
     <section class="screen app-screen" id="messagesScreen">
       <div class="app-ui">
-        <div class="app-header">
+        <div class="app-header app-header-title">
           <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
             <span class="back-arrow"></span>
           </button>
+          <div class="app-header-copy">
+            <p class="app-header-eyebrow">Messages</p>
+            <h1 class="app-header-title-text">메시지</h1>
+          </div>
         </div>
-        <div class="app-content"></div>
+        <div class="app-content app-placeholder-content">
+          <div class="app-placeholder-card">
+            <p class="app-placeholder-label">준비 중</p>
+            <h2>메시지 앱은 안정적인 전체 화면 플레이스홀더로 연결됩니다.</h2>
+            <p>향후 대화 목록 / 채팅 화면을 추가해도 현재의 홈 복귀 흐름을 그대로 유지할 수 있습니다.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- KAKAO APP -->
     <section class="screen app-screen" id="kakaoScreen">
       <div class="app-ui">
-        <div class="app-header">
+        <div class="app-header app-header-title">
           <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
             <span class="back-arrow"></span>
           </button>
+          <div class="app-header-copy">
+            <p class="app-header-eyebrow">KakaoTalk</p>
+            <h1 class="app-header-title-text">카카오톡</h1>
+          </div>
         </div>
-        <div class="app-content"></div>
+        <div class="app-content app-placeholder-content">
+          <div class="app-placeholder-card">
+            <p class="app-placeholder-label">준비 중</p>
+            <h2>카카오톡 앱도 깨지지 않는 레이어로 유지합니다.</h2>
+            <p>현재는 안정적인 진입/복귀와 화면 계층 보존이 목적이며, 이후 실제 채팅 UI를 덧붙이기 쉽도록 정리했습니다.</p>
+          </div>
+        </div>
       </div>
     </section>
 
