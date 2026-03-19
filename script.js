@@ -166,20 +166,6 @@ async function openPasscodeScreen() {
   isTransitioning = false;
 }
 
-if (lockScreen) {
-  lockScreen.addEventListener("click", openPasscodeScreen);
-}
-
-lockActionButtons.forEach((button) => {
-  button.addEventListener("click", (event) => {
-    event.stopPropagation();
-  });
-
-  button.addEventListener("pointerup", (event) => {
-    event.stopPropagation();
-  });
-});
-
 /* 잠금화면 포인터 입력 */
 let startY = 0;
 let currentY = 0;
@@ -216,6 +202,7 @@ function handleLockPointerUp(event) {
   const swipedUp = diff > 20;
 
   if (tapped || swipedUp) {
+    event.preventDefault();
     openPasscodeScreen();
   }
 }
@@ -225,40 +212,20 @@ function cancelLockPointer() {
   activePointerId = null;
 }
 
-if (lockScreen) {
-  lockScreen.addEventListener("pointerdown", handleLockPointerDown);
-  lockScreen.addEventListener("pointermove", handleLockPointerMove);
-  lockScreen.addEventListener("pointerup", handleLockPointerUp);
-  lockScreen.addEventListener("pointercancel", cancelLockPointer);
+if (lockScreenHitArea) {
+  lockScreenHitArea.addEventListener("click", (event) => {
+    event.preventDefault();
+    openPasscodeScreen();
+  });
+
+  lockScreenHitArea.addEventListener("pointerdown", handleLockPointerDown);
+  lockScreenHitArea.addEventListener("pointermove", handleLockPointerMove);
+  lockScreenHitArea.addEventListener("pointerup", handleLockPointerUp);
+  lockScreenHitArea.addEventListener("pointercancel", cancelLockPointer);
 }
 
 window.addEventListener("pointerup", handleLockPointerUp);
 
-document.addEventListener("keydown", (event) => {
-  if (!passcodeScreen || !passcodeScreen.classList.contains("active")) return;
-
-  if (/^[0-9]$/.test(event.key)) {
-    pressKey(event.key);
-    return;
-  }
-
-  if (event.key === "Backspace" || event.key === "Delete") {
-    deleteKey();
-  }
-});
-
-document.addEventListener("keydown", (event) => {
-  if (!passcodeScreen || !passcodeScreen.classList.contains("active")) return;
-
-  if (/^[0-9]$/.test(event.key)) {
-    pressKey(event.key);
-    return;
-  }
-
-  if (event.key === "Backspace" || event.key === "Delete") {
-    deleteKey();
-  }
-});
 
 /* =========================
    비밀번호 점
