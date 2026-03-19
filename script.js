@@ -178,11 +178,7 @@ window.addEventListener("mouseup", handleEnd);
 ========================= */
 function updateDots() {
   dots.forEach((dot, index) => {
-    if (index < currentInput.length) {
-      dot.classList.add("filled");
-    } else {
-      dot.classList.remove("filled");
-    }
+    dot.classList.toggle("filled", index < currentInput.length);
   });
 }
 
@@ -369,6 +365,7 @@ async function openAppWithAnimation(button) {
 
   homeScreen.classList.remove("active", "app-opening");
   hideAllAppScreens();
+
   targetScreen.classList.add("active", "opening");
 
   await wait(360);
@@ -772,7 +769,8 @@ dummyAppButtons.forEach((button) => {
     memoDetailTitle.textContent = memo.title;
 
     if (memo.type === "checklist") {
-      memoDetailBody.innerHTML = renderChecklist(memo.items) + (memo.extraHtml ? memo.extraHtml : "");
+      memoDetailBody.innerHTML =
+        renderChecklist(memo.items) + (memo.extraHtml ? memo.extraHtml : "");
     } else {
       memoDetailBody.innerHTML = memo.html;
     }
@@ -841,8 +839,7 @@ dummyAppButtons.forEach((button) => {
   ];
 
   function getAvatarChar(name) {
-    const clean = name.trim();
-    return clean.charAt(0);
+    return name.trim().charAt(0);
   }
 
   function renderContacts() {
@@ -911,8 +908,8 @@ dummyAppButtons.forEach((button) => {
     });
   });
 
-  const keypadButtons = phoneScreen.querySelectorAll(".phone-key-btn");
-  keypadButtons.forEach((button) => {
+  const phoneKeypadButtons = phoneScreen.querySelectorAll(".phone-key-btn");
+  phoneKeypadButtons.forEach((button) => {
     button.addEventListener("click", () => {
       button.classList.remove("tap");
       void button.offsetWidth;
