@@ -35,6 +35,7 @@ const glassPopupTitle = document.getElementById("glassPopupTitle");
 const glassPopupText = document.getElementById("glassPopupText");
 const glassPopupTime = document.getElementById("glassPopupTime");
 const glassPopupIcon = document.getElementById("glassPopupIcon");
+const lockActionButtons = document.querySelectorAll(".lock-bottom-actions .round-action");
 
 if (glassPopup) {
   glassPopup.classList.remove("show");
@@ -102,6 +103,44 @@ function hideAllAppScreens() {
   });
 }
 
+function resetPasscodeState() {
+  if (passcodeWrap) {
+    passcodeWrap.classList.remove("shake");
+  }
+  resetInput();
+}
+
+function hidePopupInstantly() {
+  if (!glassPopup) return;
+
+  clearTimeout(showPopup._timer);
+  glassPopup.classList.remove("show");
+  glassPopup.setAttribute("aria-hidden", "true");
+
+  if (glassPopupTitle) glassPopupTitle.textContent = "";
+  if (glassPopupText) glassPopupText.textContent = "";
+  if (glassPopupTime) glassPopupTime.textContent = "";
+}
+
+function initializeScreens() {
+  hideAllAppScreens();
+  hidePopupInstantly();
+  resetPasscodeState();
+
+  if (lockScreen) {
+    lockScreen.classList.add("active");
+    lockScreen.classList.remove("opening", "closing");
+  }
+
+  if (passcodeScreen) {
+    passcodeScreen.classList.remove("active", "opening", "closing");
+  }
+
+  if (homeScreen) {
+    homeScreen.classList.remove("active", "opening", "closing", "app-opening");
+  }
+}
+
 /* =========================
    잠금화면 -> 암호입력
 ========================= */
@@ -129,6 +168,16 @@ async function openPasscodeScreen() {
 if (lockScreen) {
   lockScreen.addEventListener("click", openPasscodeScreen);
 }
+
+lockActionButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+
+  button.addEventListener("touchend", (event) => {
+    event.stopPropagation();
+  });
+});
 
 /* 위로 드래그 */
 let startY = 0;
@@ -172,6 +221,19 @@ if (lockScreen) {
 
 window.addEventListener("mousemove", handleMove);
 window.addEventListener("mouseup", handleEnd);
+
+document.addEventListener("keydown", (event) => {
+  if (!passcodeScreen || !passcodeScreen.classList.contains("active")) return;
+
+  if (/^[0-9]$/.test(event.key)) {
+    pressKey(event.key);
+    return;
+  }
+
+  if (event.key === "Backspace" || event.key === "Delete") {
+    deleteKey();
+  }
+});
 
 /* =========================
    비밀번호 점
@@ -355,8 +417,18 @@ async function openAppWithAnimation(button) {
   isAppAnimating = true;
 
   if (targetScreen.id === "memoScreen") {
-    targetScreen.classList.remove("detail-open");
+    if (typeof window.resetMemoAppState === "function") {
+      window.resetMemoAppState();
+    } else {
+      targetScreen.classList.remove("detail-open");
+    }
   }
+
+  if (targetScreen.id === "phoneScreen" && typeof window.resetPhoneAppState === "function") {
+    window.resetPhoneAppState();
+  }
+
+  hidePopupInstantly();
 
   button.classList.add("launching");
   homeScreen.classList.add("app-opening");
@@ -394,6 +466,7 @@ async function backToHomeFromApp() {
 
   currentAppScreen.classList.remove("closing");
   homeScreen.classList.add("active", "opening");
+  hidePopupInstantly();
 
   await wait(260);
 
@@ -795,6 +868,7 @@ dummyAppButtons.forEach((button) => {
   }
 
   renderMemoLists();
+  window.resetMemoAppState = () => memoScreen.classList.remove("detail-open");
 })();
 
 /* =========================
@@ -921,7 +995,13 @@ dummyAppButtons.forEach((button) => {
     });
   });
 
+  window.resetPhoneAppState = () => {
+    setPhonePage("keypad");
+  };
+
   renderContacts();
   renderRecents();
-  setPhonePage("keypad");
+  window.resetPhoneAppState();
 })();
+
+initializeScreens();
