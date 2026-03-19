@@ -367,17 +367,201 @@
       </div>
     </section>
 
-    <!-- PHONE APP -->
-    <section class="screen app-screen" id="phoneScreen">
-      <div class="app-ui">
-        <div class="app-header">
-          <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
-            <span class="back-arrow"></span>
+<!-- PHONE APP -->
+<section class="screen app-screen phone-app-screen" id="phoneScreen">
+  <div class="app-ui phone-ui">
+
+    <!-- 키패드 -->
+    <div class="phone-page phone-keypad-page active" data-phone-page="keypad">
+      <div class="phone-page-inner phone-keypad-inner">
+        <div class="phone-keypad-grid">
+          <button class="phone-key-btn" type="button">
+            <span class="phone-key-num">1</span>
+          </button>
+
+          <button class="phone-key-btn" type="button">
+            <span class="phone-key-num">2</span>
+            <span class="phone-key-sub">ABC</span>
+          </button>
+
+          <button class="phone-key-btn" type="button">
+            <span class="phone-key-num">3</span>
+            <span class="phone-key-sub">DEF</span>
+          </button>
+
+          <button class="phone-key-btn" type="button">
+            <span class="phone-key-num">4</span>
+            <span class="phone-key-sub">GHI</span>
+          </button>
+
+          <button class="phone-key-btn" type="button">
+            <span class="phone-key-num">5</span>
+            <span class="phone-key-sub">JKL</span>
+          </button>
+
+          <button class="phone-key-btn" type="button">
+            <span class="phone-key-num">6</span>
+            <span class="phone-key-sub">MNO</span>
+          </button>
+
+          <button class="phone-key-btn" type="button">
+            <span class="phone-key-num">7</span>
+            <span class="phone-key-sub">PQRS</span>
+          </button>
+
+          <button class="phone-key-btn" type="button">
+            <span class="phone-key-num">8</span>
+            <span class="phone-key-sub">TUV</span>
+          </button>
+
+          <button class="phone-key-btn" type="button">
+            <span class="phone-key-num">9</span>
+            <span class="phone-key-sub">WXYZ</span>
+          </button>
+
+          <button class="phone-key-btn" type="button">
+            <span class="phone-key-num">*</span>
+          </button>
+
+          <button class="phone-key-btn" type="button">
+            <span class="phone-key-num">0</span>
+            <span class="phone-key-sub plus">+</span>
+          </button>
+
+          <button class="phone-key-btn" type="button">
+            <span class="phone-key-num">#</span>
           </button>
         </div>
-        <div class="app-content"></div>
+
+        <button class="phone-call-main-btn" type="button" aria-label="통화">
+          <img src="assets/icons/icon_call_green.png" alt="" class="phone-call-main-icon">
+        </button>
       </div>
-    </section>
+    </div>
+
+    <!-- 연락처 -->
+    <div class="phone-page phone-contacts-page" data-phone-page="contacts">
+      <div class="phone-topbar phone-topbar-contacts">
+        <button class="back-home app-back-btn phone-app-back" type="button" aria-label="뒤로가기">
+          <span class="back-arrow"></span>
+        </button>
+
+        <h2 class="phone-page-title">연락처</h2>
+
+        <button class="phone-round-top-btn phone-add-btn" type="button" aria-label="추가">
+          <span class="phone-plus-icon"></span>
+        </button>
+      </div>
+
+      <div class="phone-scroll-area">
+        <div class="phone-contacts-list" id="phoneContactsList">
+          <div class="phone-my-card">
+            <div class="phone-avatar phone-avatar-my">
+              <span class="phone-mycard-icon"></span>
+            </div>
+            <div class="phone-my-card-text">내 카드</div>
+          </div>
+
+          <div class="phone-contact-section-label">ㄱ</div>
+        </div>
+
+        <div class="phone-contacts-side-index">
+          <span>ㄱ</span>
+          <span>ㄴ</span>
+          <span>ㄷ</span>
+          <span>ㄹ</span>
+          <span>ㅁ</span>
+          <span>ㅂ</span>
+          <span>ㅅ</span>
+          <span>ㅇ</span>
+          <span>ㅈ</span>
+          <span>ㅊ</span>
+          <span>ㅋ</span>
+          <span>ㅌ</span>
+          <span>ㅍ</span>
+          <span>ㅎ</span>
+          <span>A</span>
+          <span>B</span>
+          <span>C</span>
+          <span>D</span>
+          <span>E</span>
+          <span>F</span>
+          <span>G</span>
+          <span>H</span>
+          <span>I</span>
+          <span>J</span>
+          <span>K</span>
+          <span>L</span>
+          <span>M</span>
+          <span>N</span>
+          <span>O</span>
+          <span>P</span>
+          <span>Q</span>
+          <span>R</span>
+          <span>S</span>
+          <span>T</span>
+          <span>U</span>
+          <span>V</span>
+          <span>W</span>
+          <span>X</span>
+          <span>Y</span>
+          <span>Z</span>
+          <span>#</span>
+        </div>
+
+        <div class="phone-contacts-count">155개의 연락처</div>
+      </div>
+    </div>
+
+    <!-- 통화 -->
+    <div class="phone-page phone-recents-page" data-phone-page="recents">
+      <div class="phone-topbar phone-topbar-recents">
+        <button class="phone-edit-btn" type="button" aria-label="편집">편집</button>
+
+        <h2 class="phone-page-title">통화</h2>
+
+        <button class="phone-round-top-btn phone-filter-btn" type="button" aria-label="필터">
+          <span class="phone-drawer-icon"></span>
+        </button>
+      </div>
+
+      <div class="phone-scroll-area">
+        <div class="phone-recents-list" id="phoneRecentsList"></div>
+      </div>
+    </div>
+
+    <!-- 하단 탭바 -->
+    <div class="phone-bottom-bar-wrap">
+      <div class="phone-bottom-bar">
+        <button class="phone-tab-btn" type="button" data-phone-tab="recents" aria-label="통화">
+          <div class="phone-tab-pill">
+            <img src="assets/icons/icon_call_recent.png" alt="" class="phone-tab-icon">
+            <span class="phone-tab-label">통화</span>
+          </div>
+        </button>
+
+        <button class="phone-tab-btn" type="button" data-phone-tab="contacts" aria-label="연락처">
+          <div class="phone-tab-pill">
+            <img src="assets/icons/icon_call_profile.png" alt="" class="phone-tab-icon">
+            <span class="phone-tab-label">연락처</span>
+          </div>
+        </button>
+
+        <button class="phone-tab-btn active" type="button" data-phone-tab="keypad" aria-label="키패드">
+          <div class="phone-tab-pill">
+            <img src="assets/icons/icon_call_keypad.png" alt="" class="phone-tab-icon">
+            <span class="phone-tab-label">키패드</span>
+          </div>
+        </button>
+      </div>
+
+      <button class="phone-search-btn" type="button" aria-label="검색">
+        <img src="assets/icons/icon_call_search.png" alt="" class="phone-search-icon">
+      </button>
+    </div>
+
+  </div>
+</section>
 
     <!-- MESSAGES APP -->
     <section class="screen app-screen" id="messagesScreen">
