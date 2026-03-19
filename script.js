@@ -35,6 +35,7 @@ const glassPopupTitle = document.getElementById("glassPopupTitle");
 const glassPopupText = document.getElementById("glassPopupText");
 const glassPopupTime = document.getElementById("glassPopupTime");
 const glassPopupIcon = document.getElementById("glassPopupIcon");
+const lockActionButtons = document.querySelectorAll(".lock-bottom-actions .round-action");
 
 if (glassPopup) {
   glassPopup.classList.remove("show");
@@ -102,6 +103,44 @@ function hideAllAppScreens() {
   });
 }
 
+function resetPasscodeState() {
+  if (passcodeWrap) {
+    passcodeWrap.classList.remove("shake");
+  }
+  resetInput();
+}
+
+function hidePopupInstantly() {
+  if (!glassPopup) return;
+
+  clearTimeout(showPopup._timer);
+  glassPopup.classList.remove("show");
+  glassPopup.setAttribute("aria-hidden", "true");
+
+  if (glassPopupTitle) glassPopupTitle.textContent = "";
+  if (glassPopupText) glassPopupText.textContent = "";
+  if (glassPopupTime) glassPopupTime.textContent = "";
+}
+
+function initializeScreens() {
+  hideAllAppScreens();
+  hidePopupInstantly();
+  resetPasscodeState();
+
+  if (lockScreen) {
+    lockScreen.classList.add("active");
+    lockScreen.classList.remove("opening", "closing");
+  }
+
+  if (passcodeScreen) {
+    passcodeScreen.classList.remove("active", "opening", "closing");
+  }
+
+  if (homeScreen) {
+    homeScreen.classList.remove("active", "opening", "closing", "app-opening");
+  }
+}
+
 /* =========================
    잠금화면 -> 암호입력
 ========================= */
@@ -130,48 +169,82 @@ if (lockScreen) {
   lockScreen.addEventListener("click", openPasscodeScreen);
 }
 
-/* 위로 드래그 */
+lockActionButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+
+  button.addEventListener("pointerup", (event) => {
+    event.stopPropagation();
+  });
+});
+
+/* 잠금화면 포인터 입력 */
 let startY = 0;
 let currentY = 0;
 let dragging = false;
+let activePointerId = null;
 
-function getPointerY(event) {
-  if (event.touches && event.touches[0]) return event.touches[0].clientY;
-  if (event.changedTouches && event.changedTouches[0]) return event.changedTouches[0].clientY;
-  return event.clientY;
-}
-
-function handleStart(event) {
+function handleLockPointerDown(event) {
+  if (!lockScreen || !lockScreen.classList.contains("active")) return;
   if (isTransitioning) return;
+  if (event.button !== undefined && event.button !== 0) return;
+
   dragging = true;
-  startY = getPointerY(event);
+  activePointerId = event.pointerId ?? null;
+  startY = event.clientY;
   currentY = startY;
 }
 
-function handleMove(event) {
+function handleLockPointerMove(event) {
   if (!dragging) return;
-  currentY = getPointerY(event);
+  if (activePointerId !== null && event.pointerId !== activePointerId) return;
+
+  currentY = event.clientY;
 }
 
-function handleEnd() {
+function handleLockPointerUp(event) {
   if (!dragging) return;
+  if (activePointerId !== null && event.pointerId !== activePointerId) return;
+
   dragging = false;
+  activePointerId = null;
 
   const diff = startY - currentY;
-  if (diff > 20) {
+  const tapped = Math.abs(diff) < 14;
+  const swipedUp = diff > 20;
+
+  if (tapped || swipedUp) {
     openPasscodeScreen();
   }
 }
 
-if (lockScreen) {
-  lockScreen.addEventListener("touchstart", handleStart, { passive: true });
-  lockScreen.addEventListener("touchmove", handleMove, { passive: true });
-  lockScreen.addEventListener("touchend", handleEnd);
-  lockScreen.addEventListener("mousedown", handleStart);
+function cancelLockPointer() {
+  dragging = false;
+  activePointerId = null;
 }
 
-window.addEventListener("mousemove", handleMove);
-window.addEventListener("mouseup", handleEnd);
+if (lockScreen) {
+  lockScreen.addEventListener("pointerdown", handleLockPointerDown);
+  lockScreen.addEventListener("pointermove", handleLockPointerMove);
+  lockScreen.addEventListener("pointerup", handleLockPointerUp);
+  lockScreen.addEventListener("pointercancel", cancelLockPointer);
+}
+
+window.addEventListener("pointerup", handleLockPointerUp);
+
+document.addEventListener("keydown", (event) => {
+  if (!passcodeScreen || !passcodeScreen.classList.contains("active")) return;
+
+  if (/^[0-9]$/.test(event.key)) {
+    pressKey(event.key);
+    return;
+  }
+
+  if (event.key === "Backspace" || event.key === "Delete") {
+    deleteKey();
+  }
+});
 
 /* =========================
    비밀번호 점
@@ -355,8 +428,18 @@ async function openAppWithAnimation(button) {
   isAppAnimating = true;
 
   if (targetScreen.id === "memoScreen") {
-    targetScreen.classList.remove("detail-open");
+    if (typeof window.resetMemoAppState === "function") {
+      window.resetMemoAppState();
+    } else {
+      targetScreen.classList.remove("detail-open");
+    }
   }
+
+  if (targetScreen.id === "phoneScreen" && typeof window.resetPhoneAppState === "function") {
+    window.resetPhoneAppState();
+  }
+
+  hidePopupInstantly();
 
   button.classList.add("launching");
   homeScreen.classList.add("app-opening");
@@ -394,6 +477,7 @@ async function backToHomeFromApp() {
 
   currentAppScreen.classList.remove("closing");
   homeScreen.classList.add("active", "opening");
+  hidePopupInstantly();
 
   await wait(260);
 
@@ -795,6 +879,7 @@ dummyAppButtons.forEach((button) => {
   }
 
   renderMemoLists();
+  window.resetMemoAppState = () => memoScreen.classList.remove("detail-open");
 })();
 
 /* =========================
@@ -921,7 +1006,13 @@ dummyAppButtons.forEach((button) => {
     });
   });
 
+  window.resetPhoneAppState = () => {
+    setPhonePage("keypad");
+  };
+
   renderContacts();
   renderRecents();
-  setPhonePage("keypad");
+  window.resetPhoneAppState();
 })();
+
+initializeScreens();
