@@ -580,6 +580,8 @@ dummyAppButtons.forEach((button) => {
           <p>- 기념품?</p>
           <p>인형 같은거</p>
           <p><a href="#">https://youtu.be/1c7_NYeUF1g?si=9J2VeKzTrzUdON_g</a></p>
+          <p><a href="#">https://youtu.be/U_22eCKqBik?si=FXvPGkbMVdsAX2B-</a></p>
+
         </div>
       `
     },
