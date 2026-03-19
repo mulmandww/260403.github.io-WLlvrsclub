@@ -1017,7 +1017,16 @@ dummyAppButtons.forEach((button) => {
   function renderContacts() {
     if (!phoneContactsList) return;
 
-    let html = "";
+    const myCard = `
+      <div class="phone-my-card">
+        <div class="phone-avatar phone-avatar-my">
+          <span class="phone-mycard-icon"></span>
+        </div>
+        <div class="phone-my-card-text">내 카드</div>
+      </div>
+    `;
+
+    let html = myCard;
     let currentGroup = "";
 
     contactNames.forEach((name) => {
@@ -1039,7 +1048,7 @@ dummyAppButtons.forEach((button) => {
       `;
     });
 
-    phoneContactsList.insertAdjacentHTML("beforeend", html);
+    phoneContactsList.innerHTML = html;
   }
 
   function renderRecents() {
@@ -1090,13 +1099,16 @@ dummyAppButtons.forEach((button) => {
   }
 
   phoneTabButtons.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
       setPhonePage(button.dataset.phoneTab);
     });
   });
 
   phoneKeyButtons.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+
       button.classList.remove("tap");
       void button.offsetWidth;
       button.classList.add("tap");
@@ -1106,6 +1118,10 @@ dummyAppButtons.forEach((button) => {
       }, 140);
     });
   });
+
+  window.resetPhoneAppState = function () {
+    setPhonePage("keypad");
+  };
 
   renderContacts();
   renderRecents();
