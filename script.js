@@ -246,6 +246,19 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+document.addEventListener("keydown", (event) => {
+  if (!passcodeScreen || !passcodeScreen.classList.contains("active")) return;
+
+  if (/^[0-9]$/.test(event.key)) {
+    pressKey(event.key);
+    return;
+  }
+
+  if (event.key === "Backspace" || event.key === "Delete") {
+    deleteKey();
+  }
+});
+
 /* =========================
    비밀번호 점
 ========================= */
