@@ -174,53 +174,77 @@ lockActionButtons.forEach((button) => {
     event.stopPropagation();
   });
 
-  button.addEventListener("touchend", (event) => {
+  button.addEventListener("pointerup", (event) => {
     event.stopPropagation();
   });
 });
 
-/* 위로 드래그 */
+/* 잠금화면 포인터 입력 */
 let startY = 0;
 let currentY = 0;
 let dragging = false;
+let activePointerId = null;
 
-function getPointerY(event) {
-  if (event.touches && event.touches[0]) return event.touches[0].clientY;
-  if (event.changedTouches && event.changedTouches[0]) return event.changedTouches[0].clientY;
-  return event.clientY;
-}
-
-function handleStart(event) {
+function handleLockPointerDown(event) {
+  if (!lockScreen || !lockScreen.classList.contains("active")) return;
   if (isTransitioning) return;
+  if (event.button !== undefined && event.button !== 0) return;
+
   dragging = true;
-  startY = getPointerY(event);
+  activePointerId = event.pointerId ?? null;
+  startY = event.clientY;
   currentY = startY;
 }
 
-function handleMove(event) {
+function handleLockPointerMove(event) {
   if (!dragging) return;
-  currentY = getPointerY(event);
+  if (activePointerId !== null && event.pointerId !== activePointerId) return;
+
+  currentY = event.clientY;
 }
 
-function handleEnd() {
+function handleLockPointerUp(event) {
   if (!dragging) return;
+  if (activePointerId !== null && event.pointerId !== activePointerId) return;
+
   dragging = false;
+  activePointerId = null;
 
   const diff = startY - currentY;
-  if (diff > 20) {
+  const tapped = Math.abs(diff) < 14;
+  const swipedUp = diff > 20;
+
+  if (tapped || swipedUp) {
     openPasscodeScreen();
   }
 }
 
-if (lockScreen) {
-  lockScreen.addEventListener("touchstart", handleStart, { passive: true });
-  lockScreen.addEventListener("touchmove", handleMove, { passive: true });
-  lockScreen.addEventListener("touchend", handleEnd);
-  lockScreen.addEventListener("mousedown", handleStart);
+function cancelLockPointer() {
+  dragging = false;
+  activePointerId = null;
 }
 
-window.addEventListener("mousemove", handleMove);
-window.addEventListener("mouseup", handleEnd);
+if (lockScreen) {
+  lockScreen.addEventListener("pointerdown", handleLockPointerDown);
+  lockScreen.addEventListener("pointermove", handleLockPointerMove);
+  lockScreen.addEventListener("pointerup", handleLockPointerUp);
+  lockScreen.addEventListener("pointercancel", cancelLockPointer);
+}
+
+window.addEventListener("pointerup", handleLockPointerUp);
+
+document.addEventListener("keydown", (event) => {
+  if (!passcodeScreen || !passcodeScreen.classList.contains("active")) return;
+
+  if (/^[0-9]$/.test(event.key)) {
+    pressKey(event.key);
+    return;
+  }
+
+  if (event.key === "Backspace" || event.key === "Delete") {
+    deleteKey();
+  }
+});
 
 document.addEventListener("keydown", (event) => {
   if (!passcodeScreen || !passcodeScreen.classList.contains("active")) return;

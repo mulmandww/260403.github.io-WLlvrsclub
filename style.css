@@ -109,6 +109,7 @@ img {
   border-radius: 20px;
   background: #000;
   z-index: 50;
+  pointer-events: none;
 }
 
 /* ============================= */
@@ -363,7 +364,7 @@ img {
 .lock-screen {
   z-index: 5;
   cursor: pointer;
-  touch-action: none;
+  touch-action: manipulation;
 }
 
 .lock-content {
