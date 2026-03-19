@@ -2,6 +2,7 @@
    요소
 ========================= */
 const lockScreen = document.getElementById("lockScreen");
+const lockScreenHitArea = document.getElementById("lockScreenHitArea");
 const passcodeScreen = document.getElementById("passcodeScreen");
 const homeScreen = document.getElementById("homeScreen");
 
@@ -296,6 +297,9 @@ function deleteKey() {
   updateDots();
 }
 
+window.pressKey = pressKey;
+window.deleteKey = deleteKey;
+
 /* =========================
    비밀번호 검사
 ========================= */
@@ -346,6 +350,12 @@ async function unlockToHome() {
 const keypadButtons = document.querySelectorAll(".key");
 keypadButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    const num = button.querySelector(".num")?.textContent?.trim();
+
+    if (num && /^\d$/.test(num)) {
+      pressKey(num);
+    }
+
     button.classList.remove("tap");
     void button.offsetWidth;
     button.classList.add("tap");

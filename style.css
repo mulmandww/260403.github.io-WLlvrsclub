@@ -369,7 +369,7 @@ img {
 
 .lock-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -451,7 +451,7 @@ img {
   left: 0;
   right: 0;
   bottom: calc(86px + var(--safe-bottom));
-  z-index: 3;
+  z-index: 4;
   display: flex;
   justify-content: space-between;
   padding-left: calc(28px + var(--safe-left));
@@ -562,16 +562,18 @@ img {
 }
 
 .keypad {
+  position: relative;
+  z-index: 3;
   display: grid;
-  grid-template-columns: repeat(3, 94px);
-  gap: 18px 14px;
+  grid-template-columns: repeat(3, var(--passcode-key-size));
+  gap: var(--passcode-key-gap-y) var(--passcode-key-gap-x);
   justify-content: center;
   align-items: center;
 }
 
 .key {
-  width: 94px;
-  height: 94px;
+  width: var(--passcode-key-size);
+  height: var(--passcode-key-size);
   border-radius: 50%;
   position: relative;
   overflow: hidden;
@@ -666,8 +668,8 @@ img {
 }
 
 .key-empty {
-  width: 94px;
-  height: 94px;
+  width: var(--passcode-key-size);
+  height: var(--passcode-key-size);
 }
 
 /* ============================= */
