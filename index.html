@@ -35,7 +35,6 @@
     <section class="screen lock-screen active" id="lockScreen">
       <div class="wallpaper wallpaper-lock"></div>
       <div class="lock-overlay-top"></div>
-      <button class="lock-screen-hit-area" id="lockScreenHitArea" type="button" aria-label="잠금 화면 열기"></button>
 
       <div class="lock-content">
         <div class="lock-icon"></div>
@@ -79,53 +78,53 @@
         </div>
 
         <div class="keypad">
-          <button class="key key-number" type="button">
+          <button class="key key-number" type="button" onclick="pressKey('1')">
             <span class="num">1</span>
           </button>
 
-          <button class="key key-number" type="button">
+          <button class="key key-number" type="button" onclick="pressKey('2')">
             <span class="num">2</span>
             <span class="letters">ABC</span>
           </button>
 
-          <button class="key key-number" type="button">
+          <button class="key key-number" type="button" onclick="pressKey('3')">
             <span class="num">3</span>
             <span class="letters">DEF</span>
           </button>
 
-          <button class="key key-number" type="button">
+          <button class="key key-number" type="button" onclick="pressKey('4')">
             <span class="num">4</span>
             <span class="letters">GHI</span>
           </button>
 
-          <button class="key key-number" type="button">
+          <button class="key key-number" type="button" onclick="pressKey('5')">
             <span class="num">5</span>
             <span class="letters">JKL</span>
           </button>
 
-          <button class="key key-number" type="button">
+          <button class="key key-number" type="button" onclick="pressKey('6')">
             <span class="num">6</span>
             <span class="letters">MNO</span>
           </button>
 
-          <button class="key key-number" type="button">
+          <button class="key key-number" type="button" onclick="pressKey('7')">
             <span class="num">7</span>
             <span class="letters">PQRS</span>
           </button>
 
-          <button class="key key-number" type="button">
+          <button class="key key-number" type="button" onclick="pressKey('8')">
             <span class="num">8</span>
             <span class="letters">TUV</span>
           </button>
 
-          <button class="key key-number" type="button">
+          <button class="key key-number" type="button" onclick="pressKey('9')">
             <span class="num">9</span>
             <span class="letters">WXYZ</span>
           </button>
 
           <div class="key-empty"></div>
 
-          <button class="key key-number" type="button">
+          <button class="key key-number" type="button" onclick="pressKey('0')">
             <span class="num">0</span>
           </button>
 
@@ -335,316 +334,72 @@
     <!-- CALENDAR APP -->
     <section class="screen app-screen" id="calendarScreen">
       <div class="app-ui">
-        <div class="app-header app-header-title">
+        <div class="app-header">
           <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
             <span class="back-arrow"></span>
           </button>
-          <div class="app-header-copy">
-            <p class="app-header-eyebrow">Calendar</p>
-            <h1 class="app-header-title-text">캘린더</h1>
-          </div>
         </div>
-        <div class="app-content app-placeholder-content">
-          <div class="app-placeholder-card">
-            <p class="app-placeholder-label">준비 중</p>
-            <h2>월별 일정 화면을 안정적으로 연결해둘 자리입니다.</h2>
-            <p>현재는 구조 복구를 우선해, 앱이 열릴 때 빈 화면이나 검은 화면 없이 자연스럽게 진입하도록 유지합니다.</p>
-          </div>
-        </div>
+        <div class="app-content"></div>
       </div>
     </section>
 
     <!-- PHOTOS APP -->
     <section class="screen app-screen" id="photosScreen">
       <div class="app-ui">
-        <div class="app-header app-header-title">
+        <div class="app-header">
           <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
             <span class="back-arrow"></span>
           </button>
-          <div class="app-header-copy">
-            <p class="app-header-eyebrow">Photos</p>
-            <h1 class="app-header-title-text">사진</h1>
-          </div>
         </div>
-        <div class="app-content app-placeholder-content">
-          <div class="app-placeholder-card">
-            <p class="app-placeholder-label">준비 중</p>
-            <h2>사진 앱 자리도 안정적인 전체 화면으로 유지됩니다.</h2>
-            <p>추후 앨범/그리드 UI를 넣더라도 현재의 홈 → 앱 전환 흐름은 그대로 재사용할 수 있습니다.</p>
-          </div>
-        </div>
+        <div class="app-content"></div>
       </div>
     </section>
 
     <!-- INSTAGRAM APP -->
     <section class="screen app-screen" id="instagramScreen">
       <div class="app-ui">
-        <div class="app-header app-header-title">
+        <div class="app-header">
           <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
             <span class="back-arrow"></span>
           </button>
-          <div class="app-header-copy">
-            <p class="app-header-eyebrow">Instagram</p>
-            <h1 class="app-header-title-text">Instagram</h1>
-          </div>
         </div>
-        <div class="app-content app-placeholder-content">
-          <div class="app-placeholder-card">
-            <p class="app-placeholder-label">준비 중</p>
-            <h2>인스타그램 화면도 깨지지 않는 전체 앱 레이어로 고정했습니다.</h2>
-            <p>실제 피드/스토리 UI를 추가하기 전까지 현재 전환과 복귀 동작을 안정적으로 보존합니다.</p>
-          </div>
-        </div>
+        <div class="app-content"></div>
       </div>
     </section>
 
     <!-- PHONE APP -->
-    <section class="screen app-screen phone-app-screen" id="phoneScreen">
-      <div class="app-ui phone-ui">
-
-        <!-- 키패드 -->
-        <div class="phone-page phone-keypad-page active" data-phone-page="keypad">
-          <div class="phone-topbar phone-topbar-keypad">
-            <button class="back-home app-back-btn phone-app-back" type="button" aria-label="뒤로가기">
-              <span class="back-arrow"></span>
-            </button>
-          </div>
-
-          <div class="phone-page-inner phone-keypad-inner">
-            <div class="phone-keypad-grid">
-              <button class="phone-key-btn" type="button">
-                <span class="phone-key-num">1</span>
-              </button>
-
-              <button class="phone-key-btn" type="button">
-                <span class="phone-key-num">2</span>
-                <span class="phone-key-sub">ABC</span>
-              </button>
-
-              <button class="phone-key-btn" type="button">
-                <span class="phone-key-num">3</span>
-                <span class="phone-key-sub">DEF</span>
-              </button>
-
-              <button class="phone-key-btn" type="button">
-                <span class="phone-key-num">4</span>
-                <span class="phone-key-sub">GHI</span>
-              </button>
-
-              <button class="phone-key-btn" type="button">
-                <span class="phone-key-num">5</span>
-                <span class="phone-key-sub">JKL</span>
-              </button>
-
-              <button class="phone-key-btn" type="button">
-                <span class="phone-key-num">6</span>
-                <span class="phone-key-sub">MNO</span>
-              </button>
-
-              <button class="phone-key-btn" type="button">
-                <span class="phone-key-num">7</span>
-                <span class="phone-key-sub">PQRS</span>
-              </button>
-
-              <button class="phone-key-btn" type="button">
-                <span class="phone-key-num">8</span>
-                <span class="phone-key-sub">TUV</span>
-              </button>
-
-              <button class="phone-key-btn" type="button">
-                <span class="phone-key-num">9</span>
-                <span class="phone-key-sub">WXYZ</span>
-              </button>
-
-              <button class="phone-key-btn" type="button">
-                <span class="phone-key-num">*</span>
-              </button>
-
-              <button class="phone-key-btn" type="button">
-                <span class="phone-key-num">0</span>
-                <span class="phone-key-sub plus">+</span>
-              </button>
-
-              <button class="phone-key-btn" type="button">
-                <span class="phone-key-num">#</span>
-              </button>
-            </div>
-
-            <button class="phone-call-main-btn" type="button" aria-label="통화">
-              <img src="assets/icons/icon_call_green.png" alt="" class="phone-call-main-icon">
-            </button>
-          </div>
-        </div>
-
-        <!-- 연락처 -->
-        <div class="phone-page phone-contacts-page" data-phone-page="contacts">
-          <div class="phone-topbar phone-topbar-contacts">
-            <button class="back-home app-back-btn phone-app-back" type="button" aria-label="뒤로가기">
-              <span class="back-arrow"></span>
-            </button>
-
-            <h2 class="phone-page-title">연락처</h2>
-
-            <button class="phone-round-top-btn phone-add-btn" type="button" aria-label="추가">
-              <span class="phone-plus-icon"></span>
-            </button>
-          </div>
-
-          <div class="phone-scroll-area">
-            <div class="phone-contacts-list" id="phoneContactsList">
-              <div class="phone-my-card">
-                <div class="phone-avatar phone-avatar-my">
-                  <span class="phone-mycard-icon"></span>
-                </div>
-                <div class="phone-my-card-text">내 카드</div>
-              </div>
-
-              <div class="phone-contact-section-label">ㄱ</div>
-            </div>
-
-            <div class="phone-contacts-side-index">
-              <span>ㄱ</span>
-              <span>ㄴ</span>
-              <span>ㄷ</span>
-              <span>ㄹ</span>
-              <span>ㅁ</span>
-              <span>ㅂ</span>
-              <span>ㅅ</span>
-              <span>ㅇ</span>
-              <span>ㅈ</span>
-              <span>ㅊ</span>
-              <span>ㅋ</span>
-              <span>ㅌ</span>
-              <span>ㅍ</span>
-              <span>ㅎ</span>
-              <span>A</span>
-              <span>B</span>
-              <span>C</span>
-              <span>D</span>
-              <span>E</span>
-              <span>F</span>
-              <span>G</span>
-              <span>H</span>
-              <span>I</span>
-              <span>J</span>
-              <span>K</span>
-              <span>L</span>
-              <span>M</span>
-              <span>N</span>
-              <span>O</span>
-              <span>P</span>
-              <span>Q</span>
-              <span>R</span>
-              <span>S</span>
-              <span>T</span>
-              <span>U</span>
-              <span>V</span>
-              <span>W</span>
-              <span>X</span>
-              <span>Y</span>
-              <span>Z</span>
-              <span>#</span>
-            </div>
-
-            <div class="phone-contacts-count">155개의 연락처</div>
-          </div>
-        </div>
-
-        <!-- 통화 -->
-        <div class="phone-page phone-recents-page" data-phone-page="recents">
-          <div class="phone-topbar phone-topbar-recents">
-            <button class="back-home app-back-btn phone-app-back" type="button" aria-label="뒤로가기">
-              <span class="back-arrow"></span>
-            </button>
-
-            <button class="phone-edit-btn" type="button" aria-label="편집">편집</button>
-
-            <h2 class="phone-page-title">통화</h2>
-
-            <button class="phone-round-top-btn phone-filter-btn" type="button" aria-label="필터">
-              <span class="phone-drawer-icon"></span>
-            </button>
-          </div>
-
-          <div class="phone-scroll-area">
-            <div class="phone-recents-list" id="phoneRecentsList"></div>
-          </div>
-        </div>
-
-        <!-- 하단 탭바 -->
-        <div class="phone-bottom-bar-wrap">
-          <div class="phone-bottom-bar">
-            <button class="phone-tab-btn" type="button" data-phone-tab="recents" aria-label="통화">
-              <div class="phone-tab-pill">
-                <img src="assets/icons/icon_call_recent.png" alt="" class="phone-tab-icon">
-                <span class="phone-tab-label">통화</span>
-              </div>
-            </button>
-
-            <button class="phone-tab-btn" type="button" data-phone-tab="contacts" aria-label="연락처">
-              <div class="phone-tab-pill">
-                <img src="assets/icons/icon_call_profile.png" alt="" class="phone-tab-icon">
-                <span class="phone-tab-label">연락처</span>
-              </div>
-            </button>
-
-            <button class="phone-tab-btn active" type="button" data-phone-tab="keypad" aria-label="키패드">
-              <div class="phone-tab-pill">
-                <img src="assets/icons/icon_call_keypad.png" alt="" class="phone-tab-icon">
-                <span class="phone-tab-label">키패드</span>
-              </div>
-            </button>
-          </div>
-
-          <button class="phone-search-btn" type="button" aria-label="검색">
-            <img src="assets/icons/icon_call_search.png" alt="" class="phone-search-icon">
+    <section class="screen app-screen" id="phoneScreen">
+      <div class="app-ui">
+        <div class="app-header">
+          <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
+            <span class="back-arrow"></span>
           </button>
         </div>
-
+        <div class="app-content"></div>
       </div>
     </section>
 
     <!-- MESSAGES APP -->
     <section class="screen app-screen" id="messagesScreen">
       <div class="app-ui">
-        <div class="app-header app-header-title">
+        <div class="app-header">
           <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
             <span class="back-arrow"></span>
           </button>
-          <div class="app-header-copy">
-            <p class="app-header-eyebrow">Messages</p>
-            <h1 class="app-header-title-text">메시지</h1>
-          </div>
         </div>
-        <div class="app-content app-placeholder-content">
-          <div class="app-placeholder-card">
-            <p class="app-placeholder-label">준비 중</p>
-            <h2>메시지 앱은 안정적인 전체 화면 플레이스홀더로 연결됩니다.</h2>
-            <p>향후 대화 목록 / 채팅 화면을 추가해도 현재의 홈 복귀 흐름을 그대로 유지할 수 있습니다.</p>
-          </div>
-        </div>
+        <div class="app-content"></div>
       </div>
     </section>
 
     <!-- KAKAO APP -->
     <section class="screen app-screen" id="kakaoScreen">
       <div class="app-ui">
-        <div class="app-header app-header-title">
+        <div class="app-header">
           <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
             <span class="back-arrow"></span>
           </button>
-          <div class="app-header-copy">
-            <p class="app-header-eyebrow">KakaoTalk</p>
-            <h1 class="app-header-title-text">카카오톡</h1>
-          </div>
         </div>
-        <div class="app-content app-placeholder-content">
-          <div class="app-placeholder-card">
-            <p class="app-placeholder-label">준비 중</p>
-            <h2>카카오톡 앱도 깨지지 않는 레이어로 유지합니다.</h2>
-            <p>현재는 안정적인 진입/복귀와 화면 계층 보존이 목적이며, 이후 실제 채팅 UI를 덧붙이기 쉽도록 정리했습니다.</p>
-          </div>
-        </div>
+        <div class="app-content"></div>
       </div>
     </section>
 
