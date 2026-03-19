@@ -798,3 +798,133 @@ dummyAppButtons.forEach((button) => {
 
   renderMemoLists();
 })();
+
+/* =========================
+   PHONE APP
+========================= */
+(function initPhoneApp() {
+  const phoneScreen = document.getElementById("phoneScreen");
+  if (!phoneScreen) return;
+
+  const phonePages = phoneScreen.querySelectorAll(".phone-page");
+  const phoneTabButtons = phoneScreen.querySelectorAll(".phone-tab-btn");
+  const phoneContactsList = document.getElementById("phoneContactsList");
+  const phoneRecentsList = document.getElementById("phoneRecentsList");
+
+  const contactNames = [
+    "강덕철","강영준","강준혁","강태훈","강현우","고승민 매니저님","고승연","고윤호","고재원",
+    "곽동욱","곽승현","곽지석","구정우","구태현","구현호","권도형","권민규","권성준","권재성","권찬",
+    "김도훈","김도훈(idntt)","김동현","김도현","김민석","김민석(큐브)","김민아","김민철","김성민","김영훈","김우진",
+    "김재형","김준민","김준수","김지훈","김춘심","김태민","김현준","나윤서","남기현","남성호","남재훈","남주혁",
+    "노재윤","노현수","누나","리즈하오","문동주","문성윤","문정민","문진영","문태섭","박동욱","박성호","박승찬",
+    "박영진","박원준","박준형","박진수","박한빈","박현수","박효정","배준영","백승호","백성찬","백재민","변민규",
+    "변성환","서동윤","서민주","서재원","서재원(빌)","서진혁","성한빈","성현우","신동현","신민규","신성우","신재훈",
+    "신태현","아빠","안동욱","안현석","양민재","양재민","양준혁","엄마","오성준","오재형","오진수","오태경","오현수",
+    "유강민","유상현","유상현(쏘스)","유지혜","유채아","유태섭","윤성환","윤재성","윤태웅","윤현수","이모","이성준",
+    "이연성","이영우","이재민","이준서","이준형","이진수","이진아","이태경","이현석","임민규","임상현","장기현",
+    "장성환","장재성","장준기","장한음","전이정","전재민","전진수","전영우","전태경","정민규","정재원","정진영",
+    "정예준","조기현","조영민","천보원","최경욱 매니저님","최립우","최미정","최성호","최재민","최재민(큐브)",
+    "최진수","최준형","최태경","최현석","판저이","한재원","한태산","허재성","홍성준","황재민",
+    "김준서 ALD1","롱이♥ ALD1","이리오 ALD1","이상원 ALD1","아르노 ALD1","정상현 ALD1","조우안신 ALD1"
+  ];
+
+  const recents = [
+    { name: "롱이❤️ ALD1", sub: "↙ 휴대전화", date: "어제" },
+    { name: "롱이❤️ ALD1", sub: "↙ 휴대전화", date: "목요일" },
+    { name: "롱이❤️ ALD1", sub: "↙ 휴대전화", date: "수요일" },
+    { name: "조우안신 ALD1", sub: "↗ 휴대전화 (2)", date: "수요일" },
+    { name: "정상현 ALD1", sub: "↙ 휴대전화", date: "수요일" },
+    { name: "롱이❤️ ALD1", sub: "↗ 휴대전화", date: "수요일" },
+    { name: "정상현 ALD1", sub: "↙ 휴대전화", date: "화요일" },
+    { name: "02-2156-3520", sub: "↙ 대한민국", date: "월요일", red: true, avatar: "default" },
+    { name: "롱이❤️ ALD1", sub: "↗ 휴대전화 (3)", date: "일요일" }
+  ];
+
+  function getAvatarChar(name) {
+    const clean = name.trim();
+    return clean.charAt(0);
+  }
+
+  function renderContacts() {
+    if (!phoneContactsList) return;
+
+    const rows = contactNames.map((name) => {
+      const isALD = name.includes("ALD1");
+      return `
+        <div class="phone-contact-row">
+          <div class="phone-avatar">
+            <span class="phone-avatar-char">${getAvatarChar(name)}</span>
+          </div>
+          <div class="phone-contact-name">${isALD ? `<strong>${name}</strong>` : name}</div>
+        </div>
+      `;
+    }).join("");
+
+    phoneContactsList.insertAdjacentHTML("beforeend", rows);
+  }
+
+  function renderRecents() {
+    if (!phoneRecentsList) return;
+
+    phoneRecentsList.innerHTML = recents.map((item) => {
+      const isDefault = item.avatar === "default";
+      return `
+        <div class="phone-recent-row">
+          <div class="phone-avatar ${isDefault ? "phone-avatar-my" : ""}">
+            ${
+              isDefault
+                ? '<span class="phone-mycard-icon"></span>'
+                : `<span class="phone-avatar-char">${getAvatarChar(item.name)}</span>`
+            }
+          </div>
+
+          <div class="phone-recent-main">
+            <div class="phone-recent-name ${item.red ? "red" : ""}">
+              ${item.red ? item.name : `<strong>${item.name}</strong>`}
+            </div>
+            <div class="phone-recent-sub">${item.sub}</div>
+          </div>
+
+          <div class="phone-recent-meta">${item.date}</div>
+
+          <button class="phone-recent-call-btn" type="button" aria-label="통화">
+            <img src="assets/icons/icon_call_blue.png" alt="" class="phone-recent-call-icon">
+          </button>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function setPhonePage(pageName) {
+    phonePages.forEach((page) => {
+      page.classList.toggle("active", page.dataset.phonePage === pageName);
+    });
+
+    phoneTabButtons.forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.phoneTab === pageName);
+    });
+  }
+
+  phoneTabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      setPhonePage(button.dataset.phoneTab);
+    });
+  });
+
+  const keypadButtons = phoneScreen.querySelectorAll(".phone-key-btn");
+  keypadButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      button.classList.remove("tap");
+      void button.offsetWidth;
+      button.classList.add("tap");
+
+      setTimeout(() => {
+        button.classList.remove("tap");
+      }, 140);
+    });
+  });
+
+  renderContacts();
+  renderRecents();
+  setPhonePage("keypad");
+})();
