@@ -11,6 +11,10 @@
     calc(100vw - 24px),
     calc((100dvh - 24px) * var(--phone-width) / var(--phone-height))
   );
+
+  --passcode-key-size: 94px;
+  --passcode-key-gap-x: 14px;
+  --passcode-key-gap-y: 18px;
 }
 
 /* ============================= */
@@ -489,6 +493,17 @@ img {
   background: rgba(255, 255, 255, 0.96);
   z-index: 4;
   pointer-events: none;
+}
+
+.lock-screen-hit-area {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: none;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
 }
 
 /* ============================= */
