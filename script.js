@@ -362,6 +362,10 @@ async function openAppWithAnimation(button) {
     targetScreen.classList.remove("detail-open");
   }
 
+  if (targetScreen.id === "phoneScreen" && typeof window.resetPhoneAppState === "function") {
+    window.resetPhoneAppState();
+  }
+
   button.classList.add("launching");
   homeScreen.classList.add("app-opening");
 
@@ -377,6 +381,7 @@ async function openAppWithAnimation(button) {
   targetScreen.classList.remove("opening");
   isAppAnimating = false;
 }
+
 
 /* =========================
    앱 화면 -> 홈화면
