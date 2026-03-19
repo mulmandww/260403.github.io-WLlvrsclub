@@ -2,7 +2,6 @@
    요소
 ========================= */
 const lockScreen = document.getElementById("lockScreen");
-const lockScreenHitArea = document.getElementById("lockScreenHitArea");
 const passcodeScreen = document.getElementById("passcodeScreen");
 const homeScreen = document.getElementById("homeScreen");
 
@@ -36,7 +35,6 @@ const glassPopupTitle = document.getElementById("glassPopupTitle");
 const glassPopupText = document.getElementById("glassPopupText");
 const glassPopupTime = document.getElementById("glassPopupTime");
 const glassPopupIcon = document.getElementById("glassPopupIcon");
-const lockActionButtons = document.querySelectorAll(".lock-bottom-actions .round-action");
 
 if (glassPopup) {
   glassPopup.classList.remove("show");
@@ -104,44 +102,6 @@ function hideAllAppScreens() {
   });
 }
 
-function resetPasscodeState() {
-  if (passcodeWrap) {
-    passcodeWrap.classList.remove("shake");
-  }
-  resetInput();
-}
-
-function hidePopupInstantly() {
-  if (!glassPopup) return;
-
-  clearTimeout(showPopup._timer);
-  glassPopup.classList.remove("show");
-  glassPopup.setAttribute("aria-hidden", "true");
-
-  if (glassPopupTitle) glassPopupTitle.textContent = "";
-  if (glassPopupText) glassPopupText.textContent = "";
-  if (glassPopupTime) glassPopupTime.textContent = "";
-}
-
-function initializeScreens() {
-  hideAllAppScreens();
-  hidePopupInstantly();
-  resetPasscodeState();
-
-  if (lockScreen) {
-    lockScreen.classList.add("active");
-    lockScreen.classList.remove("opening", "closing");
-  }
-
-  if (passcodeScreen) {
-    passcodeScreen.classList.remove("active", "opening", "closing");
-  }
-
-  if (homeScreen) {
-    homeScreen.classList.remove("active", "opening", "closing", "app-opening");
-  }
-}
-
 /* =========================
    잠금화면 -> 암호입력
 ========================= */
@@ -166,73 +126,63 @@ async function openPasscodeScreen() {
   isTransitioning = false;
 }
 
-/* 잠금화면 포인터 입력 */
+if (lockScreen) {
+  lockScreen.addEventListener("click", openPasscodeScreen);
+}
+
+/* 위로 드래그 */
 let startY = 0;
 let currentY = 0;
 let dragging = false;
-let activePointerId = null;
 
-function handleLockPointerDown(event) {
-  if (!lockScreen || !lockScreen.classList.contains("active")) return;
+function getPointerY(event) {
+  if (event.touches && event.touches[0]) return event.touches[0].clientY;
+  if (event.changedTouches && event.changedTouches[0]) return event.changedTouches[0].clientY;
+  return event.clientY;
+}
+
+function handleStart(event) {
   if (isTransitioning) return;
-  if (event.button !== undefined && event.button !== 0) return;
-
   dragging = true;
-  activePointerId = event.pointerId ?? null;
-  startY = event.clientY;
+  startY = getPointerY(event);
   currentY = startY;
 }
 
-function handleLockPointerMove(event) {
+function handleMove(event) {
   if (!dragging) return;
-  if (activePointerId !== null && event.pointerId !== activePointerId) return;
-
-  currentY = event.clientY;
+  currentY = getPointerY(event);
 }
 
-function handleLockPointerUp(event) {
+function handleEnd() {
   if (!dragging) return;
-  if (activePointerId !== null && event.pointerId !== activePointerId) return;
-
   dragging = false;
-  activePointerId = null;
 
   const diff = startY - currentY;
-  const tapped = Math.abs(diff) < 14;
-  const swipedUp = diff > 20;
-
-  if (tapped || swipedUp) {
-    event.preventDefault();
+  if (diff > 20) {
     openPasscodeScreen();
   }
 }
 
-function cancelLockPointer() {
-  dragging = false;
-  activePointerId = null;
+if (lockScreen) {
+  lockScreen.addEventListener("touchstart", handleStart, { passive: true });
+  lockScreen.addEventListener("touchmove", handleMove, { passive: true });
+  lockScreen.addEventListener("touchend", handleEnd);
+  lockScreen.addEventListener("mousedown", handleStart);
 }
 
-if (lockScreenHitArea) {
-  lockScreenHitArea.addEventListener("click", (event) => {
-    event.preventDefault();
-    openPasscodeScreen();
-  });
-
-  lockScreenHitArea.addEventListener("pointerdown", handleLockPointerDown);
-  lockScreenHitArea.addEventListener("pointermove", handleLockPointerMove);
-  lockScreenHitArea.addEventListener("pointerup", handleLockPointerUp);
-  lockScreenHitArea.addEventListener("pointercancel", cancelLockPointer);
-}
-
-window.addEventListener("pointerup", handleLockPointerUp);
-
+window.addEventListener("mousemove", handleMove);
+window.addEventListener("mouseup", handleEnd);
 
 /* =========================
    비밀번호 점
 ========================= */
 function updateDots() {
   dots.forEach((dot, index) => {
-    dot.classList.toggle("filled", index < currentInput.length);
+    if (index < currentInput.length) {
+      dot.classList.add("filled");
+    } else {
+      dot.classList.remove("filled");
+    }
   });
 }
 
@@ -263,9 +213,6 @@ function deleteKey() {
   currentInput = currentInput.slice(0, -1);
   updateDots();
 }
-
-window.pressKey = pressKey;
-window.deleteKey = deleteKey;
 
 /* =========================
    비밀번호 검사
@@ -317,12 +264,6 @@ async function unlockToHome() {
 const keypadButtons = document.querySelectorAll(".key");
 keypadButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const num = button.querySelector(".num")?.textContent?.trim();
-
-    if (num && /^\d$/.test(num)) {
-      pressKey(num);
-    }
-
     button.classList.remove("tap");
     void button.offsetWidth;
     button.classList.add("tap");
@@ -418,18 +359,8 @@ async function openAppWithAnimation(button) {
   isAppAnimating = true;
 
   if (targetScreen.id === "memoScreen") {
-    if (typeof window.resetMemoAppState === "function") {
-      window.resetMemoAppState();
-    } else {
-      targetScreen.classList.remove("detail-open");
-    }
+    targetScreen.classList.remove("detail-open");
   }
-
-  if (targetScreen.id === "phoneScreen" && typeof window.resetPhoneAppState === "function") {
-    window.resetPhoneAppState();
-  }
-
-  hidePopupInstantly();
 
   button.classList.add("launching");
   homeScreen.classList.add("app-opening");
@@ -438,7 +369,6 @@ async function openAppWithAnimation(button) {
 
   homeScreen.classList.remove("active", "app-opening");
   hideAllAppScreens();
-
   targetScreen.classList.add("active", "opening");
 
   await wait(360);
@@ -467,7 +397,6 @@ async function backToHomeFromApp() {
 
   currentAppScreen.classList.remove("closing");
   homeScreen.classList.add("active", "opening");
-  hidePopupInstantly();
 
   await wait(260);
 
@@ -843,8 +772,7 @@ dummyAppButtons.forEach((button) => {
     memoDetailTitle.textContent = memo.title;
 
     if (memo.type === "checklist") {
-      memoDetailBody.innerHTML =
-        renderChecklist(memo.items) + (memo.extraHtml ? memo.extraHtml : "");
+      memoDetailBody.innerHTML = renderChecklist(memo.items) + (memo.extraHtml ? memo.extraHtml : "");
     } else {
       memoDetailBody.innerHTML = memo.html;
     }
@@ -869,140 +797,4 @@ dummyAppButtons.forEach((button) => {
   }
 
   renderMemoLists();
-  window.resetMemoAppState = () => memoScreen.classList.remove("detail-open");
 })();
-
-/* =========================
-   PHONE APP
-========================= */
-(function initPhoneApp() {
-  const phoneScreen = document.getElementById("phoneScreen");
-  if (!phoneScreen) return;
-
-  const phonePages = phoneScreen.querySelectorAll(".phone-page");
-  const phoneTabButtons = phoneScreen.querySelectorAll(".phone-tab-btn");
-  const phoneContactsList = document.getElementById("phoneContactsList");
-  const phoneRecentsList = document.getElementById("phoneRecentsList");
-
-  const contactNames = [
-    "강덕철","강영준","강준혁","강태훈","강현우","고승민 매니저님","고승연","고윤호","고재원",
-    "곽동욱","곽승현","곽지석","구정우","구태현","구현호","권도형","권민규","권성준","권재성","권찬",
-    "김도훈","김도훈(idntt)","김동현","김도현","김민석","김민석(큐브)","김민아","김민철","김성민","김영훈","김우진",
-    "김재형","김준민","김준수","김지훈","김춘심","김태민","김현준","나윤서","남기현","남성호","남재훈","남주혁",
-    "노재윤","노현수","누나","리즈하오","문동주","문성윤","문정민","문진영","문태섭","박동욱","박성호","박승찬",
-    "박영진","박원준","박준형","박진수","박한빈","박현수","박효정","배준영","백승호","백성찬","백재민","변민규",
-    "변성환","서동윤","서민주","서재원","서재원(빌)","서진혁","성한빈","성현우","신동현","신민규","신성우","신재훈",
-    "신태현","아빠","안동욱","안현석","양민재","양재민","양준혁","엄마","오성준","오재형","오진수","오태경","오현수",
-    "유강민","유상현","유상현(쏘스)","유지혜","유채아","유태섭","윤성환","윤재성","윤태웅","윤현수","이모","이성준",
-    "이연성","이영우","이재민","이준서","이준형","이진수","이진아","이태경","이현석","임민규","임상현","장기현",
-    "장성환","장재성","장준기","장한음","전이정","전재민","전진수","전영우","전태경","정민규","정재원","정진영",
-    "정예준","조기현","조영민","천보원","최경욱 매니저님","최립우","최미정","최성호","최재민","최재민(큐브)",
-    "최진수","최준형","최태경","최현석","판저이","한재원","한태산","허재성","홍성준","황재민",
-    "김준서 ALD1","롱이♥ ALD1","이리오 ALD1","이상원 ALD1","아르노 ALD1","정상현 ALD1","조우안신 ALD1"
-  ];
-
-  const recents = [
-    { name: "롱이❤️ ALD1", sub: "↙ 휴대전화", date: "어제" },
-    { name: "롱이❤️ ALD1", sub: "↙ 휴대전화", date: "목요일" },
-    { name: "롱이❤️ ALD1", sub: "↙ 휴대전화", date: "수요일" },
-    { name: "조우안신 ALD1", sub: "↗ 휴대전화 (2)", date: "수요일" },
-    { name: "정상현 ALD1", sub: "↙ 휴대전화", date: "수요일" },
-    { name: "롱이❤️ ALD1", sub: "↗ 휴대전화", date: "수요일" },
-    { name: "정상현 ALD1", sub: "↙ 휴대전화", date: "화요일" },
-    { name: "02-2156-3520", sub: "↙ 대한민국", date: "월요일", red: true, avatar: "default" },
-    { name: "롱이❤️ ALD1", sub: "↗ 휴대전화 (3)", date: "일요일" }
-  ];
-
-  function getAvatarChar(name) {
-    return name.trim().charAt(0);
-  }
-
-  function renderContacts() {
-    if (!phoneContactsList) return;
-
-    const rows = contactNames.map((name) => {
-      const isALD = name.includes("ALD1");
-      return `
-        <div class="phone-contact-row">
-          <div class="phone-avatar">
-            <span class="phone-avatar-char">${getAvatarChar(name)}</span>
-          </div>
-          <div class="phone-contact-name">${isALD ? `<strong>${name}</strong>` : name}</div>
-        </div>
-      `;
-    }).join("");
-
-    phoneContactsList.insertAdjacentHTML("beforeend", rows);
-  }
-
-  function renderRecents() {
-    if (!phoneRecentsList) return;
-
-    phoneRecentsList.innerHTML = recents.map((item) => {
-      const isDefault = item.avatar === "default";
-      return `
-        <div class="phone-recent-row">
-          <div class="phone-avatar ${isDefault ? "phone-avatar-my" : ""}">
-            ${
-              isDefault
-                ? '<span class="phone-mycard-icon"></span>'
-                : `<span class="phone-avatar-char">${getAvatarChar(item.name)}</span>`
-            }
-          </div>
-
-          <div class="phone-recent-main">
-            <div class="phone-recent-name ${item.red ? "red" : ""}">
-              ${item.red ? item.name : `<strong>${item.name}</strong>`}
-            </div>
-            <div class="phone-recent-sub">${item.sub}</div>
-          </div>
-
-          <div class="phone-recent-meta">${item.date}</div>
-
-          <button class="phone-recent-call-btn" type="button" aria-label="통화">
-            <img src="assets/icons/icon_call_blue.png" alt="" class="phone-recent-call-icon">
-          </button>
-        </div>
-      `;
-    }).join("");
-  }
-
-  function setPhonePage(pageName) {
-    phonePages.forEach((page) => {
-      page.classList.toggle("active", page.dataset.phonePage === pageName);
-    });
-
-    phoneTabButtons.forEach((btn) => {
-      btn.classList.toggle("active", btn.dataset.phoneTab === pageName);
-    });
-  }
-
-  phoneTabButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      setPhonePage(button.dataset.phoneTab);
-    });
-  });
-
-  const phoneKeypadButtons = phoneScreen.querySelectorAll(".phone-key-btn");
-  phoneKeypadButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      button.classList.remove("tap");
-      void button.offsetWidth;
-      button.classList.add("tap");
-
-      setTimeout(() => {
-        button.classList.remove("tap");
-      }, 140);
-    });
-  });
-
-  window.resetPhoneAppState = () => {
-    setPhonePage("keypad");
-  };
-
-  renderContacts();
-  renderRecents();
-  window.resetPhoneAppState();
-})();
-
-initializeScreens();
