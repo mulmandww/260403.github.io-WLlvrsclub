@@ -1981,3 +1981,718 @@ img {
     height: 5px;
   }
 }
+
+/* ============================= */
+/* PHONE APP */
+/* ============================= */
+
+.phone-app-screen {
+  background: #f2f2f2;
+  color: #111;
+}
+
+.phone-ui {
+  position: relative;
+  height: 100%;
+  background: #f2f2f2;
+  overflow: hidden;
+}
+
+.phone-page {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.phone-page.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.phone-keypad-page,
+.phone-contacts-page,
+.phone-recents-page {
+  background: #f2f2f2;
+}
+
+.phone-page-inner {
+  height: 100%;
+}
+
+/* 상단 */
+.phone-topbar {
+  position: relative;
+  height: calc(122px + var(--safe-top));
+  padding-top: calc(54px + var(--safe-top));
+  z-index: 3;
+}
+
+.phone-page-title {
+  position: absolute;
+  left: 50%;
+  top: calc(58px + var(--safe-top));
+  transform: translateX(-50%);
+  font-size: 29px;
+  line-height: 1;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.8px;
+}
+
+.phone-app-back {
+  top: calc(42px + var(--safe-top));
+  left: 18px;
+}
+
+.phone-round-top-btn {
+  position: absolute;
+  top: calc(42px + var(--safe-top));
+  right: 18px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.42);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-add-btn {
+  font-size: 0;
+}
+
+.phone-plus-icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.phone-plus-icon::before,
+.phone-plus-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #111;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+}
+
+.phone-plus-icon::before {
+  width: 24px;
+  height: 3.2px;
+}
+
+.phone-plus-icon::after {
+  width: 3.2px;
+  height: 24px;
+}
+
+.phone-drawer-icon {
+  position: relative;
+  width: 24px;
+  height: 20px;
+}
+
+.phone-drawer-icon::before,
+.phone-drawer-icon::after,
+.phone-drawer-icon {
+  background-repeat: no-repeat;
+}
+
+.phone-drawer-icon::before,
+.phone-drawer-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 24px;
+  height: 3px;
+  background: #111;
+  border-radius: 999px;
+}
+
+.phone-drawer-icon::before {
+  top: 3px;
+}
+
+.phone-drawer-icon::after {
+  bottom: 3px;
+}
+
+.phone-drawer-icon {
+  display: block;
+}
+
+.phone-drawer-icon::marker {
+  display: none;
+}
+
+.phone-filter-btn .phone-drawer-icon::before,
+.phone-filter-btn .phone-drawer-icon::after {
+  width: 24px;
+}
+
+.phone-filter-btn .phone-drawer-icon {
+  position: relative;
+}
+
+.phone-filter-btn .phone-drawer-icon span {
+  display: none;
+}
+
+.phone-filter-btn .phone-drawer-icon::before {
+  box-shadow: 0 7px 0 #111;
+}
+
+/* 키패드 */
+.phone-keypad-inner {
+  padding-top: calc(226px + var(--safe-top));
+  padding-bottom: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.phone-keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 122px);
+  gap: 18px 18px;
+  justify-content: center;
+}
+
+.phone-key-btn {
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.42);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.phone-key-btn:active {
+  transform: scale(0.96);
+  background: rgba(255,255,255,0.60);
+}
+
+.phone-key-num {
+  font-size: 53px;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -1.8px;
+}
+
+.phone-key-sub {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+.phone-key-sub.plus {
+  letter-spacing: 0;
+  font-size: 23px;
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+.phone-call-main-btn {
+  margin-top: 20px;
+  width: 114px;
+  height: 114px;
+  border-radius: 50%;
+  background: #69cf69;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.28);
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.phone-call-main-btn:active {
+  transform: scale(0.97);
+  filter: brightness(0.97);
+}
+
+.phone-call-main-icon {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* 하단 탭바 */
+.phone-bottom-bar-wrap {
+  position: absolute;
+  left: 50%;
+  bottom: calc(18px + var(--safe-bottom));
+  transform: translateX(-50%);
+  width: calc(100% - 34px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+}
+
+.phone-bottom-bar {
+  width: calc(100% - 108px);
+  height: 86px;
+  border-radius: 43px;
+  background: rgba(255,255,255,0.44);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  padding: 0 8px;
+}
+
+.phone-tab-btn {
+  height: 68px;
+  border-radius: 34px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-tab-pill {
+  width: 100%;
+  height: 68px;
+  border-radius: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s ease;
+}
+
+.phone-tab-btn.active .phone-tab-pill {
+  background: rgba(0,0,0,0.08);
+}
+
+.phone-tab-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.phone-tab-label {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 600;
+  color: #111;
+}
+
+.phone-tab-btn.active .phone-tab-label {
+  color: #3d7df0;
+}
+
+.phone-search-btn {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.44);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-search-icon {
+  width: 33px;
+  height: 33px;
+  object-fit: contain;
+}
+
+/* 연락처 / 통화 스크롤 */
+.phone-scroll-area {
+  position: absolute;
+  top: calc(122px + var(--safe-top));
+  left: 0;
+  right: 0;
+  bottom: calc(114px + var(--safe-bottom));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 6px 0 24px;
+}
+
+/* 연락처 */
+.phone-my-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 18px 18px 18px;
+}
+
+.phone-avatar {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #aebdde, #7d8cc6);
+  flex: 0 0 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+}
+
+.phone-avatar-char {
+  font-size: 27px;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.phone-my-card-text {
+  font-size: 16px;
+  color: #8b8b90;
+}
+
+.phone-mycard-icon {
+  position: relative;
+  width: 34px;
+  height: 34px;
+}
+
+.phone-mycard-icon::before,
+.phone-mycard-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+}
+
+.phone-mycard-icon::before {
+  top: 1px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+.phone-mycard-icon::after {
+  bottom: 0;
+  width: 32px;
+  height: 14px;
+  border-radius: 16px 16px 10px 10px;
+}
+
+.phone-contact-section-label {
+  padding: 8px 18px 10px;
+  font-size: 18px;
+  color: #8a8a8f;
+}
+
+.phone-contact-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 18px;
+}
+
+.phone-contact-row::after {
+  content: "";
+  position: absolute;
+  left: 124px;
+  right: 18px;
+  bottom: 0;
+  height: 1px;
+  background: rgba(60,60,67,0.14);
+}
+
+.phone-contact-name {
+  font-size: 20px;
+  color: #111;
+  line-height: 1.2;
+}
+
+.phone-contact-name strong {
+  font-weight: 800;
+}
+
+.phone-contacts-side-index {
+  position: absolute;
+  right: 6px;
+  top: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  color: #3d7df0;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.phone-contacts-count {
+  text-align: center;
+  padding: 22px 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* 통화 */
+.phone-topbar-recents .phone-page-title {
+  top: calc(58px + var(--safe-top));
+}
+
+.phone-edit-btn {
+  position: absolute;
+  top: calc(42px + var(--safe-top));
+  left: 18px;
+  min-width: 72px;
+  height: 58px;
+  padding: 0 22px;
+  border-radius: 29px;
+  background: rgba(255,255,255,0.44);
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+}
+
+.phone-recent-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 16px 18px;
+  gap: 16px;
+}
+
+.phone-recent-row::after {
+  content: "";
+  position: absolute;
+  left: 142px;
+  right: 18px;
+  bottom: 0;
+  height: 1px;
+  background: rgba(60,60,67,0.14);
+}
+
+.phone-recent-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.phone-recent-name {
+  font-size: 19px;
+  line-height: 1.15;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.phone-recent-name.red {
+  color: #e14c45;
+}
+
+.phone-recent-name strong {
+  font-weight: 800;
+}
+
+.phone-recent-sub {
+  font-size: 16px;
+  color: #9b9ba1;
+  line-height: 1.15;
+}
+
+.phone-recent-meta {
+  width: 72px;
+  text-align: right;
+  font-size: 17px;
+  color: #a1a1a7;
+  padding-right: 8px;
+}
+
+.phone-recent-call-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 56px;
+}
+
+.phone-recent-call-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* 모바일 */
+@media screen and (max-width: 480px) {
+  .phone-topbar {
+    height: calc(116px + env(safe-area-inset-top));
+    padding-top: calc(52px + env(safe-area-inset-top));
+  }
+
+  .phone-page-title {
+    top: calc(57px + env(safe-area-inset-top));
+    font-size: 27px;
+  }
+
+  .phone-app-back {
+    top: calc(42px + env(safe-area-inset-top));
+    left: 16px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .phone-round-top-btn {
+    top: calc(42px + env(safe-area-inset-top));
+    right: 16px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .phone-edit-btn {
+    top: calc(42px + env(safe-area-inset-top));
+    left: 16px;
+    min-width: 72px;
+    height: 56px;
+    font-size: 20px;
+  }
+
+  .phone-keypad-inner {
+    padding-top: calc(208px + env(safe-area-inset-top));
+    padding-bottom: 150px;
+  }
+
+  .phone-keypad-grid {
+    grid-template-columns: repeat(3, min(112px, 28vw));
+    gap: 16px;
+  }
+
+  .phone-key-btn {
+    width: min(112px, 28vw);
+    height: min(112px, 28vw);
+  }
+
+  .phone-key-num {
+    font-size: clamp(44px, 8vw, 52px);
+  }
+
+  .phone-key-sub {
+    font-size: 12px;
+    letter-spacing: 3px;
+  }
+
+  .phone-call-main-btn {
+    width: 98px;
+    height: 98px;
+    margin-top: 18px;
+  }
+
+  .phone-call-main-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .phone-bottom-bar-wrap {
+    width: calc(100% - 20px);
+    bottom: calc(10px + env(safe-area-inset-bottom));
+  }
+
+  .phone-bottom-bar {
+    width: calc(100% - 92px);
+    height: 78px;
+    border-radius: 39px;
+  }
+
+  .phone-tab-btn,
+  .phone-tab-pill {
+    height: 62px;
+    border-radius: 31px;
+  }
+
+  .phone-tab-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .phone-tab-label {
+    font-size: 13px;
+  }
+
+  .phone-search-btn {
+    width: 78px;
+    height: 78px;
+  }
+
+  .phone-search-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .phone-scroll-area {
+    top: calc(116px + env(safe-area-inset-top));
+    bottom: calc(102px + env(safe-area-inset-bottom));
+  }
+
+  .phone-contact-row {
+    padding: 16px;
+  }
+
+  .phone-contact-row::after {
+    left: 110px;
+    right: 16px;
+  }
+
+  .phone-contact-name {
+    font-size: 18px;
+  }
+
+  .phone-avatar {
+    width: 58px;
+    height: 58px;
+    flex-basis: 58px;
+  }
+
+  .phone-avatar-char {
+    font-size: 25px;
+  }
+
+  .phone-contacts-side-index {
+    right: 4px;
+    top: 124px;
+    font-size: 11px;
+  }
+
+  .phone-recent-row {
+    padding: 16px;
+  }
+
+  .phone-recent-row::after {
+    left: 126px;
+    right: 16px;
+  }
+
+  .phone-recent-name {
+    font-size: 17px;
+  }
+
+  .phone-recent-sub {
+    font-size: 15px;
+  }
+
+  .phone-recent-meta {
+    width: 64px;
+    font-size: 15px;
+  }
+
+  .phone-recent-call-btn {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+  }
+}
