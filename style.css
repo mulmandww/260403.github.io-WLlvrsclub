@@ -2221,14 +2221,14 @@ img {
 .phone-keypad-grid {
   display: grid;
   grid-template-columns: repeat(3, 92px);
-  gap: 12px 14px;
+  gap: 10px 12px;
   justify-content: center;
 }
 
 .phone-key-btn {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   background: linear-gradient(180deg, #f8f8f8 0%, #efefef 100%);
@@ -2256,7 +2256,7 @@ img {
 }
 
 .phone-key-num {
-  font-size: 42px;
+  font-size: 40px;
   line-height: 0.9;
   font-weight: 300;
   letter-spacing: -1px;
@@ -2264,7 +2264,7 @@ img {
 }
 
 .phone-key-sub {
-  margin-top: 4px;
+  margin-top: 3.5px;
   font-size: 10px;
   line-height: 1;
   font-weight: 800;
@@ -2283,8 +2283,8 @@ img {
 
 .phone-call-btn {
   margin-top: 14px;
-  width: 74px;
-  height: 74px;
+  width: 70px;
+  height: 70px;
   min-width: 74px;
   min-height: 74px;
   aspect-ratio: 1 / 1;
@@ -2300,8 +2300,8 @@ img {
 }
 
 .phone-call-btn-icon {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   aspect-ratio: 1 / 1;
   object-fit: contain;
   display: block;
