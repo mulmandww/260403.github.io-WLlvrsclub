@@ -2833,7 +2833,7 @@ img {
     background:
       linear-gradient(#111, #111) center top / 20px 2.5px no-repeat,
       linear-gradient(#111, #111) center center / 14px 2.5px no-repeat,
-      linear-gradient(#111, #111) center bottom / 20px 2.5px no-repeat;
+      linear-gradient(#111, #111) center bottom / 8px 2.5px no-repeat;
   }
 
 .phone-keypad-wrap {
