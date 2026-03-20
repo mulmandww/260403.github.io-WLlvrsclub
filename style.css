@@ -2953,7 +2953,7 @@ img {
   }
 
   .phone-keypad-wrap {
-    top: calc(94px + var(--safe-top));
+    top: calc(174px + var(--safe-top));
     left: 0;
     right: 0;
     bottom: var(--phone-bottom-h);
