@@ -2227,8 +2227,8 @@ img {
 
 .phone-key-btn {
   position: relative;
-  width: 92px;
-  height: 92px;
+  width: 80px;
+  height: 80px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   background: linear-gradient(180deg, #f8f8f8 0%, #efefef 100%);
