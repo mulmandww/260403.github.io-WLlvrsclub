@@ -978,7 +978,7 @@ dummyAppButtons.forEach((button) => {
   ];
 
   const recentsData = [
-    { name: "롱이♥ ALD1", sub: "↙ 휴대전화", date: "어제", missed: false },
+    { name: "롱이♥ ALD1", sub: "↗ 휴대전화", date: "어제", missed: false },
     { name: "롱이♥ ALD1", sub: "↙ 휴대전화", date: "목요일", missed: false },
     { name: "롱이♥ ALD1", sub: "↙ 휴대전화", date: "수요일", missed: false },
     { name: "조우안신 ALD1", sub: "↗ 휴대전화 (2)", date: "수요일", missed: false },
