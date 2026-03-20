@@ -2700,13 +2700,14 @@ img {
   transform: scale(0.97);
 }
 
+
 /* 모바일 */
 @media screen and (max-width: 480px) {
   .phone-ui {
     --phone-header-h: calc(96px + env(safe-area-inset-top));
-    --phone-bottom-h: calc(108px + env(safe-area-inset-bottom));
-    --phone-search-size: 82px;
-    --phone-tabbar-h: 74px;
+    --phone-bottom-h: calc(104px + env(safe-area-inset-bottom));
+    --phone-search-size: 68px;
+    --phone-tabbar-h: 60px;
   }
 
   .phone-back-btn,
@@ -2899,26 +2900,30 @@ img {
   }
 
   .phone-bottom-controls {
-    padding: 10px 14px calc(14px + env(safe-area-inset-bottom));
-    gap: 12px;
+    padding: 8px 12px calc(12px + env(safe-area-inset-bottom));
+    gap: 10px;
   }
 
   .phone-tabbar {
-    padding: 6px;
+    padding: 4px;
+  }
+
+  .phone-tab-btn {
+    border-radius: 20px;
   }
 
   .phone-tab-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   .phone-tab-label {
-    font-size: 9.5px;
+    font-size: 8px;
   }
 
   .phone-search-icon {
-    width: 26px;
-    height: 26px;
+    width: 22px;
+    height: 22px;
   }
 }
 
