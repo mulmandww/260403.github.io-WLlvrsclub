@@ -1035,45 +1035,51 @@ dummyAppButtons.forEach((button) => {
     return `<span class="phone-name-plain ${missed ? "is-missed" : ""}">${name}</span>`;
   }
 
-  function renderContacts() {
-    if (!phoneContactsList) return;
+function renderContacts() {
+  if (!phoneContactsList) return;
 
-    let html = `
-      <div class="phone-my-card">
-        <div class="phone-avatar phone-avatar-my">
-          <span class="phone-mycard-head"></span>
-          <span class="phone-mycard-body"></span>
+  let html = `
+    <div class="phone-my-card">
+      <div class="phone-avatar phone-avatar-my">
+        <span class="phone-mycard-head"></span>
+        <span class="phone-mycard-body"></span>
+      </div>
+      <div class="phone-my-card-text">내 카드</div>
+    </div>
+  `;
+
+  let currentGroup = "";
+
+  contactNames.forEach((name) => {
+    const group = getGroupLabel(name);
+
+    if (group !== currentGroup) {
+      currentGroup = group;
+      html += `<div class="phone-contact-group-label">${group}</div>`;
+    }
+
+    html += `
+      <div class="phone-contact-row">
+        <div class="phone-avatar">
+          <span class="phone-avatar-char">${getInitialChar(name)}</span>
         </div>
-        <div class="phone-my-card-text">내 카드</div>
+
+        <div class="phone-contact-main">
+          <div class="phone-contact-name">${formatName(name)}</div>
+        </div>
       </div>
     `;
+  });
 
-    let currentGroup = "";
+  html += `
+    <div class="phone-contacts-count-row">
+      <div class="phone-contacts-count-inline">155개의 연락처</div>
+    </div>
+  `;
 
-    contactNames.forEach((name) => {
-      const group = getGroupLabel(name);
-
-      if (group !== currentGroup) {
-        currentGroup = group;
-        html += `<div class="phone-contact-group-label">${group}</div>`;
-      }
-
-      html += `
-        <div class="phone-contact-row">
-          <div class="phone-avatar">
-            <span class="phone-avatar-char">${getInitialChar(name)}</span>
-          </div>
-
-          <div class="phone-contact-main">
-            <div class="phone-contact-name">${formatName(name)}</div>
-          </div>
-        </div>
-      `;
-    });
-
-    phoneContactsList.innerHTML = html;
-  }
-
+  phoneContactsList.innerHTML = html;
+}
+   
   function renderRecents() {
     if (!phoneRecentsList) return;
 
