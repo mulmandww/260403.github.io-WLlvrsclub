@@ -2366,7 +2366,7 @@ img {
 
 .phone-clear-btn {
   position: absolute;
-  left: calc(100% + 18px);
+  left: calc(100% + 48px);
   top: 50%;
   transform: translateY(-50%);
   width: 34px;
