@@ -826,172 +826,32 @@ dummyAppButtons.forEach((button) => {
   let phoneDialValue = "";
 
   const phoneEasterEggMap = {
-    "0311": "♡ // •ω• // ♡",
+    "0311": "♡// •ω• //♡",
     "0411": "♥／≥w≤＼♥",
     "4399": "🍵🐯🐱💕",
     "250828": "선물!  홍... 홍생?  홍삼>w<",
     "250925": "꺼트릴수록 끝없이 Burn Burn"
     "520": "我아이你"
     "486": "사롱해~💕 (...형은? 형은? 형은.)"
-
   };
 
   const contactNames = [
-    "강덕철",
-    "강영준",
-    "강준혁",
-    "강태훈",
-    "강현우",
-    "고승민 매니저님",
-    "고승연",
-    "고윤호",
-    "고재원",
-    "곽동욱",
-    "곽승현",
-    "곽지석",
-    "구정우",
-    "구태현",
-    "구현호",
-    "권도형",
-    "권민규",
-    "권성준",
-    "권재성",
-    "권찬",
-    "김도훈",
-    "김도훈(idntt)",
-    "김동현",
-    "김도현",
-    "김민석",
-    "김민석(큐브)",
-    "김민아",
-    "김민철",
-    "김성민",
-    "김영훈",
-    "김우진",
-    "김재형",
-    "김준민",
-    "김준수",
-    "김지훈",
-    "김춘심",
-    "김태민",
-    "김현준",
-    "나윤서",
-    "남기현",
-    "남성호",
-    "남재훈",
-    "남주혁",
-    "노재윤",
-    "노현수",
-    "누나",
-    "리즈하오",
-    "문동주",
-    "문성윤",
-    "문정민",
-    "문진영",
-    "문태섭",
-    "박동욱",
-    "박성호",
-    "박승찬",
-    "박영진",
-    "박원준",
-    "박준형",
-    "박진수",
-    "박한빈",
-    "박현수",
-    "박효정",
-    "배준영",
-    "백승호",
-    "백성찬",
-    "백재민",
-    "변민규",
-    "변성환",
-    "서동윤",
-    "서민주",
-    "서재원",
-    "서재원(빌)",
-    "서진혁",
-    "성한빈",
-    "성현우",
-    "신동현",
-    "신민규",
-    "신성우",
-    "신재훈",
-    "신태현",
-    "아빠",
-    "안동욱",
-    "안현석",
-    "양민재",
-    "양재민",
-    "양준혁",
-    "엄마",
-    "오성준",
-    "오재형",
-    "오진수",
-    "오태경",
-    "오현수",
-    "유강민",
-    "유상현",
-    "유상현(쏘스)",
-    "유지혜",
-    "유채아",
-    "유태섭",
-    "윤성환",
-    "윤재성",
-    "윤태웅",
-    "윤현수",
-    "이모",
-    "이성준",
-    "이연성",
-    "이영우",
-    "이재민",
-    "이준서",
-    "이준형",
-    "이진수",
-    "이진아",
-    "이태경",
-    "이현석",
-    "임민규",
-    "임상현",
-    "장기현",
-    "장성환",
-    "장재성",
-    "장준기",
-    "장한음",
-    "전이정",
-    "전재민",
-    "전진수",
-    "전영우",
-    "전태경",
-    "정민규",
-    "정재원",
-    "정진영",
-    "정예준",
-    "조기현",
-    "조영민",
-    "천보원",
-    "최경욱 매니저님",
-    "최립우",
-    "최미정",
-    "최성호",
-    "최재민",
-    "최재민(큐브)",
-    "최진수",
-    "최준형",
-    "최태경",
-    "최현석",
-    "판저이",
-    "한재원",
-    "한태산",
-    "허재성",
-    "홍성준",
-    "황재민",
-    "김준서 ALD1",
-    "롱이♥ ALD1",
-    "이리오 ALD1",
-    "이상원 ALD1",
-    "아르노 ALD1",
-    "정상현 ALD1",
-    "조우안신 ALD1"
+    "강덕철", "강영준", "강준혁", "강태훈", "강현우", "고승민 매니저님", "고승연", "고윤호", "고재원",
+    "곽동욱", "곽승현", "곽지석", "구정우", "구태현", "구현호", "권도형", "권민규", "권성준", "권재성", "권찬",
+    "김도훈", "김도훈(idntt)", "김동현", "김도현", "김민석", "김민석(큐브)", "김민아", "김민철", "김성민", "김영훈",
+    "김우진", "김재형", "김준민", "김준수", "김지훈", "김춘심", "김태민", "김현준", "나윤서", "남기현",
+    "남성호", "남재훈", "남주혁", "노재윤", "노현수", "누나", "리즈하오", "문동주", "문성윤", "문정민",
+    "문진영", "문태섭", "박동욱", "박성호", "박승찬", "박영진", "박원준", "박준형", "박진수", "박한빈",
+    "박현수", "박효정", "배준영", "백승호", "백성찬", "백재민", "변민규", "변성환", "서동윤", "서민주",
+    "서재원", "서재원(빌)", "서진혁", "성한빈", "성현우", "신동현", "신민규", "신성우", "신재훈", "신태현",
+    "아빠", "안동욱", "안현석", "양민재", "양재민", "양준혁 매니저님", "엄마", "오성준", "오재형", "오진수",
+    "오태경", "오현수", "유강민", "유상현", "유상현(쏘스)", "유지혜", "유채아", "유태섭", "윤성환", "윤재성",
+    "윤태웅", "윤현수", "이모", "이성준", "이연성", "이영우", "이재민", "이준서", "이준형", "이진수",
+    "이진아", "이태경", "이현석", "임민규", "임상현", "장기현", "장성환", "장재성", "장준기", "장한음",
+    "전이정", "전재민", "전진수", "전영우", "전태경", "정민규", "정재원", "정진영", "정예준", "조기현",
+    "조영민", "천보원", "최경욱", "최립우", "최미정", "최성호", "최재민", "최재민(큐브)", "최진수", "최준형",
+    "최태경", "최현석", "판저이", "한재원", "한태산", "허재성", "홍성준", "황재민",
+    "김준서 ALD1", "롱이♥ ALD1", "이리오 ALD1", "이상원 ALD1", "아르노 ALD1", "정상현 ALD1", "조우안신 ALD1"
   ];
 
   const recentsData = [
@@ -1007,16 +867,12 @@ dummyAppButtons.forEach((button) => {
   ];
 
   function getInitialChar(name) {
-    if (!name) return "";
-    return name.trim().charAt(0);
+    return name ? name.trim().charAt(0) : "";
   }
 
   function getGroupLabel(name) {
     if (!name) return "#";
-
-    if (name.includes("ALD1")) {
-      return "A";
-    }
+    if (name.includes("ALD1")) return "A";
 
     const first = name.trim().charAt(0);
 
@@ -1031,10 +887,7 @@ dummyAppButtons.forEach((button) => {
       return choMap[cho] || "#";
     }
 
-    if (/[A-Za-z]/.test(first)) {
-      return first.toUpperCase();
-    }
-
+    if (/[A-Za-z]/.test(first)) return first.toUpperCase();
     return "#";
   }
 
@@ -1080,7 +933,6 @@ dummyAppButtons.forEach((button) => {
           <div class="phone-avatar">
             <span class="phone-avatar-char">${getInitialChar(name)}</span>
           </div>
-
           <div class="phone-contact-main">
             <div class="phone-contact-name">${formatName(name)}</div>
           </div>
@@ -1117,14 +969,11 @@ dummyAppButtons.forEach((button) => {
       return `
         <div class="phone-recents-row">
           ${avatarHtml}
-
           <div class="phone-recents-main">
             <div class="phone-recents-name">${formatName(item.name, item.missed)}</div>
             <div class="phone-recents-sub">${item.sub}</div>
           </div>
-
           <div class="phone-recents-date">${item.date}</div>
-
           <button class="phone-recent-call-btn" type="button" aria-label="통화">
             <img src="assets/icons/icon_call_blue.png" alt="" class="phone-recent-call-icon">
           </button>
@@ -1134,19 +983,25 @@ dummyAppButtons.forEach((button) => {
   }
 
   function updatePhoneDialUI() {
-    if (!phoneDialDisplay || !phoneDialEasteregg || !phoneClearBtn) return;
+    if (phoneDialDisplay) {
+      phoneDialDisplay.textContent = phoneDialValue;
+    }
 
-    phoneDialDisplay.textContent = phoneDialValue;
-    phoneDialEasteregg.textContent = phoneEasterEggMap[phoneDialValue] || "";
+    if (phoneDialEasteregg) {
+      phoneDialEasteregg.textContent = phoneEasterEggMap[phoneDialValue] || "";
+    }
 
-    if (phoneDialValue.length > 0) {
-      phoneClearBtn.classList.add("is-visible");
-    } else {
-      phoneClearBtn.classList.remove("is-visible");
+    if (phoneClearBtn) {
+      if (phoneDialValue.length > 0) {
+        phoneClearBtn.classList.add("is-visible");
+      } else {
+        phoneClearBtn.classList.remove("is-visible");
+      }
     }
   }
 
   function appendPhoneDialValue(value) {
+    if (!value) return;
     if (phoneDialValue.length >= 12) return;
     phoneDialValue += value;
     updatePhoneDialUI();
