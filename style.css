@@ -2837,7 +2837,7 @@ img {
   }
 
 .phone-keypad-wrap {
-  top: calc(154px + env(safe-area-inset-top));
+  top: calc(140px + env(safe-area-inset-top));
   padding-top: 0;
 }
 
@@ -2902,7 +2902,7 @@ img {
 }
 
 .phone-clear-btn {
-  left: calc(100% + 34px);
+  left: calc(100% + 30px);
   width: 30px;
   height: 22px;
 }
