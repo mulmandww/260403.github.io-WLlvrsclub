@@ -2182,7 +2182,7 @@ img {
   background:
     linear-gradient(#111, #111) center top / 22px 2.5px no-repeat,
     linear-gradient(#111, #111) center center / 15px 2.5px no-repeat,
-    linear-gradient(#111, #111) center bottom / 8px 2.5px no-repeat;
+    linear-gradient(#111, #111) center bottom / 22px 2.5px no-repeat;
 }
 
 .phone-drawer-icon::before,
@@ -2215,20 +2215,20 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px 0 0;
+  padding: 6px 0 0;
 }
 
 .phone-keypad-grid {
   display: grid;
-  grid-template-columns: repeat(3, 96px);
+  grid-template-columns: repeat(3, 92px);
   gap: 12px 14px;
   justify-content: center;
 }
 
 .phone-key-btn {
   position: relative;
-  width: 96px;
-  height: 96px;
+  width: 92px;
+  height: 92px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   background: linear-gradient(180deg, #f8f8f8 0%, #efefef 100%);
@@ -2256,7 +2256,7 @@ img {
 }
 
 .phone-key-num {
-  font-size:44px;
+  font-size: 42px;
   line-height: 0.9;
   font-weight: 300;
   letter-spacing: -1px;
@@ -2268,7 +2268,7 @@ img {
   font-size: 10px;
   line-height: 1;
   font-weight: 800;
-  letter-spacing: 3.2px;
+  letter-spacing: 3px;
   color: #111;
   padding-left: 3px;
 }
@@ -2283,10 +2283,10 @@ img {
 
 .phone-call-btn {
   margin-top: 14px;
-  width: 78px;
-  height: 78px;
-  min-width: 78px;
-  min-height: 78px;
+  width: 74px;
+  height: 74px;
+  min-width: 74px;
+  min-height: 74px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   background: #69cf67;
@@ -2300,8 +2300,8 @@ img {
 }
 
 .phone-call-btn-icon {
-  width: 31px;
-  height: 31px;
+  width: 28px;
+  height: 28px;
   aspect-ratio: 1 / 1;
   object-fit: contain;
   display: block;
@@ -2412,21 +2412,24 @@ img {
   letter-spacing: -0.25px;
 }
 
-/* 3) 연락처 우측 파란 인덱스 화면에 고정 */
-.phone-page-contacts .phone-contacts-side-index {
+/* 연락처 인덱스는 스크롤 영역 바깥에 있어야 고정됨 */
+.phone-page-contacts {
+  position: absolute;
+  inset: 0;
+}
+
+.phone-contacts-side-index {
   position: absolute;
   top: calc(146px + var(--safe-top));
   right: 6px;
-  bottom: calc(var(--phone-bottom-h) + 6px);
+  bottom: calc(var(--phone-bottom-h) + 4px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
   z-index: 30;
   pointer-events: none;
 }
-
-/* 스크롤 영역 안의 영향을 안 받게 연락처 페이지 기준으로 고정 */
-.phone-page-contacts {
-  position: absolute;
-}
-
 
 .phone-contacts-side-index span {
   display: block;
@@ -2501,19 +2504,23 @@ img {
 
 .phone-recents-row {
   position: relative;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto 40px;
+  align-items: center;
+  column-gap: 12px;
+  min-height: 82px;
 }
 
 .phone-recents-row::after {
   content: "";
   position: absolute;
   left: 60px;
-  right: 46px;
+  right: 40px;
   bottom: 0;
   height: 1px;
   background: rgba(60, 60, 67, 0.11);
 }
 
-/* 마지막 줄은 굳이 안 보여도 됨 */
 .phone-recents-row:last-child::after {
   display: none;
 }
@@ -2756,6 +2763,9 @@ img {
 
   .phone-key-plus {
     font-size: 14px;
+    margin-top: 2px;
+    padding-left: 0;
+    letter-spacing: 0;
   }
 
   .phone-call-btn {
@@ -2847,10 +2857,15 @@ img {
     font-size: 15px;
   }
 
-  . {
+  .phone-recents-row {
     grid-template-columns: 48px minmax(0, 1fr) auto 40px;
     min-height: 82px;
     column-gap: 12px;
+  }
+
+  .phone-recents-row::after {
+    left: 60px;
+    right: 44px;
   }
 
   .phone-recents-main {
@@ -2882,18 +2897,6 @@ img {
     width: 16px;
     height: 16px;
   }
-
-    .phone-recents-row::after {
-    left: 60px;
-    right: 44px;
-  }
-
-  .phone-page-contacts .phone-contacts-side-index {
-    top: calc(144px + env(safe-area-inset-top));
-    right: 6px;
-    bottom: calc(var(--phone-bottom-h) + 6px);
-  }
-}
 
   .phone-bottom-controls {
     padding: 10px 14px calc(14px + env(safe-area-inset-bottom));
@@ -2928,43 +2931,6 @@ img {
   .phone-contact-name,
   .phone-recents-name {
     font-size: 16px;
-  }
-}
-
-@media screen and (min-width: 481px) {
-  .phone-keypad-grid {
-    grid-template-columns: repeat(3, 92px);
-    gap: 12px 14px;
-  }
-
-  .phone-key-btn {
-    width: 92px;
-    height: 92px;
-  }
-
-  .phone-key-num {
-    font-size: 42px;
-  }
-
-  .phone-key-sub {
-    font-size: 10px;
-    letter-spacing: 3px;
-  }
-
-  .phone-key-plus {
-    font-size: 15px;
-  }
-
-  .phone-call-btn {
-    width: 74px;
-    height: 74px;
-    min-width: 74px;
-    min-height: 74px;
-  }
-
-  .phone-call-btn-icon {
-    width: 28px;
-    height: 28px;
   }
 
   .phone-recents-row::after {
