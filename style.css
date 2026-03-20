@@ -2837,16 +2837,16 @@ img {
   }
 
 .phone-keypad-wrap {
-  top: calc(140px + env(safe-area-inset-top));
+  top: calc(130px + env(safe-area-inset-top));
   padding-top: 0;
 }
 
 .phone-dial-display-wrap {
-  margin-bottom: 18px;
+  margin-bottom: 8px;
 }
 
 .phone-dial-display {
-  min-height: 44px;
+  min-height: 34px;
   font-size: 28px;
   letter-spacing: -0.6px;
 }
