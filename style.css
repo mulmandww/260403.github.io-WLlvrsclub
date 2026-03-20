@@ -2313,13 +2313,13 @@ img {
 /* 연락처 / 최근기록 스크롤 */
 .phone-scroll-area {
   position: absolute;
-  top: calc(102px + var(--safe-top));
+  top: calc(72px + var(--safe-top));
   left: 0;
   right: 0;
-  bottom: var(--phone-bottom-h);
+  bottom: calc(74px + var(--safe-bottom));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 4px 16px 10px;
+  padding: 0 16px;
 }
 
 /* 연락처 */
@@ -2327,8 +2327,10 @@ img {
   padding-right: 36px;
 }
 
-.phone-contacts-list {
-  position: relative;
+.phone-contacts-list,
+.phone-recents-list {
+  padding-top: 42px;
+  padding-bottom: 18px;
 }
 
 .phone-my-card {
@@ -2785,11 +2787,11 @@ img {
   width: 24px;
   height: 24px;
 }
-
-  .phone-scroll-area {
-    top: calc(100px + env(safe-area-inset-top));
-    padding-left: 16px;
-    padding-right: 16px;
+  
+  .phone-contacts-list,
+  .phone-recents-list {
+    padding-top: 40px;
+    padding-bottom: 14px;
   }
 
   .phone-contacts-scroll {
@@ -2906,6 +2908,9 @@ img {
   .phone-bottom-controls {
     padding: 8px 12px calc(12px + env(safe-area-inset-bottom));
     gap: 10px;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .phone-tabbar {
