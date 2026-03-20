@@ -817,6 +817,7 @@ dummyAppButtons.forEach((button) => {
   const phoneKeyButtons = phoneScreen.querySelectorAll(".phone-key-btn");
   const phoneContactsList = document.getElementById("phoneContactsList");
   const phoneRecentsList = document.getElementById("phoneRecentsList");
+  const phoneScrollAreas = phoneScreen.querySelectorAll(".phone-scroll-area");
 
   const contactNames = [
     "강덕철",
@@ -994,6 +995,12 @@ dummyAppButtons.forEach((button) => {
   }
 
   function getGroupLabel(name) {
+    if (!name) return "#";
+
+    if (name.includes("ALD1")) {
+      return "A";
+    }
+
     const first = name.trim().charAt(0);
 
     if (/[가-힣]/.test(first)) {
@@ -1014,24 +1021,37 @@ dummyAppButtons.forEach((button) => {
     return "#";
   }
 
+  function formatName(name, missed = false) {
+    if (!name) return "";
+
+    if (name.includes("ALD1")) {
+      const plain = name.replace(/\s*ALD1/g, "").trim();
+      return `
+        <span class="phone-name-plain ${missed ? "is-missed" : ""}">${plain}</span>
+        <strong class="phone-name-tag ${missed ? "is-missed" : ""}">ALD1</strong>
+      `;
+    }
+
+    return `<span class="phone-name-plain ${missed ? "is-missed" : ""}">${name}</span>`;
+  }
+
   function renderContacts() {
     if (!phoneContactsList) return;
 
-    const myCard = `
+    let html = `
       <div class="phone-my-card">
         <div class="phone-avatar phone-avatar-my">
-          <span class="phone-mycard-icon"></span>
+          <span class="phone-mycard-head"></span>
+          <span class="phone-mycard-body"></span>
         </div>
         <div class="phone-my-card-text">내 카드</div>
       </div>
     `;
 
-    let html = myCard;
     let currentGroup = "";
 
     contactNames.forEach((name) => {
       const group = getGroupLabel(name);
-      const isALD = name.includes("ALD1");
 
       if (group !== currentGroup) {
         currentGroup = group;
@@ -1043,7 +1063,10 @@ dummyAppButtons.forEach((button) => {
           <div class="phone-avatar">
             <span class="phone-avatar-char">${getInitialChar(name)}</span>
           </div>
-          <div class="phone-contact-name">${isALD ? `<strong>${name}</strong>` : name}</div>
+
+          <div class="phone-contact-main">
+            <div class="phone-contact-name">${formatName(name)}</div>
+          </div>
         </div>
       `;
     });
@@ -1058,7 +1081,8 @@ dummyAppButtons.forEach((button) => {
       const avatarHtml = item.defaultAvatar
         ? `
           <div class="phone-avatar phone-avatar-my">
-            <span class="phone-mycard-icon"></span>
+            <span class="phone-mycard-head"></span>
+            <span class="phone-mycard-body"></span>
           </div>
         `
         : `
@@ -1072,9 +1096,7 @@ dummyAppButtons.forEach((button) => {
           ${avatarHtml}
 
           <div class="phone-recents-main">
-            <div class="phone-recents-name ${item.missed ? "is-missed" : ""}">
-              ${item.missed ? item.name : `<strong>${item.name}</strong>`}
-            </div>
+            <div class="phone-recents-name">${formatName(item.name, item.missed)}</div>
             <div class="phone-recents-sub">${item.sub}</div>
           </div>
 
@@ -1096,6 +1118,8 @@ dummyAppButtons.forEach((button) => {
     phoneTabButtons.forEach((button) => {
       button.classList.toggle("active", button.dataset.phoneTab === pageName);
     });
+
+    phoneScreen.dataset.phonePage = pageName;
   }
 
   phoneTabButtons.forEach((button) => {
@@ -1121,6 +1145,9 @@ dummyAppButtons.forEach((button) => {
 
   window.resetPhoneAppState = function () {
     setPhonePage("keypad");
+    phoneScrollAreas.forEach((area) => {
+      area.scrollTop = 0;
+    });
   };
 
   renderContacts();
