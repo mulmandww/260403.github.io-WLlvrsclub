@@ -2805,7 +2805,7 @@ img {
 @media screen and (max-width: 480px) {
   .phone-ui {
     --phone-header-h: calc(96px + env(safe-area-inset-top));
-    --phone-bottom-h: calc(104px + env(safe-area-inset-bottom));
+    --phone-bottom-h: calc(118px + env(safe-area-inset-bottom));
     --phone-search-size: 68px;
     --phone-tabbar-h: 60px;
   }
@@ -2837,7 +2837,7 @@ img {
   }
 
 .phone-keypad-wrap {
-  top: calc(130px + env(safe-area-inset-top));
+  top: calc(126px + env(safe-area-inset-top));
   padding-top: 0;
 }
 
@@ -2886,7 +2886,7 @@ img {
 }
 
 .phone-keypad-actions {
-  margin-top: 10px;
+  margin-top: 6px;
 }
 
 .phone-call-btn {
