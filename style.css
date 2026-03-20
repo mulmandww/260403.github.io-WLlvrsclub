@@ -2951,4 +2951,30 @@ img {
     left: 60px;
     right: 42px;
   }
+
+  .phone-keypad-wrap {
+    top: calc(94px + var(--safe-top));
+    left: 0;
+    right: 0;
+    bottom: var(--phone-bottom-h);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+  }
+
+  .phone-keypad-grid {
+    width: fit-content;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 92px);
+    gap: 12px 14px;
+    justify-content: center;
+    justify-items: center;
+  }
+
+  .phone-call-btn {
+    align-self: center;
+  }
 }
