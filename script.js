@@ -991,14 +991,76 @@ dummyAppButtons.forEach((button) => {
       phoneDialEasteregg.textContent = phoneEasterEggMap[phoneDialValue] || "";
     }
 
-    if (phoneClearBtn) {
-      if (phoneDialValue.length > 0) {
-        phoneClearBtn.classList.add("is-visible");
-      } else {
-        phoneClearBtn.classList.remove("is-visible");
-      }
+if (phoneClearBtn) {
+  let clearHoldTimer = null;
+  let clearRepeatTimer = null;
+  let clearHoldTriggered = false;
+
+  const stopClearHold = () => {
+    if (clearHoldTimer) {
+      clearTimeout(clearHoldTimer);
+      clearHoldTimer = null;
     }
-  }
+
+    if (clearRepeatTimer) {
+      clearInterval(clearRepeatTimer);
+      clearRepeatTimer = null;
+    }
+  };
+
+  phoneClearBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+
+    if (clearHoldTriggered) {
+      clearHoldTriggered = false;
+      return;
+    }
+
+    clearPhoneDialValue();
+  });
+
+  phoneClearBtn.addEventListener("mousedown", (event) => {
+    event.stopPropagation();
+
+    clearHoldTriggered = false;
+    stopClearHold();
+
+    clearHoldTimer = setTimeout(() => {
+      clearHoldTriggered = true;
+
+      clearRepeatTimer = setInterval(() => {
+        if (!phoneDialValue.length) {
+          stopClearHold();
+          return;
+        }
+        clearPhoneDialValue();
+      }, 80);
+    }, 350);
+  });
+
+  phoneClearBtn.addEventListener("touchstart", (event) => {
+    event.stopPropagation();
+
+    clearHoldTriggered = false;
+    stopClearHold();
+
+    clearHoldTimer = setTimeout(() => {
+      clearHoldTriggered = true;
+
+      clearRepeatTimer = setInterval(() => {
+        if (!phoneDialValue.length) {
+          stopClearHold();
+          return;
+        }
+        clearPhoneDialValue();
+      }, 80);
+    }, 350);
+  }, { passive: true });
+
+  ["mouseup", "mouseleave", "touchend", "touchcancel"].forEach((eventName) => {
+    phoneClearBtn.addEventListener(eventName, stopClearHold);
+  });
+}
 
   function appendPhoneDialValue(value) {
     if (!value) return;
