@@ -267,6 +267,7 @@ img {
 .screen {
   position: absolute;
   inset: 0;
+  display: none;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -277,11 +278,33 @@ img {
     visibility 0.32s ease;
 }
 
+.screen.active,
+.screen.opening,
+.screen.closing {
+  display: block;
+}
+
 .screen.active {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
   transform: translateY(0) scale(1);
+}
+
+.lock-screen {
+  z-index: 5;
+}
+
+.passcode-screen {
+  z-index: 6;
+}
+
+.home-screen {
+  z-index: 7;
+}
+
+.app-screen {
+  z-index: 20;
 }
 
 .screen.opening {
@@ -357,7 +380,7 @@ img {
 .lock-screen {
   z-index: 5;
   cursor: pointer;
-  touch-action: none;
+  touch-action: manipulation;
 }
 
 .lock-content {
@@ -1992,8 +2015,9 @@ img {
 }
 
 /* phoneScreen 비활성일 때 완전 차단 */
-.phone-screen:not(.active) {
-  pointer-events: none;
+#phoneScreen:not(.active),
+#phoneScreen:not(.active) * {
+  pointer-events: none !important;
 }
 
 /* 내부 전체 구조 */
