@@ -371,80 +371,92 @@
 <section class="screen app-screen phone-screen" id="phoneScreen">
   <div class="app-ui phone-ui">
 
-    <!-- 키패드 -->
-    <div class="phone-page phone-page-keypad active" data-phone-page="keypad">
-      <div class="phone-keypad-topbar">
-        <button class="back-home app-back-btn phone-back-btn" type="button" aria-label="뒤로가기">
-          <span class="back-arrow"></span>
-        </button>
-      </div>
+<!-- 키패드 -->
+<div class="phone-page phone-page-keypad active" data-phone-page="keypad">
+  <div class="phone-keypad-topbar">
+    <button class="back-home app-back-btn phone-back-btn" type="button" aria-label="뒤로가기">
+      <span class="back-arrow"></span>
+    </button>
+  </div>
 
-      <div class="phone-keypad-wrap">
-        <div class="phone-keypad-grid">
-          <button class="phone-key-btn" type="button">
-            <span class="phone-key-num">1</span>
-          </button>
-
-          <button class="phone-key-btn" type="button">
-            <span class="phone-key-num">2</span>
-            <span class="phone-key-sub">ABC</span>
-          </button>
-
-          <button class="phone-key-btn" type="button">
-            <span class="phone-key-num">3</span>
-            <span class="phone-key-sub">DEF</span>
-          </button>
-
-          <button class="phone-key-btn" type="button">
-            <span class="phone-key-num">4</span>
-            <span class="phone-key-sub">GHI</span>
-          </button>
-
-          <button class="phone-key-btn" type="button">
-            <span class="phone-key-num">5</span>
-            <span class="phone-key-sub">JKL</span>
-          </button>
-
-          <button class="phone-key-btn" type="button">
-            <span class="phone-key-num">6</span>
-            <span class="phone-key-sub">MNO</span>
-          </button>
-
-          <button class="phone-key-btn" type="button">
-            <span class="phone-key-num">7</span>
-            <span class="phone-key-sub">PQRS</span>
-          </button>
-
-          <button class="phone-key-btn" type="button">
-            <span class="phone-key-num">8</span>
-            <span class="phone-key-sub">TUV</span>
-          </button>
-
-          <button class="phone-key-btn" type="button">
-            <span class="phone-key-num">9</span>
-            <span class="phone-key-sub">WXYZ</span>
-          </button>
-
-          <button class="phone-key-btn" type="button">
-            <span class="phone-key-num">*</span>
-          </button>
-
-          <button class="phone-key-btn" type="button">
-            <span class="phone-key-num">0</span>
-            <span class="phone-key-sub phone-key-plus">+</span>
-          </button>
-
-          <button class="phone-key-btn" type="button">
-            <span class="phone-key-num">#</span>
-          </button>
-        </div>
-
-        <button class="phone-call-btn" type="button" aria-label="통화">
-          <img src="assets/icons/icon_call_green.png" alt="" class="phone-call-btn-icon">
-        </button>
-      </div>
+  <div class="phone-keypad-wrap">
+    <div class="phone-dial-display-wrap">
+      <div class="phone-dial-display" id="phoneDialDisplay"></div>
+      <div class="phone-dial-easteregg" id="phoneDialEasteregg"></div>
     </div>
 
+    <div class="phone-keypad-grid">
+      <button class="phone-key-btn" type="button" data-phone-value="1">
+        <span class="phone-key-num">1</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="2">
+        <span class="phone-key-num">2</span>
+        <span class="phone-key-sub">ABC</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="3">
+        <span class="phone-key-num">3</span>
+        <span class="phone-key-sub">DEF</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="4">
+        <span class="phone-key-num">4</span>
+        <span class="phone-key-sub">GHI</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="5">
+        <span class="phone-key-num">5</span>
+        <span class="phone-key-sub">JKL</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="6">
+        <span class="phone-key-num">6</span>
+        <span class="phone-key-sub">MNO</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="7">
+        <span class="phone-key-num">7</span>
+        <span class="phone-key-sub">PQRS</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="8">
+        <span class="phone-key-num">8</span>
+        <span class="phone-key-sub">TUV</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="9">
+        <span class="phone-key-num">9</span>
+        <span class="phone-key-sub">WXYZ</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="*">
+        <span class="phone-key-num">*</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="0">
+        <span class="phone-key-num">0</span>
+        <span class="phone-key-sub phone-key-plus">+</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="#">
+        <span class="phone-key-num">#</span>
+      </button>
+    </div>
+
+    <div class="phone-keypad-actions">
+      <button class="phone-call-btn" type="button" aria-label="통화">
+        <img src="assets/icons/icon_call_green.png" alt="" class="phone-call-btn-icon">
+      </button>
+
+      <button class="phone-clear-btn" type="button" aria-label="입력 삭제" id="phoneClearBtn">
+        <span class="phone-clear-btn-shape"></span>
+        <span class="phone-clear-btn-x">×</span>
+      </button>
+    </div>
+  </div>
+</div>
+    
     <!-- 연락처 -->
     <div class="phone-page phone-page-contacts" data-phone-page="contacts">
       <div class="phone-page-topbar">
