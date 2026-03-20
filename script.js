@@ -819,6 +819,23 @@ dummyAppButtons.forEach((button) => {
   const phoneRecentsList = document.getElementById("phoneRecentsList");
   const phoneScrollAreas = phoneScreen.querySelectorAll(".phone-scroll-area");
 
+  const phoneDialDisplay = document.getElementById("phoneDialDisplay");
+  const phoneDialEasteregg = document.getElementById("phoneDialEasteregg");
+  const phoneClearBtn = document.getElementById("phoneClearBtn");
+
+  let phoneDialValue = "";
+
+  const phoneEasterEggMap = {
+    "0311": "♡ // •ω• // ♡",
+    "0411": "♥／≥w≤＼♥",
+    "4399": "🍵🐯🐱💕",
+    "250828": "선물!  홍... 홍생?  홍삼>w<",
+    "250925": "꺼트릴수록 끝없이 Burn Burn"
+    "520": "我아이你"
+    "486": "사롱해~💕 (...형은? 형은? 형은.)"
+
+  };
+
   const contactNames = [
     "강덕철",
     "강영준",
@@ -1035,51 +1052,51 @@ dummyAppButtons.forEach((button) => {
     return `<span class="phone-name-plain ${missed ? "is-missed" : ""}">${name}</span>`;
   }
 
-function renderContacts() {
-  if (!phoneContactsList) return;
+  function renderContacts() {
+    if (!phoneContactsList) return;
 
-  let html = `
-    <div class="phone-my-card">
-      <div class="phone-avatar phone-avatar-my">
-        <span class="phone-mycard-head"></span>
-        <span class="phone-mycard-body"></span>
-      </div>
-      <div class="phone-my-card-text">내 카드</div>
-    </div>
-  `;
-
-  let currentGroup = "";
-
-  contactNames.forEach((name) => {
-    const group = getGroupLabel(name);
-
-    if (group !== currentGroup) {
-      currentGroup = group;
-      html += `<div class="phone-contact-group-label">${group}</div>`;
-    }
-
-    html += `
-      <div class="phone-contact-row">
-        <div class="phone-avatar">
-          <span class="phone-avatar-char">${getInitialChar(name)}</span>
+    let html = `
+      <div class="phone-my-card">
+        <div class="phone-avatar phone-avatar-my">
+          <span class="phone-mycard-head"></span>
+          <span class="phone-mycard-body"></span>
         </div>
-
-        <div class="phone-contact-main">
-          <div class="phone-contact-name">${formatName(name)}</div>
-        </div>
+        <div class="phone-my-card-text">내 카드</div>
       </div>
     `;
-  });
 
-  html += `
-    <div class="phone-contacts-count-row">
-      <div class="phone-contacts-count-inline">155개의 연락처</div>
-    </div>
-  `;
+    let currentGroup = "";
 
-  phoneContactsList.innerHTML = html;
-}
-   
+    contactNames.forEach((name) => {
+      const group = getGroupLabel(name);
+
+      if (group !== currentGroup) {
+        currentGroup = group;
+        html += `<div class="phone-contact-group-label">${group}</div>`;
+      }
+
+      html += `
+        <div class="phone-contact-row">
+          <div class="phone-avatar">
+            <span class="phone-avatar-char">${getInitialChar(name)}</span>
+          </div>
+
+          <div class="phone-contact-main">
+            <div class="phone-contact-name">${formatName(name)}</div>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `
+      <div class="phone-contacts-count-row">
+        <div class="phone-contacts-count-inline">155개의 연락처</div>
+      </div>
+    `;
+
+    phoneContactsList.innerHTML = html;
+  }
+
   function renderRecents() {
     if (!phoneRecentsList) return;
 
@@ -1116,6 +1133,36 @@ function renderContacts() {
     }).join("");
   }
 
+  function updatePhoneDialUI() {
+    if (!phoneDialDisplay || !phoneDialEasteregg || !phoneClearBtn) return;
+
+    phoneDialDisplay.textContent = phoneDialValue;
+    phoneDialEasteregg.textContent = phoneEasterEggMap[phoneDialValue] || "";
+
+    if (phoneDialValue.length > 0) {
+      phoneClearBtn.classList.add("is-visible");
+    } else {
+      phoneClearBtn.classList.remove("is-visible");
+    }
+  }
+
+  function appendPhoneDialValue(value) {
+    if (phoneDialValue.length >= 12) return;
+    phoneDialValue += value;
+    updatePhoneDialUI();
+  }
+
+  function clearPhoneDialValue() {
+    if (!phoneDialValue.length) return;
+    phoneDialValue = phoneDialValue.slice(0, -1);
+    updatePhoneDialUI();
+  }
+
+  function resetPhoneDialValue() {
+    phoneDialValue = "";
+    updatePhoneDialUI();
+  }
+
   function setPhonePage(pageName) {
     phonePages.forEach((page) => {
       page.classList.toggle("active", page.dataset.phonePage === pageName);
@@ -1139,9 +1186,13 @@ function renderContacts() {
     button.addEventListener("click", (event) => {
       event.stopPropagation();
 
+      const value = button.dataset.phoneValue || "";
+
       button.classList.remove("tap");
       void button.offsetWidth;
       button.classList.add("tap");
+
+      appendPhoneDialValue(value);
 
       setTimeout(() => {
         button.classList.remove("tap");
@@ -1149,14 +1200,23 @@ function renderContacts() {
     });
   });
 
+  if (phoneClearBtn) {
+    phoneClearBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      clearPhoneDialValue();
+    });
+  }
+
   window.resetPhoneAppState = function () {
     setPhonePage("keypad");
     phoneScrollAreas.forEach((area) => {
       area.scrollTop = 0;
     });
+    resetPhoneDialValue();
   };
 
   renderContacts();
   renderRecents();
   setPhonePage("keypad");
+  updatePhoneDialUI();
 })();
