@@ -2207,7 +2207,7 @@ img {
 
 .phone-keypad-wrap {
   position: absolute;
-  top: calc(94px + var(--safe-top));
+  top: calc(78px + var(--safe-top));
   left: 0;
   right: 0;
   bottom: var(--phone-bottom-h);
@@ -2736,7 +2736,7 @@ img {
   }
 
   .phone-keypad-wrap {
-    top: calc(90px + env(safe-area-inset-top));
+    top: calc(74px + env(safe-area-inset-top));
     padding-top: 0;
   }
 
