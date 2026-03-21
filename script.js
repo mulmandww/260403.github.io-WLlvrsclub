@@ -596,8 +596,8 @@ dummyAppButtons.forEach((button) => {
       html: `
         <div class="memo-text-block">
           <p>- 선물 후보</p>
-          <p>귀걸이<br>반지(너무티남)<br>옷?<br><strong>향수 - 파리 가서 구매</strong><br><strong>케이크 - 롱이한테 물어보기 딸기생크림케이크</strong></p>
-          <p>Tea & Rock'n Roll - 그린, 베르가못, 레더</p>
+          <p>귀걸이<br>반지(너무티남)<br><strong>영양제?➡️홍삼(에브리타임)<br><strong>+ 파리 가서 둘러보기</strong><br><strong>케이크 - 롱이한테 물어보기 딸기생크림케이크</strong></p>
+          <p>홍삼세트 주문 / 간식들이랑 같이 넣어두기</p>
           <p>축하메시지<br>우리 씬롱이! 항상 어른스럽고 듬직한 아이지만<br>오늘만큼은 그 누구보다 환하게 웃는 네 모습을 보고싶다 :3<br>생일 너무너무 축하해!!</p>
           <p>편지 따로 준비? 아니면 카톡으로?</p>
           <p><strong>선물 챙겨서 자정 전에 롱이 방으로 가기!! 서프라이즈</strong><br>+ 낮에 어머님 연락 같이 드리기</p>
