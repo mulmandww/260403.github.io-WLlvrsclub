@@ -2384,7 +2384,7 @@ img {
   display: block;
   width: 44px;
   height: 44px;
-  object-fit: contain;
+  object-fit: cover;
   pointer-events: none;
 }
 
