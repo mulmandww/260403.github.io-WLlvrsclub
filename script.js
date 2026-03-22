@@ -907,16 +907,94 @@ dummyAppButtons.forEach((button) => {
         { type: "text-you", text: "고마워 건우~~ㅎㅎ" }
       ]
     },
+{
+  id: "leesangwon",
+  name: "이상원 ALD1",
+  avatar: "이",
+  time: "어제",
+  inputType: "iMessage",
+  messages: [
+    { type: "meta-center", text: "3월 25일 (수) 23:16" },
+
     {
-      id: "leesangwon",
-      name: "이상원 ALD1",
-      avatar: "이",
-      time: "토요일",
-      inputType: "iMessage",
-      messages: [
-        { type: "text-you", text: "Romantic & Energetic Vibe~" }
-      ]
+      type: "text-you",
+      text:
+`점심시간에 커다란 오렌지를 하나 샀어-
+그 크기에 모두 웃음을 터뜨렸지.
+난 껍질을 벗겨 로버트와 데이브에게 나눠 주었어-
+그들이 사분의 일씩 가지고 나는 반쪽을 가졌지.
+
+그 오렌지 덕분에 너무도 행복했어,
+평범한 일들이 종종 그렇지,
+특히나 요즘에는. 장을 보는 일도. 공원을 거니는 일도.
+모든 게 평화롭고 만족스러워. 새삼스럽게도.
+
+남은 하루도 편하게 흘려보냈어.
+해야 할 일을 모두 하면서도
+즐거웠고 나중에는 여유시간도 생겼지.
+사랑해. 살아있어 참 좋다.
+
+
+- 오렌지_Wendy Cope`
     },
+
+    { type: "text-me", text: "좋네 너 최애 책 맞지? 읽어보고 싶었는데" },
+    { type: "text-you", text: "내일 빌려줄게잉~" },
+    { type: "text-me", text: "드디어 읽어보넹 ㅋㅋ" },
+    { type: "text-me", text: "땡큐~~~ :3" },
+
+    { type: "meta-center", text: "3월 30일 (일) 20:23" },
+
+    {
+      type: "text-you",
+      text:
+`흰 산으로 나아가는 검은 돌
+흰 산으로 나아가는 검은 돌
+
+검은 돌은 다리를 절룩인다
+검은 돌이 다리를 절룩일 때 사람과 사물은 평등하고
+
+검은 돌이 다리를 절룩일 때
+너의 어깨 위로 한 줌의 먼지가 내려앉는다
+
+그러니까 검은 돌은
+사물의 기억을 등에 지고 천천히 나아가는 것이다
+그러므로 흰 산은 검은 돌의 걸음만큼 조용히 물러나는 것이다
+
+검은 돌이 다리를 절룩일 때
+흰 산은 흐리게 흐리게 흐르고 있어
+
+잠들지 못하는 검은 밤에 너는
+잠들지 못하는 검은 돌이 되어
+자꾸만 자꾸만 어딘가로 흘러가는 것이다
+
+
+- 있지도 않은 문장은 아름답고_이제니`
+    },
+
+    { type: "text-me", text: "되게 심오하다" },
+    { type: "text-me", text: "좋네.." },
+    { type: "text-me", text: "이것도 책 있어???" },
+
+    { type: "meta-center", text: "4월 2일 (목) 22:16" },
+
+    {
+      type: "text-you",
+      text:
+`올 것들은 돈 주지 않아도 온다. 밤이 그렇고 겨울이 그렇고 죽음 또한 그러할 것이다. 그땐 아득했고 지금은 막막한 이들 앞에, 예열하지 못한 작은 방 안 추위처럼 가만히 사랑이 당도하기를.
+
+- 안녕, 나의 작은 테이블이여_김이듬`
+    },
+
+    { type: "text-you", text: "마지막 문장이 참 좋은 것 같아~" },
+    { type: "text-me", text: "오 이건 산문집이네?" },
+    { type: "text-me", text: "감성이 좋다" },
+    { type: "text-you", text: "좀 낭만 있는걸로 보냈다잉" },
+    { type: "text-me", text: "늘 내 감성을 채워줘서 고맙다잉.. :3" },
+    { type: "read-status", text: "읽음: 23:48" },
+    { type: "text-you", text: "Romantic & Energetic Vibe~🍃🍃" }
+  ]
+},
      
 {
   id: "delivery",
