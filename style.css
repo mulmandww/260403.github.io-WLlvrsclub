@@ -2060,6 +2060,7 @@ img {
   position: relative;
   height: calc(118px + var(--safe-top));
   flex-shrink: 0;
+  z-index: 10;
 }
 
 .messages-home-back,
@@ -2102,7 +2103,7 @@ img {
   height: calc(100% - (118px + var(--safe-top)));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 34px 18px 96px;
+  padding: 34px 18px 104px;
 }
 
 .messages-list-head {
@@ -2231,17 +2232,19 @@ img {
 /* 목록 하단 */
 .messages-bottom-bar {
   position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: calc(14px + var(--safe-bottom));
-  height: 80px;
+  left: 6px;
+  right: 6px;
+  bottom: calc(10px + var(--safe-bottom));
+  height: 82px;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 12;
 }
 
 .messages-toolbar-image-btn {
   width: 100%;
+  height: 100%;
   padding: 0;
   background: transparent;
   box-shadow: none;
@@ -2252,8 +2255,8 @@ img {
 
 .messages-toolbar-image {
   display: block;
-  width: 100%;
-  max-width: 100%;
+  width: 108%;
+  max-width: none;
   height: auto;
   object-fit: contain;
   pointer-events: none;
@@ -2262,13 +2265,14 @@ img {
 /* 상세 상단 */
 .messages-detail-topbar {
   position: relative;
-  height: calc(132px + var(--safe-top));
+  height: calc(142px + var(--safe-top));
   flex-shrink: 0;
+  z-index: 20;
 }
 
 .messages-detail-profile-wrap {
   position: absolute;
-  top: calc(46px + var(--safe-top));
+  top: calc(58px + var(--safe-top));
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -2276,11 +2280,12 @@ img {
   flex-direction: column;
   align-items: center;
   pointer-events: none;
+  z-index: 21;
 }
 
 .messages-detail-avatar {
-  width: 58px;
-  height: 58px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background: linear-gradient(135deg, #bdcaea 0%, #7b89c9 100%);
   display: flex;
@@ -2292,11 +2297,11 @@ img {
 }
 
 .messages-detail-avatar-char {
-  font-size: 34px;
+  font-size: 37px;
   line-height: 1;
   font-weight: 800;
   color: #fff;
-  letter-spacing: -0.9px;
+  letter-spacing: -0.8px;
 }
 
 .messages-detail-avatar.is-default .messages-detail-avatar-char {
@@ -2305,10 +2310,10 @@ img {
 
 .messages-detail-avatar.is-default .messages-detail-avatar-head {
   position: absolute;
-  top: 12px;
+  top: 11px;
   left: 50%;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: #fff;
   transform: translateX(-50%);
@@ -2318,19 +2323,19 @@ img {
   position: absolute;
   left: 50%;
   bottom: 10px;
-  width: 38px;
-  height: 16px;
-  border-radius: 38px 38px 14px 14px;
+  width: 34px;
+  height: 15px;
+  border-radius: 34px 34px 13px 13px;
   background: #fff;
   transform: translateX(-50%);
 }
 
 .messages-detail-name-pill {
-  margin-top: 7px;
-  min-width: 158px;
-  max-width: calc(100% - 150px);
-  height: 36px;
-  border-radius: 18px;
+  margin-top: 8px;
+  min-width: 152px;
+  max-width: calc(100% - 156px);
+  height: 34px;
+  border-radius: 17px;
   background: rgba(255,255,255,0.72);
   border: 1px solid rgba(255,255,255,0.55);
   backdrop-filter: blur(18px) saturate(160%);
@@ -2342,15 +2347,15 @@ img {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 0 16px;
+  padding: 0 15px;
 }
 
 .messages-detail-name {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
   color: #111;
   line-height: 1;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.25px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2369,8 +2374,8 @@ img {
   position: absolute;
   top: calc(54px + var(--safe-top));
   right: 14px;
-  width: 44px;
-  height: 44px;
+  width: 50px;
+  height: 50px;
   padding: 0;
   border-radius: 50%;
   background: transparent;
@@ -2382,18 +2387,18 @@ img {
 
 .messages-video-image {
   display: block;
-  width: 50px;
-  height: 50px;
+  width: 58px;
+  height: 58px;
   object-fit: contain;
   pointer-events: none;
 }
 
 /* 상세 대화 */
 .messages-detail-scroll {
-  height: calc(100% - (132px + var(--safe-top)));
+  height: calc(100% - (142px + var(--safe-top)));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 18px 14px 92px;
+  padding: 10px 14px 106px;
   position: relative;
   z-index: 1;
 }
@@ -2495,14 +2500,14 @@ img {
 /* 입력창 */
 .messages-inputbar {
   position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: calc(10px + var(--safe-bottom));
-  height: 72px;
+  left: 2px;
+  right: 2px;
+  bottom: calc(6px + var(--safe-bottom));
+  height: 86px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 20;
+  z-index: 22;
 }
 
 .messages-keyboard-image-btn {
@@ -2518,8 +2523,9 @@ img {
 
 .messages-keyboard-image {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 112%;
+  max-width: none;
+  height: auto;
   object-fit: contain;
   pointer-events: none;
 }
@@ -2545,17 +2551,23 @@ img {
     top: calc(54px + env(safe-area-inset-top));
   }
 
-  .messages-top-circle-btn,
-  .messages-image-top-btn {
+  .messages-top-circle-btn {
     top: calc(54px + env(safe-area-inset-top));
   }
 
-.messages-list-scroll {
-  height: calc(100% - (112px + env(safe-area-inset-top)));
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 34px 16px 102px;
-}
+  .messages-image-top-btn {
+    top: calc(52px + env(safe-area-inset-top));
+    right: 12px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .messages-list-scroll {
+    height: calc(100% - (112px + env(safe-area-inset-top)));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 34px 16px 100px;
+  }
 
   .messages-list-head h1 {
     font-size: 32px;
@@ -2601,78 +2613,74 @@ img {
   }
 
   .messages-bottom-bar {
-    left: 12px;
-    right: 12px;
-    bottom: calc(12px + env(safe-area-inset-bottom));
-    height: 56px;
+    left: 8px;
+    right: 8px;
+    bottom: calc(8px + env(safe-area-inset-bottom));
+    height: 82px;
   }
 
-.messages-detail-topbar {
-  position: relative;
-  height: calc(132px + var(--safe-top));
-  flex-shrink: 0;
-  z-index: 20;
-}
-  
-.messages-detail-profile-wrap {
-  position: absolute;
-  top: calc(46px + var(--safe-top));
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  pointer-events: none;
-  z-index: 21;
-}
+  .messages-toolbar-image {
+    width: 110%;
+    max-width: none;
+  }
+
+  .messages-detail-topbar {
+    height: calc(142px + env(safe-area-inset-top));
+    z-index: 20;
+  }
+
+  .messages-detail-profile-wrap {
+    top: calc(58px + env(safe-area-inset-top));
+    z-index: 21;
+  }
 
   .messages-detail-avatar {
-    width: 72px;
-    height: 72px;
+    width: 64px;
+    height: 64px;
   }
 
   .messages-detail-avatar-char {
-    font-size: 40px;
+    font-size: 37px;
   }
 
   .messages-detail-avatar.is-default .messages-detail-avatar-head {
-    top: 13px;
-    width: 20px;
-    height: 20px;
+    top: 11px;
+    width: 18px;
+    height: 18px;
   }
 
   .messages-detail-avatar.is-default .messages-detail-avatar-body {
-    bottom: 11px;
-    width: 40px;
-    height: 17px;
+    bottom: 10px;
+    width: 34px;
+    height: 15px;
   }
 
   .messages-detail-name-pill {
-    min-width: 160px;
-    max-width: calc(100% - 128px);
-    height: 38px;
-    margin-top: 7px;
+    min-width: 152px;
+    max-width: calc(100% - 140px);
+    height: 34px;
+    margin-top: 8px;
+    padding: 0 15px;
   }
 
   .messages-detail-name {
-    font-size: 17px;
+    font-size: 14px;
   }
 
   .messages-video-image {
-    width: 50px;
-    height: 50px;
+    width: 58px;
+    height: 58px;
   }
 
-.messages-detail-scroll {
-  height: calc(100% - (132px + var(--safe-top)));
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 18px 14px 92px;
-  position: relative;
-  z-index: 1;
-}
-  
+  .messages-detail-scroll {
+    height: calc(100% - (142px + env(safe-area-inset-top)));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 14px 102px;
+    position: relative;
+    z-index: 1;
+  }
+
   .messages-bubble {
     max-width: 78%;
     padding: 11px 15px;
@@ -2693,16 +2701,16 @@ img {
     font-size: 13px;
   }
 
-.messages-inputbar {
-  left: 6px;
-  right: 6px;
-  bottom: calc(8px + env(safe-area-inset-bottom));
-  height: 72px;
-}
+  .messages-inputbar {
+    left: 0;
+    right: 0;
+    bottom: calc(4px + env(safe-area-inset-bottom));
+    height: 88px;
+  }
 
-  .messages-toolbar-image,
   .messages-keyboard-image {
-    width: 100%;
+    width: 114%;
+    max-width: none;
     height: auto;
   }
 }
