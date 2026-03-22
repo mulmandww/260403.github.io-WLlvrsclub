@@ -896,49 +896,49 @@ dummyAppButtons.forEach((button) => {
   messages: [
     { type: "meta-center", text: "3월 22일 (일) 15:08" },
 
-    { type: "text-you", text: "형" },
-    { type: "text-you", text: "윗층에서 이따 저녁에 훠궈먹자고" },
-    { type: "text-you", text: "우리층에서 같이 먹자는데 어때요?" },
-    { type: "text-you", text: "괜찮아요??" },
+    { type: "text-me", text: "형" },
+    { type: "text-me", text: "윗층에서 이따 저녁에 훠궈먹자고" },
+    { type: "text-me", text: "우리층에서 같이 먹자는데 어때요?" },
+    { type: "text-me", text: "괜찮아요??" },
 
-    { type: "text-me", text: "훠궈????" },
-    { type: "text-me", text: "너무 좋은데??" },
-    { type: "text-me", text: "몇시에 먹어 우리" },
+    { type: "text-you", text: "훠궈????" },
+    { type: "text-you", text: "너무 좋은데??" },
+    { type: "text-you", text: "몇시에 먹어 우리" },
 
-    { type: "text-you", text: "음 저녁이니까 6-7시 쯤..?" },
+    { type: "text-me", text: "음 저녁이니까 6-7시 쯤..?" },
 
-    { type: "text-me", text: "좋다 7시 정도 ㅎㅎ" },
+    { type: "text-you", text: "좋다 7시 정도 ㅎㅎ" },
 
-    { type: "text-you", text: "넹 연락할게요~~~" },
-    { type: "text-you", text: "재료 준비해온다고 그냥 있으래요" },
-    { type: "text-you", text: "ㅋㅋ 더 누워계십쇼." },
+    { type: "text-me", text: "넹 연락할게요~~~" },
+    { type: "text-me", text: "재료 준비해온다고 그냥 있으래요" },
+    { type: "text-me", text: "ㅋㅋ 더 누워계십쇼." },
 
-    { type: "text-me", text: "고맙다잉 ~~ㅎㅎ" },
+    { type: "text-you", text: "고맙다잉 ~~ㅎㅎ" },
 
     { type: "meta-center", text: "4월 1일 (수) 15:14" },
 
-    { type: "text-you", text: "형" },
-    { type: "text-you", text: "우리 카페 갔다가 이제 들어가는데" },
-    { type: "text-you", text: "뭐 사갈까요?" },
-    { type: "text-you", text: "여기 치즈케이크 있음" },
+    { type: "text-me", text: "형" },
+    { type: "text-me", text: "우리 카페 갔다가 이제 들어가는데" },
+    { type: "text-me", text: "뭐 사갈까요?" },
+    { type: "text-me", text: "여기 치즈케이크 있음" },
 
-    { type: "text-me", text: "오" },
-    { type: "text-me", text: "그럼 케이크 하나만 사와주라~!" },
-    { type: "text-me", text: "Thanks 건우!!!!!!" },
-    { type: "text-me", text: "좀 감동이다...ㅠㅠ" },
+    { type: "text-you", text: "오" },
+    { type: "text-you", text: "그럼 케이크 하나만 사와주라~!" },
+    { type: "text-you", text: "Thanks 건우!!!!!!" },
+    { type: "text-you", text: "좀 감동이다...ㅠㅠ" },
 
     {
-      type: "text-you",
+      type: "text-me",
       text: "롱이가 먹고 너무 좋아해서 더 포장해갈까 하니까 다 사다주고 싶대요 ㅋㅋ"
     },
 
-    { type: "text-me", text: "건우랑 롱이 키운 보람이 있네" },
-    { type: "text-me", text: "🥹🥹🥹" },
+    { type: "text-you", text: "건우랑 롱이 키운 보람이 있네" },
+    { type: "text-you", text: "🥹🥹🥹" },
 
-    { type: "text-you", text: "횽 좀만 기다려줘요" },
-    { type: "text-you", text: "cake party해용~~" },
-    { type: "text-you", text: "딸기도 사고 치즈도 샀어용" },
-    { type: "text-you", text: "신난다야~~~~" },
+    { type: "text-me", text: "횽 좀만 기다려줘요" },
+    { type: "text-me", text: "cake party해용~~" },
+    { type: "text-me", text: "딸기도 사고 치즈도 샀어용" },
+    { type: "text-me", text: "신난다야~~~~" },
 
     { type: "read-status", text: "읽음: 4월 1일" },
 
