@@ -2099,10 +2099,10 @@ img {
 }
 
 .messages-list-scroll {
-  height: calc(100% - (118px + var(--safe-top)) - 84px - var(--safe-bottom));
+  height: calc(100% - (118px + var(--safe-top)));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 34px 18px 96px;
+  padding: 34px 18px 110px;
 }
 
 .messages-list-head {
@@ -2390,10 +2390,10 @@ img {
 
 /* 상세 대화 */
 .messages-detail-scroll {
-  height: calc(100% - (132px + var(--safe-top)) - 74px - var(--safe-bottom));
+  height: calc(100% - (132px + var(--safe-top)));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 18px 14px 92px;
+  padding: 18px 14px 96px;
 }
 
 .messages-conversation {
@@ -2546,8 +2546,10 @@ img {
   }
 
 .messages-list-scroll {
-  height: calc(100% - (112px + env(safe-area-inset-top)) - 72px - env(safe-area-inset-bottom));
-  padding: 34px 16px 92px;
+  height: calc(100% - (112px + env(safe-area-inset-top)));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 34px 16px 102px;
 }
 
   .messages-list-head h1 {
@@ -2646,10 +2648,12 @@ img {
   }
 
 .messages-detail-scroll {
-  height: calc(100% - (126px + env(safe-area-inset-top)) - 68px - env(safe-area-inset-bottom));
-  padding: 18px 14px 88px;
+  height: calc(100% - (126px + env(safe-area-inset-top)));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 18px 14px 92px;
 }
-
+  
   .messages-bubble {
     max-width: 78%;
     padding: 11px 15px;
