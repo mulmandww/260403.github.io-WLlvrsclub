@@ -2387,8 +2387,8 @@ img {
 
 .messages-video-image {
   display: block;
-  width: 58px;
-  height: 58px;
+  width: 70px;
+  height: 70px;
   object-fit: contain;
   pointer-events: none;
 }
@@ -2523,7 +2523,7 @@ img {
 
 .messages-keyboard-image {
   display: block;
-  width: 112%;
+  width: 140%;
   max-width: none;
   height: auto;
   object-fit: contain;
