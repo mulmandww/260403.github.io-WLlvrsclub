@@ -2374,8 +2374,8 @@ img {
   position: absolute;
   top: calc(54px + var(--safe-top));
   right: 14px;
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   background: transparent;
   border: none;
