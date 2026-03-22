@@ -2231,8 +2231,8 @@ img {
 /* 목록 하단 */
 .messages-bottom-bar {
   position: absolute;
-  left: 14px;
-  right: 14px;
+  left: 8px;
+  right: 8px;
   bottom: calc(14px + var(--safe-bottom));
   height: 80px;
   display: flex;
@@ -2279,8 +2279,8 @@ img {
 }
 
 .messages-detail-avatar {
-  width: 76px;
-  height: 76px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background: linear-gradient(135deg, #bdcaea 0%, #7b89c9 100%);
   display: flex;
@@ -2292,7 +2292,7 @@ img {
 }
 
 .messages-detail-avatar-char {
-  font-size: 42px;
+  font-size: 38px;
   line-height: 1;
   font-weight: 800;
   color: #fff;
@@ -2305,7 +2305,7 @@ img {
 
 .messages-detail-avatar.is-default .messages-detail-avatar-head {
   position: absolute;
-  top: 14px;
+  top: 18px;
   left: 50%;
   width: 22px;
   height: 22px;
@@ -2346,7 +2346,7 @@ img {
 }
 
 .messages-detail-name {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 800;
   color: #111;
   line-height: 1;
@@ -2491,10 +2491,10 @@ img {
 /* 입력창 */
 .messages-inputbar {
   position: absolute;
-  left: 14px;
-  right: 14px;
+  left: 8px;
+  right: 8px;
   bottom: calc(14px + var(--safe-bottom));
-  height: 60px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
