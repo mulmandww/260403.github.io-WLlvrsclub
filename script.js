@@ -366,6 +366,10 @@ async function openAppWithAnimation(button) {
     window.resetPhoneAppState();
   }
 
+   if (targetScreen.id === "messagesScreen" && typeof window.resetMessagesAppState === "function") {
+    window.resetMessagesAppState();
+  }
+
   button.classList.add("launching");
   homeScreen.classList.add("app-opening");
 
@@ -803,6 +807,347 @@ dummyAppButtons.forEach((button) => {
 
   renderMemoLists();
 })();
+
+
+
+/* =========================
+   MESSAGES APP
+========================= */
+(function initMessagesApp() {
+  const messagesScreen = document.getElementById("messagesScreen");
+  if (!messagesScreen) return;
+
+  const messagesThreadList = document.getElementById("messagesThreadList");
+  const messagesDetailPage = document.getElementById("messagesDetailPage");
+  const messagesConversation = document.getElementById("messagesConversation");
+  const messagesDetailScroll = document.getElementById("messagesDetailScroll");
+
+  const messagesDetailBack = messagesScreen.querySelector(".messages-detail-back");
+  const messagesDetailName = document.getElementById("messagesDetailName");
+  const messagesDetailAvatar = document.getElementById("messagesDetailAvatar");
+  const messagesDetailAvatarChar = document.getElementById("messagesDetailAvatarChar");
+  const messagesInputPlaceholder = document.getElementById("messagesInputPlaceholder");
+
+  if (!messagesThreadList || !messagesDetailPage || !messagesConversation) return;
+
+  const messageThreads = [
+    {
+      id: "longi",
+      name: "롱이♥️ ALD1",
+      avatar: "롱",
+      time: "어제",
+      inputType: "iMessage",
+      messages: [
+        { type: "text-you", text: "ㅋㅋㅋ잘자용 형도" }
+      ]
+    },
+    {
+      id: "jungsanghyun",
+      name: "정상현 ALD1",
+      avatar: "정",
+      time: "어제",
+      inputType: "iMessage",
+      messages: [
+        { type: "text-you", text: "..." }
+      ]
+    },
+    {
+      id: "zhouwanxin",
+      name: "조우안신 ALD1",
+      avatar: "조",
+      time: "어제",
+      inputType: "iMessage",
+      messages: [
+        { type: "text-you", text: "ㅇㅋ" }
+      ]
+    },
+    {
+      id: "kimjunseo",
+      name: "김준서 ALD1",
+      avatar: "김",
+      time: "수요일",
+      inputType: "iMessage",
+      messages: [
+        { type: "text-you", text: "맛있겠다" },
+        { type: "text-me", text: "아니 근데" },
+        { type: "text-me", text: "왜 매번 회귀는 우리층에서 먹는거지" },
+        { type: "text-me", text: "루틴이 됐어 아주" },
+        { type: "text-you", text: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" },
+        { type: "text-you", text: "여기서 다 해결게.... ㅎㅎ" },
+        { type: "text-you", text: "롱이 추천 맛집이야 윗층이ㅎㅎㅎ" },
+        { type: "meta-center", text: "(오늘) 15:43" },
+        { type: "text-you", text: "롱이는 안 올라오나? 바로 합류??" },
+        { type: "text-me", text: "아 롱이 여기 같이 있는데" },
+        { type: "text-me", text: "요리 너무 못하는 것 같다고" },
+        { type: "text-me", text: "자긴 빠지겠다나..ㅋㅋ" },
+        { type: "text-me", text: "하.. 너무 귀엽다" },
+        { type: "read-status", text: "읽음: 15:43" },
+        { type: "text-you", text: ".........?" },
+        { type: "text-you", text: "그래 7시까지 내려갈게 좀 이따 보자~^^" }
+      ]
+    },
+    {
+      id: "irio",
+      name: "이리오 ALD1",
+      avatar: "이",
+      time: "수요일",
+      inputType: "iMessage",
+      messages: [
+        { type: "text-you", text: "빨리와 bro~ㅎㅎ" }
+      ]
+    },
+    {
+      id: "arno",
+      name: "아르노 ALD1",
+      avatar: "아",
+      time: "월요일",
+      inputType: "iMessage",
+      messages: [
+        { type: "text-you", text: "고마워 건우~~ㅎㅎ" }
+      ]
+    },
+    {
+      id: "leesangwon",
+      name: "이상원 ALD1",
+      avatar: "이",
+      time: "토요일",
+      inputType: "iMessage",
+      messages: [
+        { type: "text-you", text: "Romantic & Energetic Vibe~" }
+      ]
+    },
+    {
+      id: "delivery",
+      name: "+82 10-1140-5290",
+      avatar: "",
+      defaultAvatar: true,
+      time: "토요일",
+      inputType: "문자 메시지 · RCS",
+      messages: [
+        {
+          type: "text-you",
+          text:
+`[CJ대한통운]
+[Web발신][CJ대한통운_배송완료]
+
+일요일에도 신속하게!!
+모두를 위한 매일매일 배송
+CJ대한통운 매일오네(O-NE)
+
+고객님의 상품이 배송 완료되었습니다.
+· 보내는분 : 정관장
+· 상품명 : 정관장_에브리타임_10ml_100포_1개[원산지:상세설명에_표시]_정관장브랜드스토어
+· 인수자(위탁장소) : 문앞
+· 운송장번호 : 211082089934
+
+모두를 위한 단 하나의 배송!
+CJ대한통운 오네
+
+※ CJ대한통운 고객센터 : 1588-1255`
+        }
+      ]
+    },
+    {
+      id: "service0505",
+      name: "#0505",
+      avatar: "#",
+      time: "2026. 2. 3.",
+      inputType: "문자 메시지 · RCS",
+      messages: [
+        { type: "text-you", text: "[Web발신]\n안내 메시지 예시입니다." }
+      ]
+    }
+  ];
+
+  let currentThreadId = null;
+
+  function getThreadPreview(thread) {
+    if (!thread.messages || !thread.messages.length) return "";
+
+    const last = thread.messages[thread.messages.length - 1];
+
+    if (last.type === "text-me" || last.type === "text-you") {
+      return last.text;
+    }
+    if (last.type === "image-me" || last.type === "image-you") {
+      return "사진";
+    }
+    if (last.type === "voice-me" || last.type === "voice-you") {
+      return "음성 메시지";
+    }
+    if (last.type === "meta-center" || last.type === "read-status") {
+      const textMessage = [...thread.messages].reverse().find(
+        (item) => item.type === "text-me" || item.type === "text-you"
+      );
+      return textMessage ? textMessage.text : "";
+    }
+
+    return "";
+  }
+
+  function createAvatarHTML(thread) {
+    if (thread.defaultAvatar) {
+      return `
+        <div class="messages-thread-avatar messages-thread-avatar-default">
+          <span class="messages-thread-avatar-head"></span>
+          <span class="messages-thread-avatar-body"></span>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="messages-thread-avatar">
+        <span class="messages-thread-avatar-char">${thread.avatar || ""}</span>
+      </div>
+    `;
+  }
+
+  function renderThreadList() {
+    messagesThreadList.innerHTML = messageThreads.map((thread) => `
+      <button class="messages-thread-row" type="button" data-thread-id="${thread.id}">
+        ${createAvatarHTML(thread)}
+
+        <div class="messages-thread-main">
+          <div class="messages-thread-name">${thread.name}</div>
+          <div class="messages-thread-preview">${getThreadPreview(thread)}</div>
+        </div>
+
+        <div class="messages-thread-time">${thread.time}</div>
+        <div class="messages-thread-chevron"></div>
+      </button>
+    `).join("");
+  }
+
+  function setDetailHeader(thread) {
+    if (messagesDetailName) {
+      messagesDetailName.textContent = thread.name;
+    }
+
+    if (messagesInputPlaceholder) {
+      messagesInputPlaceholder.textContent = thread.inputType || "iMessage";
+    }
+
+    if (messagesDetailAvatar) {
+      messagesDetailAvatar.classList.toggle("is-default", !!thread.defaultAvatar);
+    }
+
+    if (messagesDetailAvatarChar) {
+      messagesDetailAvatarChar.textContent = thread.defaultAvatar ? "" : (thread.avatar || "");
+    }
+  }
+
+  function renderMessageItem(message) {
+    if (message.type === "meta-center") {
+      return `<div class="messages-meta-center">${message.text}</div>`;
+    }
+
+    if (message.type === "read-status") {
+      return `<div class="messages-read-status">${message.text}</div>`;
+    }
+
+    if (message.type === "text-you") {
+      return `
+        <div class="messages-row you">
+          <div class="messages-bubble">${message.text}</div>
+        </div>
+      `;
+    }
+
+    if (message.type === "text-me") {
+      return `
+        <div class="messages-row me">
+          <div class="messages-bubble">${message.text}</div>
+        </div>
+      `;
+    }
+
+    if (message.type === "image-you") {
+      return `
+        <div class="messages-row you">
+          <div class="messages-bubble image-bubble">
+            <img src="${message.src}" alt="">
+          </div>
+        </div>
+      `;
+    }
+
+    if (message.type === "image-me") {
+      return `
+        <div class="messages-row me">
+          <div class="messages-bubble image-bubble">
+            <img src="${message.src}" alt="">
+          </div>
+        </div>
+      `;
+    }
+
+    if (message.type === "voice-you") {
+      return `
+        <div class="messages-row you">
+          <div class="messages-bubble voice-bubble">
+            <img src="assets/icons/message_voice_you.png" alt="">
+          </div>
+        </div>
+      `;
+    }
+
+    if (message.type === "voice-me") {
+      return `
+        <div class="messages-row me">
+          <div class="messages-bubble voice-bubble">
+            <img src="assets/icons/message_voice_me.png" alt="">
+          </div>
+        </div>
+      `;
+    }
+
+    return "";
+  }
+
+  function openThread(threadId) {
+    const thread = messageThreads.find((item) => item.id === threadId);
+    if (!thread) return;
+
+    currentThreadId = threadId;
+    setDetailHeader(thread);
+    messagesConversation.innerHTML = thread.messages.map(renderMessageItem).join("");
+    messagesScreen.classList.add("detail-open");
+
+    requestAnimationFrame(() => {
+      if (messagesDetailScroll) {
+        messagesDetailScroll.scrollTop = messagesDetailScroll.scrollHeight;
+      }
+    });
+  }
+
+  function closeThread() {
+    currentThreadId = null;
+    messagesScreen.classList.remove("detail-open");
+  }
+
+  messagesThreadList.addEventListener("click", (event) => {
+    const row = event.target.closest(".messages-thread-row");
+    if (!row || !messagesScreen.classList.contains("active")) return;
+    openThread(row.dataset.threadId);
+  });
+
+  if (messagesDetailBack) {
+    messagesDetailBack.addEventListener("click", (event) => {
+      event.stopPropagation();
+      closeThread();
+    });
+  }
+
+  window.resetMessagesAppState = function () {
+    closeThread();
+    if (messagesDetailScroll) {
+      messagesDetailScroll.scrollTop = 0;
+    }
+  };
+
+  renderThreadList();
+})();
+
 
 
 /* =========================
