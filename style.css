@@ -2391,6 +2391,8 @@ img {
   height: 70px;
   object-fit: contain;
   pointer-events: none;
+  transform: scale(1.5);
+  transform-origin: center;
 }
 
 /* 상세 대화 */
