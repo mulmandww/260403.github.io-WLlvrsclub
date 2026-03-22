@@ -821,6 +821,7 @@ dummyAppButtons.forEach((button) => {
   const messagesDetailPage = document.getElementById("messagesDetailPage");
   const messagesConversation = document.getElementById("messagesConversation");
   const messagesDetailScroll = document.getElementById("messagesDetailScroll");
+   const messagesListScroll = messagesScreen.querySelector(".messages-list-scroll");
 
   const messagesDetailBack = messagesScreen.querySelector(".messages-detail-back");
   const messagesDetailName = document.getElementById("messagesDetailName");
@@ -1120,10 +1121,14 @@ CJ대한통운 오네
     });
   }
 
-  function closeThread() {
-    currentThreadId = null;
-    messagesScreen.classList.remove("detail-open");
+function closeThread() {
+  currentThreadId = null;
+  messagesScreen.classList.remove("detail-open");
+
+  if (messagesListScroll) {
+    messagesListScroll.scrollTop = 0;
   }
+}
 
   messagesThreadList.addEventListener("click", (event) => {
     const row = event.target.closest(".messages-thread-row");
@@ -1138,12 +1143,17 @@ CJ대한통운 오네
     });
   }
 
-  window.resetMessagesAppState = function () {
-    closeThread();
-    if (messagesDetailScroll) {
-      messagesDetailScroll.scrollTop = 0;
-    }
-  };
+window.resetMessagesAppState = function () {
+  closeThread();
+
+  if (messagesListScroll) {
+    messagesListScroll.scrollTop = 0;
+  }
+
+  if (messagesDetailScroll) {
+    messagesDetailScroll.scrollTop = 0;
+  }
+};
 
   renderThreadList();
 })();
