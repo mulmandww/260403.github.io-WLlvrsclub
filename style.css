@@ -2372,25 +2372,22 @@ img {
 
 .messages-image-top-btn {
   position: absolute;
-  top: calc(52px + env(safe-area-inset-top));
-  right: 12px;
-  width: 52px;
-  height: 52px;
+  top: calc(54px + var(--safe-top));
+  right: 14px;
+
+  width: 44px;
+  height: 44px;
+
   padding: 0;
-  border-radius: 50%;
-  background: transparent;
+  background: none;
+  border: none;
   box-shadow: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
 }
 
 .messages-video-image {
   display: block;
-  width: 130%;
-  height: 130%;
-  max-width: none;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   pointer-events: none;
 }
