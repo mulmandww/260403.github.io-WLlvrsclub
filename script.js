@@ -897,16 +897,62 @@ dummyAppButtons.forEach((button) => {
         { type: "text-you", text: "빨리와 bro~ㅎㅎ" }
       ]
     },
-    {
-      id: "arno",
-      name: "아르노 ALD1",
-      avatar: "아",
-      time: "월요일",
-      inputType: "iMessage",
-      messages: [
-        { type: "text-you", text: "고마워 건우~~ㅎㅎ" }
-      ]
-    },
+     
+{
+  id: "arno",
+  name: "아르노 ALD1",
+  avatar: "아",
+  time: "어제",
+  inputType: "iMessage",
+  messages: [
+    { type: "meta-center", text: "3월 24일 (화) 13:14" },
+
+    { type: "text-you", text: "건우" },
+    { type: "text-you", text: "밀크티 시킬건데 먹을래?" },
+    { type: "text-you", text: "茶百道" },
+
+    { type: "text-me", text: "오 좋아요 감사합니다~~" },
+
+    { type: "text-you", text: "메뉴 보고 알려줘~" },
+
+    { type: "text-me", text: "차백도 뭐가 맛있지?" },
+    { type: "text-me", text: "형은 뭐 골랐어요?" },
+
+    { type: "text-you", text: "난 타로볼 밀크티~" },
+
+    { type: "text-me", text: "그럼 저도 같은걸로 도전!" },
+
+    { type: "text-you", text: "30분 정도 걸린대~" },
+
+    { type: "text-me", text: "제가 가져올게요~" },
+    { type: "text-me", text: "잘 먹을게요 감사해용~~ :3" },
+    { type: "text-me", text: "오 이거 되게 맛있다" },
+
+    { type: "text-you", text: "my bubble tea friend🧋🧋🧋" },
+
+    { type: "meta-center", text: "4월 1일 (수) 13:10" },
+
+    { type: "text-me", text: "아르거" },
+    { type: "text-me", text: "차백도 또 시킬건데 같이 먹을래요?" },
+
+    { type: "text-you", text: "좋아 고마워~~~" },
+
+    { type: "text-me", text: "전 계화홍차라떼? 신메뉴 도전" },
+    { type: "text-me", text: "롱이는 우롱라떼에 펄추가" },
+    { type: "text-me", text: "메뉴 보고 골라주세요 하오거거~" },
+
+    { type: "text-you", text: "난 저번이랑 같은거" },
+    { type: "text-you", text: "타로볼 밀크티~🧋🧋" },
+
+    { type: "text-me", text: "연습실이죠?" },
+    { type: "text-me", text: "그쪽으로 갈게요~" },
+
+    { type: "read-status", text: "읽음: 14:20" },
+
+    { type: "text-you", text: "고마워 건우~~ㅎㅎ" }
+  ]
+},
+     
 {
   id: "leesangwon",
   name: "이상원 ALD1",
