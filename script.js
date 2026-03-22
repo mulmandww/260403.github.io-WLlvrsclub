@@ -862,31 +862,73 @@ dummyAppButtons.forEach((button) => {
         { type: "text-you", text: "ㅇㅋ" }
       ]
     },
-    {
-      id: "kimjunseo",
-      name: "김준서 ALD1",
-      avatar: "김",
-      time: "수요일",
-      inputType: "iMessage",
-      messages: [
-        { type: "text-you", text: "맛있겠다" },
-        { type: "text-me", text: "아니 근데" },
-        { type: "text-me", text: "왜 매번 회귀는 우리층에서 먹는거지" },
-        { type: "text-me", text: "루틴이 됐어 아주" },
-        { type: "text-you", text: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" },
-        { type: "text-you", text: "여기서 다 해결게.... ㅎㅎ" },
-        { type: "text-you", text: "롱이 추천 맛집이야 윗층이ㅎㅎㅎ" },
-        { type: "meta-center", text: "(오늘) 15:43" },
-        { type: "text-you", text: "롱이는 안 올라오나? 바로 합류??" },
-        { type: "text-me", text: "아 롱이 여기 같이 있는데" },
-        { type: "text-me", text: "요리 너무 못하는 것 같다고" },
-        { type: "text-me", text: "자긴 빠지겠다나..ㅋㅋ" },
-        { type: "text-me", text: "하.. 너무 귀엽다" },
-        { type: "read-status", text: "읽음: 15:43" },
-        { type: "text-you", text: ".........?" },
-        { type: "text-you", text: "그래 7시까지 내려갈게 좀 이따 보자~^^" }
-      ]
-    },
+     
+   {
+  id: "kimjunseo",
+  name: "김준서 ALD1",
+  avatar: "김",
+  time: "수요일",
+  inputType: "iMessage",
+  messages: [
+    { type: "meta-center", text: "3월 22일 (일) 15:01" },
+
+    { type: "text-you", text: "건우야" },
+    { type: "text-you", text: "애들이 이따 훠궈 먹자는데" },
+    { type: "text-you", text: "너희 층에서 다같이 먹을까?" },
+
+    { type: "text-me", text: "좋아요~" },
+    { type: "text-me", text: "여기도 물어볼게요" },
+    { type: "text-me", text: "7시쯤??" },
+
+    { type: "text-you", text: "오키 맞춰서 다같이 데리고 갈게" },
+
+    { type: "text-me", text: "넹~" },
+    { type: "text-me", text: "맛있겠다" },
+    { type: "text-me", text: "재료 거기서 손질해서 올거에요??" },
+    { type: "text-me", text: "아니 근데" },
+    { type: "text-me", text: "왜 매번 훠궈는 우리층에서 먹는거지" },
+    { type: "text-me", text: "루틴이 됐어 아주" },
+
+    { type: "text-you", text: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" },
+    { type: "text-you", text: "여기서 다 해갈게.... ㅎㅎ" },
+    { type: "text-you", text: "롱이 추천 맛집이야 윗층이" },
+    { type: "text-you", text: "롱이는 안 내려오나?" },
+
+    { type: "text-me", text: "아 롱이 여기 같이 있는데 지금" },
+    { type: "text-me", text: "요리 너무 못하는 것 같다고 충격받아서" },
+    { type: "text-me", text: "자긴 빠지겠다나 ..." },
+    { type: "text-me", text: "하.. 너무 귀엽다" },
+
+    { type: "text-you", text: ".........?" },
+    { type: "text-you", text: "그래 7시까지 내려갈게 좀 이따 보자~" },
+
+    { type: "meta-center", text: "4월 1일 (수) 17:46" },
+
+    { type: "text-you", text: "야 건우야..." },
+    { type: "text-you", text: "너가 안신이 준 선물 내가 한 번 던져봤다가" },
+    { type: "text-you", text: "망가트렸는ㄷㅔ" },
+    { type: "text-you", text: "너한테도 사과해야 할 것 같아서ㅠㅠㅜ" },
+    { type: "text-you", text: "진짜 미안..............." },
+    { type: "text-you", text: "아 왜 다 부숴먹지" },
+    { type: "text-you", text: "진짜진짜너무미안..........." },
+    { type: "text-you", text: "내가 새로 사주던지 할게 ㅠㅠㅠ" },
+
+    { type: "text-me", text: "에? 괜찮아요" },
+    { type: "text-me", text: "그거 2개라" },
+    { type: "text-me", text: "안신이 갖고 싶어하면 하나 더 줘도 돼용" },
+    { type: "text-me", text: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋ" },
+    { type: "text-me", text: "그리고 그거 테무에서 천원이래" },
+    { type: "text-me", text: "난 오만원에 샀는데" },
+    { type: "text-me", text: "................" },
+    { type: "text-me", text: "암튼 괜찮아요.." },
+     
+    { type: "read-status", text: "읽음: 4월 1일" },
+
+    { type: "text-you", text: "...응 사실 이미 알고 있긴 했어.." },
+    { type: "text-you", text: "앞으로 같이 서치해줄게..ㅎㅎ" }
+  ]
+},
+     
 {
   id: "irio",
   name: "이리오 ALD1",
