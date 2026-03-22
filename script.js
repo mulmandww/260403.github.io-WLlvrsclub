@@ -948,16 +948,17 @@ CJ대한통운 오네
         }
       ]
     },
-    {
-      id: "service0505",
-      name: "#0505",
-      avatar: "#",
-      time: "2026. 2. 3.",
-      inputType: "문자 메시지 · RCS",
-      messages: [
-        { type: "text-you", text: "[Web발신]\n안내 메시지 예시입니다." }
-      ]
-    }
+  {
+  id: "service0505",
+  name: "#0505",
+  avatar: "#",
+  time: "토요일",
+  inputType: "문자 메시지 · RCS",
+  messages: [
+    { type: "meta-center", text: "1월 24일 (토) 15:44" },
+    { type: "text-me", text: "ALPHA DRIVE ONE" }
+  ]
+}
   ];
 
   let currentThreadId = null;
