@@ -2102,7 +2102,7 @@ img {
   height: calc(100% - (118px + var(--safe-top)));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 34px 18px 110px;
+  padding: 34px 18px 96px;
 }
 
 .messages-list-head {
@@ -2393,7 +2393,7 @@ img {
   height: calc(100% - (132px + var(--safe-top)));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 18px 14px 96px;
+  padding: 18px 14px 92px;
 }
 
 .messages-conversation {
