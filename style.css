@@ -2372,10 +2372,10 @@ img {
 
 .messages-image-top-btn {
   position: absolute;
-  top: calc(54px + var(--safe-top));
-  right: 14px;
-  width: 50px;
-  height: 50px;
+  top: calc(52px + env(safe-area-inset-top));
+  right: 12px;
+  width: 52px;
+  height: 52px;
   padding: 0;
   border-radius: 50%;
   background: transparent;
@@ -2383,16 +2383,16 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .messages-video-image {
   display: block;
-  width: 70px;
-  height: 70px;
+  width: 130%;
+  height: 130%;
+  max-width: none;
   object-fit: contain;
   pointer-events: none;
-  transform: scale(1.5);
-  transform-origin: center;
 }
 
 /* 상세 대화 */
