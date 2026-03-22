@@ -917,17 +917,50 @@ dummyAppButtons.forEach((button) => {
         { type: "text-you", text: "Romantic & Energetic Vibe~" }
       ]
     },
+     
+{
+  id: "delivery",
+  name: "+82 10-1140-5290",
+  avatar: "",
+  defaultAvatar: true,
+  time: "토요일",
+  inputType: "문자 메시지 · RCS",
+  messages: [
     {
-      id: "delivery",
-      name: "+82 10-1140-5290",
-      avatar: "",
-      defaultAvatar: true,
-      time: "토요일",
-      inputType: "문자 메시지 · RCS",
-      messages: [
-        {
-          type: "text-you",
-          text:
+      type: "meta-center",
+      text: "3월 9일 (월) 10:21"
+    },
+    {
+      type: "text-you",
+      text:
+`[CJ대한통운]
+[Web발신][CJ대한통운_배송출발]
+
+반갑습니다, 고객님.
+고객님의 소중한 상품이 배송 예정입니다.
+
+· 보내는분 : 정관장
+· 상품명 : 정관장_에브리타임_10ml_100포_1개[원산지:상세설명에_표시]_정관장브랜드스토어
+· 배송예정시간 : 13-15시
+
+※ 위탁장소 선택, 실시간 배송정보
+https://www.cjlogistics.com/
+
+※ 무인락커 사용안내
+https://www.cjlogistics.com/
+
+일요일에도 신속하게!!
+모두를 위한 매일매일 배송
+CJ대한통운 매일오네(O-NE)`
+    },
+
+    {
+      type: "meta-center",
+      text: "3월 9일 (월) 14:38"
+    },
+    {
+      type: "text-you",
+      text:
 `[CJ대한통운]
 [Web발신][CJ대한통운_배송완료]
 
@@ -936,18 +969,19 @@ dummyAppButtons.forEach((button) => {
 CJ대한통운 매일오네(O-NE)
 
 고객님의 상품이 배송 완료되었습니다.
-· 보내는분 : 정관장
-· 상품명 : 정관장_에브리타임_10ml_100포_1개[원산지:상세설명에_표시]_정관장브랜드스토어
-· 인수자(위탁장소) : 문앞
-· 운송장번호 : 211082089934
+ㆍ보내는분 : 정관장
+ㆍ상품명 : 정관장 에브리타임 10ml 100포, 1개
+ㆍ인수자(위탁장소) : 문앞
+ㆍ운송장번호 : 211082089934
 
 모두를 위한 단 하나의 배송!
 CJ대한통운 오네
 
 ※ CJ대한통운 고객센터 : 1588-1255`
-        }
-      ]
-    },
+    }
+  ]
+},
+     
   {
   id: "service0505",
   name: "#0505",
@@ -963,29 +997,30 @@ CJ대한통운 오네
 
   let currentThreadId = null;
 
-  function getThreadPreview(thread) {
-    if (!thread.messages || !thread.messages.length) return "";
+function getThreadPreview(thread) {
+  if (!thread.messages || !thread.messages.length) return "";
 
-    const last = thread.messages[thread.messages.length - 1];
+  const last = thread.messages[thread.messages.length - 1];
 
-    if (last.type === "text-me" || last.type === "text-you") {
-      return last.text;
-    }
-    if (last.type === "image-me" || last.type === "image-you") {
-      return "사진";
-    }
-    if (last.type === "voice-me" || last.type === "voice-you") {
-      return "음성 메시지";
-    }
-    if (last.type === "meta-center" || last.type === "read-status") {
-      const textMessage = [...thread.messages].reverse().find(
-        (item) => item.type === "text-me" || item.type === "text-you"
-      );
-      return textMessage ? textMessage.text : "";
-    }
+  let text = "";
 
-    return "";
+  if (last.type === "text-me" || last.type === "text-you") {
+    text = last.text;
+  } else if (last.type === "image-me" || last.type === "image-you") {
+    return "사진";
+  } else if (last.type === "voice-me" || last.type === "voice-you") {
+    return "음성 메시지";
+  } else if (last.type === "meta-center" || last.type === "read-status") {
+    const textMessage = [...thread.messages].reverse().find(
+      (item) => item.type === "text-me" || item.type === "text-you"
+    );
+    text = textMessage ? textMessage.text : "";
   }
+
+  // 🔥 핵심: 줄 단위로 잘라서 2줄만 반환
+  const lines = text.split("\n").filter(line => line.trim() !== "");
+  return lines.slice(0, 2).join("\n");
+}
 
   function createAvatarHTML(thread) {
     if (thread.defaultAvatar) {
