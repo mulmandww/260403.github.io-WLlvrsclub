@@ -593,8 +593,6 @@
           <span class="back-arrow"></span>
         </button>
 
-        <button class="messages-edit-btn" type="button" aria-label="편집">편집</button>
-
         <button class="messages-top-circle-btn messages-filter-btn" type="button" aria-label="옵션">
           <span class="messages-filter-icon"></span>
         </button>
@@ -608,18 +606,11 @@
         <div class="messages-thread-list" id="messagesThreadList"></div>
       </div>
 
-      <div class="messages-bottom-bar">
-        <button class="messages-search-btn" type="button" aria-label="검색">
-          <span class="messages-search-icon"></span>
-          <span class="messages-search-placeholder">검색</span>
-          <span class="messages-mic-icon"></span>
-        </button>
-
-        <button class="messages-compose-btn" type="button" aria-label="새 메시지">
-          <span class="messages-compose-icon"></span>
-        </button>
-      </div>
-    </div>
+<div class="messages-bottom-bar">
+  <button class="messages-toolbar-image-btn" type="button" aria-label="검색 및 작성">
+    <img src="assets/icons/message_toolbar_bottom.png" alt="" class="messages-toolbar-image">
+  </button>
+</div>
 
     <!-- 상세 페이지 -->
     <div class="messages-page messages-detail-page" id="messagesDetailPage">
@@ -641,24 +632,20 @@
           </div>
         </div>
 
-        <button class="messages-top-circle-btn messages-video-btn" type="button" aria-label="영상통화">
-          <span class="messages-video-icon"></span>
-        </button>
-      </div>
+    <button class="messages-image-top-btn messages-video-btn" type="button" aria-label="영상통화">
+      <img src="assets/icons/message_facetime.png" alt="" class="messages-video-image">
+    </button>
+        </div>
 
       <div class="messages-detail-scroll" id="messagesDetailScroll">
         <div class="messages-conversation" id="messagesConversation"></div>
       </div>
 
-      <div class="messages-inputbar">
-        <button class="messages-input-plus" type="button" aria-label="추가">
-          <span class="messages-input-plus-icon"></span>
-        </button>
-
-        <div class="messages-input-pill">
-          <span class="messages-input-placeholder" id="messagesInputPlaceholder">iMessage</span>
-          <span class="messages-input-mic"></span>
-        </div>
+    <div class="messages-inputbar">
+      <button class="messages-keyboard-image-btn" type="button" aria-label="입력창">
+        <img src="assets/icons/message_keyboard.png" alt="" class="messages-keyboard-image">
+      </button>
+    </div>
       </div>
     </div>
 
