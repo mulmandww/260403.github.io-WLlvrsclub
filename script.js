@@ -887,22 +887,70 @@ dummyAppButtons.forEach((button) => {
         { type: "text-you", text: "그래 7시까지 내려갈게 좀 이따 보자~^^" }
       ]
     },
+{
+  id: "irio",
+  name: "이리오 ALD1",
+  avatar: "이",
+  time: "화요일",
+  inputType: "iMessage",
+  messages: [
+    { type: "meta-center", text: "3월 22일 (일) 15:08" },
+
+    { type: "text-you", text: "형" },
+    { type: "text-you", text: "윗층에서 이따 저녁에 훠궈먹자고" },
+    { type: "text-you", text: "우리층에서 같이 먹자는데 어때요?" },
+    { type: "text-you", text: "괜찮아요??" },
+
+    { type: "text-me", text: "훠궈????" },
+    { type: "text-me", text: "너무 좋은데??" },
+    { type: "text-me", text: "몇시에 먹어 우리" },
+
+    { type: "text-you", text: "음 저녁이니까 6-7시 쯤..?" },
+
+    { type: "text-me", text: "좋다 7시 정도 ㅎㅎ" },
+
+    { type: "text-you", text: "넹 연락할게요~~~" },
+    { type: "text-you", text: "재료 준비해온다고 그냥 있으래요" },
+    { type: "text-you", text: "ㅋㅋ 더 누워계십쇼." },
+
+    { type: "text-me", text: "고맙다잉 ~~ㅎㅎ" },
+
+    { type: "meta-center", text: "4월 1일 (수) 15:14" },
+
+    { type: "text-you", text: "형" },
+    { type: "text-you", text: "우리 카페 갔다가 이제 들어가는데" },
+    { type: "text-you", text: "뭐 사갈까요?" },
+    { type: "text-you", text: "여기 치즈케이크 있음" },
+
+    { type: "text-me", text: "오" },
+    { type: "text-me", text: "그럼 케이크 하나만 사와주라~!" },
+    { type: "text-me", text: "Thanks 건우!!!!!!" },
+    { type: "text-me", text: "좀 감동이다...ㅠㅠ" },
+
     {
-      id: "irio",
-      name: "이리오 ALD1",
-      avatar: "이",
-      time: "수요일",
-      inputType: "iMessage",
-      messages: [
-        { type: "text-you", text: "빨리와 bro~ㅎㅎ" }
-      ]
+      type: "text-you",
+      text: "롱이가 먹고 너무 좋아해서 더 포장해갈까 하니까 다 사다주고 싶대요 ㅋㅋ"
     },
+
+    { type: "text-me", text: "건우랑 롱이 키운 보람이 있네" },
+    { type: "text-me", text: "🥹🥹🥹" },
+
+    { type: "text-you", text: "횽 좀만 기다려줘요" },
+    { type: "text-you", text: "cake party해용~~" },
+    { type: "text-you", text: "딸기도 사고 치즈도 샀어용" },
+    { type: "text-you", text: "신난다야~~~~" },
+
+    { type: "read-status", text: "읽음: 4월 1일" },
+
+    { type: "text-you", text: "빨리와 bro~ㅎㅎ" }
+  ]
+},
      
 {
   id: "arno",
   name: "아르노 ALD1",
   avatar: "아",
-  time: "어제",
+  time: "월요일",
   inputType: "iMessage",
   messages: [
     { type: "meta-center", text: "3월 24일 (화) 13:14" },
@@ -930,7 +978,7 @@ dummyAppButtons.forEach((button) => {
 
     { type: "text-you", text: "my bubble tea friend🧋🧋🧋" },
 
-    { type: "meta-center", text: "4월 1일 (수) 13:10" },
+    { type: "meta-center", text: "3월 30일 (월) 13:10" },
 
     { type: "text-me", text: "아르거" },
     { type: "text-me", text: "차백도 또 시킬건데 같이 먹을래요?" },
@@ -947,7 +995,7 @@ dummyAppButtons.forEach((button) => {
     { type: "text-me", text: "연습실이죠?" },
     { type: "text-me", text: "그쪽으로 갈게요~" },
 
-    { type: "read-status", text: "읽음: 14:20" },
+    { type: "read-status", text: "읽음: 3월 30일" },
 
     { type: "text-you", text: "고마워 건우~~ㅎㅎ" }
   ]
@@ -957,10 +1005,10 @@ dummyAppButtons.forEach((button) => {
   id: "leesangwon",
   name: "이상원 ALD1",
   avatar: "이",
-  time: "어제",
+  time: "일요일",
   inputType: "iMessage",
   messages: [
-    { type: "meta-center", text: "3월 25일 (수) 23:16" },
+    { type: "meta-center", text: "3월 22일 (일) 23:16" },
 
     {
       type: "text-you",
@@ -989,7 +1037,7 @@ dummyAppButtons.forEach((button) => {
     { type: "text-me", text: "드디어 읽어보넹 ㅋㅋ" },
     { type: "text-me", text: "땡큐~~~ :3" },
 
-    { type: "meta-center", text: "3월 30일 (일) 20:23" },
+    { type: "meta-center", text: "3월 25일 (수) 20:23" },
 
     {
       type: "text-you",
@@ -1022,7 +1070,7 @@ dummyAppButtons.forEach((button) => {
     { type: "text-me", text: "좋네.." },
     { type: "text-me", text: "이것도 책 있어???" },
 
-    { type: "meta-center", text: "4월 2일 (목) 22:16" },
+    { type: "meta-center", text: "3월 29일 (일) 22:16" },
 
     {
       type: "text-you",
@@ -1037,7 +1085,7 @@ dummyAppButtons.forEach((button) => {
     { type: "text-me", text: "감성이 좋다" },
     { type: "text-you", text: "좀 낭만 있는걸로 보냈다잉" },
     { type: "text-me", text: "늘 내 감성을 채워줘서 고맙다잉.. :3" },
-    { type: "read-status", text: "읽음: 23:48" },
+    { type: "read-status", text: "읽음: 3월 29일" },
     { type: "text-you", text: "Romantic & Energetic Vibe~🍃🍃" }
   ]
 },
@@ -1047,7 +1095,7 @@ dummyAppButtons.forEach((button) => {
   name: "+82 10-1140-5290",
   avatar: "",
   defaultAvatar: true,
-  time: "토요일",
+  time: "2026. 3. 9.",
   inputType: "문자 메시지 · RCS",
   messages: [
     {
@@ -1110,7 +1158,7 @@ CJ대한통운 오네
   id: "service0505",
   name: "#0505",
   avatar: "#",
-  time: "토요일",
+  time: "2026. 1. 24.",
   inputType: "문자 메시지 · RCS",
   messages: [
     { type: "meta-center", text: "1월 24일 (토) 15:44" },
