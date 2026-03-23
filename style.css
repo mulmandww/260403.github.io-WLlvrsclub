@@ -2400,7 +2400,7 @@ img {
   height: calc(100% - (142px + var(--safe-top)));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 80px 14px 106px;
+  padding: 40px 14px 106px;
   position: relative;
   z-index: 1;
 }
