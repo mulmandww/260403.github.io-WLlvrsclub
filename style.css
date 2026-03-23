@@ -2420,8 +2420,8 @@ img {
 
 .messages-row:has(.image-bubble),
 .messages-row:has(.voice-bubble) {
-  margin-top: -6px;
-  margin-bottom: -6px;
+  margin-top: -20px;
+  margin-bottom: -20px;
 }
 
 .messages-row.me {
