@@ -2093,26 +2093,93 @@ window.resetMessagesAppState = function () {
   const photosGrid = document.getElementById("photosGrid");
   const photosGridScroll = document.getElementById("photosGridScroll");
   const photosDetailScroll = document.getElementById("photosDetailScroll");
-  const photosDetailImage = document.getElementById("photosDetailImage");
+  const photosDetailStage = photosScreen.querySelector(".photos-detail-stage");
   const photosDetailBack = photosScreen.querySelector(".photos-detail-back");
 
-  if (!photosGrid || !photosGridScroll || !photosDetailImage) return;
+  if (!photosGrid || !photosGridScroll || !photosDetailStage) return;
 
-  const PHOTO_COUNT = 300;
+  const PHOTO_FILES = [
+    "001.jpg",
+    "002.jpg",
+    "003.jpg",
+     "004.jpg",
+     "005.jpg",
+     "006.jpg",
+     "007.JPG",
+     "008.jpg",
+     "009.jpg",
+     "011.JPG",
+     "012.JPG",
+     "013.JPG",
+     "014.JPG",
+     "015.JPG",
+     "016.mp4"
+    // 여기에 계속 추가
+    // "004.png",
+    // "005.jpeg",
+    // "006.mp4"
+  ];
+
   let currentPhotoIndex = null;
   let savedGridScrollTop = 0;
 
   function getPhotoSrc(index) {
-    return `assets/pictures/${String(index).padStart(3, "0")}.jpg`;
+    return `assets/pictures/${PHOTO_FILES[index - 1]}`;
+  }
+
+  function getPhotoFile(index) {
+    return PHOTO_FILES[index - 1] || "";
+  }
+
+  function isVideoFile(filename) {
+    return /\.(mp4|webm|ogg)$/i.test(filename);
+  }
+
+  function createGridMediaHTML(index) {
+    const file = getPhotoFile(index);
+    const src = getPhotoSrc(index);
+
+    if (isVideoFile(file)) {
+      return `
+        <video
+          src="${src}"
+          class="photos-thumb-image"
+          muted
+          playsinline
+          preload="metadata"
+        ></video>
+      `;
+    }
+
+    return `<img src="${src}" alt="" class="photos-thumb-image" loading="lazy">`;
+  }
+
+  function createDetailMediaHTML(index) {
+    const file = getPhotoFile(index);
+    const src = getPhotoSrc(index);
+
+    if (isVideoFile(file)) {
+      return `
+        <video
+          src="${src}"
+          class="photos-detail-image photos-detail-video"
+          controls
+          playsinline
+          preload="metadata"
+        ></video>
+      `;
+    }
+
+    return `<img src="${src}" alt="" class="photos-detail-image">`;
   }
 
   function renderPhotosGrid() {
     let html = "";
 
-    for (let i = 1; i <= PHOTO_COUNT; i += 1) {
+    for (let i = 1; i <= PHOTO_FILES.length; i += 1) {
       html += `
-        <button class="photos-thumb-btn" type="button" data-photo-index="${i}" aria-label="사진 ${i}">
-          <img src="${getPhotoSrc(i)}" alt="" class="photos-thumb-image" loading="lazy">
+        <button class="photos-thumb-btn" type="button" data-photo-index="${i}" aria-label="미디어 ${i}">
+          ${createGridMediaHTML(i)}
         </button>
       `;
     }
@@ -2136,7 +2203,7 @@ window.resetMessagesAppState = function () {
     currentPhotoIndex = index;
     savedGridScrollTop = photosGridScroll.scrollTop;
 
-    photosDetailImage.src = getPhotoSrc(index);
+    photosDetailStage.innerHTML = createDetailMediaHTML(index);
     photosScreen.classList.add("detail-open");
 
     if (photosDetailScroll) {
