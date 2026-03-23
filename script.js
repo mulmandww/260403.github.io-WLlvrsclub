@@ -1121,6 +1121,8 @@ dummyAppButtons.forEach((button) => {
     { type: "text-me", text: "그만" },
     { type: "text-me", text: "내일 또 사줄테니까 그정도만 사자.." },
     { type: "text-me", text: "알겠지..?" },
+    { type: "read-status", text: "읽음: 어제" },
+
 
     { type: "text-you", text: "네에.." },
     { type: "text-you", text: "빨리와여~~~🕺💃🕺💃" }
