@@ -964,7 +964,7 @@ dummyAppButtons.forEach((button) => {
     { type: "meta-center", text: "3월 24일 (화) 16:48" },
 
     { type: "text-me", text: "안신아" },
-    { type: "text-me", text: "상현이 또 너희 방에 있니" },
+    { type: "text-me", text: "상현이 아직도 너희 방에 있니" },
 
     { type: "text-you", text: "샤오쭈 데려가" },
     { type: "text-you", text: "이아라ㅜㄱㅍㅇ샤오쭈아니라ㄱ고!!" },
