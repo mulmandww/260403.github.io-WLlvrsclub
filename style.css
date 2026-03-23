@@ -2472,8 +2472,8 @@ img {
 
 .messages-bubble.voice-bubble img {
   display: block;
-  width: 160px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 260px; /* 필요하면 더 키워 */
 }
 
 .messages-meta-center {
