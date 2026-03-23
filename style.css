@@ -2660,7 +2660,7 @@ messages-image-top-btn
   }
 
   .messages-detail-name {
-    font-size: 14px;
+    font-size: 13px;
   }
 
 .messages-video-image {
@@ -2675,7 +2675,7 @@ messages-image-top-btn
     height: calc(100% - (142px + env(safe-area-inset-top)));
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 10px 14px 102px;
+    padding: 30px 14px 102px;
     position: relative;
     z-index: 1;
   }
@@ -2692,7 +2692,7 @@ messages-image-top-btn
   }
 
   .messages-bubble.voice-bubble img {
-    width: 146px;
+    max-width: 88%;
   }
 
   .messages-meta-center,
@@ -2704,7 +2704,7 @@ messages-image-top-btn
     left: 0;
     right: 0;
     bottom: calc(4px + env(safe-area-inset-bottom));
-    height: 88px;
+    height: auto;
   }
 
   .messages-keyboard-image {
