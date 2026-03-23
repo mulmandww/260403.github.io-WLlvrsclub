@@ -2088,7 +2088,6 @@ window.resetMessagesAppState = function () {
 
   const photosGrid = document.getElementById("photosGrid");
   const photosGridScroll = document.getElementById("photosGridScroll");
-  const photosDetailPage = document.getElementById("photosDetailPage");
   const photosDetailScroll = document.getElementById("photosDetailScroll");
   const photosDetailImage = document.getElementById("photosDetailImage");
   const photosDetailBack = photosScreen.querySelector(".photos-detail-back");
@@ -2115,6 +2114,18 @@ window.resetMessagesAppState = function () {
     }
 
     photosGrid.innerHTML = html;
+  }
+
+  function scrollPhotosToBottom() {
+    const setBottom = () => {
+      photosGridScroll.scrollTop = photosGridScroll.scrollHeight;
+    };
+
+    requestAnimationFrame(setBottom);
+    setTimeout(setBottom, 0);
+    setTimeout(setBottom, 120);
+    setTimeout(setBottom, 320);
+    setTimeout(setBottom, 700);
   }
 
   function openPhoto(index) {
@@ -2152,23 +2163,12 @@ window.resetMessagesAppState = function () {
     });
   }
 
-  function scrollPhotosToBottom() {
-  const setBottom = () => {
-    photosGridScroll.scrollTop = photosGridScroll.scrollHeight;
+  window.resetPhotosAppState = function () {
+    photosScreen.classList.remove("detail-open");
+    currentPhotoIndex = null;
+    scrollPhotosToBottom();
   };
 
-  requestAnimationFrame(setBottom);
-  setTimeout(setBottom, 0);
-  setTimeout(setBottom, 120);
-  setTimeout(setBottom, 320);
-}
-
-window.resetPhotosAppState = function () {
-  photosScreen.classList.remove("detail-open");
-  currentPhotoIndex = null;
+  renderPhotosGrid();
   scrollPhotosToBottom();
-};
-
-renderPhotosGrid();
-scrollPhotosToBottom();
 })();
