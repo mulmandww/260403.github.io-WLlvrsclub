@@ -3895,26 +3895,23 @@ messages-image-top-btn
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,0.42) 0%,
-    rgba(0,0,0,0.24) 28%,
-    rgba(0,0,0,0.12) 52%,
-    rgba(0,0,0,0.04) 76%,
+    rgba(0,0,0,0.45) 0%,
+    rgba(0,0,0,0.25) 30%,
+    rgba(0,0,0,0.1) 60%,
     rgba(0,0,0,0) 100%
   );
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
 }
 
 .photos-grid-actions {
   position: absolute;
+  top: calc(50px + var(--safe-top));
   right: 14px;
-  top: calc(48px + var(--safe-top));
   display: flex;
   gap: 10px;
-  z-index: 2;
-  pointer-events: auto;
+  z-index: 3;
 }
-
+  
 .photos-glass-btn {
   height: 50px;
   min-width: 50px;
@@ -4180,11 +4177,11 @@ messages-image-top-btn
   }
 
 
-  .photos-grid-actions {
-    top: calc(46px + env(safe-area-inset-top));
-    right: 14px;
-    gap: 10px;
-  }
+.photos-grid-actions {
+  top: calc(48px + env(safe-area-inset-top));
+  right: 14px;
+  gap: 8px;
+}
 
   .photos-glass-btn {
     height: 48px;
