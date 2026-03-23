@@ -1653,25 +1653,25 @@ function getThreadPreview(thread) {
       `;
     }
 
-    if (message.type === "voice-you") {
-      return `
-        <div class="messages-row you">
-          <div class="messages-bubble voice-bubble">
-            <img src="assets/icons/message_voice_you.png" alt="">
-          </div>
-        </div>
-      `;
-    }
+if (message.type === "voice-you") {
+  return `
+    <div class="messages-row you">
+      <div class="messages-bubble voice-bubble">
+        <img src="assets/icons/message_record_bubble_you.png" alt="">
+      </div>
+    </div>
+  `;
+}
 
-    if (message.type === "voice-me") {
-      return `
-        <div class="messages-row me">
-          <div class="messages-bubble voice-bubble">
-            <img src="assets/icons/message_voice_me.png" alt="">
-          </div>
-        </div>
-      `;
-    }
+if (message.type === "voice-me") {
+  return `
+    <div class="messages-row me">
+      <div class="messages-bubble voice-bubble">
+        <img src="assets/icons/message_record_bubble_me.png" alt="">
+      </div>
+    </div>
+  `;
+}
 
     return "";
   }
