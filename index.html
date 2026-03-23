@@ -343,17 +343,64 @@
       </div>
     </section>
 
-    <!-- PHOTOS APP -->
-    <section class="screen app-screen" id="photosScreen">
-      <div class="app-ui">
-        <div class="app-header">
-          <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
-            <span class="back-arrow"></span>
+<!-- PHOTOS APP -->
+<section class="screen app-screen photos-screen" id="photosScreen">
+  <div class="app-ui photos-ui">
+
+    <!-- 목록 페이지 -->
+    <div class="photos-page photos-grid-page active" id="photosGridPage">
+      <div class="photos-grid-topbar">
+        <div class="photos-grid-topbar-bg"></div>
+
+        <div class="photos-grid-actions">
+          <button class="photos-glass-btn photos-sort-btn" type="button" aria-label="정렬">
+            <span class="photos-sort-icon"></span>
+          </button>
+
+          <button class="photos-glass-btn photos-select-btn" type="button" aria-label="선택">
+            선택
           </button>
         </div>
-        <div class="app-content"></div>
       </div>
-    </section>
+
+      <div class="photos-grid-scroll" id="photosGridScroll">
+        <div class="photos-grid" id="photosGrid"></div>
+      </div>
+
+      <div class="photos-bottom-bar">
+        <div class="photos-bottom-pill">
+          <button class="photos-bottom-tab photos-bottom-tab-active" type="button" aria-label="보관함">
+            <img src="assets/icons/photos_tab_library.png" alt="" class="photos-bottom-tab-icon">
+          </button>
+
+          <button class="photos-bottom-tab" type="button" aria-label="년">년</button>
+          <button class="photos-bottom-tab" type="button" aria-label="월">월</button>
+          <button class="photos-bottom-tab" type="button" aria-label="전체">전체</button>
+        </div>
+
+        <button class="photos-search-btn" type="button" aria-label="검색">
+          <img src="assets/icons/photos_search.png" alt="" class="photos-search-icon">
+        </button>
+      </div>
+    </div>
+
+    <!-- 상세 페이지 -->
+    <div class="photos-page photos-detail-page" id="photosDetailPage">
+      <div class="photos-detail-topbar">
+        <button class="photos-detail-back app-back-btn" type="button" aria-label="뒤로가기">
+          <span class="back-arrow"></span>
+        </button>
+      </div>
+
+      <div class="photos-detail-scroll" id="photosDetailScroll">
+        <div class="photos-detail-stage">
+          <img src="" alt="" id="photosDetailImage" class="photos-detail-image">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
     <!-- INSTAGRAM APP -->
     <section class="screen app-screen" id="instagramScreen">
