@@ -2152,18 +2152,23 @@ window.resetMessagesAppState = function () {
     });
   }
 
-  window.resetPhotosAppState = function () {
-    photosScreen.classList.remove("detail-open");
-    currentPhotoIndex = null;
-
-    requestAnimationFrame(() => {
-      photosGridScroll.scrollTop = photosGridScroll.scrollHeight;
-    });
+  function scrollPhotosToBottom() {
+  const setBottom = () => {
+    photosGridScroll.scrollTop = photosGridScroll.scrollHeight;
   };
 
-  renderPhotosGrid();
+  requestAnimationFrame(setBottom);
+  setTimeout(setBottom, 0);
+  setTimeout(setBottom, 120);
+  setTimeout(setBottom, 320);
+}
 
-  requestAnimationFrame(() => {
-    photosGridScroll.scrollTop = photosGridScroll.scrollHeight;
-  });
+window.resetPhotosAppState = function () {
+  photosScreen.classList.remove("detail-open");
+  currentPhotoIndex = null;
+  scrollPhotosToBottom();
+};
+
+renderPhotosGrid();
+scrollPhotosToBottom();
 })();
