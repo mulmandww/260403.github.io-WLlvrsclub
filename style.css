@@ -4162,6 +4162,14 @@ messages-image-top-btn
   background: #000;
 }
 
+.photos-detail-video {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: block;
+  background: #000;
+}  
+
 /* active */
 .photos-glass-btn:active,
 .photos-search-btn:active,
