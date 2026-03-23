@@ -3879,13 +3879,13 @@ messages-image-top-btn
   pointer-events: auto;
 }
 
-/* 목록 상단 */
+/* 상단 */
 .photos-grid-topbar {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: calc(156px + var(--safe-top));
+  height: calc(176px + var(--safe-top));
   z-index: 12;
   pointer-events: none;
 }
@@ -3895,14 +3895,39 @@ messages-image-top-btn
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(17,17,17,0.34) 0%,
-    rgba(17,17,17,0.18) 34%,
-    rgba(17,17,17,0.08) 58%,
-    rgba(17,17,17,0.02) 78%,
-    rgba(17,17,17,0) 100%
+    rgba(0,0,0,0.54) 0%,
+    rgba(0,0,0,0.34) 36%,
+    rgba(0,0,0,0.16) 66%,
+    rgba(0,0,0,0.04) 86%,
+    rgba(0,0,0,0) 100%
   );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+.photos-grid-title-wrap {
+  position: absolute;
+  left: 16px;
+  top: calc(50px + var(--safe-top));
+  z-index: 2;
+  pointer-events: none;
+}
+
+.photos-grid-title {
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.photos-grid-date {
+  font-size: 19px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: rgba(255,255,255,0.96);
 }
 
 .photos-grid-actions {
@@ -3916,29 +3941,28 @@ messages-image-top-btn
 }
 
 .photos-glass-btn {
-  height: 48px;
-  min-width: 48px;
+  height: 50px;
+  min-width: 50px;
   padding: 0 18px;
-  border-radius: 24px;
+  border-radius: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(90,90,90,0.26);
-  border: 1px solid rgba(255,255,255,0.24);
+  background: rgba(120,120,120,0.18);
+  border: 1px solid rgba(255,255,255,0.26);
   backdrop-filter: blur(22px) saturate(160%);
   -webkit-backdrop-filter: blur(22px) saturate(160%);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.20),
-    0 4px 14px rgba(0,0,0,0.18);
+    inset 0 1px 0 rgba(255,255,255,0.14),
+    0 4px 14px rgba(0,0,0,0.16);
   color: #fff;
   font-size: 16px;
   font-weight: 700;
-  letter-spacing: -0.25px;
-  pointer-events: auto;
+  letter-spacing: -0.2px;
 }
 
 .photos-sort-btn {
-  width: 48px;
+  width: 50px;
   padding: 0;
   border-radius: 50%;
 }
@@ -3954,7 +3978,7 @@ messages-image-top-btn
     linear-gradient(#fff, #fff) center bottom / 6px 2.4px no-repeat;
 }
 
-/* 그리드 스크롤 */
+/* 그리드 */
 .photos-grid-scroll {
   height: 100%;
   overflow-y: auto;
@@ -3966,14 +3990,14 @@ messages-image-top-btn
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
-  padding-top: calc(78px + var(--safe-top));
+  padding-top: calc(150px + var(--safe-top));
 }
 
 .photos-thumb-btn {
   position: relative;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: #1c1c1e;
+  background: #1b1b1d;
 }
 
 .photos-thumb-image {
@@ -3992,8 +4016,8 @@ messages-image-top-btn
 /* 하단 */
 .photos-bottom-bar {
   position: absolute;
-  left: 14px;
-  right: 14px;
+  left: 12px;
+  right: 12px;
   bottom: calc(12px + var(--safe-bottom));
   z-index: 14;
   display: flex;
@@ -4011,13 +4035,13 @@ messages-image-top-btn
   flex: 1;
   height: 62px;
   border-radius: 31px;
-  background: rgba(255,255,255,0.22);
-  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.74);
+  border: 1px solid rgba(255,255,255,0.28);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.18),
-    0 8px 18px rgba(0,0,0,0.18);
+    inset 0 1px 0 rgba(255,255,255,0.36),
+    0 8px 18px rgba(0,0,0,0.14);
   display: grid;
   grid-template-columns: 62px 1fr 1fr 1fr;
   align-items: center;
@@ -4033,13 +4057,13 @@ messages-image-top-btn
   font-size: 15px;
   line-height: 1;
   font-weight: 700;
-  letter-spacing: -0.25px;
-  color: rgba(0,0,0,0.92);
+  letter-spacing: -0.2px;
+  color: #111;
   background: transparent;
 }
 
 .photos-bottom-tab-active {
-  background: rgba(255,255,255,0.70);
+  background: rgba(255,255,255,0.76);
 }
 
 .photos-bottom-tab-icon-btn {
@@ -4059,13 +4083,13 @@ messages-image-top-btn
   width: 62px;
   height: 62px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.22);
-  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.74);
+  border: 1px solid rgba(255,255,255,0.28);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.18),
-    0 8px 18px rgba(0,0,0,0.18);
+    inset 0 1px 0 rgba(255,255,255,0.36),
+    0 8px 18px rgba(0,0,0,0.14);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4079,29 +4103,6 @@ messages-image-top-btn
   pointer-events: none;
 }
 
-.photos-search-btn {
-  flex: 0 0 62px;
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.18);
-  border: 1px solid rgba(255,255,255,0.22);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.18),
-    0 8px 18px rgba(0,0,0,0.18);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.photos-search-icon {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-}
-
 /* 상세 */
 .photos-detail-topbar {
   position: absolute;
@@ -4113,8 +4114,8 @@ messages-image-top-btn
   pointer-events: none;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,0.22) 0%,
-    rgba(0,0,0,0.08) 48%,
+    rgba(0,0,0,0.24) 0%,
+    rgba(0,0,0,0.10) 52%,
     rgba(0,0,0,0) 100%
   );
 }
@@ -4154,7 +4155,7 @@ messages-image-top-btn
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: calc(28px + var(--safe-top)) 0 calc(28px + var(--safe-bottom));
+  padding: calc(24px + var(--safe-top)) 0 calc(24px + var(--safe-bottom));
   background: #000;
 }
 
@@ -4162,7 +4163,6 @@ messages-image-top-btn
   display: block;
   width: 100%;
   height: auto;
-  max-height: none;
   object-fit: contain;
   background: #000;
 }
@@ -4178,75 +4178,94 @@ messages-image-top-btn
 /* 모바일 */
 @media screen and (max-width: 480px) {
   .photos-grid-topbar {
-    height: calc(148px + env(safe-area-inset-top));
+    height: calc(170px + env(safe-area-inset-top));
   }
 
-.photos-grid-actions {
-  top: calc(48px + env(safe-area-inset-top));
-  right: 14px;
-  gap: 10px;
-}
+  .photos-grid-title-wrap {
+    left: 16px;
+    top: calc(48px + env(safe-area-inset-top));
+  }
+
+  .photos-grid-title {
+    font-size: 34px;
+    margin-bottom: 8px;
+  }
+
+  .photos-grid-date {
+    font-size: 18px;
+  }
+
+  .photos-grid-actions {
+    top: calc(46px + env(safe-area-inset-top));
+    right: 14px;
+    gap: 10px;
+  }
 
   .photos-glass-btn {
-    height: 46px;
-    min-width: 46px;
-    padding: 0 16px;
-    font-size: 15px;
+    height: 48px;
+    min-width: 48px;
+    padding: 0 18px;
+    font-size: 16px;
   }
 
   .photos-sort-btn {
-    width: 46px;
+    width: 48px;
   }
 
-.photos-grid {
-  padding-top: calc(76px + env(safe-area-inset-top));
-  gap: 2px;
-}
-  
+  .photos-grid {
+    padding-top: calc(144px + env(safe-area-inset-top));
+    gap: 2px;
+  }
+
   .photos-grid-scroll {
-    padding-bottom: calc(98px + env(safe-area-inset-bottom));
+    padding-bottom: calc(96px + env(safe-area-inset-bottom));
   }
 
-.photos-bottom-bar {
-  left: 14px;
-  right: 14px;
-  bottom: calc(10px + env(safe-area-inset-bottom));
-  gap: 10px;
-}
+  .photos-bottom-bar {
+    left: 12px;
+    right: 12px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    gap: 10px;
+  }
 
-.photos-bottom-pill {
-  height: 60px;
-  grid-template-columns: 60px 1fr 1fr 1fr;
-}
+  .photos-bottom-pill {
+    height: 60px;
+    grid-template-columns: 60px 1fr 1fr 1fr;
+  }
 
-.photos-bottom-tab {
-  font-size: 14px;
-}
+  .photos-bottom-tab {
+    font-size: 14px;
+  }
 
-.photos-bottom-tab-image {
-  width: 28px;
-  height: 28px;
-}
+  .photos-bottom-tab-image {
+    width: 28px;
+    height: 28px;
+  }
 
-.photos-search-btn {
-  flex-basis: 60px;
-  width: 60px;
-  height: 60px;
-}
+  .photos-search-btn {
+    flex-basis: 60px;
+    width: 60px;
+    height: 60px;
+  }
 
-.photos-search-image {
-  width: 26px;
-  height: 26px;
-}
+  .photos-search-image {
+    width: 26px;
+    height: 26px;
+  }
 
-.photos-detail-back {
-  top: calc(48px + env(safe-area-inset-top));
-  left: 14px;
-  width: 46px;
-  height: 46px;
-}
+  .photos-detail-topbar {
+    height: calc(92px + env(safe-area-inset-top));
+  }
+
+  .photos-detail-back {
+    top: calc(48px + env(safe-area-inset-top));
+    left: 14px;
+    width: 46px;
+    height: 46px;
+  }
 
   .photos-detail-stage {
     padding: calc(20px + env(safe-area-inset-top)) 0 calc(20px + env(safe-area-inset-bottom));
   }
 }
+  
