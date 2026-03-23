@@ -836,7 +836,7 @@ dummyAppButtons.forEach((button) => {
   id: "longi",
   name: "롱이♥️ ALD1",
   avatar: "롱",
-  time: "어제",
+  time: "00:13",
   inputType: "iMessage",
   messages: [
     { type: "meta-center", text: "2월 26일 (목) 23:43" },
