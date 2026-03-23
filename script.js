@@ -859,7 +859,7 @@ dummyAppButtons.forEach((button) => {
     { type: "text-me", text: "너가없는데어떻게해" },
     { type: "text-me", text: "아 롱이보고싶다아아아~~~~" },
     { type: "text-you", text: "😬😬😬" },
-    { type: "image-you", src: "assets/pictures/message_image_1.png" },
+    { type: "image-you", src: "assets/pictures/message_image_1.JPEG" },
     { type: "text-me", text: "롱아아아아♥️♥️♥️♥️♥️" },
     { type: "text-me", text: "조금만 참아 알았지????? :3" },
     { type: "text-you", text: "형이나 좀 참아봐요.. ;;" },
@@ -871,12 +871,12 @@ dummyAppButtons.forEach((button) => {
 
     { type: "meta-center", text: "3월 4일 (수) 21:14" },
 
-    { type: "image-me", src: "assets/pictures/message_image_2.png" },
+    { type: "image-me", src: "assets/pictures/message_image_2.jpg" },
     { type: "text-me", text: "아~롱이보고싶은날" },
     { type: "text-me", text: "롱이가 없으니까 즐겁지가 않네" },
     { type: "text-me", text: "ㅠ.ㅠ ♥️♥️" },
     { type: "text-you", text: "ㅋㅋ" },
-    { type: "image-you", src: "assets/pictures/message_image_3.png" },
+    { type: "image-you", src: "assets/pictures/message_image_3.JPEG" },
     { type: "text-you", text: "상원형이 보내줬는데" },
     { type: "text-you", text: "되게 신나보이는데요" },
     { type: "text-you", text: "😬😬😬😬" },
