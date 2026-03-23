@@ -842,16 +842,102 @@ dummyAppButtons.forEach((button) => {
         { type: "text-you", text: "ㅋㅋㅋ잘자용 형도" }
       ]
     },
-    {
-      id: "jungsanghyun",
-      name: "정상현 ALD1",
-      avatar: "정",
-      time: "어제",
-      inputType: "iMessage",
-      messages: [
-        { type: "text-you", text: "..." }
-      ]
-    },
+     
+{
+  id: "jungsanghyun",
+  name: "정상현 ALD1",
+  avatar: "정",
+  time: "어제",
+  inputType: "iMessage",
+  messages: [
+    { type: "meta-center", text: "3월 23일 (월) 21:22" },
+
+    { type: "text-me", text: "윗층에 있던 오징어집" },
+    { type: "text-me", text: "너가 먹었냐 상현아" },
+
+    { type: "text-you", text: "므에엥?" },
+    { type: "text-you", text: "왜요???" },
+    { type: "text-you", text: "두 개 있길래 하나 먹었는데" },
+    { type: "text-you", text: "근데 어떻게 알았지 소름" },
+
+    { type: "text-me", text: "너밖에 없지 아무래도;;" },
+    { type: "text-me", text: "하나 더 먹으려다가 없어서 롱이 개빡침" },
+
+    { type: "text-you", text: "......." },
+    { type: "text-you", text: ";;죄송.." },
+
+    { type: "text-me", text: "아냐 내가 4개 사둘걸 그랬다.." },
+
+    { type: "text-you", text: "글킨함 더 많이 사둬요 좀" },
+
+    { type: "text-me", text: "야" },
+    { type: "text-me", text: ";;" },
+
+    { type: "text-you", text: "sorry..🙏🙏" },
+
+    { type: "meta-center", text: "3월 25일 (수) 21:18" },
+
+    { type: "text-you", text: "형 짐 다 쌌어여???" },
+    { type: "text-you", text: "겉옷 뭐 챙기지" },
+    { type: "text-you", text: "ㅠㅠㅠ" },
+    { type: "text-you", text: "더우려나 거기...." },
+
+    { type: "text-me", text: "21/27도라는데?" },
+    { type: "text-me", text: "더울듯" },
+    { type: "text-me", text: "난 그래서 셔츠 같은걸로 챙겼는데" },
+
+    { type: "text-you", text: "그 파란색?????" },
+
+    { type: "text-me", text: "응..;;" },
+
+    { type: "text-you", text: "역시 애착 blue shirt~" },
+    { type: "text-you", text: "Weather information 고마워용~~~~😽😽😽" },
+
+    { type: "meta-center", text: "(어제) 20:55" },
+
+    { type: "text-you", text: "형 편의점 가지" },
+    { type: "text-you", text: "내것도 사다줘요" },
+    { type: "text-you", text: "~~~~" },
+
+    { type: "text-me", text: "뭐야 어떻게 알았어" },
+
+    { type: "text-you", text: "나 지금 시니롱이방~" },
+    { type: "text-you", text: "다 들음 오땅 사러 가는거" },
+
+    { type: "text-me", text: "넌 뭐 맨날 거기 가있냐" },
+    { type: "text-me", text: "거기서 살어라 아주.." },
+
+    { type: "text-you", text: "에에엥" },
+    { type: "text-you", text: "형 맨날 자잖아" },
+    { type: "text-you", text: "!!!!! 혼자 심심하단말이에여" },
+    { type: "text-you", text: "여기는 심심할 틈이 없음 그냥" },
+    { type: "text-you", text: "와 롱이형 방금 또 윈드밀 시작" },
+    { type: "text-you", text: "신기록" },
+    { type: "text-you", text: "미쳤ㄷㅏ" },
+    { type: "text-you", text: "와" },
+
+    { type: "text-me", text: "...." },
+    { type: "text-me", text: "그래보여..." },
+    { type: "text-me", text: "뭐 사가?" },
+
+    { type: "text-you", text: "ㅈㅔ로콜라랑 비쵸비랑" },
+    { type: "text-you", text: "푸딩도 있으면 하나" },
+    { type: "text-you", text: "꼬북칩 초코도" },
+    { type: "text-you", text: "그리고 아이스크림?" },
+
+    { type: "text-me", text: "..." },
+
+    { type: "text-you", text: "또~~~" },
+
+    { type: "text-me", text: "그만" },
+    { type: "text-me", text: "내일 또 사줄테니까 그정도만 사자.." },
+    { type: "text-me", text: "알겠지..?" },
+
+    { type: "text-you", text: "네에.." },
+    { type: "text-you", text: "빨리와여~~~🕺💃🕺💃" }
+  ]
+},
+     
 {
   id: "zhouanxin",
   name: "조우안신 ALD1",
