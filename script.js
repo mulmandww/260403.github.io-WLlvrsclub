@@ -852,16 +852,65 @@ dummyAppButtons.forEach((button) => {
         { type: "text-you", text: "..." }
       ]
     },
-    {
-      id: "zhouwanxin",
-      name: "조우안신 ALD1",
-      avatar: "조",
-      time: "어제",
-      inputType: "iMessage",
-      messages: [
-        { type: "text-you", text: "ㅇㅋ" }
-      ]
-    },
+{
+  id: "zhouwanxin",
+  name: "조우안신 ALD1",
+  avatar: "조",
+  time: "어제",
+  inputType: "iMessage",
+  messages: [
+    { type: "meta-center", text: "3월 23일 (월) 21:52" },
+
+    { type: "text-me", text: "안신아 롱이 뭐해" },
+    { type: "text-you", text: "???" },
+    { type: "text-me", text: "전화를 안 받는데" },
+    { type: "text-you", text: "씬롱 지금 씻는 중" },
+    { type: "text-me", text: "20분 뒤에 간다고 전해줘 ㅎㅎ" },
+    { type: "text-you", text: "나 나갈래" },
+
+    { type: "meta-center", text: "3월 24일 (화) 21:23" },
+
+    { type: "text-me", text: "안신아" },
+    { type: "text-you", text: "씬롱 샤워 중" },
+    { type: "text-you", text: ";;" },
+    { type: "text-me", text: "쎼쎼..ㅎㅎ" },
+
+    { type: "meta-center", text: "3월 24일 (화) 16:48" },
+
+    { type: "text-me", text: "안신아" },
+    { type: "text-me", text: "상현이 또 너희 방에 있니" },
+
+    { type: "text-you", text: "샤오쭈 데려가" },
+    { type: "text-you", text: "이아라ㅜㄱㅍㅇ샤오쭈아니라ㄱ고!!" },
+    { type: "text-you", text: "형저윗층에서노는중" },
+    { type: "text-you", text: "우리저녁머먹어요??" },
+    { type: "text-you", text: "방금 샤오쭈" },
+    { type: "text-you", text: "역시샤오쭈.." },
+    { type: "text-you", text: "그냥 씬롱 샤오쭈 다 데려가" },
+    { type: "text-you", text: "제발" },
+
+    { type: "text-me", text: "나도 갈게 안신아~" },
+
+    { type: "text-you", text: "🤯🤯🤯🤯🤯" },
+
+    { type: "meta-center", text: "3월 31일 (화) 20:12" },
+
+    { type: "text-you", text: "ㅆㄹ ㅅㅇ ㅈ" },
+    { type: "text-me", text: "간식 먹고 싶은 거 있어? 롱이한테도 물어봐봐" },
+    { type: "text-you", text: "냉장고에 빙홍차 있어" },
+    { type: "text-you", text: "갖다줘요 谢谢" },
+    { type: "text-me", text: "씬롱이는? 오땅?" },
+    { type: "text-you", text: "당연~" },
+
+    { type: "meta-center", text: "(어제) 20:46" },
+
+    { type: "text-you", text: "ㅆㄹㅅㅇㅈ" },
+    { type: "text-you", text: "올 때 빙홍차" },
+    { type: "text-me", text: "ㅇㅋ~" },
+
+    { type: "read-status", text: "읽음: 어제" }
+  ]
+},
      
    {
   id: "kimjunseo",
