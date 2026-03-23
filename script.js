@@ -370,6 +370,10 @@ async function openAppWithAnimation(button) {
     window.resetMessagesAppState();
   }
 
+   if (targetScreen.id === "photosScreen" && typeof window.resetPhotosAppState === "function") {
+  window.resetPhotosAppState();
+}
+
   button.classList.add("launching");
   homeScreen.classList.add("app-opening");
 
