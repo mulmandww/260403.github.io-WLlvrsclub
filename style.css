@@ -3905,31 +3905,6 @@ messages-image-top-btn
   -webkit-backdrop-filter: blur(10px);
 }
 
-.photos-grid-title-wrap {
-  position: absolute;
-  left: 16px;
-  top: calc(50px + var(--safe-top));
-  z-index: 2;
-  pointer-events: none;
-}
-
-.photos-grid-title {
-  font-size: 36px;
-  line-height: 1;
-  font-weight: 800;
-  letter-spacing: -1.2px;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.photos-grid-date {
-  font-size: 19px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-  color: rgba(255,255,255,0.96);
-}
-
 .photos-grid-actions {
   position: absolute;
   right: 14px;
@@ -4204,19 +4179,6 @@ messages-image-top-btn
     height: calc(170px + env(safe-area-inset-top));
   }
 
-  .photos-grid-title-wrap {
-    left: 16px;
-    top: calc(48px + env(safe-area-inset-top));
-  }
-
-  .photos-grid-title {
-    font-size: 34px;
-    margin-bottom: 8px;
-  }
-
-  .photos-grid-date {
-    font-size: 18px;
-  }
 
   .photos-grid-actions {
     top: calc(46px + env(safe-area-inset-top));
@@ -4231,6 +4193,13 @@ messages-image-top-btn
     font-size: 16px;
   }
 
+.photos-home-back {
+  top: calc(48px + env(safe-area-inset-top));
+  left: 14px;
+  width: 48px;
+  height: 48px;
+}
+  
   .photos-sort-btn {
     width: 48px;
   }
