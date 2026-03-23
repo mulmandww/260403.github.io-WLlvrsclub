@@ -3961,6 +3961,29 @@ messages-image-top-btn
   letter-spacing: -0.2px;
 }
 
+.photos-home-back {
+  position: absolute;
+  top: calc(50px + var(--safe-top));
+  left: 14px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(120,120,120,0.18);
+  border: 1px solid rgba(255,255,255,0.26);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.14),
+    0 4px 14px rgba(0,0,0,0.16);
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.photos-home-back .back-arrow {
+  border-left-color: #fff;
+  border-bottom-color: #fff;
+}
+  
 .photos-sort-btn {
   width: 50px;
   padding: 0;
