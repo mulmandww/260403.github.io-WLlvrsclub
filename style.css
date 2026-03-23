@@ -3951,7 +3951,7 @@ messages-image-top-btn
   background:
     linear-gradient(#fff, #fff) center top / 18px 2.4px no-repeat,
     linear-gradient(#fff, #fff) center center / 12px 2.4px no-repeat,
-    linear-gradient(#fff, #fff) center bottom / 18px 2.4px no-repeat;
+    linear-gradient(#fff, #fff) center bottom / 6px 2.4px no-repeat;
 }
 
 /* 그리드 스크롤 */
