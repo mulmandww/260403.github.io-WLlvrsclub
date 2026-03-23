@@ -2473,8 +2473,9 @@ img {
 
 .messages-bubble.voice-bubble img {
   display: block;
-  width: 100%;
-  max-width: 260px; /* 필요하면 더 키워 */
+  width: 220px;
+  max-width: none;
+  height: auto;
 }
 
 .messages-meta-center {
@@ -2691,9 +2692,11 @@ messages-image-top-btn
     max-width: 200px;
   }
 
-  .messages-bubble.voice-bubble img {
-    width: 146px;
-  }
+.messages-bubble.voice-bubble img {
+  width: 250px;
+  max-width: none;
+  height: auto;
+}
 
   .messages-meta-center,
   .messages-read-status {
@@ -2707,11 +2710,11 @@ messages-image-top-btn
     height: 88px;
   }
 
-  .messages-keyboard-image {
-    width: 114%;
-    max-width: none;
-    height: auto;
-  }
+.messages-keyboard-image {
+  width: 126%;
+  max-width: none;
+  height: auto;
+}
 }
 
 
