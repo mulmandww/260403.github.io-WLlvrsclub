@@ -2076,3 +2076,94 @@ window.resetMessagesAppState = function () {
   setPhonePage("keypad");
   updatePhoneDialUI();
 })();
+
+
+
+/* =========================
+   PHOTOS APP
+========================= */
+(function initPhotosApp() {
+  const photosScreen = document.getElementById("photosScreen");
+  if (!photosScreen) return;
+
+  const photosGrid = document.getElementById("photosGrid");
+  const photosGridScroll = document.getElementById("photosGridScroll");
+  const photosDetailPage = document.getElementById("photosDetailPage");
+  const photosDetailScroll = document.getElementById("photosDetailScroll");
+  const photosDetailImage = document.getElementById("photosDetailImage");
+  const photosDetailBack = photosScreen.querySelector(".photos-detail-back");
+
+  if (!photosGrid || !photosGridScroll || !photosDetailImage) return;
+
+  const PHOTO_COUNT = 300;
+  let currentPhotoIndex = null;
+  let savedGridScrollTop = 0;
+
+  function getPhotoSrc(index) {
+    return `assets/pictures/${String(index).padStart(3, "0")}.jpg`;
+  }
+
+  function renderPhotosGrid() {
+    let html = "";
+
+    for (let i = 1; i <= PHOTO_COUNT; i += 1) {
+      html += `
+        <button class="photos-thumb-btn" type="button" data-photo-index="${i}" aria-label="사진 ${i}">
+          <img src="${getPhotoSrc(i)}" alt="" class="photos-thumb-image" loading="lazy">
+        </button>
+      `;
+    }
+
+    photosGrid.innerHTML = html;
+  }
+
+  function openPhoto(index) {
+    currentPhotoIndex = index;
+    savedGridScrollTop = photosGridScroll.scrollTop;
+
+    photosDetailImage.src = getPhotoSrc(index);
+    photosScreen.classList.add("detail-open");
+
+    if (photosDetailScroll) {
+      photosDetailScroll.scrollTop = 0;
+    }
+  }
+
+  function closePhoto() {
+    photosScreen.classList.remove("detail-open");
+    currentPhotoIndex = null;
+
+    requestAnimationFrame(() => {
+      photosGridScroll.scrollTop = savedGridScrollTop;
+    });
+  }
+
+  photosGrid.addEventListener("click", (event) => {
+    const thumb = event.target.closest(".photos-thumb-btn");
+    if (!thumb || !photosScreen.classList.contains("active")) return;
+
+    openPhoto(Number(thumb.dataset.photoIndex));
+  });
+
+  if (photosDetailBack) {
+    photosDetailBack.addEventListener("click", (event) => {
+      event.stopPropagation();
+      closePhoto();
+    });
+  }
+
+  window.resetPhotosAppState = function () {
+    photosScreen.classList.remove("detail-open");
+    currentPhotoIndex = null;
+
+    requestAnimationFrame(() => {
+      photosGridScroll.scrollTop = photosGridScroll.scrollHeight;
+    });
+  };
+
+  renderPhotosGrid();
+
+  requestAnimationFrame(() => {
+    photosGridScroll.scrollTop = photosGridScroll.scrollHeight;
+  });
+})();
