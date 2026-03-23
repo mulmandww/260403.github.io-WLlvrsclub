@@ -833,7 +833,7 @@ dummyAppButtons.forEach((button) => {
 
   const messageThreads = [
     {
-      id: "longi",
+      id: "long",
       name: "롱이♥️ ALD1",
       avatar: "롱",
       time: "어제",
@@ -853,7 +853,7 @@ dummyAppButtons.forEach((button) => {
       ]
     },
 {
-  id: "zhouwanxin",
+  id: "zhouanxin",
   name: "조우안신 ALD1",
   avatar: "조",
   time: "어제",
@@ -979,7 +979,7 @@ dummyAppButtons.forEach((button) => {
 },
      
 {
-  id: "irio",
+  id: "leeleo",
   name: "이리오 ALD1",
   avatar: "이",
   time: "화요일",
