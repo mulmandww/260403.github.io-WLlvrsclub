@@ -4173,36 +4173,52 @@ messages-image-top-btn
 /* 모바일 */
 @media screen and (max-width: 480px) {
   .photos-grid-topbar {
-    height: calc(170px + env(safe-area-inset-top));
+    height: calc(118px + env(safe-area-inset-top));
   }
 
+  .photos-grid-topbar-bg {
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.34) 0%,
+      rgba(0,0,0,0.18) 34%,
+      rgba(0,0,0,0.08) 58%,
+      rgba(0,0,0,0.02) 78%,
+      rgba(0,0,0,0) 100%
+    );
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
 
-.photos-grid-actions {
-  top: calc(48px + env(safe-area-inset-top));
-  right: 14px;
-  gap: 8px;
-}
+  .photos-home-back {
+    top: calc(48px + env(safe-area-inset-top));
+    left: 14px;
+    width: 46px;
+    height: 46px;
+    z-index: 20;
+  }
+
+  .photos-grid-actions {
+    top: calc(48px + env(safe-area-inset-top));
+    right: 14px;
+    gap: 8px;
+  }
 
   .photos-glass-btn {
-    height: 48px;
-    min-width: 48px;
-    padding: 0 18px;
-    font-size: 16px;
+    height: 46px;
+    min-width: 46px;
+    padding: 0 16px;
+    font-size: 15px;
+    border-radius: 23px;
   }
 
-.photos-home-back {
-  top: calc(48px + env(safe-area-inset-top));
-  left: 14px;
-  width: 48px;
-  height: 48px;
-}
-  
   .photos-sort-btn {
-    width: 48px;
+    width: 46px;
+    padding: 0;
+    border-radius: 50%;
   }
 
   .photos-grid {
-    padding-top: calc(144px + env(safe-area-inset-top));
+    padding-top: calc(92px + env(safe-area-inset-top));
     gap: 2px;
   }
 
@@ -4220,6 +4236,7 @@ messages-image-top-btn
   .photos-bottom-pill {
     height: 60px;
     grid-template-columns: 60px 1fr 1fr 1fr;
+    border-radius: 30px;
   }
 
   .photos-bottom-tab {
@@ -4251,10 +4268,10 @@ messages-image-top-btn
     left: 14px;
     width: 46px;
     height: 46px;
+    z-index: 21;
   }
 
   .photos-detail-stage {
     padding: calc(20px + env(safe-area-inset-top)) 0 calc(20px + env(safe-area-inset-bottom));
   }
 }
-  
