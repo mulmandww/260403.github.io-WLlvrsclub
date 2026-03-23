@@ -2164,7 +2164,7 @@ img {
 
 .messages-thread-avatar-default .messages-thread-avatar-head {
   position: absolute;
-  top: 6px;
+  top: 12px;
   left: 50%;
   width: 16px;
   height: 16px;
@@ -2311,7 +2311,7 @@ img {
 
 .messages-detail-avatar.is-default .messages-detail-avatar-head {
   position: absolute;
-  top: 11px;
+  top: 16px;
   left: 50%;
   width: 18px;
   height: 18px;
@@ -2647,7 +2647,7 @@ messages-image-top-btn
   }
 
   .messages-detail-avatar.is-default .messages-detail-avatar-head {
-    top: 11px;
+    top: 13px;
     width: 18px;
     height: 18px;
   }
