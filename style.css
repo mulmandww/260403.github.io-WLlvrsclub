@@ -2103,11 +2103,11 @@ img {
   height: calc(100% - (118px + var(--safe-top)));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 34px 18px 104px;
+  padding: 10px 18px 104px;
 }
 
 .messages-list-head {
-  margin-top: 6px;
+  margin-top: 0px;
   margin-bottom: 16px;
 }
 
@@ -2117,6 +2117,7 @@ img {
   font-weight: 800;
   color: #111;
   letter-spacing: -1px;
+  margin-top: 4px;
 }
 
 .messages-thread-list {
