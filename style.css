@@ -2418,6 +2418,12 @@ img {
   width: 100%;
 }
 
+.messages-row:has(.image-bubble),
+.messages-row:has(.voice-bubble) {
+  margin-top: -6px;
+  margin-bottom: -6px;
+}
+
 .messages-row.me {
   justify-content: flex-end;
 }
