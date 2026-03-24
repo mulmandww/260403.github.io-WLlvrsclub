@@ -4181,20 +4181,20 @@ messages-image-top-btn
 /* 모바일 */
 @media screen and (max-width: 480px) {
   .photos-grid-topbar {
-    height: calc(118px + env(safe-area-inset-top));
+    height: calc(92px + env(safe-area-inset-top));
   }
 
   .photos-grid-topbar-bg {
     background: linear-gradient(
       to bottom,
-      rgba(0,0,0,0.34) 0%,
-      rgba(0,0,0,0.18) 34%,
-      rgba(0,0,0,0.08) 58%,
-      rgba(0,0,0,0.02) 78%,
+      rgba(0,0,0,0.26) 0%,
+      rgba(0,0,0,0.14) 34%,
+      rgba(0,0,0,0.06) 62%,
+      rgba(0,0,0,0.01) 82%,
       rgba(0,0,0,0) 100%
     );
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
   }
 
   .photos-home-back {
@@ -4202,13 +4202,16 @@ messages-image-top-btn
     left: 14px;
     width: 46px;
     height: 46px;
-    z-index: 20;
+    z-index: 31;
   }
 
   .photos-grid-actions {
+    position: absolute;
     top: calc(48px + env(safe-area-inset-top));
     right: 14px;
+    display: flex;
     gap: 8px;
+    z-index: 31;
   }
 
   .photos-glass-btn {
@@ -4217,6 +4220,13 @@ messages-image-top-btn
     padding: 0 16px;
     font-size: 15px;
     border-radius: 23px;
+    background: rgba(120,120,120,0.16);
+    border: 1px solid rgba(255,255,255,0.24);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.12),
+      0 4px 12px rgba(0,0,0,0.15);
   }
 
   .photos-sort-btn {
@@ -4225,13 +4235,18 @@ messages-image-top-btn
     border-radius: 50%;
   }
 
+  .photos-grid-scroll {
+    height: 100%;
+    padding: 0 0 calc(92px + env(safe-area-inset-bottom));
+  }
+
   .photos-grid {
-    padding-top: calc(92px + env(safe-area-inset-top));
+    padding-top: calc(74px + env(safe-area-inset-top));
     gap: 2px;
   }
 
-  .photos-grid-scroll {
-    padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  .photos-thumb-btn {
+    aspect-ratio: 1 / 1;
   }
 
   .photos-bottom-bar {
@@ -4242,33 +4257,60 @@ messages-image-top-btn
   }
 
   .photos-bottom-pill {
-    height: 60px;
-    grid-template-columns: 60px 1fr 1fr 1fr;
-    border-radius: 30px;
+    height: 58px;
+    border-radius: 29px;
+    grid-template-columns: 58px 1fr 1fr 1fr;
+    padding: 5px;
+    background: rgba(255,255,255,0.74);
+    border: 1px solid rgba(255,255,255,0.28);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.34),
+      0 8px 18px rgba(0,0,0,0.14);
   }
 
   .photos-bottom-tab {
     font-size: 14px;
+    border-radius: 999px;
+  }
+
+  .photos-bottom-tab-active {
+    background: rgba(255,255,255,0.74);
   }
 
   .photos-bottom-tab-image {
-    width: 28px;
-    height: 28px;
+    width: 27px;
+    height: 27px;
   }
 
   .photos-search-btn {
-    flex-basis: 60px;
-    width: 60px;
-    height: 60px;
+    flex: 0 0 58px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.74);
+    border: 1px solid rgba(255,255,255,0.28);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.34),
+      0 8px 18px rgba(0,0,0,0.14);
   }
 
   .photos-search-image {
-    width: 26px;
-    height: 26px;
+    width: 25px;
+    height: 25px;
   }
 
   .photos-detail-topbar {
     height: calc(92px + env(safe-area-inset-top));
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.18) 0%,
+      rgba(0,0,0,0.08) 54%,
+      rgba(0,0,0,0) 100%
+    );
   }
 
   .photos-detail-back {
@@ -4276,7 +4318,7 @@ messages-image-top-btn
     left: 14px;
     width: 46px;
     height: 46px;
-    z-index: 21;
+    z-index: 32;
   }
 
   .photos-detail-stage {
