@@ -3850,6 +3850,7 @@ messages-image-top-btn
   position: absolute;
   inset: 0;
   background: #111;
+  overflow: hidden;
   transition:
     transform 0.34s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.28s ease;
@@ -3980,92 +3981,80 @@ messages-image-top-btn
     linear-gradient(#fff, #fff) center bottom / 6px 2.4px no-repeat;
 }
 
-/* 그리드 */
+/* 목록 스크롤 영역: 100%가 아니라 상/하단 높이를 뺀 실제 높이 */
 .photos-grid-scroll {
-  height: 100%;
+  position: absolute;
+  top: calc(94px + var(--safe-top));
+  left: 0;
+  right: 0;
+  bottom: calc(104px + var(--safe-bottom));
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  padding: 0 0 calc(104px + var(--safe-bottom));
 }
 
 .photos-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2px;
-  padding-top: calc(94px + var(--safe-top));
 }
 
 .photos-thumb-btn {
   position: relative;
+  display: block;
+  width: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: #1b1b1d;
+  background: #1a1a1a;
 }
 
 .photos-thumb-image {
   width: 100%;
   height: 100%;
-  display: block;
   object-fit: cover;
-  object-position: center;
-  transition: transform 0.18s ease;
+  display: block;
 }
 
-.photos-thumb-btn:active .photos-thumb-image {
-  transform: scale(0.97);
-}
-
-/* 하단 */
+/* 하단 바 */
 .photos-bottom-bar {
   position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: calc(12px + var(--safe-bottom));
-  z-index: 24;
+  left: 14px;
+  right: 14px;
+  bottom: calc(14px + var(--safe-bottom));
+  z-index: 25;
   display: flex;
   align-items: center;
-  gap: 10px;
-  pointer-events: none;
-}
-
-.photos-bottom-pill,
-.photos-search-btn {
-  pointer-events: auto;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .photos-bottom-pill {
   flex: 1;
-  height: 62px;
-  border-radius: 31px;
-  background: rgba(255,255,255,0.74);
-  border: 1px solid rgba(255,255,255,0.28);
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.32),
-    0 8px 18px rgba(0,0,0,0.14);
+  min-width: 0;
+  height: 78px;
+  padding: 6px;
   display: grid;
-  grid-template-columns: 62px 1fr 1fr 1fr;
+  grid-template-columns: 64px repeat(3, 1fr);
   align-items: center;
-  padding: 5px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.78);
+  color: #111;
 }
 
 .photos-bottom-tab {
   height: 100%;
-  border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
-  line-height: 1;
+  font-size: 17px;
   font-weight: 700;
-  letter-spacing: -0.2px;
+  letter-spacing: -0.3px;
+  border-radius: 999px;
   color: #111;
-  background: transparent;
 }
 
 .photos-bottom-tab-active {
-  background: rgba(255,255,255,0.76);
+  color: #2f6fff;
 }
 
 .photos-bottom-tab-icon-btn {
@@ -4073,36 +4062,26 @@ messages-image-top-btn
 }
 
 .photos-bottom-tab-image {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
-  display: block;
-  pointer-events: none;
 }
 
 .photos-search-btn {
-  flex: 0 0 62px;
-  width: 62px;
-  height: 62px;
+  flex: 0 0 78px;
+  width: 78px;
+  height: 78px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.74);
-  border: 1px solid rgba(255,255,255,0.28);
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.32),
-    0 8px 18px rgba(0,0,0,0.14);
+  background: rgba(255,255,255,0.86);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .photos-search-image {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
-  display: block;
-  pointer-events: none;
 }
 
 /* 상세 */
@@ -4149,8 +4128,10 @@ messages-image-top-btn
 }
 
 .photos-detail-scroll {
-  height: 100%;
+  position: absolute;
+  inset: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   background: #000;
 }
@@ -4225,74 +4206,52 @@ messages-image-top-btn
     min-width: 46px;
     padding: 0 16px;
     font-size: 15px;
-    border-radius: 23px;
-    background: rgba(120,120,120,0.14);
-    border: 1px solid rgba(255,255,255,0.22);
-    backdrop-filter: blur(14px) saturate(145%);
-    -webkit-backdrop-filter: blur(14px) saturate(145%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.10),
-      0 4px 12px rgba(0,0,0,0.14);
   }
 
   .photos-sort-btn {
     width: 46px;
-    padding: 0;
-    border-radius: 50%;
   }
 
   .photos-grid-scroll {
-    padding: 0 0 calc(86px + env(safe-area-inset-bottom));
-  }
-
-  .photos-grid {
-    padding-top: calc(62px + env(safe-area-inset-top));
-    gap: 2px;
+    top: calc(88px + env(safe-area-inset-top));
+    bottom: calc(102px + env(safe-area-inset-bottom));
   }
 
   .photos-bottom-bar {
-    left: 12px;
-    right: 12px;
-    bottom: calc(10px + env(safe-area-inset-bottom));
+    left: 14px;
+    right: 14px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
     gap: 10px;
   }
 
   .photos-bottom-pill {
-    height: 56px;
-    border-radius: 28px;
-    grid-template-columns: 56px 1fr 1fr 1fr;
-    padding: 4px;
-    background: rgba(255,255,255,0.74);
-    border: 1px solid rgba(255,255,255,0.28);
-    backdrop-filter: blur(18px) saturate(145%);
-    -webkit-backdrop-filter: blur(18px) saturate(145%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.32),
-      0 8px 18px rgba(0,0,0,0.14);
+    height: 80px;
+    grid-template-columns: 60px repeat(3, 1fr);
+    padding: 6px;
   }
 
   .photos-bottom-tab {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .photos-bottom-tab-image {
-    width: 26px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
   }
 
   .photos-search-btn {
-    flex: 0 0 56px;
-    width: 56px;
-    height: 56px;
+    flex: 0 0 80px;
+    width: 80px;
+    height: 80px;
   }
 
   .photos-search-image {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
   }
 
   .photos-detail-topbar {
-    height: calc(92px + env(safe-area-inset-top));
+    height: calc(88px + env(safe-area-inset-top));
   }
 
   .photos-detail-back {
@@ -4300,10 +4259,10 @@ messages-image-top-btn
     left: 14px;
     width: 46px;
     height: 46px;
-    z-index: 42;
   }
 
   .photos-detail-stage {
-    padding: calc(20px + env(safe-area-inset-top)) 0 calc(20px + env(safe-area-inset-bottom));
+    padding-top: calc(18px + env(safe-area-inset-top));
+    padding-bottom: calc(18px + env(safe-area-inset-bottom));
   }
 }
