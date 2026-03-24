@@ -4276,3 +4276,16 @@ messages-image-top-btn
     padding-bottom: calc(18px + env(safe-area-inset-bottom));
   }
 }
+
+/* ============================= */
+/* PHOTOS 상태바 색 고정 */
+/* ============================= */
+
+body:has(#photosScreen.active) .statusbar,
+body:has(#photosScreen.active) .dynamic-island,
+body:has(#photosScreen.active) .statusbar *,
+body:has(#photosScreen.active) .dynamic-island * {
+  color: #fff !important;
+  fill: #fff !important;
+  stroke: #fff !important;
+}
