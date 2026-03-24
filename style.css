@@ -3885,8 +3885,8 @@ messages-image-top-btn
   top: 0;
   left: 0;
   right: 0;
-  height: calc(176px + var(--safe-top));
-  z-index: 12;
+  height: calc(120px + var(--safe-top));
+  z-index: 20;
   pointer-events: none;
 }
 
@@ -3895,12 +3895,42 @@ messages-image-top-btn
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,0.45) 0%,
-    rgba(0,0,0,0.25) 30%,
-    rgba(0,0,0,0.10) 60%,
+    rgba(0,0,0,0.28) 0%,
+    rgba(0,0,0,0.15) 34%,
+    rgba(0,0,0,0.06) 64%,
     rgba(0,0,0,0) 100%
   );
   pointer-events: none;
+}
+
+.photos-home-back,
+.photos-grid-actions {
+  z-index: 21;
+}
+
+.photos-home-back {
+  position: absolute;
+  top: calc(50px + var(--safe-top));
+  left: 14px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(120,120,120,0.18);
+  border: 1px solid rgba(255,255,255,0.26);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 4px 14px rgba(0,0,0,0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.photos-home-back .back-arrow {
+  border-left-color: #fff;
+  border-bottom-color: #fff;
 }
 
 .photos-grid-actions {
@@ -3909,7 +3939,6 @@ messages-image-top-btn
   right: 14px;
   display: flex;
   gap: 10px;
-  z-index: 3;
   pointer-events: auto;
 }
 
@@ -3922,42 +3951,16 @@ messages-image-top-btn
   align-items: center;
   justify-content: center;
   background: rgba(120,120,120,0.18);
-  border: 1px solid rgba(255,255,255,0.26);
-  backdrop-filter: blur(22px) saturate(160%);
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid rgba(255,255,255,0.24);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.14),
+    inset 0 1px 0 rgba(255,255,255,0.12),
     0 4px 14px rgba(0,0,0,0.16);
   color: #fff;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.2px;
-}
-
-.photos-home-back {
-  position: absolute;
-  top: calc(50px + var(--safe-top));
-  left: 14px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgba(120,120,120,0.18);
-  border: 1px solid rgba(255,255,255,0.26);
-  backdrop-filter: blur(22px) saturate(160%);
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.14),
-    0 4px 14px rgba(0,0,0,0.16);
-  z-index: 3;
-  pointer-events: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.photos-home-back .back-arrow {
-  border-left-color: #fff;
-  border-bottom-color: #fff;
 }
 
 .photos-sort-btn {
@@ -3989,7 +3992,7 @@ messages-image-top-btn
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
-  padding-top: calc(150px + var(--safe-top));
+  padding-top: calc(94px + var(--safe-top));
 }
 
 .photos-thumb-btn {
@@ -4018,7 +4021,7 @@ messages-image-top-btn
   left: 12px;
   right: 12px;
   bottom: calc(12px + var(--safe-bottom));
-  z-index: 14;
+  z-index: 24;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -4036,10 +4039,10 @@ messages-image-top-btn
   border-radius: 31px;
   background: rgba(255,255,255,0.74);
   border: 1px solid rgba(255,255,255,0.28);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.36),
+    inset 0 1px 0 rgba(255,255,255,0.32),
     0 8px 18px rgba(0,0,0,0.14);
   display: grid;
   grid-template-columns: 62px 1fr 1fr 1fr;
@@ -4084,10 +4087,10 @@ messages-image-top-btn
   border-radius: 50%;
   background: rgba(255,255,255,0.74);
   border: 1px solid rgba(255,255,255,0.28);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.36),
+    inset 0 1px 0 rgba(255,255,255,0.32),
     0 8px 18px rgba(0,0,0,0.14);
   display: flex;
   align-items: center;
@@ -4109,12 +4112,12 @@ messages-image-top-btn
   left: 0;
   right: 0;
   height: calc(96px + var(--safe-top));
-  z-index: 20;
+  z-index: 30;
   pointer-events: none;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,0.24) 0%,
-    rgba(0,0,0,0.10) 52%,
+    rgba(0,0,0,0.20) 0%,
+    rgba(0,0,0,0.08) 50%,
     rgba(0,0,0,0) 100%
   );
 }
@@ -4133,11 +4136,11 @@ messages-image-top-btn
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.10),
     0 8px 20px rgba(0,0,0,0.18);
-  z-index: 21;
-  pointer-events: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 31;
+  pointer-events: auto;
 }
 
 .photos-detail-back .back-arrow {
@@ -4189,19 +4192,17 @@ messages-image-top-btn
 /* 모바일 */
 @media screen and (max-width: 480px) {
   .photos-grid-topbar {
-    height: calc(86px + env(safe-area-inset-top));
+    height: calc(82px + env(safe-area-inset-top));
   }
 
   .photos-grid-topbar-bg {
     background: linear-gradient(
       to bottom,
-      rgba(0,0,0,0.22) 0%,
-      rgba(0,0,0,0.10) 30%,
-      rgba(0,0,0,0.04) 58%,
+      rgba(0,0,0,0.18) 0%,
+      rgba(0,0,0,0.08) 34%,
+      rgba(0,0,0,0.02) 64%,
       rgba(0,0,0,0) 100%
     );
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
   }
 
   .photos-home-back {
@@ -4209,16 +4210,14 @@ messages-image-top-btn
     left: 14px;
     width: 46px;
     height: 46px;
-    z-index: 31;
+    z-index: 41;
   }
 
   .photos-grid-actions {
-    position: absolute;
     top: calc(48px + env(safe-area-inset-top));
     right: 14px;
-    display: flex;
     gap: 8px;
-    z-index: 31;
+    z-index: 41;
   }
 
   .photos-glass-btn {
@@ -4243,17 +4242,12 @@ messages-image-top-btn
   }
 
   .photos-grid-scroll {
-    height: 100%;
     padding: 0 0 calc(86px + env(safe-area-inset-bottom));
   }
 
   .photos-grid {
-    padding-top: calc(68px + env(safe-area-inset-top));
+    padding-top: calc(62px + env(safe-area-inset-top));
     gap: 2px;
-  }
-
-  .photos-thumb-btn {
-    aspect-ratio: 1 / 1;
   }
 
   .photos-bottom-bar {
@@ -4279,11 +4273,6 @@ messages-image-top-btn
 
   .photos-bottom-tab {
     font-size: 13px;
-    border-radius: 999px;
-  }
-
-  .photos-bottom-tab-active {
-    background: rgba(255,255,255,0.74);
   }
 
   .photos-bottom-tab-image {
@@ -4295,14 +4284,6 @@ messages-image-top-btn
     flex: 0 0 56px;
     width: 56px;
     height: 56px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.74);
-    border: 1px solid rgba(255,255,255,0.28);
-    backdrop-filter: blur(18px) saturate(145%);
-    -webkit-backdrop-filter: blur(18px) saturate(145%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.32),
-      0 8px 18px rgba(0,0,0,0.14);
   }
 
   .photos-search-image {
@@ -4312,12 +4293,6 @@ messages-image-top-btn
 
   .photos-detail-topbar {
     height: calc(92px + env(safe-area-inset-top));
-    background: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.18) 0%,
-      rgba(0,0,0,0.08) 54%,
-      rgba(0,0,0,0) 100%
-    );
   }
 
   .photos-detail-back {
@@ -4325,77 +4300,7 @@ messages-image-top-btn
     left: 14px;
     width: 46px;
     height: 46px;
-    z-index: 32;
-  }
-
-  .photos-detail-stage {
-    padding: calc(20px + env(safe-area-inset-top)) 0 calc(20px + env(safe-area-inset-bottom));
-  }
-}
-
-  .photos-bottom-pill {
-    height: 58px;
-    border-radius: 29px;
-    grid-template-columns: 58px 1fr 1fr 1fr;
-    padding: 5px;
-    background: rgba(255,255,255,0.74);
-    border: 1px solid rgba(255,255,255,0.28);
-    backdrop-filter: blur(20px) saturate(150%);
-    -webkit-backdrop-filter: blur(20px) saturate(150%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.34),
-      0 8px 18px rgba(0,0,0,0.14);
-  }
-
-  .photos-bottom-tab {
-    font-size: 14px;
-    border-radius: 999px;
-  }
-
-  .photos-bottom-tab-active {
-    background: rgba(255,255,255,0.74);
-  }
-
-  .photos-bottom-tab-image {
-    width: 27px;
-    height: 27px;
-  }
-
-  .photos-search-btn {
-    flex: 0 0 58px;
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.74);
-    border: 1px solid rgba(255,255,255,0.28);
-    backdrop-filter: blur(20px) saturate(150%);
-    -webkit-backdrop-filter: blur(20px) saturate(150%);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.34),
-      0 8px 18px rgba(0,0,0,0.14);
-  }
-
-  .photos-search-image {
-    width: 25px;
-    height: 25px;
-  }
-
-  .photos-detail-topbar {
-    height: calc(92px + env(safe-area-inset-top));
-    background: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.18) 0%,
-      rgba(0,0,0,0.08) 54%,
-      rgba(0,0,0,0) 100%
-    );
-  }
-
-  .photos-detail-back {
-    top: calc(48px + env(safe-area-inset-top));
-    left: 14px;
-    width: 46px;
-    height: 46px;
-    z-index: 32;
+    z-index: 42;
   }
 
   .photos-detail-stage {
