@@ -2125,7 +2125,7 @@ window.resetMessagesAppState = function () {
   let savedGridScrollTop = 0;
 
 function getPhotoSrc(index) {
-  return `assets/pictures/${String(index).padStart(3, "0")}`;
+  return `assets/pictures/${String(index).padStart(3, "0")}.jpg`;
 }
 
   function getPhotoFile(index) {
