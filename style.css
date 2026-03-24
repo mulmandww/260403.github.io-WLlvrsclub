@@ -3897,7 +3897,7 @@ messages-image-top-btn
     to bottom,
     rgba(0,0,0,0.45) 0%,
     rgba(0,0,0,0.25) 30%,
-    rgba(0,0,0,0.1) 60%,
+    rgba(0,0,0,0.10) 60%,
     rgba(0,0,0,0) 100%
   );
   pointer-events: none;
@@ -3910,8 +3910,9 @@ messages-image-top-btn
   display: flex;
   gap: 10px;
   z-index: 3;
+  pointer-events: auto;
 }
-  
+
 .photos-glass-btn {
   height: 50px;
   min-width: 50px;
@@ -3949,13 +3950,16 @@ messages-image-top-btn
     0 4px 14px rgba(0,0,0,0.16);
   z-index: 3;
   pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .photos-home-back .back-arrow {
   border-left-color: #fff;
   border-bottom-color: #fff;
 }
-  
+
 .photos-sort-btn {
   width: 50px;
   padding: 0;
@@ -4131,6 +4135,9 @@ messages-image-top-btn
     0 8px 20px rgba(0,0,0,0.18);
   z-index: 21;
   pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .photos-detail-back .back-arrow {
@@ -4168,33 +4175,33 @@ messages-image-top-btn
   max-height: 100%;
   display: block;
   background: #000;
-}  
+}
 
 /* active */
 .photos-glass-btn:active,
 .photos-search-btn:active,
 .photos-bottom-tab:active,
-.photos-detail-back:active {
+.photos-detail-back:active,
+.photos-home-back:active {
   transform: scale(0.97);
 }
 
 /* 모바일 */
 @media screen and (max-width: 480px) {
   .photos-grid-topbar {
-    height: calc(92px + env(safe-area-inset-top));
+    height: calc(86px + env(safe-area-inset-top));
   }
 
   .photos-grid-topbar-bg {
     background: linear-gradient(
       to bottom,
-      rgba(0,0,0,0.26) 0%,
-      rgba(0,0,0,0.14) 34%,
-      rgba(0,0,0,0.06) 62%,
-      rgba(0,0,0,0.01) 82%,
+      rgba(0,0,0,0.22) 0%,
+      rgba(0,0,0,0.10) 30%,
+      rgba(0,0,0,0.04) 58%,
       rgba(0,0,0,0) 100%
     );
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
   }
 
   .photos-home-back {
@@ -4220,13 +4227,13 @@ messages-image-top-btn
     padding: 0 16px;
     font-size: 15px;
     border-radius: 23px;
-    background: rgba(120,120,120,0.16);
-    border: 1px solid rgba(255,255,255,0.24);
-    backdrop-filter: blur(18px) saturate(150%);
-    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    background: rgba(120,120,120,0.14);
+    border: 1px solid rgba(255,255,255,0.22);
+    backdrop-filter: blur(14px) saturate(145%);
+    -webkit-backdrop-filter: blur(14px) saturate(145%);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.12),
-      0 4px 12px rgba(0,0,0,0.15);
+      inset 0 1px 0 rgba(255,255,255,0.10),
+      0 4px 12px rgba(0,0,0,0.14);
   }
 
   .photos-sort-btn {
@@ -4237,11 +4244,11 @@ messages-image-top-btn
 
   .photos-grid-scroll {
     height: 100%;
-    padding: 0 0 calc(92px + env(safe-area-inset-bottom));
+    padding: 0 0 calc(86px + env(safe-area-inset-bottom));
   }
 
   .photos-grid {
-    padding-top: calc(74px + env(safe-area-inset-top));
+    padding-top: calc(68px + env(safe-area-inset-top));
     gap: 2px;
   }
 
@@ -4255,6 +4262,76 @@ messages-image-top-btn
     bottom: calc(10px + env(safe-area-inset-bottom));
     gap: 10px;
   }
+
+  .photos-bottom-pill {
+    height: 56px;
+    border-radius: 28px;
+    grid-template-columns: 56px 1fr 1fr 1fr;
+    padding: 4px;
+    background: rgba(255,255,255,0.74);
+    border: 1px solid rgba(255,255,255,0.28);
+    backdrop-filter: blur(18px) saturate(145%);
+    -webkit-backdrop-filter: blur(18px) saturate(145%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.32),
+      0 8px 18px rgba(0,0,0,0.14);
+  }
+
+  .photos-bottom-tab {
+    font-size: 13px;
+    border-radius: 999px;
+  }
+
+  .photos-bottom-tab-active {
+    background: rgba(255,255,255,0.74);
+  }
+
+  .photos-bottom-tab-image {
+    width: 26px;
+    height: 26px;
+  }
+
+  .photos-search-btn {
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.74);
+    border: 1px solid rgba(255,255,255,0.28);
+    backdrop-filter: blur(18px) saturate(145%);
+    -webkit-backdrop-filter: blur(18px) saturate(145%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.32),
+      0 8px 18px rgba(0,0,0,0.14);
+  }
+
+  .photos-search-image {
+    width: 24px;
+    height: 24px;
+  }
+
+  .photos-detail-topbar {
+    height: calc(92px + env(safe-area-inset-top));
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.18) 0%,
+      rgba(0,0,0,0.08) 54%,
+      rgba(0,0,0,0) 100%
+    );
+  }
+
+  .photos-detail-back {
+    top: calc(48px + env(safe-area-inset-top));
+    left: 14px;
+    width: 46px;
+    height: 46px;
+    z-index: 32;
+  }
+
+  .photos-detail-stage {
+    padding: calc(20px + env(safe-area-inset-top)) 0 calc(20px + env(safe-area-inset-bottom));
+  }
+}
 
   .photos-bottom-pill {
     height: 58px;
