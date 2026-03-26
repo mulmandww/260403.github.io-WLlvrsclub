@@ -374,6 +374,10 @@ async function openAppWithAnimation(button) {
   window.resetPhotosAppState();
 }
 
+  if (targetScreen.id === "calendarScreen" && typeof window.resetCalendarAppState === "function") {
+    window.resetCalendarAppState();
+  }
+
   button.classList.add("launching");
   homeScreen.classList.add("app-opening");
 
@@ -2567,4 +2571,170 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
 
   renderPhotosGrid();
   scrollPhotosToBottom();
+})();
+
+
+/* =========================
+   CALENDAR APP
+========================= */
+(function initCalendarApp() {
+  const calendarScreen = document.getElementById("calendarScreen");
+  const calendarScroll = document.getElementById("calendarScroll");
+  const calendarMonths = document.getElementById("calendarMonths");
+  const calendarTodayBtn = calendarScreen?.querySelector(".calendar-today-btn");
+
+  if (!calendarScreen || !calendarScroll || !calendarMonths) return;
+
+  const CALENDAR_YEAR = 2026;
+  const CALENDAR_MONTHS = [1, 2, 3, 4];
+  const TODAY_MONTH = 4;
+  const TODAY_DAY = 3;
+
+  const HOLIDAYS = {
+    "1-1": "새해",
+    "2-16": "설날 연휴",
+    "2-17": "설날",
+    "2-18": "설날 연휴",
+    "3-1": "삼일절",
+    "3-2": "삼일절"
+  };
+
+  const CALENDAR_EVENTS = [
+    // 나중에 여기에 추가
+    // { month: 3, day: 5, title: "한결", time: "15:00" },
+    // { month: 3, day: 7, title: "미용실 예약", time: "15:30" }
+  ];
+
+  const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
+  let lastCalendarScrollTop = 0;
+
+  function getDaysInMonth(year, month) {
+    return new Date(year, month, 0).getDate();
+  }
+
+  function getFirstDayIndex(year, month) {
+    return new Date(year, month - 1, 1).getDay();
+  }
+
+  function getEventsForDate(month, day) {
+    return CALENDAR_EVENTS.filter((event) => event.month === month && event.day === day);
+  }
+
+  function createWeekdaysHTML() {
+    return `
+      <div class="calendar-weekdays">
+        ${WEEKDAY_LABELS.map((label, index) => `
+          <span class="calendar-weekday ${index === 0 ? "is-sunday" : ""}">
+            ${label}
+          </span>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  function createBadgeHTML(text) {
+    return `<div class="calendar-badge">${text}</div>`;
+  }
+
+  function createEventHTML(event) {
+    const timeHTML = event.time ? `<span class="calendar-event-time">${event.time}</span>` : "";
+    return `
+      <div class="calendar-event">
+        <span class="calendar-event-title">${event.title}</span>
+        ${timeHTML}
+      </div>
+    `;
+  }
+
+  function createEmptyCellHTML() {
+    return `<div class="calendar-day is-empty" aria-hidden="true"></div>`;
+  }
+
+  function createDayCellHTML(month, day, weekdayIndex) {
+    const holidayKey = `${month}-${day}`;
+    const holidayText = HOLIDAYS[holidayKey];
+    const events = getEventsForDate(month, day);
+    const isToday = month === TODAY_MONTH && day === TODAY_DAY;
+    const isSunday = weekdayIndex === 0;
+
+    return `
+      <div class="calendar-day ${isToday ? "is-today" : ""} ${isSunday ? "is-sunday" : ""}">
+        <div class="calendar-day-number">${day}</div>
+        ${holidayText ? createBadgeHTML(holidayText) : ""}
+        ${events.map(createEventHTML).join("")}
+      </div>
+    `;
+  }
+
+  function createMonthHTML(month) {
+    const daysInMonth = getDaysInMonth(CALENDAR_YEAR, month);
+    const firstDayIndex = getFirstDayIndex(CALENDAR_YEAR, month);
+    let cellsHTML = "";
+
+    for (let i = 0; i < firstDayIndex; i += 1) {
+      cellsHTML += createEmptyCellHTML();
+    }
+
+    for (let day = 1; day <= daysInMonth; day += 1) {
+      const weekdayIndex = new Date(CALENDAR_YEAR, month - 1, day).getDay();
+      cellsHTML += createDayCellHTML(month, day, weekdayIndex);
+    }
+
+    return `
+      <section class="calendar-month" id="calendarMonth${month}" data-month="${month}">
+        <h2 class="calendar-month-title">${month}월</h2>
+        ${createWeekdaysHTML()}
+        <div class="calendar-month-grid">
+          ${cellsHTML}
+        </div>
+      </section>
+    `;
+  }
+
+  function renderCalendar() {
+    calendarMonths.innerHTML = CALENDAR_MONTHS.map(createMonthHTML).join("");
+  }
+
+  function scrollCalendarToApril() {
+    const aprilSection = document.getElementById("calendarMonth4");
+    if (!aprilSection) return;
+
+    const targetTop = aprilSection.offsetTop - 6;
+    calendarScroll.scrollTop = targetTop;
+    lastCalendarScrollTop = targetTop;
+
+    requestAnimationFrame(() => {
+      calendarScroll.scrollTop = targetTop;
+      lastCalendarScrollTop = targetTop;
+    });
+
+    setTimeout(() => {
+      calendarScroll.scrollTop = targetTop;
+      lastCalendarScrollTop = targetTop;
+    }, 120);
+
+    setTimeout(() => {
+      calendarScroll.scrollTop = targetTop;
+      lastCalendarScrollTop = targetTop;
+    }, 320);
+  }
+
+  function resetCalendarAppState() {
+    scrollCalendarToApril();
+  }
+
+  calendarScroll.addEventListener("scroll", () => {
+    lastCalendarScrollTop = calendarScroll.scrollTop;
+  });
+
+  if (calendarTodayBtn) {
+    calendarTodayBtn.addEventListener("click", () => {
+      scrollCalendarToApril();
+    });
+  }
+
+  window.resetCalendarAppState = resetCalendarAppState;
+
+  renderCalendar();
+  scrollCalendarToApril();
 })();

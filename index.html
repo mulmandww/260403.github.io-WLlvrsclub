@@ -331,17 +331,45 @@
       </div>
     </section>
 
-    <!-- CALENDAR APP -->
-    <section class="screen app-screen" id="calendarScreen">
-      <div class="app-ui">
-        <div class="app-header">
-          <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
-            <span class="back-arrow"></span>
-          </button>
-        </div>
-        <div class="app-content"></div>
+<!-- CALENDAR APP -->
+<section class="screen app-screen calendar-screen" id="calendarScreen">
+  <div class="app-ui calendar-ui">
+    <div class="calendar-topbar">
+      <button class="back-home app-back-btn calendar-back-btn" type="button" aria-label="뒤로가기">
+        <span class="back-arrow"></span>
+      </button>
+
+      <div class="calendar-top-actions">
+        <button class="calendar-top-pill-btn" type="button" aria-label="보기">
+          <img src="assets/icons/calendar_display.png" alt="" class="calendar-top-icon">
+        </button>
+        <button class="calendar-top-pill-btn" type="button" aria-label="검색">
+          <img src="assets/icons/calendar_search.png" alt="" class="calendar-top-icon">
+        </button>
+        <button class="calendar-top-pill-btn calendar-plus-btn" type="button" aria-label="추가">
+          <span>+</span>
+        </button>
       </div>
-    </section>
+    </div>
+
+    <div class="calendar-scroll" id="calendarScroll">
+      <div class="calendar-months" id="calendarMonths"></div>
+    </div>
+
+    <div class="calendar-bottom-bar">
+      <button class="calendar-today-btn" type="button">오늘</button>
+
+      <div class="calendar-bottom-pill">
+        <button class="calendar-bottom-pill-btn" type="button" aria-label="설정">
+          <img src="assets/icons/calendar_setting.png" alt="" class="calendar-bottom-icon">
+        </button>
+        <button class="calendar-bottom-pill-btn" type="button" aria-label="목록">
+          <img src="assets/icons/calendar_drawer.png" alt="" class="calendar-bottom-icon">
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- PHOTOS APP -->
 <section class="screen app-screen photos-screen" id="photosScreen">
