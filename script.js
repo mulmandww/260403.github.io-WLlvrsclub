@@ -2993,54 +2993,53 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
     return groups;
   }
 
-  function createMessageGroupHTML(group) {
-    const isMe = group.sender === "나";
-    const profile = getProfileData(group.sender);
-    const rowClass = isMe ? "kakao-message-row is-me" : "kakao-message-row";
+ function createMessageGroupHTML(group) {
+  const isMe = group.sender === "나";
+  const profile = getProfileData(group.sender);
+  const rowClass = isMe ? "kakao-message-row is-me" : "kakao-message-row";
 
-    let bodyHTML = "";
+  let bodyHTML = "";
 
-    group.messages.forEach((message, index) => {
-      const isLast = index === group.messages.length - 1;
-      const isFirst = index === 0;
+  group.messages.forEach((message, index) => {
+    const isLast = index === group.messages.length - 1;
 
-      if (message.type === "text") {
-        bodyHTML += `
-          <div class="kakao-bubble-line">
-            ${createBubbleHTML(message, isMe, isFirst)}
-            ${isLast ? `<span class="kakao-time">${group.time}</span>` : ""}
-          </div>
-        `;
-        return;
-      }
+    if (message.type === "text") {
+      bodyHTML += `
+        <div class="kakao-bubble-line">
+          ${createBubbleHTML(message, isMe, false)}
+          ${isLast ? `<span class="kakao-time">${group.time}</span>` : ""}
+        </div>
+      `;
+      return;
+    }
 
-      if (message.type === "image") {
-        bodyHTML += `
-          <div class="kakao-media-wrap">
-            ${createMediaGroupHTML(message.files)}
-            ${!isMe ? `
-              <button class="kakao-share-btn" type="button" aria-label="공유">
-                <img src="assets/icons/kakao_share.png" alt="" class="kakao-share-icon">
-              </button>
-            ` : ""}
-            ${isLast ? `<span class="kakao-time">${group.time}</span>` : ""}
-          </div>
-        `;
-      }
-    });
+    if (message.type === "image") {
+      bodyHTML += `
+        <div class="kakao-media-wrap">
+          ${createMediaGroupHTML(message.files)}
+          ${!isMe ? `
+            <button class="kakao-share-btn" type="button" aria-label="공유">
+              <img src="assets/icons/kakao_share.png" alt="" class="kakao-share-icon">
+            </button>
+          ` : ""}
+          <span class="kakao-time">${group.time}</span>
+        </div>
+      `;
+    }
+  });
 
-    return `
-      <div class="${rowClass}">
-        ${!isMe ? createAvatarHTML(group.sender) : ""}
-        <div class="kakao-message-main">
-          ${!isMe ? `<div class="kakao-sender-name">${profile.name}</div>` : ""}
-          <div class="kakao-bubble-stack">
-            ${bodyHTML}
-          </div>
+  return `
+    <div class="${rowClass}">
+      ${!isMe ? createAvatarHTML(group.sender) : ""}
+      <div class="kakao-message-main">
+        ${!isMe ? `<div class="kakao-sender-name">${profile.name}</div>` : ""}
+        <div class="kakao-bubble-stack">
+          ${bodyHTML}
         </div>
       </div>
-    `;
-  }
+    </div>
+  `;
+}
 
   function renderKakaoConversation() {
     const groups = groupMessages(KAKAO_CHAT_DATA);
