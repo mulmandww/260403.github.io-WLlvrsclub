@@ -4695,21 +4695,32 @@ messages-image-top-btn
   left: 0;
   right: 0;
   z-index: 28;
-  height: calc(126px + var(--safe-top));
+  height: calc(92px + var(--safe-top));
   background: #bcc9d8;
 }
 
 .kakao-back-btn {
   position: absolute;
   left: 18px;
-  top: calc(54px + var(--safe-top));
-  width: 28px;
-  height: 28px;
+  top: calc(56px + var(--safe-top));
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
   border: none;
-  background: transparent;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kakao-back-btn::before,
+.kakao-back-btn::after {
+  display: none !important;
+  content: none !important;
 }
 
 .kakao-back-btn .back-arrow {
@@ -4724,7 +4735,7 @@ messages-image-top-btn
 .kakao-top-title-wrap {
   position: absolute;
   left: 50%;
-  top: calc(56px + var(--safe-top));
+  top: calc(58px + var(--safe-top));
   transform: translateX(-50%);
   display: flex;
   align-items: center;
@@ -4743,11 +4754,10 @@ messages-image-top-btn
   text-align: center;
   white-space: nowrap;
 }
-
 .kakao-top-actions {
   position: absolute;
   right: 18px;
-  top: calc(52px + var(--safe-top));
+  top: calc(54px + var(--safe-top));
   display: flex;
   align-items: center;
   gap: 10px;
@@ -5122,29 +5132,35 @@ messages-image-top-btn
 
 @media screen and (max-width: 480px) {
   .kakao-topbar {
-    height: calc(112px + env(safe-area-inset-top));
-  }
+  height: calc(84px + env(safe-area-inset-top));
+}
 
-  .kakao-back-btn {
-    left: 14px;
-    top: calc(50px + env(safe-area-inset-top));
-    width: 28px;
-    height: 28px;
-  }
+.kakao-back-btn {
+  left: 14px;
+  top: calc(52px + env(safe-area-inset-top));
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  padding: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
 
-  .kakao-top-title-wrap {
-    top: calc(52px + env(safe-area-inset-top));
-  }
+.kakao-top-title-wrap {
+  top: calc(54px + env(safe-area-inset-top));
+}
 
   .kakao-room-title {
     font-size: 16px;
   }
 
-  .kakao-top-actions {
-    right: 14px;
-    top: calc(48px + env(safe-area-inset-top));
-    gap: 8px;
-  }
+ .kakao-top-actions {
+  right: 14px;
+  top: calc(50px + env(safe-area-inset-top));
+  gap: 8px;
+}
 
   .kakao-top-icon-btn {
     width: 28px;
