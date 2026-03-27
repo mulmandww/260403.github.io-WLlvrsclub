@@ -4431,11 +4431,11 @@ messages-image-top-btn
 .calendar-day {
   min-height: 92px;
   border-radius: 16px;
-  padding: 4px 2px 6px;
+  padding: 4px 1px 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
 }
 
 .calendar-day.is-empty {
@@ -4468,40 +4468,52 @@ messages-image-top-btn
 .calendar-badge,
 .calendar-event {
   width: 100%;
-  border-radius: 11px;
-  padding: 5px 6px 4px;
+  border-radius: 10px;
+  padding: 4px 4px 3px;
   background: #ece8ff;
   color: #6b5bd2;
-  font-size: 10px;
-  line-height: 1.2;
+  font-size: 8.5px;
+  line-height: 1.15;
   font-weight: 700;
-  letter-spacing: -0.15px;
+  letter-spacing: -0.2px;
   text-align: left;
-  word-break: keep-all;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .calendar-badge {
-  min-height: 22px;
+  height: 18px;
+  min-height: 18px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .calendar-event {
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  min-height: 28px;
+  gap: 0;
+  min-height: 24px;
 }
 
 .calendar-event-title,
 .calendar-event-time {
   display: block;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+.calendar-event-title {
+  font-size: 8.5px;
+  line-height: 1.1;
+}
+
 .calendar-event-time {
-  font-size: 9px;
+  font-size: 8px;
+  line-height: 1.1;
   opacity: 0.92;
 }
 
@@ -4618,13 +4630,25 @@ messages-image-top-btn
     font-size: 17px;
   }
 
-  .calendar-badge,
-  .calendar-event {
-    border-radius: 10px;
-    padding: 5px 5px 4px;
-    font-size: 9px;
-  }
+.calendar-badge,
+.calendar-event {
+  border-radius: 9px;
+  padding: 4px 4px 3px;
+  font-size: 8px;
+}
 
+.calendar-badge {
+  height: 17px;
+  min-height: 17px;
+}
+
+.calendar-event-title {
+  font-size: 8px;
+}
+
+.calendar-event-time {
+  font-size: 7.5px;
+}
   .calendar-bottom-bar {
     left: 12px;
     right: 12px;
