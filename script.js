@@ -3007,7 +3007,7 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
   { sender: "나", type: "text", time: "21:28", text: "야" },
   { sender: "나", type: "text", time: "21:28", text: "아니야" },
   { sender: "나", type: "text", time: "21:29", text: "나 시나모롤할래" },
-  { sender: "씬롱", type: "text", time: "21:29", text: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" },
+  { sender: "씬롱", type: "text", time: "21:29", text: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" },
   { sender: "나", type: "text", time: "21:29", text: "원숭이 아니라고" },
   { sender: "안신", type: "text", time: "21:30", text: "黄猴 vs 小猪" },
   { sender: "상현", type: "text", time: "21:30", text: "나는 또 왜" },
