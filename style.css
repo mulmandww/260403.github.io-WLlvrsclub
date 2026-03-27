@@ -4301,7 +4301,7 @@ messages-image-top-btn
   right: 0;
   z-index: 20;
   height: calc(130px + var(--safe-top));
-  padding-top: calc(34px + var(--safe-top));
+  padding-top: calc(42px + var(--safe-top));
   padding-left: 16px;
   padding-right: 16px;
   display: flex;
@@ -4318,7 +4318,7 @@ messages-image-top-btn
 
 .calendar-back-btn {
   left: 16px;
-  top: calc(34px + var(--safe-top));
+  top: calc(42px + var(--safe-top));
   background: rgba(255,255,255,0.82);
   border: 1px solid rgba(0,0,0,0.06);
   box-shadow:
@@ -4575,14 +4575,14 @@ messages-image-top-btn
 @media screen and (max-width: 480px) {
   .calendar-topbar {
     height: calc(118px + env(safe-area-inset-top));
-    padding-top: calc(28px + env(safe-area-inset-top));
+    padding-top: calc(36px + env(safe-area-inset-top));
     padding-left: 14px;
     padding-right: 14px;
   }
 
   .calendar-back-btn {
     left: 14px;
-    top: calc(28px + env(safe-area-inset-top));
+    top: calc(36px + env(safe-area-inset-top));
   }
 
   .calendar-top-pill-btn {
