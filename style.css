@@ -5117,8 +5117,8 @@ messages-image-top-btn
 }
 
 .kakao-input-icon {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   object-fit: contain;
   display: block;
 }
@@ -5286,7 +5286,7 @@ messages-image-top-btn
   }
 
   .kakao-input-icon {
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
   }
 }
