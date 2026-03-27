@@ -4688,26 +4688,23 @@ messages-image-top-btn
   overflow: hidden;
 }
 
+/* 상단 */
 .kakao-topbar {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   z-index: 28;
-  height: calc(112px + var(--safe-top));
-  padding: calc(38px + var(--safe-top)) 18px 0;
-  display: grid;
-  grid-template-columns: 34px 1fr 70px;
-  align-items: start;
+  height: calc(126px + var(--safe-top));
   background: #bcc9d8;
 }
 
 .kakao-back-btn {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 30px;
+  position: absolute;
+  left: 18px;
+  top: calc(54px + var(--safe-top));
+  width: 28px;
+  height: 28px;
   border: none;
   background: transparent;
   box-shadow: none;
@@ -4720,13 +4717,20 @@ messages-image-top-btn
   height: 12px;
   border-left-width: 2.2px;
   border-bottom-width: 2.2px;
+  border-left-color: #111;
+  border-bottom-color: #111;
 }
 
 .kakao-top-title-wrap {
+  position: absolute;
+  left: 50%;
+  top: calc(56px + var(--safe-top));
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding-top: 3px;
+  justify-content: center;
+  width: max-content;
+  pointer-events: none;
 }
 
 .kakao-room-title {
@@ -4737,19 +4741,21 @@ messages-image-top-btn
   letter-spacing: -0.3px;
   color: #111;
   text-align: center;
+  white-space: nowrap;
 }
 
 .kakao-top-actions {
+  position: absolute;
+  right: 18px;
+  top: calc(52px + var(--safe-top));
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 10px;
-  padding-top: 1px;
 }
 
 .kakao-top-icon-btn {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border: none;
   background: transparent;
   padding: 0;
@@ -4759,19 +4765,20 @@ messages-image-top-btn
 }
 
 .kakao-top-icon {
-  width: 21px;
-  height: 21px;
+  width: 19px;
+  height: 19px;
   object-fit: contain;
   display: block;
 }
 
+/* 스크롤 */
 .kakao-scroll {
   position: absolute;
   inset: 0;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  padding-top: calc(102px + var(--safe-top));
+  padding-top: calc(118px + var(--safe-top));
   padding-bottom: calc(88px + var(--safe-bottom));
 }
 
@@ -4779,6 +4786,7 @@ messages-image-top-btn
   padding: 12px 14px 18px;
 }
 
+/* 날짜 구분선 */
 .kakao-date-divider {
   display: flex;
   justify-content: center;
@@ -4814,6 +4822,7 @@ messages-image-top-btn
   transform: translateY(-0.5px);
 }
 
+/* 메시지 */
 .kakao-message-row {
   display: flex;
   align-items: flex-start;
@@ -4919,7 +4928,6 @@ messages-image-top-btn
 }
 
 .kakao-bubble {
-  position: relative;
   max-width: 100%;
   min-height: 36px;
   padding: 10px 15px 9px;
@@ -4933,7 +4941,6 @@ messages-image-top-btn
   word-break: keep-all;
   white-space: pre-wrap;
 }
-
 
 .kakao-bubble.is-me {
   background: #fae54d;
@@ -4949,6 +4956,18 @@ messages-image-top-btn
   margin-bottom: 2px;
 }
 
+/* 이미지 메시지 */
+.kakao-media-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.kakao-message-row.is-me .kakao-media-block {
+  align-items: flex-end;
+}
+
 .kakao-media-wrap {
   display: flex;
   align-items: center;
@@ -4957,6 +4976,23 @@ messages-image-top-btn
 
 .kakao-message-row.is-me .kakao-media-wrap {
   flex-direction: row-reverse;
+}
+
+.kakao-media-time-line {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.kakao-message-row.is-me .kakao-media-time-line {
+  justify-content: flex-end;
+}
+
+.kakao-media-group {
+  display: grid;
+  gap: 4px;
+  overflow: hidden;
+  border-radius: 16px;
 }
 
 .kakao-media-group.is-1 {
@@ -4999,7 +5035,6 @@ messages-image-top-btn
   display: block;
 }
 
-/* 공유 버튼 */
 .kakao-share-btn {
   flex: 0 0 36px;
   width: 36px;
@@ -5021,6 +5056,7 @@ messages-image-top-btn
   display: block;
 }
 
+/* 하단 입력창 */
 .kakao-inputbar {
   position: absolute;
   left: 0;
@@ -5085,39 +5121,43 @@ messages-image-top-btn
 }
 
 @media screen and (max-width: 480px) {
- .kakao-topbar {
-  height: calc(98px + env(safe-area-inset-top));
-  padding: calc(30px + env(safe-area-inset-top)) 14px 0;
-  grid-template-columns: 30px 1fr 62px;
-}
+  .kakao-topbar {
+    height: calc(112px + env(safe-area-inset-top));
+  }
 
-.kakao-back-btn {
-  width: 28px;
-  height: 28px;
-}
+  .kakao-back-btn {
+    left: 14px;
+    top: calc(50px + env(safe-area-inset-top));
+    width: 28px;
+    height: 28px;
+  }
 
-.kakao-room-title {
-  font-size: 16px;
-  margin-top: 0;
-}
+  .kakao-top-title-wrap {
+    top: calc(52px + env(safe-area-inset-top));
+  }
 
-.kakao-top-actions {
-  gap: 8px;
-  padding-top: 0;
-}
+  .kakao-room-title {
+    font-size: 16px;
+  }
 
-.kakao-top-icon-btn {
-  width: 28px;
-  height: 28px;
-}
+  .kakao-top-actions {
+    right: 14px;
+    top: calc(48px + env(safe-area-inset-top));
+    gap: 8px;
+  }
 
-.kakao-top-icon {
-  width: 19px;
-  height: 19px;
-}
+  .kakao-top-icon-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .kakao-top-icon {
+    width: 19px;
+    height: 19px;
+  }
 
   .kakao-scroll {
-    padding-top: calc(92px + env(safe-area-inset-top));
+    padding-top: calc(108px + env(safe-area-inset-top));
     padding-bottom: calc(82px + env(safe-area-inset-bottom));
   }
 
@@ -5182,6 +5222,10 @@ messages-image-top-btn
     font-size: 10px;
   }
 
+  .kakao-media-block {
+    gap: 5px;
+  }
+
   .kakao-media-group.is-1 {
     width: 214px;
   }
@@ -5193,16 +5237,15 @@ messages-image-top-btn
   }
 
   .kakao-share-btn {
-  width: 34px;
-  height: 34px;
-  flex-basis: 34px;
-}
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+  }
 
-.kakao-share-icon {
-  width: 13px;
-  height: 13px;
-}
-
+  .kakao-share-icon {
+    width: 13px;
+    height: 13px;
+  }
 
   .kakao-inputbar {
     height: calc(60px + env(safe-area-inset-bottom));

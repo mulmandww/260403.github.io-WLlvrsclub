@@ -3015,14 +3015,20 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
 
     if (message.type === "image") {
       bodyHTML += `
-        <div class="kakao-media-wrap">
-          ${createMediaGroupHTML(message.files)}
-          ${!isMe ? `
-            <button class="kakao-share-btn" type="button" aria-label="공유">
-              <img src="assets/icons/kakao_share.png" alt="" class="kakao-share-icon">
-            </button>
+        <div class="kakao-media-block">
+          <div class="kakao-media-wrap">
+            ${createMediaGroupHTML(message.files)}
+            ${!isMe ? `
+              <button class="kakao-share-btn" type="button" aria-label="공유">
+                <img src="assets/icons/kakao_share.png" alt="" class="kakao-share-icon">
+              </button>
+            ` : ""}
+          </div>
+          ${isLast ? `
+            <div class="kakao-media-time-line">
+              <span class="kakao-time">${group.time}</span>
+            </div>
           ` : ""}
-          <span class="kakao-time">${group.time}</span>
         </div>
       `;
     }
