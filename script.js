@@ -2927,7 +2927,11 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
   function createDateDividerHTML(label) {
     return `
       <div class="kakao-date-divider">
-        <div class="kakao-date-pill">${label}</div>
+        <div class="kakao-date-pill">
+          <img src="assets/icons/kakao_calendar.png" alt="" class="kakao-date-icon">
+          <span>${label}</span>
+          <span class="kakao-date-chevron">›</span>
+        </div>
       </div>
     `;
   }
@@ -2992,7 +2996,7 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
   function createMessageGroupHTML(group) {
     const isMe = group.sender === "나";
     const profile = getProfileData(group.sender);
-    const messageMainClass = isMe ? "kakao-message-row is-me" : "kakao-message-row";
+    const rowClass = isMe ? "kakao-message-row is-me" : "kakao-message-row";
 
     let bodyHTML = "";
 
@@ -3016,7 +3020,7 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
             ${createMediaGroupHTML(message.files)}
             ${!isMe ? `
               <button class="kakao-share-btn" type="button" aria-label="공유">
-                <span class="kakao-share-icon"><span class="kakao-share-stem"></span></span>
+                <img src="assets/icons/kakao_share.png" alt="" class="kakao-share-icon">
               </button>
             ` : ""}
             ${isLast ? `<span class="kakao-time">${group.time}</span>` : ""}
@@ -3026,7 +3030,7 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
     });
 
     return `
-      <div class="${messageMainClass}">
+      <div class="${rowClass}">
         ${!isMe ? createAvatarHTML(group.sender) : ""}
         <div class="kakao-message-main">
           ${!isMe ? `<div class="kakao-sender-name">${profile.name}</div>` : ""}
