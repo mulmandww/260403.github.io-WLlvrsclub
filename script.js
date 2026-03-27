@@ -378,6 +378,10 @@ async function openAppWithAnimation(button) {
     window.resetCalendarAppState();
   }
 
+    if (targetScreen.id === "kakaoScreen" && typeof window.resetKakaoAppState === "function") {
+    window.resetKakaoAppState();
+  }
+
   button.classList.add("launching");
   homeScreen.classList.add("app-opening");
 
@@ -2787,4 +2791,279 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
 
   renderCalendar();
   scrollCalendarToApril();
+})();
+
+
+/* =========================
+   KAKAO APP
+========================= */
+(function initKakaoApp() {
+  const kakaoScreen = document.getElementById("kakaoScreen");
+  const kakaoScroll = document.getElementById("kakaoScroll");
+  const kakaoConversation = document.getElementById("kakaoConversation");
+
+  if (!kakaoScreen || !kakaoScroll || !kakaoConversation) return;
+
+  const KAKAO_PROFILES = {
+    "준서": {
+      name: "김준서 ALD1",
+      image: "assets/icons/kakao_profile_js.jpg"
+    },
+    "아르노": {
+      name: "아르노 ALD1",
+      image: "assets/icons/kakao_profile_arno.jpg"
+    },
+    "리오": {
+      name: "이리오 ALD1",
+      image: "assets/icons/kakao_profile_leo.jpg"
+    },
+    "상원": {
+      name: "이상원 ALD1",
+      image: "assets/icons/kakao_profile_sw.jpg"
+    },
+    "롱이": {
+      name: "롱이❤️ ALD1",
+      image: "assets/icons/kakao_profile_xl.jpg"
+    },
+    "안신": {
+      name: "조우안신 ALD1",
+      image: "assets/icons/kakao_profile_ax.jpg"
+    },
+    "상현": {
+      name: "정상현 ALD1",
+      image: "assets/icons/kakao_profile_sh.jpg"
+    },
+    "씬롱": {
+      name: "씬롱 ALD1",
+      image: "assets/icons/kakao_profile_xl.jpg"
+    }
+  };
+
+  const KAKAO_CHAT_DATA = [
+    { type: "date", label: "2026년 3월 4일 수요일" },
+
+    { sender: "상원", type: "image", time: "19:51", files: ["kakao_01.jpg"] },
+    { sender: "상원", type: "text", time: "19:51", text: "우리 좀 이따 공항으로 출발" },
+    { sender: "상원", type: "text", time: "19:51", text: "사진은 어제 ㅋㅋㅋ" },
+    { sender: "리오", type: "text", time: "19:52", text: "We miss you guys" },
+    { sender: "안신", type: "text", time: "19:55", text: "Oh me too!!!!!!" },
+    { sender: "리오", type: "text", time: "19:55", text: "셋이 없어서 그냥 그랬다잉~" },
+    { sender: "준서", type: "text", time: "19:55", text: "진짜" },
+    { sender: "준서", type: "text", time: "19:56", text: "다같이 갈 기회가 또 있어야하는데..ㅠㅠ" },
+    { sender: "상현", type: "text", time: "19:56", text: "당연히 다같이 또 가야죠!!!" },
+    { sender: "상현", type: "text", time: "19:56", text: "셋이 뭐하고 있어요??" },
+    { sender: "아르노", type: "text", time: "19:58", text: "우리 놀러간거 찍었어요" },
+    { sender: "아르노", type: "text", time: "19:58", text: "v-log ㅋㅋ" },
+    { sender: "씬롱", type: "text", time: "19:59", text: "저희 오늘 신발 만들었어요" },
+    { sender: "씬롱", type: "text", time: "19:59", text: "😎😎😎" },
+    { sender: "아르노", type: "image", time: "19:59", files: ["kakao_02.jpg"] },
+    { sender: "나", type: "text", time: "20:00", text: "ㅋㅋㅋㅋㅋㅋ재밌었겠넹" },
+    { sender: "나", type: "text", time: "20:00", text: "보고싶다 다들~~~~" },
+    { sender: "나", type: "text", time: "20:00", text: "내일 가니까 조금만 참아 ㅎㅎ" },
+    { sender: "아르노", type: "text", time: "20:01", text: "다들 조심히 와요~" },
+    { sender: "준서", type: "text", time: "20:01", text: "셋이 뭐 잘 지내겠지만" },
+    { sender: "준서", type: "text", time: "20:02", text: "싸우지말고 잘 챙겨먹고" },
+    { sender: "상원", type: "text", time: "20:02", text: "ㅋㅋㅋㅋㅋㅋㅋㅋ" },
+    { sender: "안신", type: "text", time: "20:02", text: "당연!!!!" },
+    { sender: "안신", type: "text", time: "20:03", text: "내일봐요~" },
+    { sender: "씬롱", type: "text", time: "20:03", text: "걱정 말아요 😬😬" },
+    { sender: "상원", type: "text", time: "20:04", text: "내일 봐 🤍🤍" },
+
+    { type: "date", label: "2026년 3월 6일 금요일" },
+
+    { sender: "상현", type: "text", time: "20:16", text: "편의점 가는데 뭐 필요한 사람~" },
+    { sender: "상현", type: "text", time: "20:16", text: "말해주세여" },
+    { sender: "상현", type: "text", time: "20:17", text: "저랑 건우형 지금 편의점" },
+    { sender: "준서", type: "text", time: "20:18", text: "ㅋㅋ난 괜찮아" },
+    { sender: "준서", type: "text", time: "20:18", text: "조심해서 사와~" },
+    { sender: "상원", type: "text", time: "20:19", text: "나두 괜찮" },
+    { sender: "상원", type: "text", time: "20:19", text: "땡스~~" },
+    { sender: "리오", type: "text", time: "20:21", text: "음 빼빼로랑 몽쉘 좀 사다줄 수 있을까.." },
+    { sender: "리오", type: "text", time: "20:21", text: "Thanks!!!❤️❤️" },
+    { sender: "씬롱", type: "text", time: "20:21", text: "나는 오땅이랑 오징어집 ㅎㅎ" },
+    { sender: "나", type: "image", time: "20:24", files: ["kakao_03.jpg", "kakao_04.jpg"] },
+    { sender: "나", type: "text", time: "20:24", text: "둘은 이제 대답 안 해도 돼..;;" },
+    { sender: "안신", type: "text", time: "20:24", text: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ" },
+    { sender: "안신", type: "text", time: "20:24", text: "저는 제로콜라 하나 plz~" },
+    { sender: "아르노", type: "text", time: "20:25", text: "Im okay~" },
+    { sender: "상현", type: "text", time: "20:29", text: "넹 곧 가요~~" },
+
+    { type: "date", label: "2026년 3월 9일 월요일" }
+  ];
+
+  function getProfileData(sender) {
+    return KAKAO_PROFILES[sender] || {
+      name: `${sender} ALD1`,
+      image: ""
+    };
+  }
+
+  function getMessageImageSrc(filename) {
+    return `assets/pictures/${filename}`;
+  }
+
+  function createAvatarHTML(sender) {
+    const profile = getProfileData(sender);
+
+    if (profile.image) {
+      return `
+        <div class="kakao-avatar">
+          <img
+            src="${profile.image}"
+            alt="${profile.name}"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=&quot;kakao-avatar-placeholder&quot;></div>';"
+          >
+        </div>
+      `;
+    }
+
+    return `
+      <div class="kakao-avatar">
+        <div class="kakao-avatar-placeholder"></div>
+      </div>
+    `;
+  }
+
+  function createDateDividerHTML(label) {
+    return `
+      <div class="kakao-date-divider">
+        <div class="kakao-date-pill">${label}</div>
+      </div>
+    `;
+  }
+
+  function createBubbleHTML(message, isMe, isFirstInGroup) {
+    const bubbleClass = [
+      "kakao-bubble",
+      isMe ? "is-me" : "",
+      isFirstInGroup ? "is-first" : ""
+    ].filter(Boolean).join(" ");
+
+    return `<div class="${bubbleClass}">${message.text}</div>`;
+  }
+
+  function createMediaGroupHTML(files) {
+    const layoutClass = `is-${Math.min(files.length, 4)}`;
+    return `
+      <div class="kakao-media-group ${layoutClass}">
+        ${files.map((file) => `
+          <div class="kakao-media-item">
+            <img src="${getMessageImageSrc(file)}" alt="" loading="lazy">
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  function groupMessages(items) {
+    const groups = [];
+    let currentGroup = null;
+
+    items.forEach((item) => {
+      if (item.type === "date") {
+        groups.push({ type: "date", label: item.label });
+        currentGroup = null;
+        return;
+      }
+
+      const canJoin =
+        currentGroup &&
+        currentGroup.type === "messageGroup" &&
+        currentGroup.sender === item.sender &&
+        currentGroup.time === item.time;
+
+      if (!canJoin) {
+        currentGroup = {
+          type: "messageGroup",
+          sender: item.sender,
+          time: item.time,
+          messages: [item]
+        };
+        groups.push(currentGroup);
+        return;
+      }
+
+      currentGroup.messages.push(item);
+    });
+
+    return groups;
+  }
+
+  function createMessageGroupHTML(group) {
+    const isMe = group.sender === "나";
+    const profile = getProfileData(group.sender);
+    const messageMainClass = isMe ? "kakao-message-row is-me" : "kakao-message-row";
+
+    let bodyHTML = "";
+
+    group.messages.forEach((message, index) => {
+      const isLast = index === group.messages.length - 1;
+      const isFirst = index === 0;
+
+      if (message.type === "text") {
+        bodyHTML += `
+          <div class="kakao-bubble-line">
+            ${createBubbleHTML(message, isMe, isFirst)}
+            ${isLast ? `<span class="kakao-time">${group.time}</span>` : ""}
+          </div>
+        `;
+        return;
+      }
+
+      if (message.type === "image") {
+        bodyHTML += `
+          <div class="kakao-media-wrap">
+            ${createMediaGroupHTML(message.files)}
+            ${!isMe ? `
+              <button class="kakao-share-btn" type="button" aria-label="공유">
+                <span class="kakao-share-icon"><span class="kakao-share-stem"></span></span>
+              </button>
+            ` : ""}
+            ${isLast ? `<span class="kakao-time">${group.time}</span>` : ""}
+          </div>
+        `;
+      }
+    });
+
+    return `
+      <div class="${messageMainClass}">
+        ${!isMe ? createAvatarHTML(group.sender) : ""}
+        <div class="kakao-message-main">
+          ${!isMe ? `<div class="kakao-sender-name">${profile.name}</div>` : ""}
+          <div class="kakao-bubble-stack">
+            ${bodyHTML}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderKakaoConversation() {
+    const groups = groupMessages(KAKAO_CHAT_DATA);
+    kakaoConversation.innerHTML = groups.map((group) => {
+      if (group.type === "date") {
+        return createDateDividerHTML(group.label);
+      }
+      return createMessageGroupHTML(group);
+    }).join("");
+  }
+
+  function scrollKakaoToBottom() {
+    const setBottom = () => {
+      kakaoScroll.scrollTop = kakaoScroll.scrollHeight;
+    };
+
+    requestAnimationFrame(setBottom);
+    setTimeout(setBottom, 0);
+    setTimeout(setBottom, 120);
+    setTimeout(setBottom, 320);
+    setTimeout(setBottom, 700);
+  }
+
+  window.resetKakaoAppState = function () {
+    scrollKakaoToBottom();
+  };
+
+  renderKakaoConversation();
+  scrollKakaoToBottom();
 })();

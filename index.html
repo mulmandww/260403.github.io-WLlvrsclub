@@ -730,17 +730,47 @@
   </div>
 </section>
 
-    <!-- KAKAO APP -->
-    <section class="screen app-screen" id="kakaoScreen">
-      <div class="app-ui">
-        <div class="app-header">
-          <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
-            <span class="back-arrow"></span>
-          </button>
-        </div>
-        <div class="app-content"></div>
+<!-- KAKAO APP -->
+<section class="screen app-screen kakao-screen" id="kakaoScreen">
+  <div class="app-ui kakao-ui">
+    <div class="kakao-topbar">
+      <button class="back-home app-back-btn kakao-back-btn" type="button" aria-label="뒤로가기">
+        <span class="back-arrow"></span>
+      </button>
+
+      <h2 class="kakao-room-title">ALD1</h2>
+
+      <div class="kakao-top-actions">
+        <button class="kakao-top-icon-btn kakao-search-btn" type="button" aria-label="검색">
+          <span class="kakao-search-icon"></span>
+        </button>
+        <button class="kakao-top-icon-btn kakao-menu-btn" type="button" aria-label="메뉴">
+          <span class="kakao-menu-icon"></span>
+        </button>
       </div>
-    </section>
+    </div>
+
+    <div class="kakao-scroll" id="kakaoScroll">
+      <div class="kakao-conversation" id="kakaoConversation"></div>
+    </div>
+
+    <div class="kakao-inputbar">
+      <button class="kakao-input-side-btn" type="button" aria-label="추가">
+        <span class="kakao-plus-icon">+</span>
+      </button>
+
+      <div class="kakao-input-placeholder">메시지 입력</div>
+
+      <button class="kakao-input-side-btn kakao-emoji-btn" type="button" aria-label="이모지">
+        <span class="kakao-emoji-icon"></span>
+      </button>
+
+      <button class="kakao-input-side-btn kakao-hash-btn" type="button" aria-label="샵">
+        <span class="kakao-hash-icon">#</span>
+      </button>
+    </div>
+  </div>
+</section>
 
     <!-- 팝업 -->
     <div class="notif-popup" id="glassPopup" aria-hidden="true">

@@ -4670,3 +4670,645 @@ messages-image-top-btn
     height: 36px;
   }
 }
+
+
+/* ============================= */
+/* KAKAO APP */
+/* ============================= */
+
+.kakao-screen {
+  background: #b8c6d6;
+  color: #111;
+}
+
+.kakao-ui {
+  position: relative;
+  height: 100%;
+  background: #b8c6d6;
+  overflow: hidden;
+}
+
+.kakao-topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 24;
+  height: calc(92px + var(--safe-top));
+  padding: calc(18px + var(--safe-top)) 18px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: linear-gradient(
+    to bottom,
+    rgba(184, 198, 214, 0.96) 0%,
+    rgba(184, 198, 214, 0.84) 74%,
+    rgba(184, 198, 214, 0) 100%
+  );
+}
+
+.kakao-back-btn {
+  top: calc(18px + var(--safe-top));
+  left: 18px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  width: 38px;
+  height: 38px;
+}
+
+.kakao-back-btn .back-arrow {
+  width: 13px;
+  height: 13px;
+  border-left-width: 2.4px;
+  border-bottom-width: 2.4px;
+  border-left-color: #111;
+  border-bottom-color: #111;
+}
+
+.kakao-room-title {
+  margin: 10px 0 0;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #111;
+}
+
+.kakao-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.kakao-top-icon-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.kakao-search-icon {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.kakao-search-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2.4px solid #111;
+  border-radius: 50%;
+}
+
+.kakao-search-icon::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 2.4px;
+  background: #111;
+  border-radius: 999px;
+  right: -2px;
+  bottom: 1px;
+  transform: rotate(45deg);
+  transform-origin: center;
+}
+
+.kakao-menu-icon {
+  position: relative;
+  width: 26px;
+  height: 18px;
+  display: block;
+  background:
+    linear-gradient(#111, #111) center top / 26px 2.6px no-repeat,
+    linear-gradient(#111, #111) center center / 26px 2.6px no-repeat,
+    linear-gradient(#111, #111) center bottom / 26px 2.6px no-repeat;
+  border-radius: 999px;
+}
+
+.kakao-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-top: calc(88px + var(--safe-top));
+  padding-bottom: calc(88px + var(--safe-bottom));
+}
+
+.kakao-conversation {
+  padding: 8px 14px 18px;
+}
+
+.kakao-date-divider {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0 20px;
+}
+
+.kakao-date-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: rgba(131, 148, 167, 0.54);
+  color: rgba(255,255,255,0.95);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.25px;
+}
+
+.kakao-date-pill::before {
+  content: "📅";
+  font-size: 14px;
+  line-height: 1;
+}
+
+.kakao-date-pill::after {
+  content: "›";
+  font-size: 16px;
+  line-height: 1;
+  opacity: 0.92;
+}
+
+.kakao-message-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.kakao-message-row.is-me {
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.kakao-avatar {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #adb7f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kakao-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.kakao-avatar-placeholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #a8b7ef;
+}
+
+.kakao-avatar-placeholder::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: rgba(255,255,255,0.72);
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.kakao-avatar-placeholder::after {
+  content: "";
+  position: absolute;
+  bottom: 7px;
+  left: 50%;
+  width: 20px;
+  height: 12px;
+  background: rgba(255,255,255,0.72);
+  border-radius: 999px 999px 8px 8px;
+  transform: translateX(-50%);
+}
+
+.kakao-message-main {
+  max-width: calc(100% - 88px);
+  min-width: 0;
+}
+
+.kakao-message-row.is-me .kakao-message-main {
+  max-width: calc(100% - 58px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.kakao-sender-name {
+  margin: 0 0 6px;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 500;
+  color: rgba(27, 34, 43, 0.62);
+  letter-spacing: -0.2px;
+}
+
+.kakao-bubble-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.kakao-message-row.is-me .kakao-bubble-stack {
+  align-items: flex-end;
+}
+
+.kakao-bubble-line {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.kakao-message-row.is-me .kakao-bubble-line {
+  flex-direction: row-reverse;
+}
+
+.kakao-bubble {
+  position: relative;
+  max-width: 100%;
+  min-height: 34px;
+  padding: 10px 14px 9px;
+  border-radius: 18px;
+  background: #fff;
+  color: #111;
+  font-size: 15px;
+  line-height: 1.34;
+  font-weight: 500;
+  letter-spacing: -0.32px;
+  word-break: keep-all;
+  white-space: pre-wrap;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+}
+
+.kakao-bubble.is-first:not(.is-me)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -7px;
+  width: 14px;
+  height: 16px;
+  background: #fff;
+  clip-path: polygon(100% 0, 100% 100%, 0 24%);
+}
+
+.kakao-bubble.is-me {
+  background: #fae54d;
+}
+
+.kakao-time {
+  flex: 0 0 auto;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 500;
+  color: rgba(52, 61, 73, 0.52);
+  letter-spacing: -0.2px;
+  margin-bottom: 2px;
+}
+
+.kakao-media-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.kakao-message-row.is-me .kakao-media-wrap {
+  flex-direction: row-reverse;
+}
+
+.kakao-media-group {
+  display: grid;
+  gap: 4px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.kakao-media-group.is-1 {
+  grid-template-columns: 1fr;
+  width: 184px;
+}
+
+.kakao-media-group.is-2 {
+  grid-template-columns: repeat(2, 1fr);
+  width: 198px;
+}
+
+.kakao-media-group.is-3,
+.kakao-media-group.is-4 {
+  grid-template-columns: repeat(2, 1fr);
+  width: 198px;
+}
+
+.kakao-media-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.38);
+}
+
+.kakao-media-group.is-1 .kakao-media-item {
+  aspect-ratio: 1.08 / 1;
+}
+
+.kakao-media-group.is-2 .kakao-media-item,
+.kakao-media-group.is-3 .kakao-media-item,
+.kakao-media-group.is-4 .kakao-media-item {
+  aspect-ratio: 1 / 1;
+}
+
+.kakao-media-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 공유 버튼 */
+.kakao-share-btn {
+  flex: 0 0 54px;
+  width: 54px;
+  height: 54px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(125, 137, 152, 0.58);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kakao-share-icon {
+  position: relative;
+  width: 20px;
+  height: 22px;
+  display: block;
+}
+
+.kakao-share-icon::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  bottom: 2px;
+  height: 12px;
+  border: 2.2px solid rgba(255,255,255,0.95);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+}
+
+.kakao-share-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  border-left: 2.2px solid rgba(255,255,255,0.95);
+  border-top: 2.2px solid rgba(255,255,255,0.95);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.kakao-share-stem {
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 2.2px;
+  height: 10px;
+  background: rgba(255,255,255,0.95);
+  transform: translateX(-50%);
+}
+
+.kakao-inputbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 24;
+  height: calc(64px + var(--safe-bottom));
+  padding: 10px 12px calc(10px + var(--safe-bottom));
+  background: rgba(244, 244, 244, 0.98);
+  border-top: 1px solid rgba(60, 60, 67, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kakao-input-side-btn {
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+}
+
+.kakao-plus-icon {
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 300;
+  transform: translateY(-1px);
+}
+
+.kakao-input-placeholder {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 22px;
+  background: #fff;
+  color: rgba(17,17,17,0.28);
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.kakao-emoji-icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #111;
+  border-radius: 50%;
+  display: block;
+}
+
+.kakao-emoji-icon::before,
+.kakao-emoji-icon::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  width: 3px;
+  height: 3px;
+  background: #111;
+  border-radius: 50%;
+}
+
+.kakao-emoji-icon::before {
+  left: 6px;
+}
+
+.kakao-emoji-icon::after {
+  right: 6px;
+}
+
+.kakao-emoji-icon span,
+.kakao-emoji-icon::marker {
+  display: none;
+}
+
+.kakao-emoji-btn .kakao-emoji-icon {
+  overflow: hidden;
+}
+
+.kakao-emoji-btn .kakao-emoji-icon::after {
+  right: 6px;
+}
+
+.kakao-emoji-btn .kakao-emoji-icon::before {
+  left: 6px;
+}
+
+.kakao-emoji-btn .kakao-emoji-icon {
+  background:
+    radial-gradient(circle at 50% 67%, transparent 6px, #111 6px, #111 7.6px, transparent 7.7px);
+}
+
+.kakao-hash-icon {
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 700;
+  transform: translateY(-1px);
+}
+
+.kakao-top-icon-btn:active,
+.kakao-input-side-btn:active,
+.kakao-share-btn:active,
+.kakao-back-btn:active {
+  transform: scale(0.96);
+}
+
+@media screen and (max-width: 480px) {
+  .kakao-topbar {
+    height: calc(86px + env(safe-area-inset-top));
+    padding: calc(14px + env(safe-area-inset-top)) 14px 0;
+  }
+
+  .kakao-back-btn {
+    top: calc(14px + env(safe-area-inset-top));
+    left: 14px;
+  }
+
+  .kakao-room-title {
+    margin-top: 8px;
+    font-size: 20px;
+  }
+
+  .kakao-top-actions {
+    gap: 10px;
+    margin-top: 2px;
+  }
+
+  .kakao-scroll {
+    padding-top: calc(78px + env(safe-area-inset-top));
+    padding-bottom: calc(82px + env(safe-area-inset-bottom));
+  }
+
+  .kakao-conversation {
+    padding: 8px 10px 16px;
+  }
+
+  .kakao-message-row {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .kakao-avatar {
+    flex-basis: 38px;
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+  }
+
+  .kakao-message-main {
+    max-width: calc(100% - 72px);
+  }
+
+  .kakao-message-row.is-me .kakao-message-main {
+    max-width: calc(100% - 50px);
+  }
+
+  .kakao-bubble {
+    min-height: 32px;
+    padding: 9px 13px 8px;
+    font-size: 14px;
+  }
+
+  .kakao-time {
+    font-size: 10px;
+  }
+
+  .kakao-media-group.is-1 {
+    width: 168px;
+  }
+
+  .kakao-media-group.is-2,
+  .kakao-media-group.is-3,
+  .kakao-media-group.is-4 {
+    width: 184px;
+  }
+
+  .kakao-share-btn {
+    width: 50px;
+    height: 50px;
+    flex-basis: 50px;
+  }
+
+  .kakao-inputbar {
+    height: calc(60px + env(safe-area-inset-bottom));
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+    gap: 6px;
+  }
+
+  .kakao-input-side-btn {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+
+  .kakao-input-placeholder {
+    height: 42px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+
+  .kakao-plus-icon {
+    font-size: 31px;
+  }
+
+  .kakao-hash-icon {
+    font-size: 26px;
+  }
+}
