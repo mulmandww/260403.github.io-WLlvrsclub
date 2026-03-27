@@ -2596,13 +2596,63 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
     "2-17": "설날",
     "2-18": "설날 연휴",
     "3-1": "삼일절",
-    "3-2": "삼일절"
+    "3-2": "삼일절(대체 휴일)"
   };
 
   const CALENDAR_EVENTS = [
-    // 나중에 여기에 추가
-    // { month: 3, day: 5, title: "한결", time: "15:00" },
-    // { month: 3, day: 7, title: "미용실 예약", time: "15:30" }
+{ month: 1, day: 9, title: "멜론 채팅" },
+{ month: 1, day: 11, title: "X 라이브", time: "20:00" },
+{ month: 1, day: 12, title: "데뷔" },
+{ month: 1, day: 12, title: "쇼케이스" },
+{ month: 1, day: 12, title: "멜론 채팅" },
+{ month: 1, day: 13, title: "쇼케이스" },
+{ month: 1, day: 14, title: "정오의희망곡", time: "12:00" },
+{ month: 1, day: 14, title: "개그콘서트" },
+{ month: 1, day: 15, title: "엠카" },
+{ month: 1, day: 16, title: "뮤뱅" },
+{ month: 1, day: 16, title: "팬싸" },
+{ month: 1, day: 17, title: "음중" },
+{ month: 1, day: 17, title: "팬싸" },
+{ month: 1, day: 18, title: "인가" },
+{ month: 1, day: 18, title: "팬싸" },
+{ month: 1, day: 19, title: "영스트리트", time: "20:00" },
+{ month: 1, day: 21, title: "쇼챔" }, 
+{ month: 1, day: 21, title: "아이돌라디오", time: "21:00" },
+{ month: 1, day: 22, title: "엠카" },
+{ month: 1, day: 23, title: "뮤뱅" },
+{ month: 1, day: 23, title: "팬싸" },
+{ month: 1, day: 24, title: "음중" },
+{ month: 1, day: 24, title: "팬싸" },
+{ month: 1, day: 25, title: "인가" },
+{ month: 1, day: 25, title: "팬싸" },
+{ month: 1, day: 27, title: "키스더라디오", time: "20:00" },
+{ month: 1, day: 28, title: "쇼챔" },
+{ month: 1, day: 28, title: "팬싸" },
+{ month: 1, day: 29, title: "엠카" },
+{ month: 1, day: 30, title: "뮤뱅" },
+{ month: 1, day: 30, title: "팬싸" },
+{ month: 1, day: 31, title: "음중" },
+{ month: 2, day: 1, title: "인가/매점가요" },
+{ month: 2, day: 4, title: "쇼챔" },
+{ month: 2, day: 4, title: "팬싸" },
+{ month: 2, day: 5, title: "엠카" },
+{ month: 2, day: 6, title: "뮤뱅" },
+{ month: 2, day: 7, title: "음중" },
+{ month: 2, day: 8, title: "인가(막방)" },
+{ month: 2, day: 8, title: "팬싸" },
+{ month: 2, day: 12, title: "팬싸" },
+{ month: 2, day: 14, title: "팬싸" },
+{ month: 2, day: 22, title: "팬싸" },
+{ month: 2, day: 27, title: "상하이" },
+{ month: 3, day: 1, title: "파리" },
+{ month: 3, day: 7, title: "공개팬싸" },
+{ month: 3, day: 8, title: "공개팬싸" },
+{ month: 3, day: 11, title: "롱🎂❤️" },
+{ month: 3, day: 11, title: "팬싸" },
+{ month: 3, day: 11, title: "생일 라이브", time: "22:00" },
+{ month: 3, day: 12, title: "도쿄" },
+{ month: 3, day: 28, title: "선전" }
+
   ];
 
   const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
