@@ -5006,7 +5006,7 @@ messages-image-top-btn
 }
 
 .kakao-media-group.is-1 {
-  grid-template-columns: 1fr;
+  display: block;
   width: 232px;
 }
 
@@ -5029,13 +5029,30 @@ messages-image-top-btn
 }
 
 .kakao-media-group.is-1 .kakao-media-item {
-  aspect-ratio: 1.32 / 1;
+  aspect-ratio: auto;
 }
 
 .kakao-media-group.is-2 .kakao-media-item,
 .kakao-media-group.is-3 .kakao-media-item,
 .kakao-media-group.is-4 .kakao-media-item {
   aspect-ratio: 1 / 1;
+}
+
+.kakao-media-group.is-1 .kakao-media-item img {
+  width: 100%;
+  height: auto;
+  max-height: 340px;
+  object-fit: contain;
+  display: block;
+}
+
+.kakao-media-group.is-2 .kakao-media-item img,
+.kakao-media-group.is-3 .kakao-media-item img,
+.kakao-media-group.is-4 .kakao-media-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .kakao-media-item img {
@@ -5243,14 +5260,18 @@ messages-image-top-btn
   }
 
   .kakao-media-group.is-1 {
-    width: 214px;
-  }
+  width: 214px;
+}
 
-  .kakao-media-group.is-2,
-  .kakao-media-group.is-3,
-  .kakao-media-group.is-4 {
-    width: 214px;
-  }
+.kakao-media-group.is-2,
+.kakao-media-group.is-3,
+.kakao-media-group.is-4 {
+  width: 214px;
+}
+
+.kakao-media-group.is-1 .kakao-media-item img {
+  max-height: 300px;
+}
 
   .kakao-share-btn {
     width: 34px;
