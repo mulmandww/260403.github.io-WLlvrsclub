@@ -3032,7 +3032,6 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
   { sender: "상현", type: "text", time: "15:36", text: "막내즈😚😚🥰" },
   { sender: "나", type: "text", time: "15:37", text: "귀엽다잉?" },
   { sender: "씬롱", type: "text", time: "15:37", text: "상혀니너무귀여워요 ㅎㅎ" },
-  { sender: "씬롱", type: "image", time: "15:38", files: ["kakao_07.jpg"] },
   { sender: "리오", type: "image", time: "15:40", files: ["kakao_08.jpg"] },
   { sender: "리오", type: "text", time: "15:40", text: "우리도 바로 찍었다잉" },
   { sender: "준서", type: "text", time: "15:41", text: "이제 다들 비행기모드로 바꾸고" },
