@@ -432,17 +432,183 @@
   </div>
 </section>
 
-    <!-- INSTAGRAM APP -->
-    <section class="screen app-screen" id="instagramScreen">
-      <div class="app-ui">
-        <div class="app-header">
-          <button class="back-home app-back-btn" type="button" aria-label="뒤로가기">
-            <span class="back-arrow"></span>
+<!-- INSTAGRAM APP -->
+<section class="screen app-screen instagram-screen" id="instagramScreen">
+  <div class="app-ui instagram-ui">
+
+    <!-- 프로필 화면 -->
+    <div class="instagram-page instagram-profile-page active" id="instagramProfilePage">
+      <div class="instagram-profile-topbar">
+        <button class="back-home app-back-btn instagram-home-back" type="button" aria-label="뒤로가기">
+          <span class="back-arrow"></span>
+        </button>
+
+        <div class="instagram-profile-title-wrap">
+          <span class="instagram-profile-username">wxcyrcl</span>
+          <img src="assets/icons/insta_lock.png" alt="" class="instagram-lock-icon">
+        </div>
+
+        <div class="instagram-profile-top-actions">
+          <button class="instagram-top-icon-btn" type="button" aria-label="알림">
+            <img src="assets/icons/insta_alart.png" alt="" class="instagram-top-icon">
+          </button>
+          <button class="instagram-top-icon-btn" type="button" aria-label="더보기">
+            <img src="assets/icons/insta_more.png" alt="" class="instagram-top-icon">
           </button>
         </div>
-        <div class="app-content"></div>
       </div>
-    </section>
+
+      <div class="instagram-profile-scroll" id="instagramProfileScroll">
+        <div class="instagram-profile-header">
+          <button class="instagram-story-ring-btn" id="instagramStoryOpenBtn" type="button" aria-label="스토리 열기">
+            <span class="instagram-story-ring">
+              <img src="assets/icons/insta_profile.png" alt="" class="instagram-profile-avatar">
+            </span>
+          </button>
+
+          <div class="instagram-profile-meta">
+            <div class="instagram-profile-name">김건우</div>
+
+            <div class="instagram-profile-stats">
+              <div class="instagram-profile-stat">
+                <strong>14</strong>
+                <span>게시물</span>
+              </div>
+              <div class="instagram-profile-stat">
+                <strong>1</strong>
+                <span>팔로워</span>
+              </div>
+              <div class="instagram-profile-stat">
+                <strong>1</strong>
+                <span>팔로잉</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="instagram-profile-buttons">
+          <button class="instagram-profile-action-btn instagram-following-btn" type="button">
+            <span>팔로잉</span>
+            <span class="instagram-following-arrow">⌄</span>
+          </button>
+          <button class="instagram-profile-action-btn" type="button">메시지</button>
+        </div>
+
+        <div class="instagram-profile-tabs">
+          <button class="instagram-tab-btn active" type="button" data-instagram-tab="posts" aria-label="게시물">
+            <img src="assets/icons/insta_post.png" alt="" class="instagram-tab-icon">
+          </button>
+          <button class="instagram-tab-btn" type="button" data-instagram-tab="reels" aria-label="릴스">
+            <img src="assets/icons/insta_reels.png" alt="" class="instagram-tab-icon">
+          </button>
+          <button class="instagram-tab-btn" type="button" data-instagram-tab="tag" aria-label="태그">
+            <img src="assets/icons/insta_tag.png" alt="" class="instagram-tab-icon">
+          </button>
+        </div>
+
+        <div class="instagram-post-grid" id="instagramPostGrid"></div>
+      </div>
+    </div>
+
+    <!-- 스토리 화면 -->
+    <div class="instagram-page instagram-story-page" id="instagramStoryPage">
+      <div class="instagram-story-progress" id="instagramStoryProgress"></div>
+
+      <div class="instagram-story-topbar">
+        <div class="instagram-story-user">
+          <img src="assets/icons/insta_profile.png" alt="" class="instagram-story-avatar">
+          <span class="instagram-story-username">wxcyrcl.w</span>
+          <span class="instagram-story-time">8분</span>
+        </div>
+
+        <div class="instagram-story-actions">
+          <button class="instagram-story-icon-btn" type="button" aria-label="더보기">
+            <img src="assets/icons/insta_more.png" alt="" class="instagram-story-top-icon">
+          </button>
+          <button class="instagram-story-close-btn" id="instagramStoryCloseBtn" type="button" aria-label="닫기">×</button>
+        </div>
+      </div>
+
+      <div class="instagram-story-stage" id="instagramStoryStage"></div>
+
+      <div class="instagram-story-bottombar">
+        <div class="instagram-story-message-pill">메시지 보내기...</div>
+
+        <div class="instagram-story-bottom-actions">
+          <button class="instagram-story-bottom-btn" type="button" aria-label="좋아요">
+            <img src="assets/icons/insta_heart_empty.png" alt="" class="instagram-story-bottom-icon">
+          </button>
+          <button class="instagram-story-bottom-btn" type="button" aria-label="댓글">
+            <img src="assets/icons/insta_reply.png" alt="" class="instagram-story-bottom-icon">
+          </button>
+          <button class="instagram-story-bottom-btn" type="button" aria-label="공유">
+            <img src="assets/icons/insta_share.png" alt="" class="instagram-story-bottom-icon">
+          </button>
+        </div>
+      </div>
+
+      <button class="instagram-story-hit instagram-story-hit-left" id="instagramStoryPrevHit" type="button" aria-label="이전"></button>
+      <button class="instagram-story-hit instagram-story-hit-right" id="instagramStoryNextHit" type="button" aria-label="다음"></button>
+    </div>
+
+    <!-- 게시물 상세 화면 -->
+    <div class="instagram-page instagram-post-detail-page" id="instagramPostDetailPage">
+      <div class="instagram-post-detail-topbar">
+        <button class="instagram-post-detail-back app-back-btn" id="instagramPostDetailBack" type="button" aria-label="뒤로가기">
+          <span class="back-arrow"></span>
+        </button>
+
+        <div class="instagram-post-detail-title-wrap">
+          <div class="instagram-post-detail-title">게시물</div>
+          <div class="instagram-post-detail-subtitle">wxcyrcl.w</div>
+        </div>
+      </div>
+
+      <div class="instagram-post-detail-scroll" id="instagramPostDetailScroll">
+        <div class="instagram-post-detail-card">
+          <div class="instagram-post-detail-head">
+            <div class="instagram-post-detail-user">
+              <img src="assets/icons/insta_profile.png" alt="" class="instagram-post-detail-avatar">
+              <span class="instagram-post-detail-username">wxcyrcl.w</span>
+            </div>
+
+            <button class="instagram-post-detail-more-btn" type="button" aria-label="더보기">
+              <img src="assets/icons/insta_more.png" alt="" class="instagram-post-detail-more-icon">
+            </button>
+          </div>
+
+          <div class="instagram-post-media-wrap">
+            <div class="instagram-post-counter" id="instagramPostCounter">1/1</div>
+            <div class="instagram-post-slider" id="instagramPostSlider"></div>
+            <div class="instagram-post-dots" id="instagramPostDots"></div>
+          </div>
+
+          <div class="instagram-post-actions">
+            <div class="instagram-post-actions-left">
+              <button class="instagram-post-action-btn" id="instagramHeartToggleBtn" type="button" aria-label="좋아요">
+                <img src="assets/icons/insta_heart_empty.png" alt="" class="instagram-post-action-icon" id="instagramHeartToggleIcon">
+              </button>
+              <button class="instagram-post-action-btn" type="button" aria-label="댓글">
+                <img src="assets/icons/insta_reply.png" alt="" class="instagram-post-action-icon">
+              </button>
+              <button class="instagram-post-action-btn" type="button" aria-label="공유">
+                <img src="assets/icons/insta_share.png" alt="" class="instagram-post-action-icon">
+              </button>
+            </div>
+
+            <button class="instagram-post-action-btn" type="button" aria-label="북마크">
+              <img src="assets/icons/insta_bookmark.png" alt="" class="instagram-post-action-icon">
+            </button>
+          </div>
+          
+          <div class="instagram-post-caption" id="instagramPostCaption"></div>
+          <div class="instagram-post-time" id="instagramPostTimeAgo">13분 전</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- PHONE APP -->
 <section class="screen app-screen phone-screen" id="phoneScreen">

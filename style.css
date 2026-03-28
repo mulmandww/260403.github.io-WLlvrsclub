@@ -5311,3 +5311,1007 @@ messages-image-top-btn
     height: 15px;
   }
 }
+
+
+/* ============================= */
+/* INSTAGRAM APP */
+/* ============================= */
+
+.instagram-screen {
+  background: #f5f5f5;
+  color: #111;
+}
+
+.instagram-ui {
+  position: relative;
+  height: 100%;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+.instagram-page {
+  position: absolute;
+  inset: 0;
+  background: #f5f5f5;
+  transition:
+    opacity 0.28s ease,
+    transform 0.32s ease;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.instagram-page.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.instagram-profile-page {
+  z-index: 2;
+}
+
+.instagram-story-page {
+  z-index: 4;
+  background: #000;
+}
+
+.instagram-post-detail-page {
+  z-index: 3;
+  background: #f5f5f5;
+}
+
+/* 프로필 상단 */
+.instagram-profile-topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 12;
+  height: calc(108px + var(--safe-top));
+  padding: calc(50px + var(--safe-top)) 18px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: #f5f5f5;
+}
+
+.instagram-home-back {
+  top: calc(50px + var(--safe-top));
+  left: 18px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  width: 30px;
+  height: 30px;
+}
+
+.instagram-profile-title-wrap {
+  position: absolute;
+  left: 58px;
+  top: calc(54px + var(--safe-top));
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.instagram-profile-username {
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: #111;
+}
+
+.instagram-lock-icon {
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
+  display: block;
+}
+
+.instagram-profile-top-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.instagram-top-icon-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.instagram-top-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+/* 프로필 스크롤 */
+.instagram-profile-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-top: calc(104px + var(--safe-top));
+  padding-bottom: calc(24px + var(--safe-bottom));
+}
+
+.instagram-profile-header {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 18px 16px 8px;
+}
+
+.instagram-story-ring-btn {
+  width: 146px;
+  height: 146px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.instagram-story-ring {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f7b733, #fc4a1a 35%, #d6249f 70%, #285AEB);
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.instagram-profile-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 4px solid #f5f5f5;
+  object-fit: cover;
+  background: #e9e9eb;
+}
+
+.instagram-profile-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.instagram-profile-name {
+  font-size: 18px;
+  line-height: 1.1;
+  font-weight: 700;
+  color: #111;
+}
+
+.instagram-profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  text-align: center;
+}
+
+.instagram-profile-stat strong {
+  display: block;
+  font-size: 18px;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #111;
+}
+
+.instagram-profile-stat span {
+  display: block;
+  margin-top: 3px;
+  font-size: 15px;
+  line-height: 1.15;
+  font-weight: 500;
+  color: #111;
+}
+
+.instagram-profile-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 14px 16px 18px;
+}
+
+.instagram-profile-action-btn {
+  height: 48px;
+  border-radius: 12px;
+  background: #e9e9ed;
+  color: #111;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.instagram-following-arrow {
+  transform: translateY(-1px);
+}
+
+.instagram-profile-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  border-bottom: 1px solid rgba(60,60,67,0.12);
+}
+
+.instagram-tab-btn {
+  position: relative;
+  height: 58px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.48;
+}
+
+.instagram-tab-btn.active {
+  opacity: 1;
+}
+
+.instagram-tab-btn.active::after {
+  content: "";
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 0;
+  height: 3px;
+  border-radius: 999px;
+  background: #111;
+}
+
+.instagram-tab-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+}
+
+.instagram-post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(60,60,67,0.08);
+}
+
+.instagram-grid-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #ddd;
+}
+
+.instagram-grid-item img,
+.instagram-grid-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.instagram-grid-stack-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+  z-index: 2;
+}
+
+.instagram-grid-video-badge {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.42);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.instagram-grid-video-badge::before {
+  content: "";
+  margin-left: 2px;
+  width: 0;
+  height: 0;
+  border-left: 9px solid #fff;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+/* 스토리 */
+.instagram-story-page {
+  background: #05080c;
+}
+
+.instagram-story-progress {
+  position: absolute;
+  top: calc(18px + var(--safe-top));
+  left: 16px;
+  right: 16px;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.instagram-story-progress-bar {
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.28);
+  overflow: hidden;
+}
+
+.instagram-story-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: rgba(255,255,255,0.92);
+  border-radius: inherit;
+}
+
+.instagram-story-progress-bar.is-done .instagram-story-progress-fill {
+  width: 100%;
+}
+
+.instagram-story-progress-bar.is-active .instagram-story-progress-fill {
+  width: 40%;
+}
+
+.instagram-story-topbar {
+  position: absolute;
+  top: calc(32px + var(--safe-top));
+  left: 16px;
+  right: 16px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.instagram-story-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+}
+
+.instagram-story-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ddd;
+}
+
+.instagram-story-username {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.25px;
+}
+
+.instagram-story-time {
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0.82;
+}
+
+.instagram-story-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.instagram-story-icon-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.instagram-story-top-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+
+.instagram-story-close-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 46px;
+  line-height: 0.7;
+  font-weight: 200;
+}
+
+.instagram-story-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #05080c;
+}
+
+.instagram-story-stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.instagram-story-bottombar {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: calc(20px + var(--safe-bottom));
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.instagram-story-message-pill {
+  flex: 1;
+  min-width: 0;
+  height: 56px;
+  border-radius: 28px;
+  border: 1.6px solid rgba(255,255,255,0.48);
+  color: rgba(255,255,255,0.92);
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  padding: 0 22px;
+}
+
+.instagram-story-bottom-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.instagram-story-bottom-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.instagram-story-bottom-icon {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  display: block;
+}
+
+.instagram-story-hit {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  border: none;
+  background: transparent;
+  z-index: 10;
+}
+
+.instagram-story-hit-left {
+  left: 0;
+}
+
+.instagram-story-hit-right {
+  right: 0;
+}
+
+/* 게시물 상세 */
+.instagram-post-detail-topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 14;
+  height: calc(104px + var(--safe-top));
+  background: #f5f5f5;
+}
+
+.instagram-post-detail-back {
+  top: calc(48px + var(--safe-top));
+  left: 18px;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.instagram-post-detail-title-wrap {
+  position: absolute;
+  left: 50%;
+  top: calc(44px + var(--safe-top));
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.instagram-post-detail-title {
+  font-size: 18px;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #111;
+}
+
+.instagram-post-detail-subtitle {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  color: #222;
+}
+
+.instagram-post-detail-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-top: calc(100px + var(--safe-top));
+  padding-bottom: calc(24px + var(--safe-bottom));
+}
+
+.instagram-post-detail-card {
+  background: #f5f5f5;
+}
+
+.instagram-post-detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 12px;
+  border-top: 1px solid rgba(60,60,67,0.08);
+  border-bottom: 1px solid rgba(60,60,67,0.08);
+}
+
+.instagram-post-detail-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.instagram-post-detail-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ddd;
+}
+
+.instagram-post-detail-username {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+}
+
+.instagram-post-detail-more-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.instagram-post-detail-more-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+
+.instagram-post-media-wrap {
+  position: relative;
+  background: #fff;
+}
+
+.instagram-post-counter {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+  min-width: 58px;
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 19px;
+  background: rgba(0,0,0,0.42);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.instagram-post-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.instagram-post-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.instagram-post-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: start;
+  background: #fff;
+}
+
+.instagram-post-slide img,
+.instagram-post-slide video {
+  width: 100%;
+  height: auto;
+  max-height: 560px;
+  object-fit: contain;
+  display: block;
+  background: #fff;
+}
+
+.instagram-post-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 0 4px;
+}
+
+.instagram-post-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(20,20,20,0.16);
+}
+
+.instagram-post-dot.active {
+  background: #5b67f1;
+}
+
+.instagram-post-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 0;
+}
+
+.instagram-post-actions-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.instagram-post-action-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.instagram-post-action-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  display: block;
+}
+
+.instagram-post-caption {
+  padding: 10px 16px 0;
+  font-size: 16px;
+  line-height: 1.35;
+  color: #111;
+  word-break: break-all;
+}
+
+.instagram-post-caption strong {
+  font-weight: 800;
+  margin-right: 6px;
+}
+
+.instagram-post-time {
+  padding: 8px 16px 0;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 500;
+  color: rgba(20,20,20,0.62);
+}
+
+.instagram-top-icon-btn:active,
+.instagram-profile-action-btn:active,
+.instagram-tab-btn:active,
+.instagram-grid-item:active,
+.instagram-story-ring-btn:active,
+.instagram-story-icon-btn:active,
+.instagram-story-bottom-btn:active,
+.instagram-post-action-btn:active,
+.instagram-post-detail-more-btn:active,
+.instagram-post-detail-back:active,
+.instagram-home-back:active {
+  transform: scale(0.96);
+}
+
+@media screen and (max-width: 480px) {
+  .instagram-profile-topbar {
+    height: calc(98px + env(safe-area-inset-top));
+    padding: calc(46px + env(safe-area-inset-top)) 14px 0;
+  }
+
+  .instagram-home-back {
+    top: calc(46px + env(safe-area-inset-top));
+    left: 14px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .instagram-profile-title-wrap {
+    left: 50px;
+    top: calc(50px + env(safe-area-inset-top));
+  }
+
+  .instagram-profile-username {
+    font-size: 17px;
+  }
+
+  .instagram-lock-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .instagram-profile-top-actions {
+    gap: 10px;
+  }
+
+  .instagram-top-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .instagram-profile-scroll {
+    padding-top: calc(94px + env(safe-area-inset-top));
+  }
+
+  .instagram-profile-header {
+    grid-template-columns: 150px 1fr;
+    gap: 6px;
+    padding: 18px 14px 8px;
+  }
+
+  .instagram-story-ring-btn {
+    width: 136px;
+    height: 136px;
+  }
+
+  .instagram-story-ring {
+    width: 132px;
+    height: 132px;
+  }
+
+  .instagram-profile-meta {
+    gap: 16px;
+  }
+
+  .instagram-profile-name {
+    font-size: 17px;
+  }
+
+  .instagram-profile-stat strong {
+    font-size: 17px;
+  }
+
+  .instagram-profile-stat span {
+    font-size: 14px;
+  }
+
+  .instagram-profile-buttons {
+    gap: 8px;
+    padding: 14px 14px 16px;
+  }
+
+  .instagram-profile-action-btn {
+    height: 44px;
+    font-size: 15px;
+  }
+
+  .instagram-tab-btn {
+    height: 54px;
+  }
+
+  .instagram-tab-btn.active::after {
+    left: 20px;
+    right: 20px;
+  }
+
+  .instagram-tab-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .instagram-grid-stack-icon {
+    width: 20px;
+    height: 20px;
+    top: 7px;
+    right: 7px;
+  }
+
+  .instagram-story-progress {
+    top: calc(16px + env(safe-area-inset-top));
+    left: 12px;
+    right: 12px;
+    gap: 4px;
+  }
+
+  .instagram-story-topbar {
+    top: calc(28px + env(safe-area-inset-top));
+    left: 12px;
+    right: 12px;
+  }
+
+  .instagram-story-avatar {
+    width: 34px;
+    height: 34px;
+  }
+
+  .instagram-story-username {
+    font-size: 15px;
+  }
+
+  .instagram-story-time {
+    font-size: 14px;
+  }
+
+  .instagram-story-actions {
+    gap: 10px;
+  }
+
+  .instagram-story-top-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .instagram-story-close-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 42px;
+  }
+
+  .instagram-story-bottombar {
+    left: 12px;
+    right: 12px;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    gap: 10px;
+  }
+
+  .instagram-story-message-pill {
+    height: 50px;
+    border-radius: 25px;
+    font-size: 16px;
+    padding: 0 18px;
+  }
+
+  .instagram-story-bottom-actions {
+    gap: 10px;
+  }
+
+  .instagram-story-bottom-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .instagram-post-detail-topbar {
+    height: calc(96px + env(safe-area-inset-top));
+  }
+
+  .instagram-post-detail-back {
+    top: calc(44px + env(safe-area-inset-top));
+    left: 14px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .instagram-post-detail-title-wrap {
+    top: calc(40px + env(safe-area-inset-top));
+  }
+
+  .instagram-post-detail-title {
+    font-size: 17px;
+  }
+
+  .instagram-post-detail-subtitle {
+    font-size: 13px;
+  }
+
+  .instagram-post-detail-scroll {
+    padding-top: calc(92px + env(safe-area-inset-top));
+  }
+
+  .instagram-post-detail-head {
+    padding: 12px 14px 10px;
+  }
+
+  .instagram-post-detail-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .instagram-post-detail-username {
+    font-size: 15px;
+  }
+
+  .instagram-post-counter {
+    top: 14px;
+    right: 14px;
+    min-width: 52px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  .instagram-post-slide img,
+  .instagram-post-slide video {
+    max-height: 500px;
+  }
+
+  .instagram-post-action-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+.instagram-post-caption {
+  padding: 10px 14px 0;
+  font-size: 15px;
+}
+
+  .instagram-post-time {
+    padding: 8px 14px 0;
+    font-size: 14px;
+  }
+}
