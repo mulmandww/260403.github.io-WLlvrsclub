@@ -2897,9 +2897,9 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
       name: "정상현 ALD1",
       image: "assets/icons/kakao_profile_sh.jpg"
     },
-    "씬롱": {
-      name: "씬롱 ALD1",
-      image: "assets/icons/kakao_profile_xl.jpg"
+    "건우": {
+      name: "김건우 ALD1",
+      image: "assets/icons/kakao_profile_gw.jpg"
     }
   };
 
