@@ -2885,7 +2885,7 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
       name: "이상원 ALD1",
       image: "assets/icons/kakao_profile_sw.jpg"
     },
-    "롱이": {
+    "씬롱": {
       name: "롱이❤️ ALD1",
       image: "assets/icons/kakao_profile_xl.jpg"
     },
