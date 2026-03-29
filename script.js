@@ -3541,11 +3541,11 @@ function renderInstagramGrid() {
     }).join("");
   }
 
-  function renderStory() {
-    const storySrc = INSTAGRAM_STORIES[currentStoryIndex];
-    instagramStoryStage.innerHTML = `<img src="${storySrc}" alt="">`;
-    renderStoryProgress();
-  }
+function renderStory() {
+  const storySrc = INSTAGRAM_STORIES[currentStoryIndex];
+  instagramStoryStage.innerHTML = `<img src="${storySrc}" alt="" class="instagram-story-media">`;
+  renderStoryProgress();
+}
 
   function openStoryViewer() {
     currentStoryIndex = 0;
