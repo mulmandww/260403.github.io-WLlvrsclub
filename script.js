@@ -3042,7 +3042,7 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
   { sender: "준서", type: "text", time: "15:41", text: "도착해서 다시 봅시다~✈️✈️" },
 
   { type: "date", label: "2026년 3월 15일 일요일" },
-  { sender: "상현", type: "images", time: "21:14", files: ["kakao_09.jpg", "kakao_10.jpg"] },
+  { sender: "상현", type: "image", time: "21:14", files: ["kakao_09.jpg", "kakao_10.jpg"] },
   { sender: "상현", type: "text", time: "21:14", text: "이거 우리 같다고 하던데" },
   { sender: "상현", type: "text", time: "21:14", text: "어때요??" },
   { sender: "리오", type: "text", time: "21:15", text: "준차코는 맞지" },
