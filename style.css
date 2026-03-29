@@ -5318,21 +5318,21 @@ messages-image-top-btn
 /* ============================= */
 
 .instagram-screen {
-  background: #f5f5f5;
+  background: #fafafa;
   color: #111;
 }
 
 .instagram-ui {
   position: relative;
   height: 100%;
-  background: #f5f5f5;
+  background: #fafafa;
   overflow: hidden;
 }
 
 .instagram-page {
   position: absolute;
   inset: 0;
-  background: #f5f5f5;
+  background: #fafafa;
   transition:
     opacity 0.28s ease,
     transform 0.32s ease;
@@ -5358,7 +5358,7 @@ messages-image-top-btn
 
 .instagram-post-detail-page {
   z-index: 3;
-  background: #f5f5f5;
+  background: #fafafa;
 }
 
 /* 프로필 상단 */
@@ -5368,43 +5368,41 @@ messages-image-top-btn
   left: 0;
   right: 0;
   z-index: 12;
-  height: calc(108px + var(--safe-top));
-  padding: calc(50px + var(--safe-top)) 18px 0;
+  height: calc(94px + var(--safe-top));
+  padding: calc(48px + var(--safe-top)) 16px 0;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  background: #f5f5f5;
+  background: #fafafa;
 }
 
 .instagram-home-back {
-  top: calc(50px + var(--safe-top));
-  left: 18px;
+  top: calc(46px + var(--safe-top));
+  left: 16px;
   background: transparent;
   border: none;
   box-shadow: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
 }
 
 .instagram-profile-title-wrap {
   position: absolute;
-  left: 58px;
-  top: calc(54px + var(--safe-top));
+  left: 56px;
+  top: calc(50px + var(--safe-top));
   display: flex;
   align-items: center;
-  gap: 6px;
 }
 
 .instagram-profile-username {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1;
   font-weight: 800;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.25px;
   color: #111;
 }
-
 
 .instagram-profile-top-actions {
   margin-left: auto;
@@ -5414,8 +5412,8 @@ messages-image-top-btn
 }
 
 .instagram-top-icon-btn {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border: none;
   background: transparent;
   display: flex;
@@ -5425,8 +5423,8 @@ messages-image-top-btn
 }
 
 .instagram-top-icon {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
   display: block;
 }
@@ -5438,21 +5436,21 @@ messages-image-top-btn
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  padding-top: calc(104px + var(--safe-top));
-  padding-bottom: calc(24px + var(--safe-bottom));
+  padding-top: calc(90px + var(--safe-top));
+  padding-bottom: calc(20px + var(--safe-bottom));
 }
 
 .instagram-profile-header {
   display: grid;
-  grid-template-columns: 160px 1fr;
+  grid-template-columns: 120px 1fr;
   gap: 10px;
   align-items: center;
-  padding: 18px 16px 8px;
+  padding: 16px 14px 6px;
 }
 
 .instagram-story-ring-btn {
-  width: 146px;
-  height: 146px;
+  width: 108px;
+  height: 108px;
   border: none;
   background: transparent;
   padding: 0;
@@ -5462,11 +5460,11 @@ messages-image-top-btn
 }
 
 .instagram-story-ring {
-  width: 140px;
-  height: 140px;
+  width: 104px;
+  height: 104px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #f7b733, #fc4a1a 35%, #d6249f 70%, #285AEB);
-  padding: 4px;
+  background: linear-gradient(135deg, #f7b733, #fc4a1a 35%, #d6249f 70%, #7b3cff);
+  padding: 3px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -5476,20 +5474,20 @@ messages-image-top-btn
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 4px solid #f5f5f5;
+  border: 3px solid #fafafa;
   object-fit: cover;
-  background: #e9e9eb;
+  background: #ececef;
 }
 
 .instagram-profile-meta {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
 }
 
 .instagram-profile-name {
-  font-size: 18px;
-  line-height: 1.1;
+  font-size: 14px;
+  line-height: 1.05;
   font-weight: 700;
   color: #111;
 }
@@ -5503,16 +5501,16 @@ messages-image-top-btn
 
 .instagram-profile-stat strong {
   display: block;
-  font-size: 18px;
-  line-height: 1.1;
+  font-size: 16px;
+  line-height: 1.05;
   font-weight: 800;
   color: #111;
 }
 
 .instagram-profile-stat span {
   display: block;
-  margin-top: 3px;
-  font-size: 15px;
+  margin-top: 2px;
+  font-size: 11px;
   line-height: 1.15;
   font-weight: 500;
   color: #111;
@@ -5521,26 +5519,27 @@ messages-image-top-btn
 .instagram-profile-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 14px 16px 18px;
+  gap: 8px;
+  padding: 12px 14px 14px;
 }
 
 .instagram-profile-action-btn {
-  height: 48px;
-  border-radius: 12px;
-  background: #e9e9ed;
+  height: 40px;
+  border-radius: 10px;
+  background: #efeff3;
   color: #111;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.25px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .instagram-following-arrow {
   transform: translateY(-1px);
+  font-size: 12px;
 }
 
 .instagram-profile-tabs {
@@ -5552,13 +5551,13 @@ messages-image-top-btn
 
 .instagram-tab-btn {
   position: relative;
-  height: 58px;
+  height: 50px;
   border: none;
   background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.48;
+  opacity: 0.35;
 }
 
 .instagram-tab-btn.active {
@@ -5568,17 +5567,17 @@ messages-image-top-btn
 .instagram-tab-btn.active::after {
   content: "";
   position: absolute;
-  left: 24px;
-  right: 24px;
+  left: 28px;
+  right: 28px;
   bottom: 0;
-  height: 3px;
+  height: 2px;
   border-radius: 999px;
   background: #111;
 }
 
 .instagram-tab-icon {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   object-fit: contain;
   display: block;
 }
@@ -5587,7 +5586,7 @@ messages-image-top-btn
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
-  background: rgba(60,60,67,0.08);
+  background: rgba(60,60,67,0.10);
 }
 
 .instagram-grid-item {
@@ -5595,6 +5594,8 @@ messages-image-top-btn
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background: #ddd;
+  border: none;
+  padding: 0;
 }
 
 .instagram-grid-item img,
@@ -5607,37 +5608,13 @@ messages-image-top-btn
 
 .instagram-grid-stack-icon {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 22px;
-  height: 22px;
+  top: 6px;
+  right: 6px;
+  width: 17px;
+  height: 17px;
   object-fit: contain;
   display: block;
   z-index: 2;
-}
-
-.instagram-grid-video-badge {
-  position: absolute;
-  right: 8px;
-  bottom: 8px;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.42);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-
-.instagram-grid-video-badge::before {
-  content: "";
-  margin-left: 2px;
-  width: 0;
-  height: 0;
-  border-left: 9px solid #fff;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
 }
 
 /* 스토리 */
@@ -5697,21 +5674,21 @@ messages-image-top-btn
 }
 
 .instagram-story-avatar {
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   object-fit: cover;
   background: #ddd;
 }
 
 .instagram-story-username {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: -0.25px;
+  letter-spacing: -0.2px;
 }
 
 .instagram-story-time {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   opacity: 0.82;
 }
@@ -5719,12 +5696,12 @@ messages-image-top-btn
 .instagram-story-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .instagram-story-icon-btn {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border: none;
   background: transparent;
   display: flex;
@@ -5733,19 +5710,19 @@ messages-image-top-btn
 }
 
 .instagram-story-top-icon {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
   display: block;
 }
 
 .instagram-story-close-btn {
-  width: 34px;
-  height: 34px;
+  width: 28px;
+  height: 28px;
   border: none;
   background: transparent;
   color: #fff;
-  font-size: 46px;
+  font-size: 38px;
   line-height: 0.7;
   font-weight: 200;
 }
@@ -5770,36 +5747,36 @@ messages-image-top-btn
   position: absolute;
   left: 16px;
   right: 16px;
-  bottom: calc(20px + var(--safe-bottom));
+  bottom: calc(18px + var(--safe-bottom));
   z-index: 20;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .instagram-story-message-pill {
   flex: 1;
   min-width: 0;
-  height: 56px;
-  border-radius: 28px;
-  border: 1.6px solid rgba(255,255,255,0.48);
+  height: 50px;
+  border-radius: 25px;
+  border: 1.5px solid rgba(255,255,255,0.48);
   color: rgba(255,255,255,0.92);
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
   display: flex;
   align-items: center;
-  padding: 0 22px;
+  padding: 0 18px;
 }
 
 .instagram-story-bottom-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .instagram-story-bottom-btn {
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   border: none;
   background: transparent;
   display: flex;
@@ -5809,8 +5786,8 @@ messages-image-top-btn
 }
 
 .instagram-story-bottom-icon {
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
   display: block;
 }
@@ -5840,15 +5817,15 @@ messages-image-top-btn
   left: 0;
   right: 0;
   z-index: 14;
-  height: calc(104px + var(--safe-top));
-  background: #f5f5f5;
+  height: calc(92px + var(--safe-top));
+  background: #fafafa;
 }
 
 .instagram-post-detail-back {
-  top: calc(48px + var(--safe-top));
-  left: 18px;
-  width: 30px;
-  height: 30px;
+  top: calc(42px + var(--safe-top));
+  left: 16px;
+  width: 28px;
+  height: 28px;
   background: transparent;
   border: none;
   box-shadow: none;
@@ -5859,21 +5836,21 @@ messages-image-top-btn
 .instagram-post-detail-title-wrap {
   position: absolute;
   left: 50%;
-  top: calc(44px + var(--safe-top));
+  top: calc(38px + var(--safe-top));
   transform: translateX(-50%);
   text-align: center;
 }
 
 .instagram-post-detail-title {
-  font-size: 18px;
-  line-height: 1.1;
+  font-size: 14px;
+  line-height: 1.05;
   font-weight: 800;
   color: #111;
 }
 
 .instagram-post-detail-subtitle {
-  margin-top: 4px;
-  font-size: 14px;
+  margin-top: 3px;
+  font-size: 11px;
   line-height: 1;
   font-weight: 500;
   color: #222;
@@ -5885,54 +5862,55 @@ messages-image-top-btn
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  padding-top: calc(100px + var(--safe-top));
-  padding-bottom: calc(24px + var(--safe-bottom));
+  padding-top: calc(88px + var(--safe-top));
+  padding-bottom: calc(20px + var(--safe-bottom));
 }
 
 .instagram-post-detail-card {
-  background: #f5f5f5;
+  background: #fafafa;
 }
 
 .instagram-post-detail-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px 12px;
+  padding: 12px 14px 10px;
   border-top: 1px solid rgba(60,60,67,0.08);
   border-bottom: 1px solid rgba(60,60,67,0.08);
+  background: #fafafa;
 }
 
 .instagram-post-detail-user {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .instagram-post-detail-avatar {
-  width: 44px;
-  height: 44px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   object-fit: cover;
   background: #ddd;
 }
 
 .instagram-post-detail-username {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 700;
   color: #111;
 }
 
 .instagram-post-detail-more-btn {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border: none;
   background: transparent;
   padding: 0;
 }
 
 .instagram-post-detail-more-icon {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
   display: block;
 }
@@ -5944,16 +5922,16 @@ messages-image-top-btn
 
 .instagram-post-counter {
   position: absolute;
-  top: 18px;
-  right: 18px;
+  top: 12px;
+  right: 12px;
   z-index: 2;
-  min-width: 58px;
-  height: 38px;
-  padding: 0 14px;
-  border-radius: 19px;
+  min-width: 46px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 15px;
   background: rgba(0,0,0,0.42);
   color: #fff;
-  font-size: 17px;
+  font-size: 13px;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -5966,6 +5944,13 @@ messages-image-top-btn
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+}
+
+.instagram-post-slider.dragging {
+  cursor: grabbing;
 }
 
 .instagram-post-slider::-webkit-scrollbar {
@@ -5975,15 +5960,19 @@ messages-image-top-btn
 .instagram-post-slide {
   flex: 0 0 100%;
   width: 100%;
+  min-height: 520px;
   scroll-snap-align: start;
   background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .instagram-post-slide img,
 .instagram-post-slide video {
   width: 100%;
   height: auto;
-  max-height: 560px;
+  max-height: 520px;
   object-fit: contain;
   display: block;
   background: #fff;
@@ -5994,12 +5983,13 @@ messages-image-top-btn
   justify-content: center;
   align-items: center;
   gap: 8px;
-  padding: 14px 0 4px;
+  padding: 12px 0 2px;
+  background: #fff;
 }
 
 .instagram-post-dot {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: rgba(20,20,20,0.16);
 }
@@ -6012,18 +6002,18 @@ messages-image-top-btn
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 14px 0;
+  padding: 10px 14px 0;
 }
 
 .instagram-post-actions-left {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .instagram-post-action-btn {
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   border: none;
   background: transparent;
   display: flex;
@@ -6033,16 +6023,16 @@ messages-image-top-btn
 }
 
 .instagram-post-action-icon {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
   display: block;
 }
 
 .instagram-post-caption {
-  padding: 10px 16px 0;
-  font-size: 16px;
-  line-height: 1.35;
+  padding: 8px 14px 0;
+  font-size: 14px;
+  line-height: 1.3;
   color: #111;
   word-break: break-all;
 }
@@ -6053,8 +6043,8 @@ messages-image-top-btn
 }
 
 .instagram-post-time {
-  padding: 8px 16px 0;
-  font-size: 15px;
+  padding: 8px 14px 0;
+  font-size: 12px;
   line-height: 1;
   font-weight: 500;
   color: rgba(20,20,20,0.62);
@@ -6076,100 +6066,105 @@ messages-image-top-btn
 
 @media screen and (max-width: 480px) {
   .instagram-profile-topbar {
-    height: calc(98px + env(safe-area-inset-top));
-    padding: calc(46px + env(safe-area-inset-top)) 14px 0;
+    height: calc(86px + env(safe-area-inset-top));
+    padding: calc(44px + env(safe-area-inset-top)) 14px 0;
   }
 
   .instagram-home-back {
-    top: calc(46px + env(safe-area-inset-top));
+    top: calc(42px + env(safe-area-inset-top));
     left: 14px;
-    width: 28px;
-    height: 28px;
-  }
-
-  .instagram-profile-title-wrap {
-    left: 50px;
-    top: calc(50px + env(safe-area-inset-top));
-  }
-
-  .instagram-profile-username {
-    font-size: 17px;
-  }
-
-  .instagram-profile-top-actions {
-    gap: 10px;
-  }
-
-  .instagram-top-icon {
-    width: 22px;
-    height: 22px;
-  }
-
-  .instagram-profile-scroll {
-    padding-top: calc(94px + env(safe-area-inset-top));
-  }
-
-  .instagram-profile-header {
-    grid-template-columns: 150px 1fr;
-    gap: 6px;
-    padding: 18px 14px 8px;
-  }
-
-  .instagram-story-ring-btn {
-    width: 136px;
-    height: 136px;
-  }
-
-  .instagram-story-ring {
-    width: 132px;
-    height: 132px;
-  }
-
-  .instagram-profile-meta {
-    gap: 16px;
-  }
-
-  .instagram-profile-name {
-    font-size: 17px;
-  }
-
-  .instagram-profile-stat strong {
-    font-size: 17px;
-  }
-
-  .instagram-profile-stat span {
-    font-size: 14px;
-  }
-
-  .instagram-profile-buttons {
-    gap: 8px;
-    padding: 14px 14px 16px;
-  }
-
-  .instagram-profile-action-btn {
-    height: 44px;
-    font-size: 15px;
-  }
-
-  .instagram-tab-btn {
-    height: 54px;
-  }
-
-  .instagram-tab-btn.active::after {
-    left: 20px;
-    right: 20px;
-  }
-
-  .instagram-tab-icon {
     width: 26px;
     height: 26px;
   }
 
+  .instagram-profile-title-wrap {
+    left: 52px;
+    top: calc(46px + env(safe-area-inset-top));
+  }
+
+  .instagram-profile-username {
+    font-size: 15px;
+  }
+
+  .instagram-profile-top-actions {
+    gap: 12px;
+  }
+
+  .instagram-top-icon {
+    width: 21px;
+    height: 21px;
+  }
+
+  .instagram-profile-scroll {
+    padding-top: calc(82px + env(safe-area-inset-top));
+  }
+
+  .instagram-profile-header {
+    grid-template-columns: 104px 1fr;
+    gap: 8px;
+    padding: 14px 14px 4px;
+  }
+
+  .instagram-story-ring-btn {
+    width: 96px;
+    height: 96px;
+  }
+
+  .instagram-story-ring {
+    width: 92px;
+    height: 92px;
+  }
+
+  .instagram-profile-meta {
+    gap: 12px;
+  }
+
+  .instagram-profile-name {
+    font-size: 13px;
+  }
+
+  .instagram-profile-stat strong {
+    font-size: 15px;
+  }
+
+  .instagram-profile-stat span {
+    font-size: 10px;
+  }
+
+  .instagram-profile-buttons {
+    gap: 8px;
+    padding: 10px 14px 12px;
+  }
+
+  .instagram-profile-action-btn {
+    height: 36px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .instagram-following-arrow {
+    font-size: 11px;
+  }
+
+  .instagram-tab-btn {
+    height: 48px;
+  }
+
+  .instagram-tab-btn.active::after {
+    left: 22px;
+    right: 22px;
+  }
+
+  .instagram-tab-icon {
+    width: 23px;
+    height: 23px;
+  }
+
   .instagram-grid-stack-icon {
-    width: 20px;
-    height: 20px;
-    top: 7px;
-    right: 7px;
+    width: 15px;
+    height: 15px;
+    top: 6px;
+    right: 6px;
   }
 
   .instagram-story-progress {
@@ -6186,16 +6181,16 @@ messages-image-top-btn
   }
 
   .instagram-story-avatar {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
   }
 
   .instagram-story-username {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .instagram-story-time {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .instagram-story-actions {
@@ -6203,14 +6198,14 @@ messages-image-top-btn
   }
 
   .instagram-story-top-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   .instagram-story-close-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 42px;
+    width: 28px;
+    height: 28px;
+    font-size: 36px;
   }
 
   .instagram-story-bottombar {
@@ -6221,10 +6216,10 @@ messages-image-top-btn
   }
 
   .instagram-story-message-pill {
-    height: 50px;
-    border-radius: 25px;
-    font-size: 16px;
-    padding: 0 18px;
+    height: 46px;
+    border-radius: 23px;
+    font-size: 15px;
+    padding: 0 16px;
   }
 
   .instagram-story-bottom-actions {
@@ -6232,75 +6227,90 @@ messages-image-top-btn
   }
 
   .instagram-story-bottom-icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .instagram-post-detail-topbar {
-    height: calc(96px + env(safe-area-inset-top));
-  }
-
-  .instagram-post-detail-back {
-    top: calc(44px + env(safe-area-inset-top));
-    left: 14px;
     width: 28px;
     height: 28px;
   }
 
-  .instagram-post-detail-title-wrap {
+  .instagram-post-detail-topbar {
+    height: calc(84px + env(safe-area-inset-top));
+  }
+
+  .instagram-post-detail-back {
     top: calc(40px + env(safe-area-inset-top));
+    left: 14px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .instagram-post-detail-title-wrap {
+    top: calc(37px + env(safe-area-inset-top));
   }
 
   .instagram-post-detail-title {
-    font-size: 17px;
+    font-size: 12px;
   }
 
   .instagram-post-detail-subtitle {
-    font-size: 13px;
+    font-size: 10px;
   }
 
   .instagram-post-detail-scroll {
-    padding-top: calc(92px + env(safe-area-inset-top));
+    padding-top: calc(80px + env(safe-area-inset-top));
   }
 
   .instagram-post-detail-head {
-    padding: 12px 14px 10px;
+    padding: 10px 12px 8px;
   }
 
   .instagram-post-detail-avatar {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
   }
 
   .instagram-post-detail-username {
-    font-size: 15px;
+    font-size: 12px;
   }
 
   .instagram-post-counter {
-    top: 14px;
-    right: 14px;
-    min-width: 52px;
-    height: 34px;
-    font-size: 16px;
+    top: 10px;
+    right: 10px;
+    min-width: 40px;
+    height: 26px;
+    padding: 0 9px;
+    font-size: 12px;
+  }
+
+  .instagram-post-slide {
+    min-height: 430px;
   }
 
   .instagram-post-slide img,
   .instagram-post-slide video {
-    max-height: 500px;
+    max-height: 430px;
+  }
+
+  .instagram-post-dots {
+    gap: 7px;
+    padding: 10px 0 2px;
+  }
+
+  .instagram-post-dot {
+    width: 7px;
+    height: 7px;
   }
 
   .instagram-post-action-icon {
-    width: 28px;
-    height: 28px;
+    width: 25px;
+    height: 25px;
   }
 
-.instagram-post-caption {
-  padding: 10px 14px 0;
-  font-size: 15px;
-}
+  .instagram-post-caption {
+    padding: 8px 12px 0;
+    font-size: 13px;
+  }
 
   .instagram-post-time {
-    padding: 8px 14px 0;
-    font-size: 14px;
+    padding: 8px 12px 0;
+    font-size: 11px;
   }
 }

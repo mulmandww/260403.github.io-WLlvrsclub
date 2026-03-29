@@ -3427,6 +3427,7 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
   const instagramStoryNextHit = document.getElementById("instagramStoryNextHit");
 
   const instagramPostDetailBack = document.getElementById("instagramPostDetailBack");
+  const instagramPostDetailScroll = document.getElementById("instagramPostDetailScroll");
   const instagramPostSlider = document.getElementById("instagramPostSlider");
   const instagramPostDots = document.getElementById("instagramPostDots");
   const instagramPostCounter = document.getElementById("instagramPostCounter");
@@ -3436,21 +3437,21 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
   const instagramHeartToggleBtn = document.getElementById("instagramHeartToggleBtn");
   const instagramHeartToggleIcon = document.getElementById("instagramHeartToggleIcon");
 
-if (
-  !instagramProfilePage ||
-  !instagramStoryPage ||
-  !instagramPostDetailPage ||
-  !instagramPostGrid ||
-  !instagramStoryStage ||
-  !instagramStoryProgress ||
-  !instagramPostSlider ||
-  !instagramPostDots ||
-  !instagramPostCounter ||
-  !instagramPostTimeAgo ||
-  !instagramPostCaption ||
-  !instagramHeartToggleBtn ||
-  !instagramHeartToggleIcon
-) return;
+  if (
+    !instagramProfilePage ||
+    !instagramStoryPage ||
+    !instagramPostDetailPage ||
+    !instagramPostGrid ||
+    !instagramStoryStage ||
+    !instagramStoryProgress ||
+    !instagramPostSlider ||
+    !instagramPostDots ||
+    !instagramPostCounter ||
+    !instagramPostTimeAgo ||
+    !instagramPostCaption ||
+    !instagramHeartToggleBtn ||
+    !instagramHeartToggleIcon
+  ) return;
 
   const INSTAGRAM_BASE_PATH = "assets/pictures/ig/gw";
 
@@ -3461,27 +3462,32 @@ if (
     `${INSTAGRAM_BASE_PATH}/insta_story_4.jpg`
   ];
 
-const INSTAGRAM_POSTS = [
-  { id: 14, type: "image", mediaCount: 14, timeAgo: "13분 전", caption: "🏆" },
-  { id: 13, type: "image", mediaCount: 7, timeAgo: "22분 전", caption: "" },
-  { id: 12, type: "image", mediaCount: 9, timeAgo: "41분 전", caption: "" },
-  { id: 11, type: "image", mediaCount: 10, timeAgo: "1시간 전", caption: "" },
-  { id: 10, type: "image", mediaCount: 5, timeAgo: "2시간 전", caption: "" },
-  { id: 9, type: "image", mediaCount: 7, timeAgo: "4시간 전", caption: "" },
-  { id: 8, type: "image", mediaCount: 10, timeAgo: "8시간 전", caption: "" },
-  { id: 7, type: "image", mediaCount: 5, timeAgo: "1일 전", caption: "" },
-  { id: 6, type: "image", mediaCount: 6, timeAgo: "2일 전", caption: "" },
-  { id: 5, type: "image", mediaCount: 3, timeAgo: "3일 전", caption: "" },
-  { id: 4, type: "image", mediaCount: 3, timeAgo: "4일 전", caption: "" },
-  { id: 3, type: "video", mediaCount: 1, timeAgo: "5일 전", caption: "" },
-  { id: 2, type: "image", mediaCount: 2, timeAgo: "6일 전", caption: "" },
-  { id: 1, type: "image", mediaCount: 4, timeAgo: "1주 전", caption: "" }
-];
+  const INSTAGRAM_POSTS = [
+    { id: 14, type: "image", mediaCount: 14, timeAgo: "13분 전", caption: "🏆" },
+    { id: 13, type: "image", mediaCount: 7, timeAgo: "22분 전", caption: "" },
+    { id: 12, type: "image", mediaCount: 9, timeAgo: "41분 전", caption: "" },
+    { id: 11, type: "image", mediaCount: 10, timeAgo: "1시간 전", caption: "" },
+    { id: 10, type: "image", mediaCount: 5, timeAgo: "2시간 전", caption: "" },
+    { id: 9, type: "image", mediaCount: 7, timeAgo: "4시간 전", caption: "" },
+    { id: 8, type: "image", mediaCount: 10, timeAgo: "8시간 전", caption: "" },
+    { id: 7, type: "image", mediaCount: 5, timeAgo: "1일 전", caption: "" },
+    { id: 6, type: "image", mediaCount: 6, timeAgo: "2일 전", caption: "" },
+    { id: 5, type: "image", mediaCount: 3, timeAgo: "3일 전", caption: "" },
+    { id: 4, type: "image", mediaCount: 3, timeAgo: "4일 전", caption: "" },
+    { id: 3, type: "video", mediaCount: 1, timeAgo: "5일 전", caption: "" },
+    { id: 2, type: "image", mediaCount: 2, timeAgo: "6일 전", caption: "" },
+    { id: 1, type: "image", mediaCount: 4, timeAgo: "1주 전", caption: "" }
+  ];
 
   let currentStoryIndex = 0;
   let currentPost = null;
   let currentPostIndex = 0;
   let currentHeartFilled = false;
+
+  let isSliderDragging = false;
+  let dragStartX = 0;
+  let dragStartScrollLeft = 0;
+  let suppressGridClick = false;
 
   function setActiveInstagramPage(page) {
     [instagramProfilePage, instagramStoryPage, instagramPostDetailPage].forEach((target) => {
@@ -3494,26 +3500,28 @@ const INSTAGRAM_POSTS = [
     return `${INSTAGRAM_BASE_PATH}/insta_post_${postId}-${mediaIndex}.${ext}`;
   }
 
+  function getVideoGridPosterPath(postId) {
+    return `${INSTAGRAM_BASE_PATH}/insta_post_${postId}-1.jpg`;
+  }
+
   function renderInstagramGrid() {
     instagramPostGrid.innerHTML = INSTAGRAM_POSTS.map((post) => {
-      const coverPath = getPostMediaPath(post.id, 1, post.type);
-      const stackIcon = post.mediaCount > 1
-        ? `<img src="assets/icons/insta_post_pictures.png" alt="" class="instagram-grid-stack-icon">`
-        : "";
+      const coverPath = post.type === "video"
+        ? getVideoGridPosterPath(post.id)
+        : getPostMediaPath(post.id, 1, post.type);
 
-      const mediaHTML = post.type === "video"
-        ? `<video src="${coverPath}" muted playsinline preload="metadata"></video>`
-        : `<img src="${coverPath}" alt="" loading="lazy">`;
+      const overlayIconPath = post.type === "video"
+        ? "assets/icons/insta_post_video.png"
+        : (post.mediaCount > 1 ? "assets/icons/insta_post_pictures.png" : "");
 
-      const videoBadge = post.type === "video"
-        ? `<span class="instagram-grid-video-badge"></span>`
+      const overlayIcon = overlayIconPath
+        ? `<img src="${overlayIconPath}" alt="" class="instagram-grid-stack-icon">`
         : "";
 
       return `
         <button class="instagram-grid-item" type="button" data-instagram-post-id="${post.id}">
-          ${mediaHTML}
-          ${stackIcon}
-          ${videoBadge}
+          <img src="${coverPath}" alt="" loading="lazy">
+          ${overlayIcon}
         </button>
       `;
     }).join("");
@@ -3582,6 +3590,31 @@ const INSTAGRAM_POSTS = [
       : "assets/icons/insta_heart_empty.png";
   }
 
+  function forceSliderToFirst() {
+    if (!instagramPostSlider) return;
+
+    currentPostIndex = 0;
+    instagramPostSlider.scrollLeft = 0;
+    instagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
+
+    requestAnimationFrame(() => {
+      instagramPostSlider.scrollLeft = 0;
+      instagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
+    });
+
+    setTimeout(() => {
+      instagramPostSlider.scrollLeft = 0;
+      instagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
+      syncPostSliderState();
+    }, 0);
+
+    setTimeout(() => {
+      instagramPostSlider.scrollLeft = 0;
+      instagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
+      syncPostSliderState();
+    }, 120);
+  }
+
   function renderPostDetail(postId) {
     const post = INSTAGRAM_POSTS.find((item) => item.id === Number(postId));
     if (!post) return;
@@ -3609,18 +3642,23 @@ const INSTAGRAM_POSTS = [
       `;
     }).join("");
 
-instagramPostSlider.innerHTML = slidesHTML;
-instagramPostSlider.scrollLeft = 0;
-instagramPostTimeAgo.textContent = post.timeAgo;
-instagramPostCaption.innerHTML = post.caption
-  ? `<strong>wxcyrcl</strong> ${post.caption}`
-  : "";
+    instagramPostSlider.innerHTML = slidesHTML;
+    instagramPostTimeAgo.textContent = post.timeAgo;
+    instagramPostCaption.innerHTML = post.caption
+      ? `<strong>wxcyrcl</strong> ${post.caption}`
+      : "";
 
     updateHeartIcon();
     renderPostDots(post.mediaCount, 0);
     updatePostCounter(post.mediaCount, 0);
 
     setActiveInstagramPage(instagramPostDetailPage);
+
+    if (instagramPostDetailScroll) {
+      instagramPostDetailScroll.scrollTop = 0;
+    }
+
+    forceSliderToFirst();
   }
 
   function syncPostSliderState() {
@@ -3634,34 +3672,71 @@ instagramPostCaption.innerHTML = post.caption
     updatePostCounter(currentPost.mediaCount, currentPostIndex);
   }
 
+  function startSliderDrag(clientX) {
+    isSliderDragging = true;
+    suppressGridClick = false;
+    dragStartX = clientX;
+    dragStartScrollLeft = instagramPostSlider.scrollLeft;
+    instagramPostSlider.classList.add("dragging");
+  }
+
+  function moveSliderDrag(clientX) {
+    if (!isSliderDragging) return;
+
+    const deltaX = clientX - dragStartX;
+    if (Math.abs(deltaX) > 4) {
+      suppressGridClick = true;
+    }
+
+    instagramPostSlider.scrollLeft = dragStartScrollLeft - deltaX;
+  }
+
+  function endSliderDrag() {
+    if (!isSliderDragging) return;
+
+    isSliderDragging = false;
+    instagramPostSlider.classList.remove("dragging");
+    requestAnimationFrame(syncPostSliderState);
+
+    setTimeout(() => {
+      suppressGridClick = false;
+    }, 60);
+  }
+
   function resetInstagramAppState() {
     setActiveInstagramPage(instagramProfilePage);
     currentStoryIndex = 0;
     currentPost = null;
     currentPostIndex = 0;
     currentHeartFilled = false;
+    isSliderDragging = false;
+    suppressGridClick = false;
 
     if (instagramPostSlider) {
       instagramPostSlider.scrollLeft = 0;
+      instagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
       instagramPostSlider.innerHTML = "";
+      instagramPostSlider.classList.remove("dragging");
     }
 
     if (instagramPostDots) {
       instagramPostDots.innerHTML = "";
     }
 
-if (instagramPostCounter) {
-  instagramPostCounter.textContent = "1/1";
-}
+    if (instagramPostCounter) {
+      instagramPostCounter.textContent = "1/1";
+    }
 
-if (instagramPostCaption) {
-  instagramPostCaption.innerHTML = "";
-}
+    if (instagramPostCaption) {
+      instagramPostCaption.innerHTML = "";
+    }
 
-updateHeartIcon();
+    updateHeartIcon();
   }
 
   instagramPostGrid.addEventListener("click", (event) => {
+    if (suppressGridClick) return;
+
     const button = event.target.closest(".instagram-grid-item");
     if (!button) return;
     renderPostDetail(button.dataset.instagramPostId);
@@ -3694,6 +3769,35 @@ updateHeartIcon();
   if (instagramPostSlider) {
     instagramPostSlider.addEventListener("scroll", () => {
       requestAnimationFrame(syncPostSliderState);
+    });
+
+    instagramPostSlider.addEventListener("mousedown", (event) => {
+      startSliderDrag(event.clientX);
+    });
+
+    window.addEventListener("mousemove", (event) => {
+      moveSliderDrag(event.clientX);
+    });
+
+    window.addEventListener("mouseup", endSliderDrag);
+
+    instagramPostSlider.addEventListener("mouseleave", endSliderDrag);
+
+    instagramPostSlider.addEventListener("touchstart", (event) => {
+      if (!event.touches[0]) return;
+      startSliderDrag(event.touches[0].clientX);
+    }, { passive: true });
+
+    instagramPostSlider.addEventListener("touchmove", (event) => {
+      if (!event.touches[0]) return;
+      moveSliderDrag(event.touches[0].clientX);
+    }, { passive: true });
+
+    instagramPostSlider.addEventListener("touchend", endSliderDrag);
+    instagramPostSlider.addEventListener("touchcancel", endSliderDrag);
+
+    instagramPostSlider.addEventListener("dragstart", (event) => {
+      event.preventDefault();
     });
   }
 
