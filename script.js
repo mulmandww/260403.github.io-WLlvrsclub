@@ -3504,28 +3504,28 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
     return `${INSTAGRAM_BASE_PATH}/insta_post_${postId}-1.jpg`;
   }
 
-  function renderInstagramGrid() {
-    instagramPostGrid.innerHTML = INSTAGRAM_POSTS.map((post) => {
-      const coverPath = post.type === "video"
-        ? getVideoGridPosterPath(post.id)
-        : getPostMediaPath(post.id, 1, post.type);
+function renderInstagramGrid() {
+  instagramPostGrid.innerHTML = INSTAGRAM_POSTS.map((post) => {
+    const coverPath = post.type === "video"
+      ? getVideoGridPosterPath(post.id)
+      : getPostMediaPath(post.id, 1, post.type);
 
-      const overlayIconPath = post.type === "video"
-        ? "assets/icons/insta_post_video.png"
-        : (post.mediaCount > 1 ? "assets/icons/insta_post_pictures.png" : "");
+    const overlayIconPath = post.type === "video"
+      ? "assets/icons/insta_post_video.png"
+      : (post.mediaCount > 1 ? "assets/icons/insta_post_pictures.png" : "");
 
-      const overlayIcon = overlayIconPath
-        ? `<img src="${overlayIconPath}" alt="" class="instagram-grid-stack-icon">`
-        : "";
+    const overlayIcon = overlayIconPath
+      ? `<img src="${overlayIconPath}" alt="" class="instagram-grid-stack-icon">`
+      : "";
 
-      return `
-        <button class="instagram-grid-item" type="button" data-instagram-post-id="${post.id}">
-          <img src="${coverPath}" alt="" loading="lazy">
-          ${overlayIcon}
-        </button>
-      `;
-    }).join("");
-  }
+    return `
+      <button class="instagram-grid-item" type="button" data-instagram-post-id="${post.id}">
+        <img src="${coverPath}" alt="" loading="lazy" class="instagram-grid-media">
+        ${overlayIcon}
+      </button>
+    `;
+  }).join("");
+}
 
   function renderStoryProgress() {
     instagramStoryProgress.innerHTML = INSTAGRAM_STORIES.map((_, index) => {

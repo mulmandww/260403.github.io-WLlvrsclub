@@ -5593,10 +5593,9 @@ messages-image-top-btn
   padding: 0;
 }
 
-.instagram-grid-item img,
-.instagram-grid-item video {
-  width: 10%;
-  height: 10%;
+.instagram-grid-media {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
@@ -6137,9 +6136,6 @@ messages-image-top-btn
     font-weight: 600;
   }
 
-  .instagram-following-arrow {
-    font-size: 11px;
-  }
 
   .instagram-tab-btn {
     height: 48px;
