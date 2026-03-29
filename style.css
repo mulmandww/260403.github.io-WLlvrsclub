@@ -5405,12 +5405,6 @@ messages-image-top-btn
   color: #111;
 }
 
-.instagram-lock-icon {
-  width: 13px;
-  height: 13px;
-  object-fit: contain;
-  display: block;
-}
 
 .instagram-profile-top-actions {
   margin-left: auto;
@@ -6100,11 +6094,6 @@ messages-image-top-btn
 
   .instagram-profile-username {
     font-size: 17px;
-  }
-
-  .instagram-lock-icon {
-    width: 12px;
-    height: 12px;
   }
 
   .instagram-profile-top-actions {
