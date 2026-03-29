@@ -3463,20 +3463,20 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
   ];
 
   const INSTAGRAM_POSTS = [
-    { id: 14, type: "image", mediaCount: 14, timeAgo: "13분 전", caption: "🏆" },
-    { id: 13, type: "image", mediaCount: 7, timeAgo: "22분 전", caption: "" },
-    { id: 12, type: "image", mediaCount: 9, timeAgo: "41분 전", caption: "" },
-    { id: 11, type: "image", mediaCount: 10, timeAgo: "1시간 전", caption: "" },
-    { id: 10, type: "image", mediaCount: 5, timeAgo: "2시간 전", caption: "" },
-    { id: 9, type: "image", mediaCount: 7, timeAgo: "4시간 전", caption: "" },
-    { id: 8, type: "image", mediaCount: 10, timeAgo: "8시간 전", caption: "" },
-    { id: 7, type: "image", mediaCount: 5, timeAgo: "1일 전", caption: "" },
-    { id: 6, type: "image", mediaCount: 6, timeAgo: "2일 전", caption: "" },
-    { id: 5, type: "image", mediaCount: 3, timeAgo: "3일 전", caption: "" },
-    { id: 4, type: "image", mediaCount: 3, timeAgo: "4일 전", caption: "" },
-    { id: 3, type: "video", mediaCount: 1, timeAgo: "5일 전", caption: "" },
-    { id: 2, type: "image", mediaCount: 2, timeAgo: "6일 전", caption: "" },
-    { id: 1, type: "image", mediaCount: 4, timeAgo: "1주 전", caption: "" }
+    { id: 14, type: "image", mediaCount: 14, timeAgo: "2026년 3월 22일", caption: "" },
+    { id: 13, type: "image", mediaCount: 7, timeAgo: "2026년 3월 11일", caption: "❤️" },
+    { id: 12, type: "image", mediaCount: 9, timeAgo: "2026년 3월 5일", caption: "" },
+    { id: 11, type: "image", mediaCount: 10, timeAgo: "2026년 2월 24일", caption: "" },
+    { id: 10, type: "image", mediaCount: 5, timeAgo: "2026년 2월 21일", caption: "" },
+    { id: 9, type: "image", mediaCount: 7, timeAgo: "2026년 1월 25일", caption: "" },
+    { id: 8, type: "image", mediaCount: 10, timeAgo: "2026년 1월 11일", caption: "Bハ人드_Long" },
+    { id: 7, type: "image", mediaCount: 5, timeAgo: "2026년 1월 2일", caption: "" },
+    { id: 6, type: "image", mediaCount: 6, timeAgo: "2025년 12월 21일", caption: "" },
+    { id: 5, type: "image", mediaCount: 3, timeAgo: "2025년 12월 5일", caption: "" },
+    { id: 4, type: "image", mediaCount: 3, timeAgo: "2025년 5월 7일", caption: "" },
+    { id: 3, type: "video", mediaCount: 1, timeAgo: "2025년 4월 20일", caption: "" },
+    { id: 2, type: "image", mediaCount: 2, timeAgo: "2025년 4월 20일", caption: "" },
+    { id: 1, type: "image", mediaCount: 4, timeAgo: "2025년 4월 11일", caption: "" }
   ];
 
   let currentStoryIndex = 0;
