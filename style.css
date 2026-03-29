@@ -5537,11 +5537,6 @@ messages-image-top-btn
   gap: 5px;
 }
 
-.instagram-following-arrow {
-  transform: translateY(-1px);
-  font-size: 12px;
-}
-
 .instagram-profile-tabs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -5600,8 +5595,8 @@ messages-image-top-btn
 
 .instagram-grid-item img,
 .instagram-grid-item video {
-  width: 100%;
-  height: 100%;
+  width: 10%;
+  height: 10%;
   object-fit: cover;
   display: block;
 }
@@ -5836,7 +5831,7 @@ messages-image-top-btn
 .instagram-post-detail-title-wrap {
   position: absolute;
   left: 50%;
-  top: calc(38px + var(--safe-top));
+  top: calc(58px + var(--safe-top));
   transform: translateX(-50%);
   text-align: center;
 }
