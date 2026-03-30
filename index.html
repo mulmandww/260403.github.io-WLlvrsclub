@@ -31,8 +31,165 @@
       </div>
     </header>
 
+    <!-- ENTRY FLOW START -->
+    <section class="screen entry-screen entry-intro-screen active" id="entryIntroScreen">
+      <div class="entry-layer entry-layer-intro">
+        <div class="entry-intro-bg-card entry-intro-bg-card-1"></div>
+        <div class="entry-intro-bg-card entry-intro-bg-card-2"></div>
+        <div class="entry-intro-bg-card entry-intro-bg-card-3"></div>
+        <div class="entry-intro-bg-card entry-intro-bg-card-4"></div>
+        <div class="entry-intro-bg-card entry-intro-bg-card-5"></div>
+        <div class="entry-intro-bg-card entry-intro-bg-card-6"></div>
+      </div>
+
+      <div class="entry-intro-center">
+        <div class="entry-intro-card">
+          <div class="entry-intro-title" id="entryIntroTitle"></div>
+          <div class="entry-intro-text" id="entryIntroText"></div>
+
+          <div class="entry-intro-actions">
+            <button
+              class="entry-intro-btn entry-intro-btn-secondary"
+              id="entryIntroLaterBtn"
+              type="button"
+              onclick="openEntryNoticeScreen()"
+            ></button>
+
+            <button
+              class="entry-intro-btn entry-intro-btn-primary"
+              id="entryIntroConfirmBtn"
+              type="button"
+              onclick="openEntryNoticeScreen()"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen entry-screen entry-notice-screen" id="entryNoticeScreen">
+      <div class="entry-layer entry-layer-plain"></div>
+
+      <div class="entry-notice-center">
+        <div class="entry-notice-card">
+          <div class="entry-notice-title" id="entryNoticeTitle"></div>
+          <div class="entry-notice-body" id="entryNoticeBody"></div>
+
+          <button
+            class="entry-notice-confirm"
+            id="entryNoticeConfirmBtn"
+            type="button"
+            onclick="openEntryPasscodeScreen()"
+          ></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen entry-screen entry-passcode-screen" id="entryPasscodeScreen">
+      <div class="entry-layer entry-layer-plain"></div>
+
+      <div class="entry-passcode-stage">
+        <div class="entry-passcode-photo"></div>
+
+        <div class="entry-passcode-wrap" id="entryPasscodeWrap">
+          <div class="lock-icon passcode-lock"></div>
+
+          <h1 class="passcode-title" id="entryPasscodeTitle"></h1>
+
+          <div class="passcode-dots">
+            <span class="passcode-dot" id="entryDot1"></span>
+            <span class="passcode-dot" id="entryDot2"></span>
+            <span class="passcode-dot" id="entryDot3"></span>
+            <span class="passcode-dot" id="entryDot4"></span>
+          </div>
+
+          <div class="keypad">
+            <button class="key key-number" type="button" onclick="entryPressKey('1')">
+              <span class="num">1</span>
+            </button>
+
+            <button class="key key-number" type="button" onclick="entryPressKey('2')">
+              <span class="num">2</span>
+              <span class="letters">ABC</span>
+            </button>
+
+            <button class="key key-number" type="button" onclick="entryPressKey('3')">
+              <span class="num">3</span>
+              <span class="letters">DEF</span>
+            </button>
+
+            <button class="key key-number" type="button" onclick="entryPressKey('4')">
+              <span class="num">4</span>
+              <span class="letters">GHI</span>
+            </button>
+
+            <button class="key key-number" type="button" onclick="entryPressKey('5')">
+              <span class="num">5</span>
+              <span class="letters">JKL</span>
+            </button>
+
+            <button class="key key-number" type="button" onclick="entryPressKey('6')">
+              <span class="num">6</span>
+              <span class="letters">MNO</span>
+            </button>
+
+            <button class="key key-number" type="button" onclick="entryPressKey('7')">
+              <span class="num">7</span>
+              <span class="letters">PQRS</span>
+            </button>
+
+            <button class="key key-number" type="button" onclick="entryPressKey('8')">
+              <span class="num">8</span>
+              <span class="letters">TUV</span>
+            </button>
+
+            <button class="key key-number" type="button" onclick="entryPressKey('9')">
+              <span class="num">9</span>
+              <span class="letters">WXYZ</span>
+            </button>
+
+            <div class="key-empty"></div>
+
+            <button class="key key-number" type="button" onclick="entryPressKey('0')">
+              <span class="num">0</span>
+            </button>
+
+            <div class="key-empty"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen entry-screen entry-select-screen" id="entrySelectScreen">
+      <div class="entry-layer entry-layer-plain"></div>
+
+      <div class="entry-select-center">
+        <div class="entry-select-card">
+          <div class="entry-select-title" id="entrySelectTitle"></div>
+          <div class="entry-select-text" id="entrySelectText"></div>
+
+          <div class="entry-select-actions">
+            <button
+              class="entry-select-btn entry-select-btn-gw"
+              id="entrySelectGwBtn"
+              type="button"
+              onclick="enterSelectedDataset('gw')"
+            ></button>
+
+            <button
+              class="entry-select-btn entry-select-btn-xl"
+              id="entrySelectXlBtn"
+              type="button"
+              onclick="enterSelectedDataset('xl')"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ENTRY FLOW END -->
+
+
     <!-- 잠금화면 -->
-    <section class="screen lock-screen active" id="lockScreen">
+ <section class="screen lock-screen" id="lockScreen">
       <div class="wallpaper wallpaper-lock"></div>
       <div class="lock-overlay-top"></div>
 

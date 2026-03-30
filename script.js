@@ -1,6 +1,38 @@
 /* =========================
    요소
 ========================= */
+/* =========================
+   요소
+========================= */
+const entryIntroScreen = document.getElementById("entryIntroScreen");
+const entryNoticeScreen = document.getElementById("entryNoticeScreen");
+const entryPasscodeScreen = document.getElementById("entryPasscodeScreen");
+const entrySelectScreen = document.getElementById("entrySelectScreen");
+
+const entryIntroTitle = document.getElementById("entryIntroTitle");
+const entryIntroText = document.getElementById("entryIntroText");
+const entryIntroLaterBtn = document.getElementById("entryIntroLaterBtn");
+const entryIntroConfirmBtn = document.getElementById("entryIntroConfirmBtn");
+
+const entryNoticeTitle = document.getElementById("entryNoticeTitle");
+const entryNoticeBody = document.getElementById("entryNoticeBody");
+const entryNoticeConfirmBtn = document.getElementById("entryNoticeConfirmBtn");
+
+const entryPasscodeTitle = document.getElementById("entryPasscodeTitle");
+const entryPasscodeWrap = document.getElementById("entryPasscodeWrap");
+
+const entrySelectTitle = document.getElementById("entrySelectTitle");
+const entrySelectText = document.getElementById("entrySelectText");
+const entrySelectGwBtn = document.getElementById("entrySelectGwBtn");
+const entrySelectXlBtn = document.getElementById("entrySelectXlBtn");
+
+const entryDots = [
+  document.getElementById("entryDot1"),
+  document.getElementById("entryDot2"),
+  document.getElementById("entryDot3"),
+  document.getElementById("entryDot4")
+].filter(Boolean);
+
 const lockScreen = document.getElementById("lockScreen");
 const passcodeScreen = document.getElementById("passcodeScreen");
 const homeScreen = document.getElementById("homeScreen");
@@ -17,6 +49,47 @@ const dots = [
   document.getElementById("dot3"),
   document.getElementById("dot4")
 ].filter(Boolean);
+
+/* 홈화면 앱 */
+const openAppButtons = document.querySelectorAll(".app-icon.open-app, .dock-icon.open-app");
+const popupAppButtons = document.querySelectorAll(".app-icon.popup-app, .dock-icon.popup-app");
+const dummyAppButtons = document.querySelectorAll(".app-icon.dummy-app, .dock-icon.dummy-app");
+const allTappableApps = document.querySelectorAll(".app-icon, .dock-icon");
+
+const backHomeButtons = document.querySelectorAll(".back-home");
+const appScreens = document.querySelectorAll(".app-screen");
+
+const calendarLiveWeekday = document.getElementById("calendarLiveWeekday");
+const calendarLiveDate = document.getElementById("calendarLiveDate");
+
+const glassPopup = document.getElementById("glassPopup");
+const glassPopupTitle = document.getElementById("glassPopupTitle");
+const glassPopupText = document.getElementById("glassPopupText");
+const glassPopupTime = document.getElementById("glassPopupTime");
+const glassPopupIcon = document.getElementById("glassPopupIcon");
+
+if (glassPopup) {
+  glassPopup.classList.remove("show");
+  glassPopup.setAttribute("aria-hidden", "true");
+}
+if (glassPopupTitle) glassPopupTitle.textContent = "";
+if (glassPopupText) glassPopupText.textContent = "";
+if (glassPopupTime) glassPopupTime.textContent = "";
+
+/* =========================
+   비밀번호
+========================= */
+const PASSWORD = "4399";
+let currentInput = "";
+let entryCurrentInput = "";
+let selectedDataset = null;
+
+/* =========================
+   상태값
+========================= */
+let isTransitioning = false;
+let isAppAnimating = false;
+let touchHandled = false;
 
 /* 홈화면 앱 */
 const openAppButtons = document.querySelectorAll(".app-icon.open-app, .dock-icon.open-app");
@@ -101,6 +174,205 @@ function hideAllAppScreens() {
     screen.classList.remove("active", "opening", "closing");
   });
 }
+
+/* =========================
+   ENTRY FLOW
+========================= */
+const entryText = {
+  intro: {
+    title: "2026.04.03. HAPPY-WOOLONGZ-DAY!",
+    body: `익명의 WLZ가 GW, XL의 스마트폰 일부 데이터를
+입수했다고 합니다.
+비밀번호를 입력하여 진입해보세요.`,
+    later: "다음에",
+    confirm: "확인"
+  },
+  notice: {
+    title: "주의사항",
+    body: `본 웹사이트는 CP(GW X XL)의 기념일을 기념하여
+제작된 가상의 비공식 콘텐츠입니다.
+
+사이트 내의 모든 내용은 허구이며,
+제작자의 사적인 해석과 캐릭터 해석(캐해)이 다수
+포함되어 있습니다.
+
+본 콘텐츠는 어디까지나 가볍게 즐기기 위한 용도로
+제작되었으며, 사실관계나 설정적 정합성을 보장하지
+않습니다.
+
+또한 혹시라도 “이 캐해 아닌데?”, “이건 좀 아닌데?”
+싶은 부분이 있다면 제가 전적으로 틀린 것입니다.
+너른 마음으로 이해 부탁드립니다 ㅠ.ㅠ
+
+혹시나 하는 마음에 초기 비밀번호를 입력해야 진입
+가능하도록 설정해두었으며,
+이는 본 사이트가 철저한 허구 기반의 적폐성 콘텐츠
+임을 다시 한 번 상기시키기 위함입니다.
+
+<span class="entry-notice-emphasis">모든 것이 적폐이므로
+GWXL을 사랑하는 마음+가벼운 마음으로
+재미있게 즐겨주시면 감사하겠습니다!</span>
+
+<span class="entry-notice-foot">+ 추가로 이용 중 오류, 버그, 깨짐, 오타, 기타 문제가 발생할 경우
+공유 계정 DM 등으로 제보 부탁드립니다. 감사합니다 :3</span>`,
+    confirm: "주의사항을 확인함"
+  },
+  passcode: {
+    title: "암호 입력"
+  },
+  select: {
+    title: "진입 데이터 선택",
+    body: `진입할 데이터를 선택해주세요.
+
+선택하지 않은 데이터도 이후 동일한 방식으로 다시
+진입할 수 있습니다.`,
+    gw: "GW",
+    xl: "XL"
+  }
+};
+
+function renderEntryText() {
+  if (entryIntroTitle) entryIntroTitle.textContent = entryText.intro.title;
+  if (entryIntroText) entryIntroText.innerHTML = entryText.intro.body.replace(/\n/g, "<br>");
+  if (entryIntroLaterBtn) entryIntroLaterBtn.textContent = entryText.intro.later;
+  if (entryIntroConfirmBtn) entryIntroConfirmBtn.textContent = entryText.intro.confirm;
+
+  if (entryNoticeTitle) entryNoticeTitle.textContent = entryText.notice.title;
+  if (entryNoticeBody) entryNoticeBody.innerHTML = entryText.notice.body.replace(/\n/g, "<br>");
+  if (entryNoticeConfirmBtn) entryNoticeConfirmBtn.textContent = entryText.notice.confirm;
+
+  if (entryPasscodeTitle) entryPasscodeTitle.textContent = entryText.passcode.title;
+
+  if (entrySelectTitle) entrySelectTitle.textContent = entryText.select.title;
+  if (entrySelectText) entrySelectText.innerHTML = entryText.select.body.replace(/\n/g, "<br>");
+  if (entrySelectGwBtn) entrySelectGwBtn.textContent = entryText.select.gw;
+  if (entrySelectXlBtn) entrySelectXlBtn.textContent = entryText.select.xl;
+}
+
+function hideEntryScreens() {
+  [
+    entryIntroScreen,
+    entryNoticeScreen,
+    entryPasscodeScreen,
+    entrySelectScreen
+  ].forEach((screen) => {
+    if (!screen) return;
+    screen.classList.remove("active", "opening", "closing");
+  });
+}
+
+async function transitionBetweenScreens(fromScreen, toScreen, closeMs = 220, openMs = 280) {
+  if (!fromScreen || !toScreen) return;
+  if (isTransitioning) return;
+
+  isTransitioning = true;
+
+  fromScreen.classList.remove("active");
+  fromScreen.classList.add("closing");
+
+  await wait(closeMs);
+
+  fromScreen.classList.remove("closing");
+  toScreen.classList.add("active", "opening");
+
+  await wait(openMs);
+
+  toScreen.classList.remove("opening");
+  isTransitioning = false;
+}
+
+async function openEntryNoticeScreen() {
+  if (!entryIntroScreen || !entryNoticeScreen) return;
+  if (!entryIntroScreen.classList.contains("active")) return;
+  await transitionBetweenScreens(entryIntroScreen, entryNoticeScreen);
+}
+
+async function openEntryPasscodeScreen() {
+  if (!entryNoticeScreen || !entryPasscodeScreen) return;
+  if (!entryNoticeScreen.classList.contains("active")) return;
+  await transitionBetweenScreens(entryNoticeScreen, entryPasscodeScreen);
+}
+
+async function openEntrySelectScreen() {
+  if (!entryPasscodeScreen || !entrySelectScreen) return;
+  if (!entryPasscodeScreen.classList.contains("active")) return;
+  await transitionBetweenScreens(entryPasscodeScreen, entrySelectScreen, 240, 320);
+}
+
+function updateEntryDots() {
+  entryDots.forEach((dot, index) => {
+    if (index < entryCurrentInput.length) {
+      dot.classList.add("filled");
+    } else {
+      dot.classList.remove("filled");
+    }
+  });
+}
+
+function resetEntryInput() {
+  entryCurrentInput = "";
+  updateEntryDots();
+}
+
+function entryPressKey(num) {
+  if (isTransitioning || isAppAnimating) return;
+  if (!entryPasscodeScreen || !entryPasscodeScreen.classList.contains("active")) return;
+  if (entryCurrentInput.length >= 4) return;
+
+  entryCurrentInput += num;
+  updateEntryDots();
+
+  if (entryCurrentInput.length === 4) {
+    setTimeout(checkEntryPassword, 120);
+  }
+}
+
+function checkEntryPassword() {
+  if (entryCurrentInput === PASSWORD) {
+    resetEntryInput();
+    openEntrySelectScreen();
+  } else {
+    if (entryPasscodeWrap) {
+      entryPasscodeWrap.classList.add("shake");
+    }
+
+    setTimeout(() => {
+      if (entryPasscodeWrap) {
+        entryPasscodeWrap.classList.remove("shake");
+      }
+      resetEntryInput();
+    }, 360);
+  }
+}
+
+async function enterSelectedDataset(datasetKey) {
+  if (!entrySelectScreen || !lockScreen) return;
+  if (!entrySelectScreen.classList.contains("active")) return;
+
+  selectedDataset = datasetKey;
+
+  isTransitioning = true;
+
+  entrySelectScreen.classList.remove("active");
+  entrySelectScreen.classList.add("closing");
+
+  await wait(220);
+
+  entrySelectScreen.classList.remove("closing");
+  lockScreen.classList.add("active", "opening");
+
+  await wait(300);
+
+  lockScreen.classList.remove("opening");
+  isTransitioning = false;
+}
+
+renderEntryText();
+
+window.openEntryNoticeScreen = openEntryNoticeScreen;
+window.openEntryPasscodeScreen = openEntryPasscodeScreen;
+window.entryPressKey = entryPressKey;
+window.enterSelectedDataset = enterSelectedDataset;
 
 /* =========================
    잠금화면 -> 암호입력
