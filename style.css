@@ -6702,6 +6702,10 @@ messages-image-top-btn
     font-size: 13px;
   }
 
+  .instagram-profile-stats {
+    transform: translateX(-20px);
+  }
+
   .instagram-profile-stat strong {
     font-size: 15px;
   }
