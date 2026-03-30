@@ -92,7 +92,7 @@ img {
   position: absolute;
   inset: 0;
   display: block;
-  background: #cccccc;
+  background: #e5e5e5;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -171,11 +171,11 @@ img {
 }
 
 .entry-gate-passcode-screen {
-  background: #666666;
+  background: #e5e5e5;
 }
 
 .entry-gate-passcode-screen .wallpaper-passcode {
-  background: #666666;
+  background: #e5e5e5;
 }
 
 .entry-gate-passcode-screen .passcode-blur {
