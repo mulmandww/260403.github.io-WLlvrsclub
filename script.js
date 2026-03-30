@@ -155,6 +155,20 @@ function openEntryNoticeScreen() {
   setActiveEntryScreen(entryNoticeScreen);
 }
 
+function shakeEntryIntroScreen() {
+  if (!entryIntroScreen) return;
+
+  entryIntroScreen.classList.remove("shake");
+  void entryIntroScreen.offsetWidth;
+  entryIntroScreen.classList.add("shake");
+
+  setTimeout(() => {
+    if (entryIntroScreen) {
+      entryIntroScreen.classList.remove("shake");
+    }
+  }, 360);
+}
+
 function openEntryGatePasscodeScreen() {
   setActiveEntryScreen(entryGatePasscodeScreen);
 }
@@ -220,7 +234,7 @@ function enterSelectedDataset(datasetKey) {
 }
 
 if (entryIntroLaterBtn) {
-  entryIntroLaterBtn.addEventListener("click", openEntryNoticeScreen);
+  entryIntroLaterBtn.addEventListener("click", shakeEntryIntroScreen);
 }
 
 if (entryIntroConfirmBtn) {

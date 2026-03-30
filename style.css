@@ -80,7 +80,7 @@ img {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #d9d9d9;
+  background: #cccccc;
   overflow: hidden;
 }
 
@@ -92,6 +92,7 @@ img {
   position: absolute;
   inset: 0;
   display: none;
+  background: #cccccc;
 }
 
 .entry-screen.active {
@@ -101,17 +102,28 @@ img {
 .entry-picture {
   position: absolute;
   inset: 0;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .entry-picture img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
   display: block;
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
+}
+
+/* 모바일은 기존처럼 꽉 차게 */
+@media screen and (max-width: 480px) {
+  .entry-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .entry-hitbox {
@@ -125,57 +137,84 @@ img {
 }
 
 .entry-gate-passcode-screen {
-  background: #000;
+  background: #cccccc;
+}
+
+.entry-gate-passcode-screen .wallpaper-passcode {
+  background: #cccccc;
+}
+
+.entry-gate-passcode-screen .passcode-blur {
+  background: rgba(0, 0, 0, 0);
+}
+
+.entry-gate-passcode-screen .lock-overlay-top {
+  display: none;
 }
 
 .entry-gate-passcode-wrap {
   z-index: 3;
 }
 
+/* shake */
+.entry-screen.shake {
+  animation: entryImageShake 0.36s ease;
+}
+
+@keyframes entryImageShake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+  100% { transform: translateX(0); }
+}
+
 /* =========================
    DESKTOP HOTSPOT
+   90% 축소 이미지 기준으로 재조정
 ========================= */
 
 /* intro */
 .intro-later {
-  left: 37.1%;
-  top: 47.7%;
-  width: 10.2%;
-  height: 7.2%;
+  left: 38.4%;
+  top: 50.0%;
+  width: 9.2%;
+  height: 6.4%;
   border-radius: 999px;
 }
 
 .intro-confirm {
-  left: 49.0%;
-  top: 47.7%;
-  width: 12.0%;
-  height: 7.2%;
+  left: 49.4%;
+  top: 50.0%;
+  width: 10.8%;
+  height: 6.4%;
   border-radius: 999px;
 }
 
 /* notice */
 .notice-confirm {
-  left: 43.1%;
-  top: 81.7%;
-  width: 13.9%;
-  height: 6.0%;
+  left: 44.0%;
+  top: 80.7%;
+  width: 12.1%;
+  height: 5.4%;
   border-radius: 999px;
 }
 
 /* select */
 .select-gw {
-  left: 43.2%;
-  top: 53.7%;
-  width: 13.8%;
-  height: 6.0%;
+  left: 44.0%;
+  top: 54.2%;
+  width: 12.0%;
+  height: 5.4%;
   border-radius: 999px;
 }
 
 .select-xl {
-  left: 43.2%;
-  top: 61.3%;
-  width: 13.8%;
-  height: 6.0%;
+  left: 44.0%;
+  top: 61.1%;
+  width: 12.0%;
+  height: 5.4%;
   border-radius: 999px;
 }
 
@@ -183,11 +222,6 @@ img {
    MOBILE HOTSPOT
 ========================= */
 @media screen and (max-width: 480px) {
-  .entry-picture img {
-    object-fit: cover;
-  }
-
-  /* intro */
   .intro-later {
     left: 21.2%;
     top: 57.2%;
@@ -202,7 +236,6 @@ img {
     height: 5.6%;
   }
 
-  /* notice */
   .notice-confirm {
     left: 14.8%;
     top: 76.9%;
@@ -210,7 +243,6 @@ img {
     height: 5.4%;
   }
 
-  /* select */
   .select-gw {
     left: 14.9%;
     top: 53.9%;
