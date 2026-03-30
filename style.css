@@ -80,7 +80,7 @@ img {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #cccccc;
+  background: #e5e5e5;
   overflow: hidden;
 }
 
@@ -91,12 +91,23 @@ img {
 .entry-screen {
   position: absolute;
   inset: 0;
-  display: none;
+  display: block;
   background: #cccccc;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(1.01);
+  transition:
+    opacity 0.28s ease,
+    transform 0.32s ease,
+    visibility 0.32s ease;
 }
 
 .entry-screen.active {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1);
 }
 
 .entry-picture {
@@ -136,12 +147,35 @@ img {
   cursor: pointer;
 }
 
+.entry-hitbox::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.18);
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    opacity 0.16s ease,
+    transform 0.16s ease;
+  pointer-events: none;
+}
+
+.entry-hitbox:active::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.entry-hitbox:active {
+  transform: scale(0.98);
+}
+
 .entry-gate-passcode-screen {
-  background: #cccccc;
+  background: #666666;
 }
 
 .entry-gate-passcode-screen .wallpaper-passcode {
-  background: #cccccc;
+  background: #666666;
 }
 
 .entry-gate-passcode-screen .passcode-blur {
@@ -178,7 +212,7 @@ img {
 /* intro */
 .intro-later {
   left: 38.4%;
-  top: 50.0%;
+  top: 53.0%;
   width: 9.2%;
   height: 6.4%;
   border-radius: 999px;
@@ -186,7 +220,7 @@ img {
 
 .intro-confirm {
   left: 49.4%;
-  top: 50.0%;
+  top: 53.0%;
   width: 10.8%;
   height: 6.4%;
   border-radius: 999px;
@@ -242,6 +276,12 @@ img {
     width: 70.4%;
     height: 5.4%;
   }
+
+@media screen and (max-width: 480px) {
+  .entry-gate-passcode-wrap {
+    transform: translateY(52px);
+  }
+}
 
   .select-gw {
     left: 14.9%;

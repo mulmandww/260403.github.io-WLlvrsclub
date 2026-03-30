@@ -129,21 +129,33 @@ function hideAllAppScreens() {
 /* =========================
    ENTRY FLOW
 ========================= */
-function setActiveEntryScreen(target) {
-  [entryIntroScreen, entryNoticeScreen, entryGatePasscodeScreen, entrySelectScreen].forEach((screen) => {
-    if (!screen) return;
-    screen.classList.remove("active");
-  });
+async function setActiveEntryScreen(target) {
+  const entryScreens = [
+    entryIntroScreen,
+    entryNoticeScreen,
+    entryGatePasscodeScreen,
+    entrySelectScreen
+  ].filter(Boolean);
+
+  const current = entryScreens.find((screen) => screen.classList.contains("active"));
+
+  if (current === target) return;
+
+  if (current) {
+    current.classList.remove("active");
+    await wait(180);
+  }
 
   if (target) {
     target.classList.add("active");
+    await wait(220);
   }
 }
 
-function openEntryFlow() {
+async function openEntryFlow() {
   if (!entryFlow) return;
   entryFlow.classList.add("active");
-  setActiveEntryScreen(entryIntroScreen);
+  await setActiveEntryScreen(entryIntroScreen);
 }
 
 function closeEntryFlow() {
@@ -151,8 +163,8 @@ function closeEntryFlow() {
   entryFlow.classList.remove("active");
 }
 
-function openEntryNoticeScreen() {
-  setActiveEntryScreen(entryNoticeScreen);
+async function openEntryNoticeScreen() {
+  await setActiveEntryScreen(entryNoticeScreen);
 }
 
 function shakeEntryIntroScreen() {
@@ -169,13 +181,13 @@ function shakeEntryIntroScreen() {
   }, 360);
 }
 
-function openEntryGatePasscodeScreen() {
-  setActiveEntryScreen(entryGatePasscodeScreen);
+async function openEntryGatePasscodeScreen() {
+  await setActiveEntryScreen(entryGatePasscodeScreen);
 }
 
-function openEntrySelectScreen() {
+async function openEntrySelectScreen() {
   entryGateResetInput();
-  setActiveEntryScreen(entrySelectScreen);
+  await setActiveEntryScreen(entrySelectScreen);
 }
 
 function updateEntryGateDots() {
@@ -255,7 +267,9 @@ if (entrySelectXlBtn) {
 
 window.entryGatePressKey = entryGatePressKey;
 
-openEntryFlow();
+setTimeout(() => {
+  openEntryFlow();
+}, 40);
 
 
 /* =========================
