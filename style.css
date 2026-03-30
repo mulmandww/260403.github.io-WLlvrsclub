@@ -179,7 +179,13 @@ img {
    ENTRY GATE PASSCODE
 ========================= */
 .entry-gate-passcode-screen {
+  position: absolute;
+  inset: 0;
   background: #e5e5e5;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .entry-gate-bg {
