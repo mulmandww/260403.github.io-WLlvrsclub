@@ -2092,7 +2092,7 @@ img {
   }
 
   .passcode-wrap {
-    padding-top: calc(60px + env(safe-area-inset-top));
+    padding-top: calc(88px + env(safe-area-inset-top));
     transform: scale(0.94);
     transform-origin: top center;
   }
