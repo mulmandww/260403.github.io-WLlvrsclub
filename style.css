@@ -212,7 +212,7 @@ img {
 /* intro */
 .intro-later {
   left: 38.4%;
-  top: 53.0%;
+  top: 56.0%;
   width: 9.2%;
   height: 6.4%;
   border-radius: 999px;
@@ -220,7 +220,7 @@ img {
 
 .intro-confirm {
   left: 49.4%;
-  top: 53.0%;
+  top: 56.0%;
   width: 10.8%;
   height: 6.4%;
   border-radius: 999px;
@@ -277,11 +277,9 @@ img {
     height: 5.4%;
   }
 
-@media screen and (max-width: 480px) {
   .entry-gate-passcode-wrap {
     transform: translateY(52px);
   }
-}
 
   .select-gw {
     left: 14.9%;
