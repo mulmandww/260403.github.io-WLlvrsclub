@@ -3639,222 +3639,280 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
 
   const INSTAGRAM_BASE_PATH = "assets/pictures/ig/gw";
 
-  const INSTAGRAM_STORIES = [
-    `${INSTAGRAM_BASE_PATH}/insta_story_1.jpg`,
-    `${INSTAGRAM_BASE_PATH}/insta_story_2.jpg`,
-    `${INSTAGRAM_BASE_PATH}/insta_story_3.jpg`,
-    `${INSTAGRAM_BASE_PATH}/insta_story_4.jpg`
-  ];
+const INSTAGRAM_STORIES = [
+  { src: `${INSTAGRAM_BASE_PATH}/insta_story_1.jpg`, timeAgo: "21분" },
+  { src: `${INSTAGRAM_BASE_PATH}/insta_story_2.jpg`, timeAgo: "21분" },
+  { src: `${INSTAGRAM_BASE_PATH}/insta_story_3.jpg`, timeAgo: "21분" },
+  { src: `${INSTAGRAM_BASE_PATH}/insta_story_4.jpg`, timeAgo: "21분" }
+];
 
-  const INSTAGRAM_POSTS = [
-    { id: 14, type: "image", mediaCount: 14, timeAgo: "13분 전", caption: "🏆" },
-    { id: 13, type: "image", mediaCount: 7, timeAgo: "22분 전", caption: "" },
-    { id: 12, type: "image", mediaCount: 9, timeAgo: "41분 전", caption: "" },
-    { id: 11, type: "image", mediaCount: 10, timeAgo: "1시간 전", caption: "" },
-    { id: 10, type: "image", mediaCount: 5, timeAgo: "2시간 전", caption: "" },
-    { id: 9, type: "image", mediaCount: 7, timeAgo: "4시간 전", caption: "" },
-    { id: 8, type: "image", mediaCount: 10, timeAgo: "8시간 전", caption: "" },
-    { id: 7, type: "image", mediaCount: 5, timeAgo: "1일 전", caption: "" },
-    { id: 6, type: "image", mediaCount: 6, timeAgo: "2일 전", caption: "" },
-    { id: 5, type: "image", mediaCount: 3, timeAgo: "3일 전", caption: "" },
-    { id: 4, type: "image", mediaCount: 3, timeAgo: "4일 전", caption: "" },
-    { id: 3, type: "video", mediaCount: 1, timeAgo: "5일 전", caption: "" },
-    { id: 2, type: "image", mediaCount: 2, timeAgo: "6일 전", caption: "" },
-    { id: 1, type: "image", mediaCount: 4, timeAgo: "1주 전", caption: "" }
-  ];
+const INSTAGRAM_POSTS = [
+  { id: 14, type: "image", mediaCount: 14, timeAgo: "2026년 3월 22일", caption: "" },
+  { id: 13, type: "image", mediaCount: 7, timeAgo: "2026년 3월 11일", caption: "❤️" },
+  { id: 12, type: "image", mediaCount: 9, timeAgo: "2026년 3월 5일", caption: "" },
+  { id: 11, type: "image", mediaCount: 10, timeAgo: "2026년 2월 24일", caption: "" },
+  { id: 10, type: "image", mediaCount: 5, timeAgo: "2026년 2월 21일", caption: "" },
+  { id: 9, type: "image", mediaCount: 7, timeAgo: "2026년 1월 25일", caption: "Bハ人드_Long" },
+  { id: 8, type: "image", mediaCount: 10, timeAgo: "2026년 1월 11일", caption: "" },
+  { id: 7, type: "image", mediaCount: 5, timeAgo: "2026년 1월 2일", caption: "" },
+  { id: 6, type: "image", mediaCount: 6, timeAgo: "2025년 12월 21일", caption: "" },
+  { id: 5, type: "image", mediaCount: 3, timeAgo: "2025년 12월 5일", caption: "" },
+  { id: 4, type: "image", mediaCount: 3, timeAgo: "2025년 5월 7일", caption: "" },
+  { id: 3, type: "video", mediaCount: 1, timeAgo: "2025년 4월 20일", caption: "" },
+  { id: 2, type: "image", mediaCount: 2, timeAgo: "2025년 4월 20일", caption: "" },
 
-  let currentStoryIndex = 0;
-  let currentPost = null;
-  let currentPostIndex = 0;
-  let currentHeartFilled = false;
+  /* 1번 게시물: 사진+영상 혼합 */
+  {
+    id: 1,
+    type: "image",
+    mediaCount: 4,
+    timeAgo: "2025년 4월 11일",
+    caption: "",
+    media: [
+      { type: "image" },  // insta_post_1-1.jpg
+      { type: "image" },  // insta_post_1-2.jpg
+      { type: "image" },  // insta_post_1-3.jpg
+      { type: "video" }   // insta_post_1-4.mp4
+    ]
+  }
+];
 
-  let isSliderDragging = false;
-  let dragStartX = 0;
-  let dragStartScrollLeft = 0;
-  let suppressGridClick = false;
+const instagramStoryTime = instagramStoryPage.querySelector(".instagram-story-time");
 
-  function setActiveInstagramPage(page) {
-    [instagramProfilePage, instagramStoryPage, instagramPostDetailPage].forEach((target) => {
-      target.classList.toggle("active", target === page);
-    });
+function getFallbackPostMediaItems(post) {
+  return Array.from({ length: post.mediaCount }, (_, index) => ({
+    type: post.type,
+    index: index + 1
+  }));
+}
+
+function getPostMediaItems(post) {
+  if (Array.isArray(post.media) && post.media.length) {
+    return post.media.map((item, index) => ({
+      type: item.type || "image",
+      index: index + 1,
+      src: item.src || "",
+      poster: item.poster || ""
+    }));
   }
 
-  function getPostMediaPath(postId, mediaIndex, type) {
-    const ext = type === "video" ? "mp4" : "jpg";
-    return `${INSTAGRAM_BASE_PATH}/insta_post_${postId}-${mediaIndex}.${ext}`;
+  return getFallbackPostMediaItems(post);
+}
+
+function getPostMediaPath(postId, media) {
+  if (media.src) return media.src;
+  const ext = media.type === "video" ? "mp4" : "jpg";
+  return `${INSTAGRAM_BASE_PATH}/insta_post_${postId}-${media.index}.${ext}`;
+}
+
+function getPostMediaPosterPath(postId, media) {
+  if (media.poster) return media.poster;
+  return `${INSTAGRAM_BASE_PATH}/insta_post_${postId}-${media.index}.jpg`;
+}
+
+function getGridCoverPath(post) {
+  const firstMedia = getPostMediaItems(post)[0];
+  if (!firstMedia) return "";
+
+  if (firstMedia.type === "video") {
+    return getPostMediaPosterPath(post.id, firstMedia);
   }
 
-  function getVideoGridPosterPath(postId) {
-    return `${INSTAGRAM_BASE_PATH}/insta_post_${postId}-1.jpg`;
-  }
+  return getPostMediaPath(post.id, firstMedia);
+}
 
-  function renderInstagramGrid() {
-    instagramPostGrid.innerHTML = INSTAGRAM_POSTS.map((post) => {
-      const coverPath = post.type === "video"
-        ? getVideoGridPosterPath(post.id)
-        : getPostMediaPath(post.id, 1, post.type);
+function getGridOverlayIconPath(post) {
+  const mediaItems = getPostMediaItems(post);
+  const hasVideo = mediaItems.some((item) => item.type === "video");
 
-      const overlayIconPath = post.type === "video"
-        ? "assets/icons/insta_post_video.png"
-        : (post.mediaCount > 1 ? "assets/icons/insta_post_pictures.png" : "");
+  if (hasVideo) return "assets/icons/insta_post_video.png";
+  if (mediaItems.length > 1) return "assets/icons/insta_post_pictures.png";
+  return "";
+}
 
-      const overlayIcon = overlayIconPath
-        ? `<img src="${overlayIconPath}" alt="" class="instagram-grid-stack-icon">`
-        : "";
+function renderInstagramGrid() {
+  instagramPostGrid.innerHTML = INSTAGRAM_POSTS.map((post) => {
+    const coverPath = getGridCoverPath(post);
+    const overlayIconPath = getGridOverlayIconPath(post);
 
-      return `
-        <button class="instagram-grid-item" type="button" data-instagram-post-id="${post.id}">
-          <img src="${coverPath}" alt="" loading="lazy">
-          ${overlayIcon}
-        </button>
-      `;
-    }).join("");
-  }
-
-  function renderStoryProgress() {
-    instagramStoryProgress.innerHTML = INSTAGRAM_STORIES.map((_, index) => {
-      let stateClass = "";
-      if (index < currentStoryIndex) stateClass = "is-done";
-      if (index === currentStoryIndex) stateClass = "is-active";
-
-      return `
-        <div class="instagram-story-progress-bar ${stateClass}">
-          <div class="instagram-story-progress-fill"></div>
-        </div>
-      `;
-    }).join("");
-  }
-
-  function renderStory() {
-    const storySrc = INSTAGRAM_STORIES[currentStoryIndex];
-    instagramStoryStage.innerHTML = `<img src="${storySrc}" alt="">`;
-    renderStoryProgress();
-  }
-
-  function openStoryViewer() {
-    currentStoryIndex = 0;
-    renderStory();
-    setActiveInstagramPage(instagramStoryPage);
-  }
-
-  function goToNextStory() {
-    if (currentStoryIndex >= INSTAGRAM_STORIES.length - 1) {
-      setActiveInstagramPage(instagramProfilePage);
-      return;
-    }
-
-    currentStoryIndex += 1;
-    renderStory();
-  }
-
-  function goToPrevStory() {
-    if (currentStoryIndex <= 0) return;
-    currentStoryIndex -= 1;
-    renderStory();
-  }
-
-  function renderPostDots(count, activeIndex) {
-    if (count <= 1) {
-      instagramPostDots.innerHTML = "";
-      return;
-    }
-
-    instagramPostDots.innerHTML = Array.from({ length: count }, (_, index) => `
-      <span class="instagram-post-dot ${index === activeIndex ? "active" : ""}"></span>
-    `).join("");
-  }
-
-  function updatePostCounter(count, activeIndex) {
-    instagramPostCounter.textContent = `${activeIndex + 1}/${count}`;
-  }
-
-  function updateHeartIcon() {
-    instagramHeartToggleIcon.src = currentHeartFilled
-      ? "assets/icons/insta_heart_fill.png"
-      : "assets/icons/insta_heart_empty.png";
-  }
-
-  function forceSliderToFirst() {
-    if (!instagramPostSlider) return;
-
-    currentPostIndex = 0;
-    instagramPostSlider.scrollLeft = 0;
-    instagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
-
-    requestAnimationFrame(() => {
-      instagramPostSlider.scrollLeft = 0;
-      instagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
-    });
-
-    setTimeout(() => {
-      instagramPostSlider.scrollLeft = 0;
-      instagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
-      syncPostSliderState();
-    }, 0);
-
-    setTimeout(() => {
-      instagramPostSlider.scrollLeft = 0;
-      instagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
-      syncPostSliderState();
-    }, 120);
-  }
-
-  function renderPostDetail(postId) {
-    const post = INSTAGRAM_POSTS.find((item) => item.id === Number(postId));
-    if (!post) return;
-
-    currentPost = post;
-    currentPostIndex = 0;
-    currentHeartFilled = false;
-
-    const slidesHTML = Array.from({ length: post.mediaCount }, (_, index) => {
-      const mediaIndex = index + 1;
-      const src = getPostMediaPath(post.id, mediaIndex, post.type);
-
-      if (post.type === "video") {
-        return `
-          <div class="instagram-post-slide">
-            <video src="${src}" controls playsinline preload="metadata"></video>
-          </div>
-        `;
-      }
-
-      return `
-        <div class="instagram-post-slide">
-          <img src="${src}" alt="" loading="lazy">
-        </div>
-      `;
-    }).join("");
-
-    instagramPostSlider.innerHTML = slidesHTML;
-    instagramPostTimeAgo.textContent = post.timeAgo;
-    instagramPostCaption.innerHTML = post.caption
-      ? `<strong>wxcyrcl</strong> ${post.caption}`
+    const overlayIcon = overlayIconPath
+      ? `
+        <span class="instagram-grid-stack-badge">
+          <img src="${overlayIconPath}" alt="" class="instagram-grid-stack-icon">
+        </span>
+      `
       : "";
 
-    updateHeartIcon();
-    renderPostDots(post.mediaCount, 0);
-    updatePostCounter(post.mediaCount, 0);
+    return `
+      <button class="instagram-grid-item" type="button" data-instagram-post-id="${post.id}">
+        <div class="instagram-grid-preview">
+          <img src="${coverPath}" alt="" loading="lazy" class="instagram-grid-media">
+        </div>
+        ${overlayIcon}
+      </button>
+    `;
+  }).join("");
+}
 
-    setActiveInstagramPage(instagramPostDetailPage);
+function renderStoryProgress() {
+  instagramStoryProgress.innerHTML = INSTAGRAM_STORIES.map((_, index) => {
+    let stateClass = "";
+    if (index < currentStoryIndex) stateClass = "is-done";
+    if (index === currentStoryIndex) stateClass = "is-active";
 
-    if (instagramPostDetailScroll) {
-      instagramPostDetailScroll.scrollTop = 0;
+    return `
+      <div class="instagram-story-progress-bar ${stateClass}">
+        <div class="instagram-story-progress-fill"></div>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderStory() {
+  const story = INSTAGRAM_STORIES[currentStoryIndex];
+  if (!story) return;
+
+  instagramStoryStage.innerHTML = `<img src="${story.src}" alt="" class="instagram-story-image">`;
+
+  if (instagramStoryTime) {
+    instagramStoryTime.textContent = story.timeAgo;
+  }
+
+  renderStoryProgress();
+}
+
+function openStoryViewer() {
+  currentStoryIndex = 0;
+  renderStory();
+  setActiveInstagramPage(instagramStoryPage);
+}
+
+function goToNextStory() {
+  if (currentStoryIndex >= INSTAGRAM_STORIES.length - 1) {
+    setActiveInstagramPage(instagramProfilePage);
+    return;
+  }
+
+  currentStoryIndex += 1;
+  renderStory();
+}
+
+function goToPrevStory() {
+  if (currentStoryIndex <= 0) return;
+  currentStoryIndex -= 1;
+  renderStory();
+}
+
+function renderPostDots(count, activeIndex) {
+  if (count <= 1) {
+    instagramPostDots.innerHTML = "";
+    return;
+  }
+
+  instagramPostDots.innerHTML = Array.from({ length: count }, (_, index) => `
+    <span class="instagram-post-dot ${index === activeIndex ? "active" : ""}"></span>
+  `).join("");
+}
+
+function updatePostCounter(count, activeIndex) {
+  instagramPostCounter.textContent = `${activeIndex + 1}/${count}`;
+}
+
+function updateHeartIcon() {
+  instagramHeartToggleIcon.src = currentHeartFilled
+    ? "assets/icons/insta_heart_fill.png"
+    : "assets/icons/insta_heart_empty.png";
+}
+
+function forceSliderToFirst() {
+  if (!instagramPostSlider) return;
+
+  currentPostIndex = 0;
+  instagramPostSlider.scrollLeft = 0;
+  instagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
+
+  requestAnimationFrame(() => {
+    instagramPostSlider.scrollLeft = 0;
+    instagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
+  });
+
+  setTimeout(() => {
+    instagramPostSlider.scrollLeft = 0;
+    instagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
+    syncPostSliderState();
+  }, 0);
+
+  setTimeout(() => {
+    instagramPostSlider.scrollLeft = 0;
+    instagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
+    syncPostSliderState();
+  }, 120);
+}
+
+function renderPostDetail(postId) {
+  const post = INSTAGRAM_POSTS.find((item) => item.id === Number(postId));
+  if (!post) return;
+
+  currentPost = post;
+  currentPostIndex = 0;
+  currentHeartFilled = false;
+
+  const mediaItems = getPostMediaItems(post);
+
+  const slidesHTML = mediaItems.map((media) => {
+    const src = getPostMediaPath(post.id, media);
+
+    if (media.type === "video") {
+      return `
+        <div class="instagram-post-slide">
+          <video
+            src="${src}"
+            poster="${getPostMediaPosterPath(post.id, media)}"
+            controls
+            playsinline
+            preload="metadata"
+          ></video>
+        </div>
+      `;
     }
 
-    forceSliderToFirst();
+    return `
+      <div class="instagram-post-slide">
+        <img src="${src}" alt="" loading="lazy">
+      </div>
+    `;
+  }).join("");
+
+  instagramPostSlider.innerHTML = slidesHTML;
+  instagramPostTimeAgo.textContent = post.timeAgo;
+  instagramPostCaption.innerHTML = post.caption
+    ? `<strong>wxcyrcl</strong> ${post.caption}`
+    : "";
+
+  updateHeartIcon();
+  renderPostDots(mediaItems.length, 0);
+  updatePostCounter(mediaItems.length, 0);
+
+  setActiveInstagramPage(instagramPostDetailPage);
+
+  if (instagramPostDetailScroll) {
+    instagramPostDetailScroll.scrollTop = 0;
   }
 
-  function syncPostSliderState() {
-    if (!currentPost) return;
+  forceSliderToFirst();
+}
 
-    const slideWidth = instagramPostSlider.clientWidth || 1;
-    const index = Math.round(instagramPostSlider.scrollLeft / slideWidth);
+function syncPostSliderState() {
+  if (!currentPost) return;
 
-    currentPostIndex = Math.max(0, Math.min(index, currentPost.mediaCount - 1));
-    renderPostDots(currentPost.mediaCount, currentPostIndex);
-    updatePostCounter(currentPost.mediaCount, currentPostIndex);
-  }
+  const mediaCount = getPostMediaItems(currentPost).length;
+  const slideWidth = instagramPostSlider.clientWidth || 1;
+  const index = Math.round(instagramPostSlider.scrollLeft / slideWidth);
+
+  currentPostIndex = Math.max(0, Math.min(index, mediaCount - 1));
+  renderPostDots(mediaCount, currentPostIndex);
+  updatePostCounter(mediaCount, currentPostIndex);
+}
 
   function startSliderDrag(clientX) {
     isSliderDragging = true;
