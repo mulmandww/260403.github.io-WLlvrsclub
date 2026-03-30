@@ -3637,13 +3637,38 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
     !instagramHeartToggleIcon
   ) return;
 
+  let currentStoryIndex = 0;
+  let currentPost = null;
+  let currentPostIndex = 0;
+  let currentHeartFilled = false;
+
+  let isSliderDragging = false;
+  let suppressGridClick = false;
+  let dragStartX = 0;
+  let dragStartScrollLeft = 0;
+
+  function setActiveInstagramPage(targetPage) {
+    [
+      instagramProfilePage,
+      instagramStoryPage,
+      instagramPostDetailPage
+    ].forEach((page) => {
+      if (!page) return;
+      page.classList.remove("active");
+    });
+
+    if (targetPage) {
+      targetPage.classList.add("active");
+    }
+  }
+
   const INSTAGRAM_BASE_PATH = "assets/pictures/ig/gw";
 
 const INSTAGRAM_STORIES = [
-  { src: `${INSTAGRAM_BASE_PATH}/insta_story_1.jpg`, timeAgo: "21분" },
-  { src: `${INSTAGRAM_BASE_PATH}/insta_story_2.jpg`, timeAgo: "21분" },
-  { src: `${INSTAGRAM_BASE_PATH}/insta_story_3.jpg`, timeAgo: "21분" },
-  { src: `${INSTAGRAM_BASE_PATH}/insta_story_4.jpg`, timeAgo: "21분" }
+  { src: `${INSTAGRAM_BASE_PATH}/insta_story_1.jpg`, timeAgo: "5시간 전" },
+  { src: `${INSTAGRAM_BASE_PATH}/insta_story_2.jpg`, timeAgo: "4시간 전" },
+  { src: `${INSTAGRAM_BASE_PATH}/insta_story_3.jpg`, timeAgo: "3시간 전" },
+  { src: `${INSTAGRAM_BASE_PATH}/insta_story_4.jpg`, timeAgo: "7분 전" }
 ];
 
 const INSTAGRAM_POSTS = [
