@@ -5938,6 +5938,7 @@ messages-image-top-btn
   grid-template-columns: repeat(3, 1fr);
   gap: 6px;
   text-align: center;
+  transform: translateX(-20px);
 }
 
 .instagram-profile-stat strong {
@@ -5976,11 +5977,6 @@ messages-image-top-btn
   align-items: center;
   justify-content: center;
   gap: 5px;
-}
-
-.instagram-following-arrow {
-  transform: translateY(-1px);
-  font-size: 12px;
 }
 
 .instagram-profile-tabs {
@@ -6723,10 +6719,6 @@ messages-image-top-btn
     height: 36px;
     font-size: 12px;
     font-weight: 600;
-  }
-
-  .instagram-following-arrow {
-    font-size: 11px;
   }
 
   .instagram-tab-btn {
