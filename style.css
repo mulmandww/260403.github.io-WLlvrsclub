@@ -6822,20 +6822,6 @@ messages-image-top-btn
     height: 28px;
   }
 
-  .instagram-story-stage {
-  top: calc(92px + env(safe-area-inset-top));
-  bottom: calc(84px + env(safe-area-inset-bottom));
-}
-
-.instagram-story-stage img,
-.instagram-story-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  max-width: none;
-  max-height: none;
-}
-
   .instagram-post-detail-topbar {
     height: calc(84px + env(safe-area-inset-top));
   }
@@ -6848,7 +6834,7 @@ messages-image-top-btn
   }
 
   .instagram-post-detail-title-wrap {
-    top: calc(44px + env(safe-area-inset-top));
+    top: calc(50px + env(safe-area-inset-top));
   }
 
   .instagram-post-detail-title {
