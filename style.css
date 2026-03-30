@@ -190,6 +190,55 @@ img {
   z-index: 3;
 }
 
+/* =========================
+   ENTRY GATE PASSCODE - DARK TEXT/UI
+========================= */
+.entry-gate-passcode-screen .passcode-lock {
+  filter: brightness(0.18);
+  opacity: 0.9;
+}
+
+.entry-gate-passcode-screen .passcode-title {
+  color: rgba(35, 35, 35, 0.95);
+  text-shadow: none;
+}
+
+.entry-gate-passcode-screen .passcode-dot {
+  border-color: rgba(55, 55, 55, 0.55);
+  background: transparent;
+}
+
+.entry-gate-passcode-screen .passcode-dot.filled {
+  background: rgba(35, 35, 35, 0.9);
+  border-color: rgba(35, 35, 35, 0.9);
+}
+
+.entry-gate-passcode-screen .key.key-number {
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(70, 70, 70, 0.08);
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.entry-gate-passcode-screen .key.key-number .num {
+  color: rgba(35, 35, 35, 0.92);
+  text-shadow: none;
+}
+
+.entry-gate-passcode-screen .key.key-number .letters {
+  color: rgba(55, 55, 55, 0.72);
+  text-shadow: none;
+}
+
+.entry-gate-passcode-screen .key.key-number:active {
+  background: rgba(255, 255, 255, 0.58);
+  transform: scale(0.96);
+}
+
+
 /* shake */
 .entry-screen.shake {
   animation: entryImageShake 0.36s ease;
@@ -277,8 +326,19 @@ img {
     height: 5.4%;
   }
 
+  .entry-gate-passcode-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+  }
+
   .entry-gate-passcode-wrap {
-    transform: translateY(52px);
+    width: 100%;
+    max-width: 360px;
+    transform: none !important;
+    padding-top: 0 !important;
+    margin: 0 auto;
   }
 
   .select-gw {
