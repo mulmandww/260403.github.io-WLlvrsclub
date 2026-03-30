@@ -1,29 +1,6 @@
 /* =========================
    요소
 ========================= */
-const entryIntroScreen = document.getElementById("entryIntroScreen");
-const entryNoticeScreen = document.getElementById("entryNoticeScreen");
-const entryPasscodeScreen = document.getElementById("entryPasscodeScreen");
-const entrySelectScreen = document.getElementById("entrySelectScreen");
-
-const entryIntroConfirmBtn = document.getElementById("entryIntroConfirmBtn");
-const entryIntroLaterBtn = document.getElementById("entryIntroLaterBtn");
-const entryNoticeConfirmBtn = document.getElementById("entryNoticeConfirmBtn");
-const entrySelectButtons = document.querySelectorAll(".entry-select-btn");
-
-const entryIntroTime = document.getElementById("entryIntroTime");
-const entryNoticeTime = document.getElementById("entryNoticeTime");
-const entrySelectTime = document.getElementById("entrySelectTime");
-
-const entryPasscodeWrap = document.getElementById("entryPasscodeWrap");
-
-const entryDots = [
-  document.getElementById("entryDot1"),
-  document.getElementById("entryDot2"),
-  document.getElementById("entryDot3"),
-  document.getElementById("entryDot4")
-].filter(Boolean);
-
 const lockScreen = document.getElementById("lockScreen");
 const passcodeScreen = document.getElementById("passcodeScreen");
 const homeScreen = document.getElementById("homeScreen");
@@ -67,10 +44,11 @@ if (glassPopupTitle) glassPopupTitle.textContent = "";
 if (glassPopupText) glassPopupText.textContent = "";
 if (glassPopupTime) glassPopupTime.textContent = "";
 
+/* =========================
+   비밀번호
+========================= */
 const PASSWORD = "4399";
 let currentInput = "";
-let entryCurrentInput = "";
-let selectedDataset = null;
 
 /* =========================
    상태값
@@ -99,10 +77,6 @@ function updateDateTime() {
   if (lockTime) lockTime.textContent = `${hour}:${minute}`;
   if (statusTime) statusTime.textContent = `${hour}:${minute}`;
 
-  if (entryIntroTime) entryIntroTime.textContent = currentTimeText;
-  if (entryNoticeTime) entryNoticeTime.textContent = currentTimeText;
-  if (entrySelectTime) entrySelectTime.textContent = currentTimeText;
-
   if (calendarLiveWeekday) {
     calendarLiveWeekday.textContent = weekday;
     calendarLiveWeekday.classList.toggle("is-holiday", dayIndex === 0 || dayIndex === 6);
@@ -126,78 +100,6 @@ function hideAllAppScreens() {
   appScreens.forEach((screen) => {
     screen.classList.remove("active", "opening", "closing");
   });
-}
-
-function hideEntryScreens() {
-  [
-    entryIntroScreen,
-    entryNoticeScreen,
-    entryPasscodeScreen,
-    entrySelectScreen
-  ].forEach((screen) => {
-    if (!screen) return;
-    screen.classList.remove("active", "opening", "closing");
-  });
-}
-
-async function transitionScreen(fromScreen, toScreen, closeMs = 220, openMs = 280) {
-  if (!fromScreen || !toScreen) return;
-  if (isTransitioning) return;
-
-  isTransitioning = true;
-
-  fromScreen.classList.remove("active");
-  fromScreen.classList.add("closing");
-
-  await wait(closeMs);
-
-  fromScreen.classList.remove("closing");
-  toScreen.classList.add("active", "opening");
-
-  await wait(openMs);
-
-  toScreen.classList.remove("opening");
-  isTransitioning = false;
-}
-
-async function openEntryNoticeScreen() {
-  if (!entryIntroScreen || !entryNoticeScreen) return;
-  if (!entryIntroScreen.classList.contains("active")) return;
-  await transitionScreen(entryIntroScreen, entryNoticeScreen);
-}
-
-async function openEntryPasscodeScreen() {
-  if (!entryNoticeScreen || !entryPasscodeScreen) return;
-  if (!entryNoticeScreen.classList.contains("active")) return;
-  await transitionScreen(entryNoticeScreen, entryPasscodeScreen);
-}
-
-async function openEntrySelectScreen() {
-  if (!entryPasscodeScreen || !entrySelectScreen) return;
-  if (!entryPasscodeScreen.classList.contains("active")) return;
-  await transitionScreen(entryPasscodeScreen, entrySelectScreen, 240, 320);
-}
-
-async function enterSelectedDataset(datasetKey) {
-  if (!entrySelectScreen || !lockScreen) return;
-  if (!entrySelectScreen.classList.contains("active")) return;
-
-  selectedDataset = datasetKey;
-
-  isTransitioning = true;
-
-  entrySelectScreen.classList.remove("active");
-  entrySelectScreen.classList.add("closing");
-
-  await wait(220);
-
-  entrySelectScreen.classList.remove("closing");
-  lockScreen.classList.add("active", "opening");
-
-  await wait(300);
-
-  lockScreen.classList.remove("opening");
-  isTransitioning = false;
 }
 
 /* =========================
@@ -227,26 +129,6 @@ async function openPasscodeScreen() {
 if (lockScreen) {
   lockScreen.addEventListener("click", openPasscodeScreen);
 }
-
-if (entryIntroConfirmBtn) {
-  entryIntroConfirmBtn.addEventListener("click", openEntryNoticeScreen);
-}
-
-if (entryIntroLaterBtn) {
-  entryIntroLaterBtn.addEventListener("click", openEntryNoticeScreen);
-}
-
-if (entryNoticeConfirmBtn) {
-  entryNoticeConfirmBtn.addEventListener("click", openEntryPasscodeScreen);
-}
-
-entrySelectButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const datasetKey = button.dataset.entryDataset;
-    if (!datasetKey) return;
-    enterSelectedDataset(datasetKey);
-  });
-});
 
 /* 위로 드래그 */
 let startY = 0;
@@ -308,55 +190,6 @@ function resetInput() {
   currentInput = "";
   updateDots();
 }
-
-
-function updateEntryDots() {
-  entryDots.forEach((dot, index) => {
-    if (index < entryCurrentInput.length) {
-      dot.classList.add("filled");
-    } else {
-      dot.classList.remove("filled");
-    }
-  });
-}
-
-function resetEntryInput() {
-  entryCurrentInput = "";
-  updateEntryDots();
-}
-
-function entryPressKey(num) {
-  if (isTransitioning || isAppAnimating) return;
-  if (!entryPasscodeScreen || !entryPasscodeScreen.classList.contains("active")) return;
-  if (entryCurrentInput.length >= 4) return;
-
-  entryCurrentInput += num;
-  updateEntryDots();
-
-  if (entryCurrentInput.length === 4) {
-    setTimeout(checkEntryPassword, 120);
-  }
-}
-
-function checkEntryPassword() {
-  if (entryCurrentInput === PASSWORD) {
-    resetEntryInput();
-    openEntrySelectScreen();
-  } else {
-    if (entryPasscodeWrap) {
-      entryPasscodeWrap.classList.add("shake");
-    }
-
-    setTimeout(() => {
-      if (entryPasscodeWrap) {
-        entryPasscodeWrap.classList.remove("shake");
-      }
-      resetEntryInput();
-    }, 360);
-  }
-}
-
-window.entryPressKey = entryPressKey;
 
 /* =========================
    숫자 입력
@@ -3630,20 +3463,20 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
   ];
 
   const INSTAGRAM_POSTS = [
-    { id: 14, type: "image", mediaCount: 14, timeAgo: "2026년 3월 22일", caption: "" },
-    { id: 13, type: "image", mediaCount: 7, timeAgo: "2026년 3월 11일", caption: "❤️" },
-    { id: 12, type: "image", mediaCount: 9, timeAgo: "2026년 3월 5일", caption: "" },
-    { id: 11, type: "image", mediaCount: 10, timeAgo: "2026년 2월 24일", caption: "" },
-    { id: 10, type: "image", mediaCount: 5, timeAgo: "2026년 2월 21일", caption: "" },
-    { id: 9, type: "image", mediaCount: 7, timeAgo: "2026년 1월 25일", caption: "" },
-    { id: 8, type: "image", mediaCount: 10, timeAgo: "2026년 1월 11일", caption: "Bハ人드_Long" },
-    { id: 7, type: "image", mediaCount: 5, timeAgo: "2026년 1월 2일", caption: "" },
-    { id: 6, type: "image", mediaCount: 6, timeAgo: "2025년 12월 21일", caption: "" },
-    { id: 5, type: "image", mediaCount: 3, timeAgo: "2025년 12월 5일", caption: "" },
-    { id: 4, type: "image", mediaCount: 3, timeAgo: "2025년 5월 7일", caption: "" },
-    { id: 3, type: "video", mediaCount: 1, timeAgo: "2025년 4월 20일", caption: "" },
-    { id: 2, type: "image", mediaCount: 2, timeAgo: "2025년 4월 20일", caption: "" },
-    { id: 1, type: "image", mediaCount: 4, timeAgo: "2025년 4월 11일", caption: "" }
+    { id: 14, type: "image", mediaCount: 14, timeAgo: "13분 전", caption: "🏆" },
+    { id: 13, type: "image", mediaCount: 7, timeAgo: "22분 전", caption: "" },
+    { id: 12, type: "image", mediaCount: 9, timeAgo: "41분 전", caption: "" },
+    { id: 11, type: "image", mediaCount: 10, timeAgo: "1시간 전", caption: "" },
+    { id: 10, type: "image", mediaCount: 5, timeAgo: "2시간 전", caption: "" },
+    { id: 9, type: "image", mediaCount: 7, timeAgo: "4시간 전", caption: "" },
+    { id: 8, type: "image", mediaCount: 10, timeAgo: "8시간 전", caption: "" },
+    { id: 7, type: "image", mediaCount: 5, timeAgo: "1일 전", caption: "" },
+    { id: 6, type: "image", mediaCount: 6, timeAgo: "2일 전", caption: "" },
+    { id: 5, type: "image", mediaCount: 3, timeAgo: "3일 전", caption: "" },
+    { id: 4, type: "image", mediaCount: 3, timeAgo: "4일 전", caption: "" },
+    { id: 3, type: "video", mediaCount: 1, timeAgo: "5일 전", caption: "" },
+    { id: 2, type: "image", mediaCount: 2, timeAgo: "6일 전", caption: "" },
+    { id: 1, type: "image", mediaCount: 4, timeAgo: "1주 전", caption: "" }
   ];
 
   let currentStoryIndex = 0;
@@ -3671,28 +3504,28 @@ return `assets/pictures/${CURRENT_PROFILE}/${PHOTO_FILES[index - 1]}`;
     return `${INSTAGRAM_BASE_PATH}/insta_post_${postId}-1.jpg`;
   }
 
-function renderInstagramGrid() {
-  instagramPostGrid.innerHTML = INSTAGRAM_POSTS.map((post) => {
-    const coverPath = post.type === "video"
-      ? getVideoGridPosterPath(post.id)
-      : getPostMediaPath(post.id, 1, post.type);
+  function renderInstagramGrid() {
+    instagramPostGrid.innerHTML = INSTAGRAM_POSTS.map((post) => {
+      const coverPath = post.type === "video"
+        ? getVideoGridPosterPath(post.id)
+        : getPostMediaPath(post.id, 1, post.type);
 
-    const overlayIconPath = post.type === "video"
-      ? "assets/icons/insta_post_video.png"
-      : (post.mediaCount > 1 ? "assets/icons/insta_post_pictures.png" : "");
+      const overlayIconPath = post.type === "video"
+        ? "assets/icons/insta_post_video.png"
+        : (post.mediaCount > 1 ? "assets/icons/insta_post_pictures.png" : "");
 
-    const overlayIcon = overlayIconPath
-      ? `<img src="${overlayIconPath}" alt="" class="instagram-grid-stack-icon">`
-      : "";
+      const overlayIcon = overlayIconPath
+        ? `<img src="${overlayIconPath}" alt="" class="instagram-grid-stack-icon">`
+        : "";
 
-    return `
-      <button class="instagram-grid-item" type="button" data-instagram-post-id="${post.id}">
-        <img src="${coverPath}" alt="" loading="lazy" class="instagram-grid-media">
-        ${overlayIcon}
-      </button>
-    `;
-  }).join("");
-}
+      return `
+        <button class="instagram-grid-item" type="button" data-instagram-post-id="${post.id}">
+          <img src="${coverPath}" alt="" loading="lazy">
+          ${overlayIcon}
+        </button>
+      `;
+    }).join("");
+  }
 
   function renderStoryProgress() {
     instagramStoryProgress.innerHTML = INSTAGRAM_STORIES.map((_, index) => {
@@ -3708,11 +3541,11 @@ function renderInstagramGrid() {
     }).join("");
   }
 
-function renderStory() {
-  const storySrc = INSTAGRAM_STORIES[currentStoryIndex];
-  instagramStoryStage.innerHTML = `<img src="${storySrc}" alt="" class="instagram-story-media">`;
-  renderStoryProgress();
-}
+  function renderStory() {
+    const storySrc = INSTAGRAM_STORIES[currentStoryIndex];
+    instagramStoryStage.innerHTML = `<img src="${storySrc}" alt="">`;
+    renderStoryProgress();
+  }
 
   function openStoryViewer() {
     currentStoryIndex = 0;
