@@ -6597,4 +6597,122 @@ messages-image-top-btn
     padding: 8px 12px 0;
     font-size: 11px;
   }
+
+    /* =========================
+     ENTRY GATE PASSCODE - MOBILE FINAL
+  ========================= */
+  .entry-gate-passcode-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #cccccc;
+  }
+
+  .entry-gate-passcode-screen .wallpaper-passcode {
+    background: #cccccc !important;
+  }
+
+  .entry-gate-passcode-screen .passcode-blur {
+    background: transparent !important;
+  }
+
+  .entry-gate-passcode-screen .lock-overlay-top {
+    display: none !important;
+  }
+
+  .entry-gate-passcode-screen .entry-gate-passcode-wrap {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    padding-top: 0 !important;
+    margin: 0 auto;
+    transform: none !important;
+    transform-origin: center center !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .entry-gate-passcode-screen .passcode-lock.lock-icon {
+    margin-bottom: 28px;
+  }
+
+  .entry-gate-passcode-screen .passcode-lock.lock-icon::before {
+    border-color: #222 !important;
+  }
+
+  .entry-gate-passcode-screen .passcode-lock.lock-icon::after {
+    background: #222 !important;
+  }
+
+  .entry-gate-passcode-screen .passcode-title {
+    color: #222 !important;
+    text-shadow: none !important;
+    margin-bottom: 20px;
+  }
+
+  .entry-gate-passcode-screen .passcode-dots {
+    margin-bottom: 42px;
+  }
+
+  .entry-gate-passcode-screen .passcode-dot {
+    border-color: rgba(34, 34, 34, 0.45) !important;
+    background: transparent !important;
+  }
+
+  .entry-gate-passcode-screen .passcode-dot.filled {
+    background: #222 !important;
+    border-color: #222 !important;
+  }
+
+  .entry-gate-passcode-screen .keypad {
+    transform: none !important;
+    grid-template-columns: repeat(3, 82px) !important;
+    gap: 14px 12px !important;
+    justify-content: center;
+  }
+
+  .entry-gate-passcode-screen .key,
+  .entry-gate-passcode-screen .key-empty {
+    width: 82px !important;
+    height: 82px !important;
+  }
+
+  .entry-gate-passcode-screen .key.key-number {
+    background: rgba(255, 255, 255, 0.42) !important;
+    border: 1px solid rgba(70, 70, 70, 0.08) !important;
+    box-shadow:
+      0 6px 18px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+
+  .entry-gate-passcode-screen .key.key-number::before {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.20) 0%,
+        rgba(255,255,255,0.08) 26%,
+        rgba(255,255,255,0.02) 48%,
+        rgba(255,255,255,0.00) 72%
+      ) !important;
+  }
+
+  .entry-gate-passcode-screen .key.key-number .num {
+    color: #222 !important;
+    font-size: 31px !important;
+    text-shadow: none !important;
+  }
+
+  .entry-gate-passcode-screen .key.key-number .letters {
+    color: rgba(34, 34, 34, 0.7) !important;
+    font-size: 8px !important;
+    text-shadow: none !important;
+  }
+
+  .entry-gate-passcode-screen .key.key-number:active {
+    background: rgba(255, 255, 255, 0.58) !important;
+  }
 }
