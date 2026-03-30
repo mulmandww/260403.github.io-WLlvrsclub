@@ -67,8 +67,8 @@ img {
   background:
     linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.38)),
     url("assets/wallpaper/background.jpg") center / cover no-repeat;
-  transform: scale(1.05);
-  filter: blur(12px);
+  transform: scale(1.00);
+  filter: blur(1px);
   pointer-events: none;
 }
 
