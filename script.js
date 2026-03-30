@@ -1,6 +1,29 @@
 /* =========================
    요소
 ========================= */
+const entryIntroScreen = document.getElementById("entryIntroScreen");
+const entryNoticeScreen = document.getElementById("entryNoticeScreen");
+const entryPasscodeScreen = document.getElementById("entryPasscodeScreen");
+const entrySelectScreen = document.getElementById("entrySelectScreen");
+
+const entryIntroConfirmBtn = document.getElementById("entryIntroConfirmBtn");
+const entryIntroLaterBtn = document.getElementById("entryIntroLaterBtn");
+const entryNoticeConfirmBtn = document.getElementById("entryNoticeConfirmBtn");
+const entrySelectButtons = document.querySelectorAll(".entry-select-btn");
+
+const entryIntroTime = document.getElementById("entryIntroTime");
+const entryNoticeTime = document.getElementById("entryNoticeTime");
+const entrySelectTime = document.getElementById("entrySelectTime");
+
+const entryPasscodeWrap = document.getElementById("entryPasscodeWrap");
+
+const entryDots = [
+  document.getElementById("entryDot1"),
+  document.getElementById("entryDot2"),
+  document.getElementById("entryDot3"),
+  document.getElementById("entryDot4")
+].filter(Boolean);
+
 const lockScreen = document.getElementById("lockScreen");
 const passcodeScreen = document.getElementById("passcodeScreen");
 const homeScreen = document.getElementById("homeScreen");
@@ -44,11 +67,10 @@ if (glassPopupTitle) glassPopupTitle.textContent = "";
 if (glassPopupText) glassPopupText.textContent = "";
 if (glassPopupTime) glassPopupTime.textContent = "";
 
-/* =========================
-   비밀번호
-========================= */
 const PASSWORD = "4399";
 let currentInput = "";
+let entryCurrentInput = "";
+let selectedDataset = null;
 
 /* =========================
    상태값
@@ -77,6 +99,10 @@ function updateDateTime() {
   if (lockTime) lockTime.textContent = `${hour}:${minute}`;
   if (statusTime) statusTime.textContent = `${hour}:${minute}`;
 
+  if (entryIntroTime) entryIntroTime.textContent = currentTimeText;
+  if (entryNoticeTime) entryNoticeTime.textContent = currentTimeText;
+  if (entrySelectTime) entrySelectTime.textContent = currentTimeText;
+
   if (calendarLiveWeekday) {
     calendarLiveWeekday.textContent = weekday;
     calendarLiveWeekday.classList.toggle("is-holiday", dayIndex === 0 || dayIndex === 6);
@@ -100,6 +126,78 @@ function hideAllAppScreens() {
   appScreens.forEach((screen) => {
     screen.classList.remove("active", "opening", "closing");
   });
+}
+
+function hideEntryScreens() {
+  [
+    entryIntroScreen,
+    entryNoticeScreen,
+    entryPasscodeScreen,
+    entrySelectScreen
+  ].forEach((screen) => {
+    if (!screen) return;
+    screen.classList.remove("active", "opening", "closing");
+  });
+}
+
+async function transitionScreen(fromScreen, toScreen, closeMs = 220, openMs = 280) {
+  if (!fromScreen || !toScreen) return;
+  if (isTransitioning) return;
+
+  isTransitioning = true;
+
+  fromScreen.classList.remove("active");
+  fromScreen.classList.add("closing");
+
+  await wait(closeMs);
+
+  fromScreen.classList.remove("closing");
+  toScreen.classList.add("active", "opening");
+
+  await wait(openMs);
+
+  toScreen.classList.remove("opening");
+  isTransitioning = false;
+}
+
+async function openEntryNoticeScreen() {
+  if (!entryIntroScreen || !entryNoticeScreen) return;
+  if (!entryIntroScreen.classList.contains("active")) return;
+  await transitionScreen(entryIntroScreen, entryNoticeScreen);
+}
+
+async function openEntryPasscodeScreen() {
+  if (!entryNoticeScreen || !entryPasscodeScreen) return;
+  if (!entryNoticeScreen.classList.contains("active")) return;
+  await transitionScreen(entryNoticeScreen, entryPasscodeScreen);
+}
+
+async function openEntrySelectScreen() {
+  if (!entryPasscodeScreen || !entrySelectScreen) return;
+  if (!entryPasscodeScreen.classList.contains("active")) return;
+  await transitionScreen(entryPasscodeScreen, entrySelectScreen, 240, 320);
+}
+
+async function enterSelectedDataset(datasetKey) {
+  if (!entrySelectScreen || !lockScreen) return;
+  if (!entrySelectScreen.classList.contains("active")) return;
+
+  selectedDataset = datasetKey;
+
+  isTransitioning = true;
+
+  entrySelectScreen.classList.remove("active");
+  entrySelectScreen.classList.add("closing");
+
+  await wait(220);
+
+  entrySelectScreen.classList.remove("closing");
+  lockScreen.classList.add("active", "opening");
+
+  await wait(300);
+
+  lockScreen.classList.remove("opening");
+  isTransitioning = false;
 }
 
 /* =========================
@@ -129,6 +227,26 @@ async function openPasscodeScreen() {
 if (lockScreen) {
   lockScreen.addEventListener("click", openPasscodeScreen);
 }
+
+if (entryIntroConfirmBtn) {
+  entryIntroConfirmBtn.addEventListener("click", openEntryNoticeScreen);
+}
+
+if (entryIntroLaterBtn) {
+  entryIntroLaterBtn.addEventListener("click", openEntryNoticeScreen);
+}
+
+if (entryNoticeConfirmBtn) {
+  entryNoticeConfirmBtn.addEventListener("click", openEntryPasscodeScreen);
+}
+
+entrySelectButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const datasetKey = button.dataset.entryDataset;
+    if (!datasetKey) return;
+    enterSelectedDataset(datasetKey);
+  });
+});
 
 /* 위로 드래그 */
 let startY = 0;
@@ -190,6 +308,55 @@ function resetInput() {
   currentInput = "";
   updateDots();
 }
+
+
+function updateEntryDots() {
+  entryDots.forEach((dot, index) => {
+    if (index < entryCurrentInput.length) {
+      dot.classList.add("filled");
+    } else {
+      dot.classList.remove("filled");
+    }
+  });
+}
+
+function resetEntryInput() {
+  entryCurrentInput = "";
+  updateEntryDots();
+}
+
+function entryPressKey(num) {
+  if (isTransitioning || isAppAnimating) return;
+  if (!entryPasscodeScreen || !entryPasscodeScreen.classList.contains("active")) return;
+  if (entryCurrentInput.length >= 4) return;
+
+  entryCurrentInput += num;
+  updateEntryDots();
+
+  if (entryCurrentInput.length === 4) {
+    setTimeout(checkEntryPassword, 120);
+  }
+}
+
+function checkEntryPassword() {
+  if (entryCurrentInput === PASSWORD) {
+    resetEntryInput();
+    openEntrySelectScreen();
+  } else {
+    if (entryPasscodeWrap) {
+      entryPasscodeWrap.classList.add("shake");
+    }
+
+    setTimeout(() => {
+      if (entryPasscodeWrap) {
+        entryPasscodeWrap.classList.remove("shake");
+      }
+      resetEntryInput();
+    }, 360);
+  }
+}
+
+window.entryPressKey = entryPressKey;
 
 /* =========================
    숫자 입력
@@ -850,7 +1017,7 @@ dummyAppButtons.forEach((button) => {
   const messageThreads = [
 {
   id: "longi",
-  name: "롱이♥️ ALD1",
+  name: "롱이❤️ ALD1",
   avatar: "롱",
   time: "00:13",
   inputType: "iMessage",
@@ -865,7 +1032,7 @@ dummyAppButtons.forEach((button) => {
     { type: "meta-center", text: "3월 1일 (일) 11:20" },
 
     { type: "text-me", text: "롱이보고싶따~~~~~" },
-    { type: "text-you", text: "ㅠㅠ" },
+    { type: "text-me", text: "ㅠㅠ" },
     { type: "text-me", text: "롱아 나 안 보고싶어????" },
     { type: "text-you", text: "형 아직 한국이자나요..;;" },
     { type: "text-you", text: "비행기도 안탔는데 ㅋㅋㅋ" },
@@ -876,7 +1043,7 @@ dummyAppButtons.forEach((button) => {
     { type: "text-me", text: "아 롱이보고싶다아아아~~~~" },
     { type: "text-you", text: "😬😬😬" },
     { type: "image-you", src: "assets/pictures/message_image_1.JPEG" },
-    { type: "text-me", text: "롱아아아아♥️♥️♥️♥️♥️" },
+    { type: "text-me", text: "롱아아아아❤️❤️❤️❤️❤️" },
     { type: "text-me", text: "조금만 참아 알았지????? :3" },
     { type: "text-you", text: "형이나 좀 참아봐요.. ;;" },
     { type: "text-you", text: "너무 着急了" },
@@ -890,7 +1057,7 @@ dummyAppButtons.forEach((button) => {
     { type: "image-me", src: "assets/pictures/message_image_2.jpg" },
     { type: "text-me", text: "아~롱이보고싶은날" },
     { type: "text-me", text: "롱이가 없으니까 즐겁지가 않네" },
-    { type: "text-me", text: "ㅠ.ㅠ ♥️♥️" },
+    { type: "text-me", text: "ㅠ.ㅠ ❤️❤️" },
     { type: "text-you", text: "ㅋㅋ" },
     { type: "image-you", src: "assets/pictures/message_image_3.JPEG" },
     { type: "text-you", text: "상원형이 보내줬는데" },
@@ -911,7 +1078,7 @@ dummyAppButtons.forEach((button) => {
     { type: "text-you", text: "wow" },
     { type: "text-you", text: "ㅋㅋ" },
     { type: "text-you", text: "통했네~" },
-    { type: "text-me", text: "♥️♥️♥️♥️♥️" },
+    { type: "text-me", text: "❤️❤️❤️❤️❤️" },
 
     { type: "meta-center", text: "3월 6일 (금) 20:19" },
 
@@ -936,7 +1103,7 @@ dummyAppButtons.forEach((button) => {
     { type: "text-me", text: "알았지??!?!?????" },
     { type: "text-you", text: "넹.. 숙소가서 통화해용" },
     { type: "text-you", text: "加油!" },
-    { type: "text-me", text: "♥️♥️♥️♥️♥️" },
+    { type: "text-me", text: "❤️❤️❤️❤️❤️" },
 
     { type: "meta-center", text: "3월 9일 (월) 14:02" },
 
@@ -952,9 +1119,9 @@ dummyAppButtons.forEach((button) => {
     { type: "text-you", text: "형이랑 같이 나눠먹고 시펐는데" },
     { type: "text-me", text: "아주 형을 막 부려먹ㅇ" },
     { type: "text-me", text: "아아아앙롱아 형이랑 같이 먹고싶어서" },
-    { type: "text-me", text: "형 생각한거야???????♥️♥️♥️♥️♥️" },
+    { type: "text-me", text: "형 생각한거야???????❤️❤️❤️❤️❤️" },
     { type: "text-me", text: "팥으로 다 사갈게에에에~~~~" },
-    { type: "text-me", text: "♥️♥️♥️♥️♥️♥️" },
+    { type: "text-me", text: "❤️❤️❤️❤️❤️❤️" },
     { type: "text-me", text: "우리롱이 따뜻한거 먹여줘야지" },
     { type: "text-me", text: "품에 넣고 뛴다 이제" },
     { type: "text-you", text: "天哪" },
@@ -966,16 +1133,16 @@ dummyAppButtons.forEach((button) => {
     { type: "text-me", text: "내가 처음 마지막 둘 다 축하해줌" },
     { type: "text-me", text: "맞지?????" },
     { type: "text-me", text: "잘 자고 내 꿈 꿔야 돼~~ :3" },
-    { type: "text-me", text: "사롱롱해♥️♥️♥️" },
+    { type: "text-me", text: "사롱롱해❤️❤️❤️" },
     { type: "text-you", text: "ㅋㅋㅋ챙겨줘서고마워요" },
     { type: "text-you", text: "형도 잘자용~" },
     { type: "text-you", text: "晚安" },
     { type: "text-you", text: "520😬" },
-    { type: "text-me", text: "♥️♥️♥️♥️♥️♥️" },
+    { type: "text-me", text: "❤️❤️❤️❤️❤️❤️" },
     { type: "text-me", text: "나도 486~~~~" },
     { type: "text-me", text: "486 = 520 같은 뜻" },
     { type: "text-you", text: "oh 486 새로 알앗어요!! 신기하다" },
-    { type: "text-you", text: "😬😬😬😬😬♥️" },
+    { type: "text-you", text: "😬😬😬😬😬❤️" },
 
     { type: "meta-center", text: "3월 15일 (일) 21:35" },
 
@@ -1045,8 +1212,8 @@ dummyAppButtons.forEach((button) => {
 
     { type: "text-me", text: "롱아 잘 자 오늘도 내 꿈 꿔" },
     { type: "text-me", text: "롱쿨러~~~" },
-    { type: "text-me", text: "롱나잇~~~~♥️♥️" },
-    { type: "text-you", text: "晚安😬😬♥️" },
+    { type: "text-me", text: "롱나잇~~~~❤️❤️" },
+    { type: "text-you", text: "晚安😬😬❤️" },
 
     { type: "meta-center", text: "3월 26일 (목) 21:25" },
     { type: "text-you", text: "거누형" },
@@ -1095,10 +1262,10 @@ dummyAppButtons.forEach((button) => {
     { type: "text-you", text: "이따가 편의점 간다고 나올게용" },
     { type: "text-you", text: "😬😬😬" },
     { type: "text-me", text: "너 이러면 내가 풀릴 줄 알ㄱ" },
-    { type: "text-you", text: "♥️♥️♥️" },
+    { type: "text-you", text: "❤️❤️❤️" },
     { type: "text-me", text: "..연락해 맞춰서 나와있을게" },
     { type: "text-me", text: "롱이 좋아하는 과자 다 사줄게~~~" },
-    { type: "text-me", text: "ㅎㅎ♥️" },
+    { type: "text-me", text: "ㅎㅎ❤️" },
 
     { type: "meta-center", text: "(오늘) 00:00" },
 
@@ -1106,7 +1273,7 @@ dummyAppButtons.forEach((button) => {
     { type: "text-you", text: "네 형꿈꿀게요" },
     { type: "text-me", text: "뭐야" },
     { type: "text-me", text: "그래..." },
-    { type: "text-me", text: "그럼 내가 晚安~~♥️" },
+    { type: "text-me", text: "그럼 내가 晚安~~❤️" },
     { type: "read-status", text: "읽음: 00:13" },
     { type: "text-you", text: "ㅋㅋㅋ잘자용 형도" }
   ]
@@ -1480,7 +1647,7 @@ dummyAppButtons.forEach((button) => {
 - 오렌지_Wendy Cope`
     },
 
-    { type: "text-me", text: "좋네 너 최애 책 맞지? 읽어보고 싶었는데" },
+    { type: "text-me", text: "너 맨날 들고 다니던 거 맞지? 읽어보고 싶었는데" },
     { type: "text-you", text: "내일 빌려줄게잉~" },
     { type: "text-me", text: "드디어 읽어보넹 ㅋㅋ" },
     { type: "text-me", text: "땡큐~~~ :3" },

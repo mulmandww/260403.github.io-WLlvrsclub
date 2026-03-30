@@ -1136,6 +1136,272 @@ img {
   overflow: hidden;
 }
 
+
+/* ============================= */
+/* ENTRY FLOW */
+/* ============================= */
+
+.entry-screen {
+  z-index: 70;
+  background: #000;
+  overflow: hidden;
+}
+
+.entry-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.24), rgba(0, 0, 0, 0.42)),
+    url("assets/wallpaper/background.jpg") center / cover no-repeat;
+  transform: scale(1.08);
+  filter: blur(18px);
+}
+
+.entry-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.10), transparent 34%),
+    linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(0,0,0,0.18));
+}
+
+.entry-card-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(86px + var(--safe-top)) 18px calc(74px + var(--safe-bottom));
+}
+
+.entry-stack {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: 360px;
+  height: 260px;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.entry-stack-card {
+  position: absolute;
+  left: 50%;
+  width: calc(100% - 26px);
+  border-radius: 28px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(26px) saturate(180%);
+  -webkit-backdrop-filter: blur(26px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    inset 0 -1px 0 rgba(255,255,255,0.04),
+    0 14px 34px rgba(0,0,0,0.18);
+}
+
+.entry-stack-card-back {
+  top: 18px;
+  height: 190px;
+  transform: translateX(-50%) scale(0.90);
+  opacity: 0.42;
+}
+
+.entry-stack-card-mid {
+  top: 8px;
+  height: 210px;
+  transform: translateX(-50%) scale(0.95);
+  opacity: 0.62;
+}
+
+.entry-card {
+  position: relative;
+  width: 100%;
+  max-width: 356px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    inset 0 -1px 0 rgba(255,255,255,0.04),
+    0 12px 28px rgba(0,0,0,0.14);
+  overflow: hidden;
+  padding: 18px 18px 16px;
+}
+
+.entry-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.22) 0%,
+      rgba(255,255,255,0.08) 20%,
+      rgba(255,255,255,0.02) 45%,
+      rgba(255,255,255,0.00) 72%
+    );
+  pointer-events: none;
+}
+
+.entry-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.entry-card-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.entry-app-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.94);
+}
+
+.entry-card-time {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.72);
+}
+
+.entry-card-title {
+  font-size: 21px;
+  line-height: 1.18;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.entry-card-text {
+  font-size: 14px;
+  line-height: 1.48;
+  color: rgba(255,255,255,0.92);
+  word-break: keep-all;
+}
+
+.entry-card-text-long {
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.entry-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.entry-card-actions-single {
+  grid-template-columns: 1fr;
+}
+
+.entry-card-btn {
+  height: 44px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  transition: transform 0.15s ease, filter 0.15s ease, background 0.15s ease;
+}
+
+.entry-card-btn:active,
+.entry-select-btn:active {
+  transform: scale(0.97);
+}
+
+.entry-card-btn-secondary {
+  background: rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.96);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.entry-card-btn-primary {
+  background: #0a84ff;
+  color: #fff;
+}
+
+.entry-select-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.entry-select-btn {
+  height: 56px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+}
+
+.entry-passcode-screen .home-indicator,
+.entry-intro-screen .home-indicator,
+.entry-notice-screen .home-indicator,
+.entry-select-screen .home-indicator {
+  background: rgba(255,255,255,0.96);
+}
+
+@media screen and (max-width: 480px) {
+  .entry-card-wrap {
+    padding: calc(82px + env(safe-area-inset-top)) 14px calc(66px + env(safe-area-inset-bottom));
+  }
+
+  .entry-stack {
+    max-width: 100%;
+    height: 240px;
+  }
+
+  .entry-stack-card {
+    width: calc(100% - 28px);
+  }
+
+  .entry-card {
+    max-width: 100%;
+    border-radius: 26px;
+    padding: 16px 16px 14px;
+  }
+
+  .entry-card-title {
+    font-size: 20px;
+  }
+
+  .entry-card-text {
+    font-size: 13px;
+    line-height: 1.46;
+  }
+
+  .entry-card-btn {
+    height: 42px;
+    border-radius: 13px;
+    font-size: 13px;
+  }
+
+  .entry-select-btn {
+    height: 52px;
+    border-radius: 16px;
+    font-size: 17px;
+  }
+}
+
+
 /* ============================= */
 /* MEMO APP */
 /* ============================= */
