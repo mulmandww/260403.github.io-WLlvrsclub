@@ -38,74 +38,72 @@
 
     <!-- 3. ENTRY GATE PASSCODE -->
     <section class="entry-screen entry-gate-passcode-screen" id="entryGatePasscodeScreen">
-      <div class="wallpaper wallpaper-passcode"></div>
-      <div class="passcode-blur"></div>
-      <div class="lock-overlay-top"></div>
+      <div class="entry-gate-bg"></div>
 
-      <div class="passcode-wrap entry-gate-passcode-wrap" id="entryGatePasscodeWrap">
-        <div class="lock-icon passcode-lock"></div>
+      <div class="entry-gate-wrap" id="entryGatePasscodeWrap">
+        <div class="entry-gate-lock" aria-hidden="true"></div>
 
-        <h1 class="passcode-title">암호 입력</h1>
+        <h1 class="entry-gate-title">암호 입력</h1>
 
-        <div class="passcode-dots">
-          <span class="passcode-dot" id="entryGateDot1"></span>
-          <span class="passcode-dot" id="entryGateDot2"></span>
-          <span class="passcode-dot" id="entryGateDot3"></span>
-          <span class="passcode-dot" id="entryGateDot4"></span>
+        <div class="entry-gate-dots">
+          <span class="entry-gate-dot" id="entryGateDot1"></span>
+          <span class="entry-gate-dot" id="entryGateDot2"></span>
+          <span class="entry-gate-dot" id="entryGateDot3"></span>
+          <span class="entry-gate-dot" id="entryGateDot4"></span>
         </div>
 
-        <div class="keypad">
-          <button class="key key-number" type="button" onclick="entryGatePressKey('1')">
+        <div class="entry-gate-keypad">
+          <button class="entry-gate-key" type="button" onclick="entryGatePressKey('1')">
             <span class="num">1</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="entryGatePressKey('2')">
+          <button class="entry-gate-key" type="button" onclick="entryGatePressKey('2')">
             <span class="num">2</span>
             <span class="letters">ABC</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="entryGatePressKey('3')">
+          <button class="entry-gate-key" type="button" onclick="entryGatePressKey('3')">
             <span class="num">3</span>
             <span class="letters">DEF</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="entryGatePressKey('4')">
+          <button class="entry-gate-key" type="button" onclick="entryGatePressKey('4')">
             <span class="num">4</span>
             <span class="letters">GHI</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="entryGatePressKey('5')">
+          <button class="entry-gate-key" type="button" onclick="entryGatePressKey('5')">
             <span class="num">5</span>
             <span class="letters">JKL</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="entryGatePressKey('6')">
+          <button class="entry-gate-key" type="button" onclick="entryGatePressKey('6')">
             <span class="num">6</span>
             <span class="letters">MNO</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="entryGatePressKey('7')">
+          <button class="entry-gate-key" type="button" onclick="entryGatePressKey('7')">
             <span class="num">7</span>
             <span class="letters">PQRS</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="entryGatePressKey('8')">
+          <button class="entry-gate-key" type="button" onclick="entryGatePressKey('8')">
             <span class="num">8</span>
             <span class="letters">TUV</span>
           </button>
 
-          <button class="key key-number" type="button" onclick="entryGatePressKey('9')">
+          <button class="entry-gate-key" type="button" onclick="entryGatePressKey('9')">
             <span class="num">9</span>
             <span class="letters">WXYZ</span>
           </button>
 
-          <div class="key-empty"></div>
+          <div class="entry-gate-key-empty"></div>
 
-          <button class="key key-number" type="button" onclick="entryGatePressKey('0')">
+          <button class="entry-gate-key" type="button" onclick="entryGatePressKey('0')">
             <span class="num">0</span>
           </button>
 
-          <div class="key-empty"></div>
+          <div class="entry-gate-key-empty"></div>
         </div>
       </div>
     </section>
@@ -121,7 +119,7 @@
       <button class="entry-hitbox select-xl" id="entrySelectXlBtn" type="button" aria-label="XL 선택"></button>
     </section>
   </section>
-  
+
 
   <main class="phone">
     <div class="dynamic-island"></div>

@@ -37,6 +37,7 @@ const entryGateDots = [
   document.getElementById("entryGateDot3"),
   document.getElementById("entryGateDot4")
 ].filter(Boolean);
+const entryGateKeyButtons = document.querySelectorAll(".entry-gate-key");
 
 
 /* 홈화면 앱 */
@@ -182,6 +183,7 @@ function shakeEntryIntroScreen() {
 }
 
 async function openEntryGatePasscodeScreen() {
+  entryGateResetInput();
   await setActiveEntryScreen(entryGatePasscodeScreen);
 }
 
@@ -264,6 +266,18 @@ if (entrySelectGwBtn) {
 if (entrySelectXlBtn) {
   entrySelectXlBtn.addEventListener("click", () => enterSelectedDataset("xl"));
 }
+
+entryGateKeyButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    button.classList.remove("tap");
+    void button.offsetWidth;
+    button.classList.add("tap");
+
+    setTimeout(() => {
+      button.classList.remove("tap");
+    }, 180);
+  });
+});
 
 window.entryGatePressKey = entryGatePressKey;
 

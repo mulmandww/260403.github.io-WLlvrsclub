@@ -128,15 +128,6 @@ img {
   pointer-events: none;
 }
 
-/* 모바일은 기존처럼 꽉 차게 */
-@media screen and (max-width: 480px) {
-  .entry-picture img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
 .entry-hitbox {
   position: absolute;
   z-index: 2;
@@ -170,75 +161,6 @@ img {
   transform: scale(0.98);
 }
 
-.entry-gate-passcode-screen {
-  background: #e5e5e5;
-}
-
-.entry-gate-passcode-screen .wallpaper-passcode {
-  background: #e5e5e5;
-}
-
-.entry-gate-passcode-screen .passcode-blur {
-  background: rgba(0, 0, 0, 0);
-}
-
-.entry-gate-passcode-screen .lock-overlay-top {
-  display: none;
-}
-
-.entry-gate-passcode-wrap {
-  z-index: 3;
-}
-
-/* =========================
-   ENTRY GATE PASSCODE - DARK TEXT/UI
-========================= */
-.entry-gate-passcode-screen .passcode-lock {
-  filter: brightness(0.18);
-  opacity: 0.9;
-}
-
-.entry-gate-passcode-screen .passcode-title {
-  color: rgba(35, 35, 35, 0.95);
-  text-shadow: none;
-}
-
-.entry-gate-passcode-screen .passcode-dot {
-  border-color: rgba(55, 55, 55, 0.55);
-  background: transparent;
-}
-
-.entry-gate-passcode-screen .passcode-dot.filled {
-  background: rgba(35, 35, 35, 0.9);
-  border-color: rgba(35, 35, 35, 0.9);
-}
-
-.entry-gate-passcode-screen .key.key-number {
-  background: rgba(255, 255, 255, 0.42);
-  border: 1px solid rgba(70, 70, 70, 0.08);
-  box-shadow:
-    0 6px 18px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.entry-gate-passcode-screen .key.key-number .num {
-  color: rgba(35, 35, 35, 0.92);
-  text-shadow: none;
-}
-
-.entry-gate-passcode-screen .key.key-number .letters {
-  color: rgba(55, 55, 55, 0.72);
-  text-shadow: none;
-}
-
-.entry-gate-passcode-screen .key.key-number:active {
-  background: rgba(255, 255, 255, 0.58);
-  transform: scale(0.96);
-}
-
-
 /* shake */
 .entry-screen.shake {
   animation: entryImageShake 0.36s ease;
@@ -254,11 +176,203 @@ img {
 }
 
 /* =========================
-   DESKTOP HOTSPOT
-   90% 축소 이미지 기준으로 재조정
+   ENTRY GATE PASSCODE
 ========================= */
+.entry-gate-passcode-screen {
+  background: #e5e5e5;
+}
 
-/* intro */
+.entry-gate-bg {
+  position: absolute;
+  inset: 0;
+  background: #e5e5e5;
+}
+
+.entry-gate-wrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 390px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 118px;
+  left: 0;
+}
+
+.entry-gate-wrap.shake {
+  animation: iphoneShakeLeft 0.36s ease;
+}
+
+.entry-gate-lock {
+  width: 24px;
+  height: 28px;
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.entry-gate-lock::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 9px;
+  border: 3px solid #222;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.entry-gate-lock::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 15px;
+  border-radius: 4px;
+  background: #222;
+}
+
+.entry-gate-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  color: rgba(35, 35, 35, 0.95);
+}
+
+.entry-gate-dots {
+  display: flex;
+  gap: 26px;
+  margin-bottom: 56px;
+}
+
+.entry-gate-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid rgba(55, 55, 55, 0.55);
+  background: transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.entry-gate-dot.filled {
+  background: rgba(35, 35, 35, 0.9);
+  border-color: rgba(35, 35, 35, 0.9);
+}
+
+.entry-gate-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 94px);
+  gap: 18px 14px;
+  justify-content: center;
+  align-items: center;
+}
+
+.entry-gate-key {
+  width: 94px;
+  height: 94px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(70, 70, 70, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #222;
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+  will-change: transform, background;
+}
+
+.entry-gate-key::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.20) 0%,
+      rgba(255,255,255,0.08) 26%,
+      rgba(255,255,255,0.02) 48%,
+      rgba(255,255,255,0.00) 72%
+    );
+  pointer-events: none;
+}
+
+.entry-gate-key::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.12) 35%, rgba(255,255,255,0.00) 72%);
+  opacity: 0;
+  transform: scale(0.45);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+  pointer-events: none;
+}
+
+.entry-gate-key:active {
+  transform: scale(0.96);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.entry-gate-key.tap {
+  transform: scale(0.955);
+  background: rgba(255, 255, 255, 0.54);
+}
+
+.entry-gate-key.tap::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.entry-gate-key .num {
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 300;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+  color: #222;
+}
+
+.entry-gate-key .letters {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1;
+  margin-left: 2px;
+  position: relative;
+  z-index: 1;
+  color: rgba(34, 34, 34, 0.72);
+}
+
+.entry-gate-key-empty {
+  width: 94px;
+  height: 94px;
+}
+
+/* =========================
+   DESKTOP HOTSPOT
+========================= */
 .intro-later {
   left: 38.4%;
   top: 55.0%;
@@ -275,7 +389,6 @@ img {
   border-radius: 999px;
 }
 
-/* notice */
 .notice-confirm {
   left: 44.0%;
   top: 82%;
@@ -284,7 +397,6 @@ img {
   border-radius: 999px;
 }
 
-/* select */
 .select-gw {
   left: 44.0%;
   top: 54.2%;
@@ -302,9 +414,15 @@ img {
 }
 
 /* =========================
-   MOBILE HOTSPOT
+   MOBILE ONLY
 ========================= */
 @media screen and (max-width: 480px) {
+  .entry-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   .intro-later {
     left: 21.2%;
     top: 57.2%;
@@ -326,21 +444,6 @@ img {
     height: 5.4%;
   }
 
-  .entry-gate-passcode-screen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px;
-  }
-
-  .entry-gate-passcode-wrap {
-    width: 100%;
-    max-width: 360px;
-    transform: none !important;
-    padding-top: 0 !important;
-    margin: 0 auto;
-  }
-
   .select-gw {
     left: 14.9%;
     top: 53.9%;
@@ -353,6 +456,54 @@ img {
     top: 61.0%;
     width: 70.2%;
     height: 5.2%;
+  }
+
+  .entry-gate-passcode-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+  }
+
+  .entry-gate-wrap {
+    width: 100%;
+    max-width: 360px;
+    min-height: auto;
+    padding-top: 0;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .entry-gate-lock {
+    margin-bottom: 28px;
+  }
+
+  .entry-gate-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .entry-gate-dots {
+    margin-bottom: 42px;
+  }
+
+  .entry-gate-keypad {
+    grid-template-columns: repeat(3, 82px);
+    gap: 14px 12px;
+  }
+
+  .entry-gate-key,
+  .entry-gate-key-empty {
+    width: 82px;
+    height: 82px;
+  }
+
+  .entry-gate-key .num {
+    font-size: 31px;
+  }
+
+  .entry-gate-key .letters {
+    font-size: 8px;
   }
 }
 
@@ -6596,123 +6747,5 @@ messages-image-top-btn
   .instagram-post-time {
     padding: 8px 12px 0;
     font-size: 11px;
-  }
-
-    /* =========================
-     ENTRY GATE PASSCODE - MOBILE FINAL
-  ========================= */
-  .entry-gate-passcode-screen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #cccccc;
-  }
-
-  .entry-gate-passcode-screen .wallpaper-passcode {
-    background: #cccccc !important;
-  }
-
-  .entry-gate-passcode-screen .passcode-blur {
-    background: transparent !important;
-  }
-
-  .entry-gate-passcode-screen .lock-overlay-top {
-    display: none !important;
-  }
-
-  .entry-gate-passcode-screen .entry-gate-passcode-wrap {
-    width: 100%;
-    max-width: 360px;
-    height: auto;
-    padding-top: 0 !important;
-    margin: 0 auto;
-    transform: none !important;
-    transform-origin: center center !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .entry-gate-passcode-screen .passcode-lock.lock-icon {
-    margin-bottom: 28px;
-  }
-
-  .entry-gate-passcode-screen .passcode-lock.lock-icon::before {
-    border-color: #222 !important;
-  }
-
-  .entry-gate-passcode-screen .passcode-lock.lock-icon::after {
-    background: #222 !important;
-  }
-
-  .entry-gate-passcode-screen .passcode-title {
-    color: #222 !important;
-    text-shadow: none !important;
-    margin-bottom: 20px;
-  }
-
-  .entry-gate-passcode-screen .passcode-dots {
-    margin-bottom: 42px;
-  }
-
-  .entry-gate-passcode-screen .passcode-dot {
-    border-color: rgba(34, 34, 34, 0.45) !important;
-    background: transparent !important;
-  }
-
-  .entry-gate-passcode-screen .passcode-dot.filled {
-    background: #222 !important;
-    border-color: #222 !important;
-  }
-
-  .entry-gate-passcode-screen .keypad {
-    transform: none !important;
-    grid-template-columns: repeat(3, 82px) !important;
-    gap: 14px 12px !important;
-    justify-content: center;
-  }
-
-  .entry-gate-passcode-screen .key,
-  .entry-gate-passcode-screen .key-empty {
-    width: 82px !important;
-    height: 82px !important;
-  }
-
-  .entry-gate-passcode-screen .key.key-number {
-    background: rgba(255, 255, 255, 0.42) !important;
-    border: 1px solid rgba(70, 70, 70, 0.08) !important;
-    box-shadow:
-      0 6px 18px rgba(0, 0, 0, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-  }
-
-  .entry-gate-passcode-screen .key.key-number::before {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(255,255,255,0.20) 0%,
-        rgba(255,255,255,0.08) 26%,
-        rgba(255,255,255,0.02) 48%,
-        rgba(255,255,255,0.00) 72%
-      ) !important;
-  }
-
-  .entry-gate-passcode-screen .key.key-number .num {
-    color: #222 !important;
-    font-size: 31px !important;
-    text-shadow: none !important;
-  }
-
-  .entry-gate-passcode-screen .key.key-number .letters {
-    color: rgba(34, 34, 34, 0.7) !important;
-    font-size: 8px !important;
-    text-shadow: none !important;
-  }
-
-  .entry-gate-passcode-screen .key.key-number:active {
-    background: rgba(255, 255, 255, 0.58) !important;
   }
 }
