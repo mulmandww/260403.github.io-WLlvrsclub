@@ -4165,7 +4165,7 @@ weather: {
     },
     calculator: {
       title: "계산기",
-      text: "(411×(11+4))−(43×(11+3))+(3×4×11)−(43+3) = ?",
+      text: "411×(3+4+4)−43×3+(11−4) = ?",
       icon: "assets/icons/calculator.png"
     }
   };
@@ -4614,4 +4614,545 @@ weather: {
   window.xlPressKey = xlPressKey;
 
   showGwBranch();
+})();
+
+/* =========================
+   XL PHOTOS APP
+========================= */
+(function initXlPhotosApp() {
+  const xlPhotosScreen = document.getElementById("xlPhotosScreen");
+  if (!xlPhotosScreen) return;
+
+  const xlPhotosGrid = document.getElementById("xlPhotosGrid");
+  const xlPhotosGridScroll = document.getElementById("xlPhotosGridScroll");
+  const xlPhotosDetailScroll = document.getElementById("xlPhotosDetailScroll");
+  const xlPhotosDetailStage = xlPhotosScreen.querySelector(".photos-detail-stage");
+  const xlPhotosDetailBack = xlPhotosScreen.querySelector(".photos-detail-back");
+
+  if (!xlPhotosGrid || !xlPhotosGridScroll || !xlPhotosDetailStage) return;
+
+  const XL_PHOTO_FILES = [
+  "001.JPG",
+"002.JPG",
+"003.JPG",
+"004.JPG",
+"005.JPG",
+"006.JPG",
+"007.JPG",
+"008.JPG",
+"009.JPG",
+"010.JPG",
+"011.JPG",
+"012.JPG",
+"013.JPG",
+"014.JPG",
+"015.JPG",
+"016.JPG",
+"018.JPG",
+"019.JPG",
+"020.JPG",
+"021.JPG",
+"022.JPG",
+"023.JPG",
+"024.JPG",
+"025.JPG",
+"026.JPG",
+"027.JPG",
+"028.JPG",
+"029.JPG",
+"030.jpeg",
+"031.jpg",
+"032.jpg",
+"033.JPG",
+"034.JPG",
+"035.JPG",
+"036.JPG",
+"037.JPG",
+"038.jpeg",
+"039.jpeg",
+"040.jpeg",
+"041.jpeg",
+"042.jpeg",
+"043.jpg",
+"044.jpg",
+"045.jpeg",
+"046.jpeg",
+"047.jpeg",
+"048.JPG",
+"049.JPG",
+"050.JPG",
+"051.JPG",
+"052.JPG",
+"053.jpg",
+"054.JPG",
+"055.JPG",
+"056.JPG",
+"057.JPG",
+"058.JPG",
+"059.JPG",
+"060.jpeg",
+"061.jpeg",
+"062.jpeg",
+"063.jpeg",
+"064.JPG",
+"065.JPG",
+"066.JPG",
+"067.jpeg",
+"068.jpeg",
+"069.jpeg",
+"070.jpeg",
+"071.JPG",
+"072.JPG",
+"073.JPG",
+"074.jpeg",
+"075.jpeg",
+"076.JPG",
+"077.jpeg",
+"078.jpeg",
+"079.jpeg",
+"080.jpeg",
+"081.JPG",
+"082.JPG",
+"083.JPG",
+"084.webp",
+"085.JPG",
+"086.JPG",
+"087.JPG",
+"088.JPG",
+"089.JPG",
+"090.JPG",
+"091.JPG",
+"092.jpeg",
+"093.jpeg",
+"094.JPG",
+"095.JPG",
+"096.JPG",
+"097.JPG",
+"098.JPG",
+"099.JPG",
+"100.JPG",
+"101.JPG",
+"102.JPG",
+"103.JPG",
+"104.JPG",
+"105.JPG",
+"106.JPG",
+"107.JPG",
+"108.JPG",
+"109.JPG",
+"110.JPG",
+"111.JPG",
+"112.JPG",
+"113.JPG",
+"114.jpeg",
+"115.JPG",
+"116.JPG",
+"117.JPG",
+"118.JPG",
+"119.JPG",
+"120.JPG",
+"121.JPG",
+"122.JPG",
+"123.JPG",
+"124.JPG",
+"125.JPG",
+"126.JPG",
+"127.JPG",
+"128.JPG",
+"129.JPG",
+"130.JPG",
+"131.JPG",
+"132.JPEG",
+"133.JPG",
+"134.JPG",
+"135.JPG",
+"136.jpeg",
+"137.jpeg",
+"138.JPG",
+"139.JPG",
+"140.jpeg",
+"141.JPG",
+"142.JPG",
+"143.jpeg",
+"144.JPG",
+"145.JPG",
+"146.JPG",
+"147.JPG",
+"148.JPG",
+"149.JPG",
+"150.jpeg",
+"151.JPG",
+"152.JPG",
+"153.JPG",
+"154.JPG",
+"155.JPG",
+"156.JPG",
+"157.jpeg",
+"158.JPG",
+"159.JPG",
+"160.JPG",
+"161.JPG",
+"162.JPG",
+"163.JPEG",
+"164.jpeg",
+"165.JPG",
+"166.JPG",
+"167.jpeg",
+"168.JPEG",
+"169.JPEG",
+"17.JPG",
+"170.jpeg",
+"171.jpeg",
+"172.jpeg",
+"173.JPG",
+"174.JPG",
+"175.JPG",
+"176.JPG",
+"177.JPG",
+"178.JPG",
+"179.JPG",
+"180.JPG",
+"181.jpeg",
+"182.jpeg",
+"183.jpeg",
+"184.jpeg",
+"185.JPG",
+"186.JPG",
+"187.JPG",
+"188.JPG",
+"189.JPG",
+"190.JPG",
+"191.JPG",
+"192.JPG",
+"193.JPG",
+"194.JPG",
+"195.JPG",
+"196.JPG",
+"197.jpeg",
+"198.jpeg",
+"199.jpeg",
+"200.JPG",
+"201.JPG",
+"202.JPG",
+"203.jpeg",
+"204.JPG",
+"205.JPG",
+"206.JPG",
+"207.JPG",
+"208.jpeg",
+"209.jpeg",
+"210.jpeg",
+"211.jpeg",
+"212.JPG",
+"213.JPG",
+"214.jpeg",
+"215.jpeg",
+"216.JPG",
+"217.JPG",
+"218.JPG",
+"219.JPG",
+"220.JPG",
+"221.JPG",
+"222.jpeg",
+"223.JPG",
+"224.JPG",
+"225.jpeg",
+"226.jpeg",
+"227.jpeg",
+"228.jpeg",
+"229.jpeg",
+"230.jpeg",
+"231.JPG",
+"232.JPG",
+"233.JPG",
+"234.JPG",
+"235.JPG",
+"236.JPG",
+"237.JPG",
+"238.jpeg",
+"239.jpeg",
+"240.jpeg",
+"241.jpeg",
+"242.jpeg",
+"243.jpeg",
+"244.jpeg",
+"245.JPEG",
+"246.JPG",
+"247.JPG",
+"248.JPG",
+"249.JPG",
+"250.JPG",
+"251.JPG",
+"252.JPG",
+"253.JPG",
+"254.JPG",
+"255.JPG",
+"256.jpg",
+"257.jpg",
+"258.JPG",
+"259.JPG",
+"260.JPG",
+"261.JPG",
+"262.JPG",
+"263.jpeg",
+"264.jpeg",
+"265.jpeg",
+"266.jpeg",
+"267.jpeg",
+"268.jpeg",
+"269.jpeg",
+"270.jpeg",
+"271.jpeg",
+"272.jpeg",
+"273.jpeg",
+"274.JPG",
+"275.jpg",
+"276.jpeg",
+"277.jpeg",
+"278.jpeg",
+"279.jpg",
+"280.jpeg",
+"281.jpeg",
+"282.jpeg",
+"283.JPG",
+"284.JPG",
+"285.jpeg",
+"286.JPG",
+"287.JPG",
+"288.jpg",
+"289.jpg",
+"290.JPG",
+"291.JPG",
+"292.JPG",
+"293.JPG",
+"294.JPG",
+"295.JPG",
+"296.JPG",
+"297.JPG",
+"298.JPG",
+"299.JPG",
+"300.JPG",
+"301.JPG",
+"302.jpeg",
+"303.JPG",
+"304.JPG",
+"305.JPG",
+"306.JPG",
+"307.JPG",
+"308.JPG",
+"309.JPG",
+"310.JPG",
+"311.JPG",
+"312.JPG",
+"313.jpeg",
+"314.jpeg",
+"315.jpeg",
+"316.JPG",
+"317.JPG",
+"318.JPG",
+"319.JPG",
+"320.jpeg",
+"321.JPG",
+"321_0.JPG",
+"321_1.JPG",
+"321_2.JPG",
+"321_3.JPG",
+"321_4.JPG",
+"321_5.JPG",
+"321_6.JPG",
+"321_7.JPG",
+"322.JPG",
+"322_1.JPG",
+"323.jpeg",
+"324.jpeg",
+"325.jpeg",
+"326.jpeg",
+"327.jpeg",
+"328.jpeg",
+"329.jpeg",
+"330.jpeg",
+"331.jpeg",
+"332.JPG",
+"333.jpeg",
+"334.jpeg",
+"335.jpeg",
+"336.jpeg",
+"337.JPG",
+"338.JPG",
+"339.JPG",
+"340.jpeg",
+"341.jpeg",
+"342.jpeg",
+"343.jpeg",
+"344.jpeg",
+"345.jpeg",
+"346.jpeg",
+"347.jpeg",
+"348.JPG",
+"349.jpeg",
+"350.JPG",
+"351.JPG",
+"352.JPG",
+"353.jpg",
+"354.jpeg",
+"355.JPG",
+"356.JPG",
+"357.jpeg",
+"358.JPG",
+"359.JPG",
+"360.JPG",
+"361.JPG",
+"362.JPG",
+"363.jpeg",
+"364.jpeg",
+"365.JPG",
+"366.JPG",
+"367.JPG",
+"368.JPG",
+"369.jpeg",
+"370.jpeg",
+"371.jpeg",
+"372.JPG",
+"373.jpeg",
+"374.jpeg",
+"375.jpeg",
+"376.jpeg",
+"377.jpeg",
+"378.JPG",
+"379.jpg",
+"380.jpg",
+"381.jpg",
+"382.jpg"
+
+
+    // 여기에 계속 추가
+    // "004.png",
+    // "005.jpeg",
+    // "006.mp4"
+  ];
+
+  let xlCurrentPhotoIndex = null;
+  let xlSavedGridScrollTop = 0;
+
+  function getXlPhotoSrc(index) {
+const CURRENT_PROFILE = "xl";
+return `assets/pictures/${CURRENT_PROFILE}/${XL_PHOTO_FILES[index - 1]}`;
+  }
+
+
+  function getXlPhotoFile(index) {
+    return XL_PHOTO_FILES[index - 1] || "";
+  }
+
+  function isVideoFile(filename) {
+    return /\.(mp4|webm|ogg)$/i.test(filename);
+  }
+
+  function createGridMediaHTML(index) {
+    const file = getXlPhotoFile(index);
+    const src = getXlPhotoSrc(index);
+
+    if (isVideoFile(file)) {
+      return `
+        <video
+          src="${src}"
+          class="photos-thumb-image"
+          muted
+          playsinline
+          preload="metadata"
+        ></video>
+      `;
+    }
+
+    return `<img src="${src}" alt="" class="photos-thumb-image" loading="lazy">`;
+  }
+
+  function createDetailMediaHTML(index) {
+    const file = getXlPhotoFile(index);
+    const src = getXlPhotoSrc(index);
+
+    if (isVideoFile(file)) {
+      return `
+        <video
+          src="${src}"
+          class="photos-detail-image photos-detail-video"
+          controls
+          playsinline
+          preload="metadata"
+        ></video>
+      `;
+    }
+
+    return `<img src="${src}" alt="" class="photos-detail-image">`;
+  }
+
+  function renderxlPhotosGrid() {
+    let html = "";
+
+    for (let i = 1; i <= XL_PHOTO_FILES.length; i += 1) {
+      html += `
+        <button class="photos-thumb-btn" type="button" data-photo-index="${i}" aria-label="미디어 ${i}">
+          ${createGridMediaHTML(i)}
+        </button>
+      `;
+    }
+
+    xlPhotosGrid.innerHTML = html;
+  }
+
+  function scrollPhotosToBottom() {
+    const setBottom = () => {
+      xlPhotosGridScroll.scrollTop = xlPhotosGridScroll.scrollHeight;
+    };
+
+    requestAnimationFrame(setBottom);
+    setTimeout(setBottom, 0);
+    setTimeout(setBottom, 120);
+    setTimeout(setBottom, 320);
+    setTimeout(setBottom, 700);
+  }
+
+  function openPhoto(index) {
+    xlCurrentPhotoIndex = index;
+    xlSavedGridScrollTop = xlPhotosGridScroll.scrollTop;
+
+    xlPhotosDetailStage.innerHTML = createDetailMediaHTML(index);
+    xlPhotosScreen.classList.add("detail-open");
+
+    if (xlPhotosDetailScroll) {
+      xlPhotosDetailScroll.scrollTop = 0;
+    }
+  }
+
+  function closePhoto() {
+    xlPhotosScreen.classList.remove("detail-open");
+    xlCurrentPhotoIndex = null;
+
+    requestAnimationFrame(() => {
+      xlPhotosGridScroll.scrollTop = xlSavedGridScrollTop;
+    });
+  }
+
+  xlPhotosGrid.addEventListener("click", (event) => {
+    const thumb = event.target.closest(".photos-thumb-btn");
+    if (!thumb || !xlPhotosScreen.classList.contains("active")) return;
+
+    openPhoto(Number(thumb.dataset.photoIndex));
+  });
+
+  if (xlPhotosDetailBack) {
+    xlPhotosDetailBack.addEventListener("click", (event) => {
+      event.stopPropagation();
+      closePhoto();
+    });
+  }
+
+  window.resetXlPhotosAppState = function () {
+    xlPhotosScreen.classList.remove("detail-open");
+    xlCurrentPhotoIndex = null;
+    scrollPhotosToBottom();
+  };
+
+  renderxlPhotosGrid();
+  scrollPhotosToBottom();
 })();
