@@ -6901,3 +6901,50 @@ messages-image-top-btn
     font-size: 11px;
   }
 }
+
+
+/* =============================
+   XL BRANCH VISIBILITY
+============================= */
+
+.phone-xl {
+  display: none;
+}
+
+.phone.branch-hidden {
+  display: none !important;
+}
+
+.phone.phone-xl.branch-active {
+  display: block;
+}
+
+.phone.phone-xl[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+.phone.phone-xl[aria-hidden="false"] {
+  pointer-events: auto;
+}
+
+/* =============================
+   XL WALLPAPER TEST
+============================= */
+
+#xlPhone .wallpaper-lock {
+  background: url("assets/wallpaper/xl_wallpaper_lock.jpg") center / cover no-repeat;
+}
+
+#xlPhone .wallpaper-passcode {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
+    url("assets/wallpaper/xl_wallpaper_lock.jpg") center / cover no-repeat;
+}
+
+#xlPhone .wallpaper-home {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.10)),
+    url("assets/wallpaper/xl_wallpaper_lock.jpg") center / cover no-repeat;
+  filter: blur(12px);
+  transform: scale(1.08);
+}

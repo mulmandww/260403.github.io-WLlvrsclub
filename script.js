@@ -4080,3 +4080,417 @@ function syncPostSliderState() {
   renderInstagramGrid();
   resetInstagramAppState();
 })();
+
+
+/* =========================
+   XL BRANCH CONTROLLER
+========================= */
+(function initXlBranch() {
+  const gwPhone = document.querySelector("main.phone:not(.phone-xl)");
+  const xlPhone = document.getElementById("xlPhone");
+
+  if (!gwPhone || !xlPhone) return;
+
+  const xl = {
+    root: xlPhone,
+
+    lockScreen: xlPhone.querySelector("#xlLockScreen"),
+    passcodeScreen: xlPhone.querySelector("#xlPasscodeScreen"),
+    homeScreen: xlPhone.querySelector("#xlHomeScreen"),
+
+    lockDate: xlPhone.querySelector("#xlLockDate"),
+    lockTime: xlPhone.querySelector("#xlLockTime"),
+    statusTime: xlPhone.querySelector("#xlStatusTime"),
+
+    passcodeWrap: xlPhone.querySelector("#xlPasscodeWrap"),
+
+    dots: [
+      xlPhone.querySelector("#xlDot1"),
+      xlPhone.querySelector("#xlDot2"),
+      xlPhone.querySelector("#xlDot3"),
+      xlPhone.querySelector("#xlDot4")
+    ].filter(Boolean),
+
+    openAppButtons: xlPhone.querySelectorAll(".app-icon.open-app, .dock-icon.open-app"),
+    popupAppButtons: xlPhone.querySelectorAll(".app-icon.popup-app, .dock-icon.popup-app"),
+    dummyAppButtons: xlPhone.querySelectorAll(".app-icon.dummy-app, .dock-icon.dummy-app"),
+    backHomeButtons: xlPhone.querySelectorAll(".back-home"),
+    appScreens: xlPhone.querySelectorAll(".app-screen"),
+    keypadButtons: xlPhone.querySelectorAll(".key")
+  };
+
+  const xlState = {
+    password: "4399",
+    currentInput: "",
+    isTransitioning: false,
+    isAppAnimating: false,
+    touchHandled: false,
+    dragging: false,
+    startY: 0,
+    currentY: 0
+  };
+
+  function xlWait(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  function showGwBranch() {
+    gwPhone.classList.remove("branch-hidden");
+    gwPhone.setAttribute("aria-hidden", "false");
+
+    xlPhone.classList.remove("branch-active");
+    xlPhone.setAttribute("aria-hidden", "true");
+  }
+
+  function showXlBranch() {
+    gwPhone.classList.add("branch-hidden");
+    gwPhone.setAttribute("aria-hidden", "true");
+
+    xlPhone.classList.add("branch-active");
+    xlPhone.setAttribute("aria-hidden", "false");
+  }
+
+  function hideAllXlAppScreens() {
+    xl.appScreens.forEach((screen) => {
+      screen.classList.remove("active", "opening", "closing");
+    });
+  }
+
+  function updateXlDateTime() {
+    const now = new Date();
+
+    const hour = String(now.getHours()).padStart(2, "0");
+    const minute = String(now.getMinutes()).padStart(2, "0");
+
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+    const dayIndex = now.getDay();
+
+    const weekdayNames = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+    const weekday = weekdayNames[dayIndex];
+
+    if (xl.lockDate) xl.lockDate.textContent = `${month}월 ${day}일 ${weekday}`;
+    if (xl.lockTime) xl.lockTime.textContent = `${hour}:${minute}`;
+    if (xl.statusTime) xl.statusTime.textContent = `${hour}:${minute}`;
+  }
+
+  function updateXlDots() {
+    xl.dots.forEach((dot, index) => {
+      if (!dot) return;
+      dot.classList.toggle("filled", index < xlState.currentInput.length);
+    });
+  }
+
+  function resetXlInput() {
+    xlState.currentInput = "";
+    updateXlDots();
+  }
+
+  function resetXlShellToLock() {
+    hideAllXlAppScreens();
+
+    if (xl.homeScreen) xl.homeScreen.classList.remove("active", "opening", "closing");
+    if (xl.passcodeScreen) xl.passcodeScreen.classList.remove("active", "opening", "closing");
+    if (xl.lockScreen) xl.lockScreen.classList.add("active");
+
+    resetXlInput();
+    updateXlDateTime();
+  }
+
+  async function openXlPasscodeScreen() {
+    if (!xl.lockScreen || !xl.passcodeScreen) return;
+    if (!xl.lockScreen.classList.contains("active")) return;
+    if (xlState.isTransitioning) return;
+
+    xlState.isTransitioning = true;
+
+    xl.lockScreen.classList.remove("active");
+    xl.lockScreen.classList.add("closing");
+
+    await xlWait(220);
+
+    xl.lockScreen.classList.remove("closing");
+    xl.passcodeScreen.classList.add("active", "opening");
+
+    await xlWait(280);
+
+    xl.passcodeScreen.classList.remove("opening");
+    xlState.isTransitioning = false;
+  }
+
+  async function unlockXlToHome() {
+    if (!xl.passcodeScreen || !xl.homeScreen) return;
+    if (!xl.passcodeScreen.classList.contains("active")) return;
+    if (xlState.isTransitioning) return;
+
+    xlState.isTransitioning = true;
+
+    xl.passcodeScreen.classList.remove("active");
+    xl.passcodeScreen.classList.add("closing");
+
+    await xlWait(240);
+
+    xl.passcodeScreen.classList.remove("closing");
+    xl.homeScreen.classList.add("active", "opening");
+
+    await xlWait(320);
+
+    xl.homeScreen.classList.remove("opening");
+    xlState.isTransitioning = false;
+  }
+
+  function checkXlPassword() {
+    if (xlState.currentInput === xlState.password) {
+      unlockXlToHome();
+      return;
+    }
+
+    if (xl.passcodeWrap) {
+      xl.passcodeWrap.classList.add("shake");
+    }
+
+    setTimeout(() => {
+      if (xl.passcodeWrap) {
+        xl.passcodeWrap.classList.remove("shake");
+      }
+      resetXlInput();
+    }, 360);
+  }
+
+  function xlPressKey(num) {
+    if (xlState.isTransitioning || xlState.isAppAnimating) return;
+    if (xlState.currentInput.length >= 4) return;
+
+    xlState.currentInput += num;
+    updateXlDots();
+
+    if (xlState.currentInput.length === 4) {
+      setTimeout(checkXlPassword, 120);
+    }
+  }
+
+  window.xlPressKey = xlPressKey;
+
+  function getXlPointerY(event) {
+    if (event.touches && event.touches[0]) return event.touches[0].clientY;
+    if (event.changedTouches && event.changedTouches[0]) return event.changedTouches[0].clientY;
+    return event.clientY;
+  }
+
+  function handleXlStart(event) {
+    if (xlState.isTransitioning) return;
+    xlState.dragging = true;
+    xlState.startY = getXlPointerY(event);
+    xlState.currentY = xlState.startY;
+  }
+
+  function handleXlMove(event) {
+    if (!xlState.dragging) return;
+    xlState.currentY = getXlPointerY(event);
+  }
+
+  function handleXlEnd() {
+    if (!xlState.dragging) return;
+    xlState.dragging = false;
+
+    const diff = xlState.startY - xlState.currentY;
+    if (diff > 20) {
+      openXlPasscodeScreen();
+    }
+  }
+
+  async function openXlAppWithAnimation(button) {
+    const targetId = button.dataset.screen;
+    if (!targetId) return;
+
+    const targetScreen = xl.root.querySelector(`#${targetId}`);
+    if (!targetScreen) return;
+    if (!xl.homeScreen || !xl.homeScreen.classList.contains("active")) return;
+    if (xlState.isTransitioning || xlState.isAppAnimating) return;
+
+    xlState.isAppAnimating = true;
+
+    if (targetScreen.id === "xlMemoScreen") {
+      targetScreen.classList.remove("detail-open");
+    }
+
+    button.classList.add("launching");
+    xl.homeScreen.classList.add("app-opening");
+
+    await xlWait(320);
+
+    xl.homeScreen.classList.remove("active", "app-opening");
+    hideAllXlAppScreens();
+    targetScreen.classList.add("active", "opening");
+
+    await xlWait(360);
+
+    button.classList.remove("launching", "touching");
+    targetScreen.classList.remove("opening");
+    xlState.isAppAnimating = false;
+  }
+
+  async function backToHomeFromXlApp() {
+    if (!xl.homeScreen) return;
+    if (xlState.isTransitioning || xlState.isAppAnimating) return;
+
+    const currentAppScreen = xl.root.querySelector(".app-screen.active");
+    if (!currentAppScreen) return;
+
+    xlState.isAppAnimating = true;
+
+    currentAppScreen.classList.remove("active");
+    currentAppScreen.classList.add("closing");
+
+    await xlWait(180);
+
+    currentAppScreen.classList.remove("closing");
+    xl.homeScreen.classList.add("active", "opening");
+
+    await xlWait(260);
+
+    xl.homeScreen.classList.remove("opening");
+    xlState.isAppAnimating = false;
+  }
+
+  function attachXlTouchFeedback(button, action) {
+    button.addEventListener(
+      "touchstart",
+      () => {
+        if (!xl.homeScreen || !xl.homeScreen.classList.contains("active")) return;
+        if (xlState.isTransitioning || xlState.isAppAnimating) return;
+
+        button.classList.add("touching");
+        xlState.touchHandled = false;
+      },
+      { passive: true }
+    );
+
+    button.addEventListener("touchend", async (event) => {
+      if (!xl.homeScreen || !xl.homeScreen.classList.contains("active")) return;
+      if (xlState.isTransitioning || xlState.isAppAnimating) return;
+
+      event.preventDefault();
+      xlState.touchHandled = true;
+
+      await xlWait(120);
+      await action(button);
+    });
+
+    button.addEventListener("touchcancel", () => {
+      button.classList.remove("touching");
+      xlState.touchHandled = false;
+    });
+
+    button.addEventListener("click", async (event) => {
+      if (xlState.touchHandled) {
+        xlState.touchHandled = false;
+        event.preventDefault();
+        return;
+      }
+
+      button.classList.add("touching");
+
+      setTimeout(() => {
+        button.classList.remove("touching");
+      }, 150);
+
+      await action(button);
+    });
+  }
+
+  xl.keypadButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      button.classList.remove("tap");
+      void button.offsetWidth;
+      button.classList.add("tap");
+
+      setTimeout(() => {
+        button.classList.remove("tap");
+      }, 180);
+    });
+  });
+
+  if (xl.lockScreen) {
+    xl.lockScreen.addEventListener("click", openXlPasscodeScreen);
+    xl.lockScreen.addEventListener("touchstart", handleXlStart, { passive: true });
+    xl.lockScreen.addEventListener("touchmove", handleXlMove, { passive: true });
+    xl.lockScreen.addEventListener("touchend", handleXlEnd);
+    xl.lockScreen.addEventListener("mousedown", handleXlStart);
+  }
+
+  window.addEventListener("mousemove", handleXlMove);
+  window.addEventListener("mouseup", handleXlEnd);
+
+  xl.backHomeButtons.forEach((button) => {
+    button.addEventListener("click", backToHomeFromXlApp);
+  });
+
+  xl.openAppButtons.forEach((button) => {
+    attachXlTouchFeedback(button, openXlAppWithAnimation);
+  });
+
+  xl.popupAppButtons.forEach((button) => {
+    attachXlTouchFeedback(button, async (btn) => {
+      await xlWait(40);
+      btn.classList.remove("touching");
+    });
+  });
+
+  xl.dummyAppButtons.forEach((button) => {
+    attachXlTouchFeedback(button, async (btn) => {
+      await xlWait(60);
+      btn.classList.remove("touching");
+    });
+  });
+
+  updateXlDateTime();
+  setInterval(updateXlDateTime, 1000);
+
+  if (entrySelectGwBtn) {
+    entrySelectGwBtn.addEventListener(
+      "click",
+      (event) => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        window.SELECTED_DATASET = "gw";
+
+        showGwBranch();
+        closeEntryFlow();
+
+        const gwLock = document.getElementById("lockScreen");
+        const gwPasscode = document.getElementById("passcodeScreen");
+        const gwHome = document.getElementById("homeScreen");
+
+        document.querySelectorAll("main.phone:not(.phone-xl) .app-screen").forEach((screen) => {
+          screen.classList.remove("active", "opening", "closing");
+        });
+
+        if (gwPasscode) gwPasscode.classList.remove("active", "opening", "closing");
+        if (gwHome) gwHome.classList.remove("active", "opening", "closing");
+        if (gwLock) gwLock.classList.add("active");
+      },
+      true
+    );
+  }
+
+  if (entrySelectXlBtn) {
+    entrySelectXlBtn.addEventListener(
+      "click",
+      (event) => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        window.SELECTED_DATASET = "xl";
+
+        showXlBranch();
+        closeEntryFlow();
+        resetXlShellToLock();
+      },
+      true
+    );
+  }
+
+  showGwBranch();
+})();

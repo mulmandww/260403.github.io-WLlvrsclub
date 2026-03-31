@@ -1065,6 +1065,955 @@
     </div>
   </main>
 
+
+
+
+<!-- XL 분기 구성 -->
+
+<main class="phone phone-xl" id="xlPhone" aria-hidden="true">
+      <div class="dynamic-island"></div>
+
+    <header class="statusbar">
+      <div class="status-left" id="xlStatusTime">00:00</div>
+
+      <div class="status-right">
+        <span class="cellular" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+        </span>
+
+        <span class="wifi" aria-hidden="true">
+          <span class="wifi-dot"></span>
+        </span>
+
+        <span class="battery" aria-hidden="true">
+          <span class="battery-level"></span>
+        </span>
+      </div>
+    </header>
+
+    <!-- 잠금화면 -->
+    <section class="screen lock-screen active" id="xlLockScreen">
+      <div class="wallpaper wallpaper-lock"></div>
+      <div class="lock-overlay-top"></div>
+
+      <div class="lock-content">
+        <div class="lock-icon"></div>
+        <div class="lock-date" id="xlLockDate">3월 15일 일요일</div>
+        <div class="lock-time" id="xlLockTime">00:00</div>
+      </div>
+
+      <div class="swipe-up-area">
+        <div class="swipe-up-text">위로 쓸어올려 열기</div>
+      </div>
+
+      <div class="lock-bottom-actions">
+        <button class="round-action flashlight" type="button" aria-label="손전등">
+          <img src="assets/icons/lock_flashlight.png" class="lock-btn-img" alt="손전등">
+        </button>
+
+        <button class="round-action camera" type="button" aria-label="카메라">
+          <img src="assets/icons/lock_camera.png" class="lock-btn-img" alt="카메라">
+        </button>
+      </div>
+
+      <div class="home-indicator"></div>
+    </section>
+
+    <!-- 암호 입력 -->
+    <section class="screen passcode-screen" id="xlPasscodeScreen">
+      <div class="wallpaper wallpaper-passcode"></div>
+      <div class="passcode-blur"></div>
+      <div class="lock-overlay-top"></div>
+
+      <div class="passcode-wrap" id="xlPasscodeWrap">
+        <div class="lock-icon passcode-lock"></div>
+
+        <h1 class="passcode-title">암호 입력</h1>
+
+        <div class="passcode-dots">
+          <span class="passcode-dot" id="xlDot1"></span>
+          <span class="passcode-dot" id="xlDot2"></span>
+          <span class="passcode-dot" id="xlDot3"></span>
+          <span class="passcode-dot" id="xlDot4"></span>
+        </div>
+
+        <div class="keypad">
+          <button class="key key-number" type="button" onclick="xlPressKey('1')">
+            <span class="num">1</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="xlPressKey('2')">
+            <span class="num">2</span>
+            <span class="letters">ABC</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="xlPressKey('3')">
+            <span class="num">3</span>
+            <span class="letters">DEF</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="xlPressKey('4')">
+            <span class="num">4</span>
+            <span class="letters">GHI</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="xlPressKey('5')">
+            <span class="num">5</span>
+            <span class="letters">JKL</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="xlPressKey('6')">
+            <span class="num">6</span>
+            <span class="letters">MNO</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="xlPressKey('7')">
+            <span class="num">7</span>
+            <span class="letters">PQRS</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="xlPressKey('8')">
+            <span class="num">8</span>
+            <span class="letters">TUV</span>
+          </button>
+
+          <button class="key key-number" type="button" onclick="xlPressKey('9')">
+            <span class="num">9</span>
+            <span class="letters">WXYZ</span>
+          </button>
+
+          <div class="key-empty"></div>
+
+          <button class="key key-number" type="button" onclick="xlPressKey('0')">
+            <span class="num">0</span>
+          </button>
+
+          <div class="key-empty"></div>
+        </div>
+      </div>
+
+      <div class="home-indicator"></div>
+    </section>
+
+    <!-- 홈화면 -->
+    <section class="screen home-screen" id="xlHomeScreen">
+      <div class="wallpaper wallpaper-home"></div>
+
+      <div class="home-apps">
+        <button class="app-icon dummy-app" type="button" aria-label="설정">
+          <img src="assets/icons/settings.png" alt="설정">
+          <span>설정</span>
+        </button>
+
+        <button class="app-icon dummy-app" type="button" aria-label="파일">
+          <img src="assets/icons/files.png" alt="파일">
+          <span>파일</span>
+        </button>
+
+        <button class="app-icon open-app" type="button" data-screen="xlMemoScreen" aria-label="메모">
+          <img src="assets/icons/memo.png" alt="메모">
+          <span>메모</span>
+        </button>
+
+        <button class="app-icon open-app calendar-app-icon" type="button" data-screen="xlCalendarScreen" aria-label="캘린더">
+          <div class="calendar-icon-wrap">
+            <img src="assets/icons/calendar.png" alt="캘린더">
+            <span class="calendar-live-weekday" id="calendarLiveWeekday">화요일</span>
+            <span class="calendar-live-date" id="calendarLiveDate">17</span>
+          </div>
+          <span>캘린더</span>
+        </button>
+
+        <button class="app-icon popup-app" type="button" data-popup="weather" aria-label="날씨">
+          <img src="assets/icons/weather.png" alt="날씨">
+          <span>날씨</span>
+        </button>
+
+        <button class="app-icon popup-app" type="button" data-popup="calculator" aria-label="계산기">
+          <img src="assets/icons/calculator.png" alt="계산기">
+          <span>계산기</span>
+        </button>
+
+        <button class="app-icon dummy-app" type="button" aria-label="카메라">
+          <img src="assets/icons/camera.png" alt="카메라">
+          <span>카메라</span>
+        </button>
+
+        <button class="app-icon open-app" type="button" data-screen="xlPhotosScreen" aria-label="사진">
+          <img src="assets/icons/photos.png" alt="사진">
+          <span>사진</span>
+        </button>
+
+        <button class="app-icon dummy-app" type="button" aria-label="시계">
+          <img src="assets/icons/clock.png" alt="시계">
+          <span>시계</span>
+        </button>
+
+        <button class="app-icon dummy-app" type="button" aria-label="카카오맵">
+          <img src="assets/icons/kakaomap.png" alt="카카오맵">
+          <span>카카오맵</span>
+        </button>
+
+        <button class="app-icon popup-app" type="button" data-popup="youtube" aria-label="YouTube">
+          <img src="assets/icons/youtube.png" alt="YouTube">
+          <span>YouTube</span>
+        </button>
+
+        <button class="app-icon open-app" type="button" data-screen="xlInstagramScreen" aria-label="Instagram">
+          <img src="assets/icons/instagram.png" alt="Instagram">
+          <span>Instagram</span>
+        </button>
+
+        <button class="app-icon dummy-app" type="button" aria-label="App Store">
+          <img src="assets/icons/appstore.png" alt="App Store">
+          <span>App Store</span>
+        </button>
+
+        <button class="app-icon popup-app" type="button" data-popup="spotify" aria-label="spotify">
+          <img src="assets/icons/spotify.png" alt="spotify">
+          <span>spotify</span>
+        </button>
+
+        <button class="app-icon popup-app" type="button" data-popup="x" aria-label="X">
+          <img src="assets/icons/x.png" alt="X">
+          <span>X</span>
+        </button>
+
+        <button class="app-icon dummy-app" type="button" aria-label="Safari">
+          <img src="assets/icons/safari.png" alt="Safari">
+          <span>Safari</span>
+        </button>
+
+        <div class="app-empty"></div>
+        <div class="app-empty"></div>
+        <div class="app-empty"></div>
+        <div class="app-empty"></div>
+
+        <div class="app-empty"></div>
+        <div class="app-empty"></div>
+        <div class="app-empty"></div>
+        <div class="app-empty"></div>
+      </div>
+
+      <div class="dock">
+        <button class="dock-icon open-app" type="button" data-screen="xlPhoneScreen" aria-label="전화">
+          <img src="assets/icons/phone.png" alt="전화">
+        </button>
+
+        <button class="dock-icon open-app" type="button" data-screen="xlMessagesScreen" aria-label="메시지">
+          <img src="assets/icons/messages.png" alt="메시지">
+        </button>
+
+        <button class="dock-icon open-app" type="button" data-screen="xlKakaoScreen" aria-label="카카오톡">
+          <img src="assets/icons/kakaotalk.png" alt="카카오톡">
+        </button>
+
+        <button class="dock-icon popup-app" type="button" data-popup="music" aria-label="음악">
+          <img src="assets/icons/music.png" alt="음악">
+        </button>
+      </div>
+    </section>
+
+    <!-- MEMO APP -->
+    <section class="screen app-screen memo-screen" id="xlMemoScreen">
+      <div class="app-ui memo-ui">
+
+        <!-- 메모 목록 -->
+        <div class="memo-page memo-list-page active" id="memoListPage">
+          <div class="memo-topbar">
+            <button class="back-home app-back-btn memo-home-back" type="button" aria-label="뒤로가기">
+              <span class="back-arrow"></span>
+            </button>
+
+            <button class="memo-more-btn" type="button" aria-label="더보기">
+              <span class="memo-more-dots"></span>
+            </button>
+          </div>
+
+          <div class="memo-list-scroll">
+            <div class="memo-list-head">
+              <h1>메모</h1>
+              <p>114개의 메모</p>
+            </div>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">고정된 메모</h2>
+              <div class="memo-card" id="memoPinnedCard"></div>
+            </section>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">이전 7일</h2>
+              <div class="memo-card" id="memo7DaysCard"></div>
+            </section>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">이전 30일</h2>
+              <div class="memo-card" id="memo30DaysCard"></div>
+            </section>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">2월</h2>
+              <div class="memo-card" id="memoFebruaryCard"></div>
+            </section>
+
+            <section class="memo-section-block">
+              <h2 class="memo-section-title">2025년</h2>
+              <div class="memo-card" id="memo2025Card"></div>
+            </section>
+          </div>
+        </div>
+
+        <!-- 메모 상세 -->
+        <div class="memo-page memo-detail-page" id="memoDetailPage">
+          <div class="memo-topbar memo-detail-topbar">
+            <button class="memo-detail-back app-back-btn" type="button" aria-label="뒤로가기">
+              <span class="back-arrow"></span>
+            </button>
+
+            <div class="memo-detail-actions">
+              <button class="memo-circle-btn memo-image-btn" type="button" aria-label="되돌리기">
+                <img src="assets/icons/undo.png" alt="" class="memo-action-image memo-action-image-undo">
+              </button>
+
+              <button class="memo-pill-btn memo-image-btn" type="button" aria-label="공유 및 더보기">
+                <img src="assets/icons/share.png" alt="" class="memo-action-image memo-action-image-share">
+              </button>
+            </div>
+          </div>
+
+          <div class="memo-detail-scroll">
+            <div class="memo-detail-date" id="memoDetailDate"></div>
+            <h1 class="memo-detail-title" id="memoDetailTitle"></h1>
+            <div class="memo-detail-body" id="memoDetailBody"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+<!-- CALENDAR APP -->
+<section class="screen app-screen calendar-screen" id="xlCalendarScreen">
+  <div class="app-ui calendar-ui">
+    <div class="calendar-topbar">
+      <button class="back-home app-back-btn calendar-back-btn" type="button" aria-label="뒤로가기">
+        <span class="back-arrow"></span>
+      </button>
+
+      <div class="calendar-top-actions">
+        <button class="calendar-top-pill-btn" type="button" aria-label="보기">
+          <img src="assets/icons/calendar_display.png" alt="" class="calendar-top-icon">
+        </button>
+        <button class="calendar-top-pill-btn" type="button" aria-label="검색">
+          <img src="assets/icons/calendar_search.png" alt="" class="calendar-top-icon">
+        </button>
+        <button class="calendar-top-pill-btn calendar-plus-btn" type="button" aria-label="추가">
+          <span>+</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="calendar-scroll" id="calendarScroll">
+      <div class="calendar-months" id="calendarMonths"></div>
+    </div>
+
+    <div class="calendar-bottom-bar">
+      <button class="calendar-today-btn" type="button">오늘</button>
+
+      <div class="calendar-bottom-pill">
+        <button class="calendar-bottom-pill-btn" type="button" aria-label="설정">
+          <img src="assets/icons/calendar_setting.png" alt="" class="calendar-bottom-icon">
+        </button>
+        <button class="calendar-bottom-pill-btn" type="button" aria-label="목록">
+          <img src="assets/icons/calendar_drawer.png" alt="" class="calendar-bottom-icon">
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTOS APP -->
+<section class="screen app-screen photos-screen" id="xlPhotosScreen">
+  <div class="app-ui photos-ui">
+
+    <!-- 목록 페이지 -->
+    <div class="photos-page photos-grid-page active" id="photosGridPage">
+      <div class="photos-grid-topbar">
+        <div class="photos-grid-topbar-bg"></div>
+
+        <button class="back-home app-back-btn photos-home-back" type="button" aria-label="뒤로가기">
+          <span class="back-arrow"></span>
+        </button>
+
+        <div class="photos-grid-actions">
+          <button class="photos-glass-btn photos-sort-btn" type="button" aria-label="정렬">
+            <span class="photos-sort-icon"></span>
+          </button>
+
+          <button class="photos-glass-btn photos-select-btn" type="button" aria-label="선택">
+            선택
+          </button>
+        </div>
+      </div>
+
+      <div class="photos-grid-scroll" id="photosGridScroll">
+        <div class="photos-grid" id="photosGrid"></div>
+      </div>
+
+      <div class="photos-bottom-bar">
+        <div class="photos-bottom-pill">
+          <button class="photos-bottom-tab photos-bottom-tab-active photos-bottom-tab-icon-btn" type="button" aria-label="보관함">
+            <img src="assets/icons/photos_tab_library.png" alt="" class="photos-bottom-tab-image">
+          </button>
+
+          <button class="photos-bottom-tab" type="button" aria-label="년">년</button>
+          <button class="photos-bottom-tab" type="button" aria-label="월">월</button>
+          <button class="photos-bottom-tab" type="button" aria-label="전체">전체</button>
+        </div>
+
+        <button class="photos-search-btn" type="button" aria-label="검색">
+          <img src="assets/icons/photos_search.png" alt="" class="photos-search-image">
+        </button>
+      </div>
+    </div>
+
+<!-- 상세 페이지 -->
+<div class="photos-page photos-detail-page" id="photosDetailPage">
+  <div class="photos-detail-topbar">
+    <button class="photos-detail-back app-back-btn" type="button" aria-label="뒤로가기">
+      <span class="back-arrow"></span>
+    </button>
+  </div>
+
+  <div class="photos-detail-scroll" id="photosDetailScroll">
+    <div class="photos-detail-stage"></div>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<<!-- INSTAGRAM APP -->
+<section class="screen app-screen instagram-screen" id="xlInstagramScreen">
+  <div class="app-ui instagram-ui">
+
+    <!-- 프로필 화면 -->
+    <div class="instagram-page instagram-profile-page active" id="instagramProfilePage">
+      <div class="instagram-profile-topbar">
+        <button class="back-home app-back-btn instagram-home-back" type="button" aria-label="뒤로가기">
+          <span class="back-arrow"></span>
+        </button>
+
+        <div class="instagram-profile-title-wrap">
+          <span class="instagram-profile-username">wxcyrcl</span>
+        </div>
+
+        <div class="instagram-profile-top-actions">
+          <button class="instagram-top-icon-btn" type="button" aria-label="알림">
+            <img src="assets/icons/insta_alart.png" alt="" class="instagram-top-icon">
+          </button>
+          <button class="instagram-top-icon-btn" type="button" aria-label="더보기">
+            <img src="assets/icons/insta_more.png" alt="" class="instagram-top-icon">
+          </button>
+        </div>
+      </div>
+
+      <div class="instagram-profile-scroll" id="instagramProfileScroll">
+        <div class="instagram-profile-header">
+          <button class="instagram-story-ring-btn" id="instagramStoryOpenBtn" type="button" aria-label="스토리 열기">
+            <span class="instagram-story-ring">
+              <img src="assets/icons/insta_profile.png" alt="" class="instagram-profile-avatar">
+            </span>
+          </button>
+
+          <div class="instagram-profile-meta">
+            <div class="instagram-profile-name">김건우</div>
+
+            <div class="instagram-profile-stats">
+              <div class="instagram-profile-stat">
+                <strong>14</strong>
+                <span>게시물</span>
+              </div>
+              <div class="instagram-profile-stat">
+                <strong>1</strong>
+                <span>팔로워</span>
+              </div>
+              <div class="instagram-profile-stat">
+                <strong>1</strong>
+                <span>팔로잉</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="instagram-profile-buttons">
+          <button class="instagram-profile-action-btn instagram-following-btn" type="button">
+            <span>팔로잉</span>
+          </button>
+          <button class="instagram-profile-action-btn" type="button">메시지</button>
+        </div>
+
+        <div class="instagram-profile-tabs">
+          <button class="instagram-tab-btn active" type="button" data-instagram-tab="posts" aria-label="게시물">
+            <img src="assets/icons/insta_post.png" alt="" class="instagram-tab-icon">
+          </button>
+          <button class="instagram-tab-btn" type="button" data-instagram-tab="reels" aria-label="릴스">
+            <img src="assets/icons/insta_reels.png" alt="" class="instagram-tab-icon">
+          </button>
+          <button class="instagram-tab-btn" type="button" data-instagram-tab="tag" aria-label="태그">
+            <img src="assets/icons/insta_tag.png" alt="" class="instagram-tab-icon">
+          </button>
+        </div>
+
+        <div class="instagram-post-grid" id="instagramPostGrid"></div>
+      </div>
+    </div>
+
+    <!-- 스토리 화면 -->
+    <div class="instagram-page instagram-story-page" id="instagramStoryPage">
+      <div class="instagram-story-progress" id="instagramStoryProgress"></div>
+
+      <div class="instagram-story-topbar">
+        <div class="instagram-story-user">
+          <img src="assets/icons/insta_profile.png" alt="" class="instagram-story-avatar">
+          <span class="instagram-story-username">wxcyrcl</span>
+          <span class="instagram-story-time"></span>
+        </div>
+
+        <div class="instagram-story-actions">
+          <button class="instagram-story-icon-btn" type="button" aria-label="더보기">
+            <img src="assets/icons/insta_more.png" alt="" class="instagram-story-top-icon">
+          </button>
+          <button class="instagram-story-close-btn" id="instagramStoryCloseBtn" type="button" aria-label="닫기">×</button>
+        </div>
+      </div>
+
+      <div class="instagram-story-stage" id="instagramStoryStage"></div>
+
+      <div class="instagram-story-bottombar">
+        <div class="instagram-story-message-pill">메시지 보내기...</div>
+
+        <div class="instagram-story-bottom-actions">
+          <button class="instagram-story-bottom-btn" type="button" aria-label="좋아요">
+            <img src="assets/icons/insta_heart_empty.png" alt="" class="instagram-story-bottom-icon">
+          </button>
+          <button class="instagram-story-bottom-btn" type="button" aria-label="댓글">
+            <img src="assets/icons/insta_reply.png" alt="" class="instagram-story-bottom-icon">
+          </button>
+          <button class="instagram-story-bottom-btn" type="button" aria-label="공유">
+            <img src="assets/icons/insta_share.png" alt="" class="instagram-story-bottom-icon">
+          </button>
+        </div>
+      </div>
+
+      <button class="instagram-story-hit instagram-story-hit-left" id="instagramStoryPrevHit" type="button" aria-label="이전"></button>
+      <button class="instagram-story-hit instagram-story-hit-right" id="instagramStoryNextHit" type="button" aria-label="다음"></button>
+    </div>
+
+    <!-- 게시물 상세 화면 -->
+    <div class="instagram-page instagram-post-detail-page" id="instagramPostDetailPage">
+      <div class="instagram-post-detail-topbar">
+        <button class="instagram-post-detail-back app-back-btn" id="instagramPostDetailBack" type="button" aria-label="뒤로가기">
+          <span class="back-arrow"></span>
+        </button>
+
+        <div class="instagram-post-detail-title-wrap">
+          <div class="instagram-post-detail-title">게시물</div>
+          <div class="instagram-post-detail-subtitle">wxcyrcl</div>
+        </div>
+      </div>
+
+      <div class="instagram-post-detail-scroll" id="instagramPostDetailScroll">
+        <div class="instagram-post-detail-card">
+          <div class="instagram-post-detail-head">
+            <div class="instagram-post-detail-user">
+              <img src="assets/icons/insta_profile.png" alt="" class="instagram-post-detail-avatar">
+              <span class="instagram-post-detail-username">wxcyrcl</span>
+            </div>
+
+            <button class="instagram-post-detail-more-btn" type="button" aria-label="더보기">
+              <img src="assets/icons/insta_more.png" alt="" class="instagram-post-detail-more-icon">
+            </button>
+          </div>
+
+          <div class="instagram-post-media-wrap">
+            <div class="instagram-post-counter" id="instagramPostCounter">1/1</div>
+            <div class="instagram-post-slider" id="instagramPostSlider"></div>
+            <div class="instagram-post-dots" id="instagramPostDots"></div>
+          </div>
+
+          <div class="instagram-post-actions">
+            <div class="instagram-post-actions-left">
+              <button class="instagram-post-action-btn" id="instagramHeartToggleBtn" type="button" aria-label="좋아요">
+                <img src="assets/icons/insta_heart_empty.png" alt="" class="instagram-post-action-icon" id="instagramHeartToggleIcon">
+              </button>
+              <button class="instagram-post-action-btn" type="button" aria-label="댓글">
+                <img src="assets/icons/insta_reply.png" alt="" class="instagram-post-action-icon">
+              </button>
+              <button class="instagram-post-action-btn" type="button" aria-label="공유">
+                <img src="assets/icons/insta_share.png" alt="" class="instagram-post-action-icon">
+              </button>
+            </div>
+
+            <button class="instagram-post-action-btn" type="button" aria-label="북마크">
+              <img src="assets/icons/insta_bookmark.png" alt="" class="instagram-post-action-icon">
+            </button>
+          </div>
+
+          <div class="instagram-post-caption" id="instagramPostCaption"></div>
+          <div class="instagram-post-time" id="instagramPostTimeAgo">13분 전</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHONE APP -->
+<section class="screen app-screen phone-screen" id="xlPhoneScreen">
+  <div class="app-ui phone-ui">
+
+<!-- 키패드 -->
+<div class="phone-page phone-page-keypad active" data-phone-page="keypad">
+  <div class="phone-keypad-topbar">
+    <button class="back-home app-back-btn phone-back-btn" type="button" aria-label="뒤로가기">
+      <span class="back-arrow"></span>
+    </button>
+  </div>
+
+  <div class="phone-keypad-wrap">
+    <div class="phone-dial-display-wrap">
+      <div class="phone-dial-display" id="phoneDialDisplay"></div>
+      <div class="phone-dial-easteregg" id="phoneDialEasteregg"></div>
+    </div>
+
+    <div class="phone-keypad-grid">
+      <button class="phone-key-btn" type="button" data-phone-value="1">
+        <span class="phone-key-num">1</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="2">
+        <span class="phone-key-num">2</span>
+        <span class="phone-key-sub">ABC</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="3">
+        <span class="phone-key-num">3</span>
+        <span class="phone-key-sub">DEF</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="4">
+        <span class="phone-key-num">4</span>
+        <span class="phone-key-sub">GHI</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="5">
+        <span class="phone-key-num">5</span>
+        <span class="phone-key-sub">JKL</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="6">
+        <span class="phone-key-num">6</span>
+        <span class="phone-key-sub">MNO</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="7">
+        <span class="phone-key-num">7</span>
+        <span class="phone-key-sub">PQRS</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="8">
+        <span class="phone-key-num">8</span>
+        <span class="phone-key-sub">TUV</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="9">
+        <span class="phone-key-num">9</span>
+        <span class="phone-key-sub">WXYZ</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="*">
+        <span class="phone-key-num">*</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="0">
+        <span class="phone-key-num">0</span>
+        <span class="phone-key-sub phone-key-plus">+</span>
+      </button>
+
+      <button class="phone-key-btn" type="button" data-phone-value="#">
+        <span class="phone-key-num">#</span>
+      </button>
+    </div>
+
+    <div class="phone-keypad-actions">
+      <button class="phone-call-btn" type="button" aria-label="통화">
+        <img src="assets/icons/icon_call_green.png" alt="" class="phone-call-btn-icon">
+      </button>
+
+      <button class="phone-clear-btn" type="button" aria-label="입력 삭제" id="phoneClearBtn">
+        <span class="phone-clear-btn-shape"></span>
+        <span class="phone-clear-btn-x">×</span>
+      </button>
+    </div>
+  </div>
+</div>
+    
+    <!-- 연락처 -->
+    <div class="phone-page phone-page-contacts" data-phone-page="contacts">
+      <div class="phone-page-topbar">
+        <button class="back-home app-back-btn phone-back-btn" type="button" aria-label="뒤로가기">
+          <span class="back-arrow"></span>
+        </button>
+
+        <h2 class="phone-page-title">연락처</h2>
+
+        <button class="phone-top-circle-btn phone-add-btn" type="button" aria-label="추가">
+          <span class="phone-plus-icon"></span>
+        </button>
+      </div>
+
+      <div class="phone-scroll-area phone-contacts-scroll">
+        <div class="phone-contacts-list" id="phoneContactsList">
+          <div class="phone-my-card">
+            <div class="phone-avatar phone-avatar-my">
+              <span class="phone-mycard-head"></span>
+              <span class="phone-mycard-body"></span>
+            </div>
+            <div class="phone-my-card-text">내 카드</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phone-contacts-side-index" aria-hidden="true">
+        <span>ㄱ</span>
+        <span>ㄴ</span>
+        <span>ㄷ</span>
+        <span>ㄹ</span>
+        <span>ㅁ</span>
+        <span>ㅂ</span>
+        <span>ㅅ</span>
+        <span>ㅇ</span>
+        <span>ㅈ</span>
+        <span>ㅊ</span>
+        <span>ㅋ</span>
+        <span>ㅌ</span>
+        <span>ㅍ</span>
+        <span>ㅎ</span>
+        <span>A</span>
+        <span>B</span>
+        <span>C</span>
+        <span>D</span>
+        <span>E</span>
+        <span>F</span>
+        <span>G</span>
+        <span>H</span>
+        <span>I</span>
+        <span>J</span>
+        <span>K</span>
+        <span>L</span>
+        <span>M</span>
+        <span>N</span>
+        <span>O</span>
+        <span>P</span>
+        <span>Q</span>
+        <span>R</span>
+        <span>S</span>
+        <span>T</span>
+        <span>U</span>
+        <span>V</span>
+        <span>W</span>
+        <span>X</span>
+        <span>Y</span>
+        <span>Z</span>
+        <span>#</span>
+      </div>
+    </div>
+
+    <!-- 통화 -->
+    <div class="phone-page phone-page-recents" data-phone-page="recents">
+      <div class="phone-page-topbar">
+        <button class="back-home app-back-btn phone-back-btn" type="button" aria-label="뒤로가기">
+          <span class="back-arrow"></span>
+        </button>
+
+        <button class="phone-edit-btn" type="button" aria-label="편집">편집</button>
+
+        <h2 class="phone-page-title">통화</h2>
+
+        <button class="phone-top-circle-btn phone-filter-btn" type="button" aria-label="서랍">
+          <span class="phone-drawer-icon"></span>
+        </button>
+      </div>
+
+      <div class="phone-scroll-area phone-recents-scroll">
+        <div class="phone-recents-list" id="phoneRecentsList"></div>
+      </div>
+    </div>
+
+    <!-- 하단 영역 -->
+    <div class="phone-bottom-controls">
+      <div class="phone-tabbar">
+        <button class="phone-tab-btn" type="button" data-phone-tab="recents" aria-label="통화">
+          <div class="phone-tab-inner">
+            <img src="assets/icons/icon_call_recent.png" alt="" class="phone-tab-icon">
+            <span class="phone-tab-label">통화</span>
+          </div>
+        </button>
+
+        <button class="phone-tab-btn" type="button" data-phone-tab="contacts" aria-label="연락처">
+          <div class="phone-tab-inner">
+            <img src="assets/icons/icon_call_profile.png" alt="" class="phone-tab-icon">
+            <span class="phone-tab-label">연락처</span>
+          </div>
+        </button>
+
+        <button class="phone-tab-btn active" type="button" data-phone-tab="keypad" aria-label="키패드">
+          <div class="phone-tab-inner">
+            <img src="assets/icons/icon_call_keypad.png" alt="" class="phone-tab-icon">
+            <span class="phone-tab-label">키패드</span>
+          </div>
+        </button>
+      </div>
+
+      <button class="phone-search-btn" type="button" aria-label="검색">
+        <img src="assets/icons/icon_call_search.png" alt="" class="phone-search-icon">
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- MESSAGES APP -->
+<section class="screen app-screen messages-screen" id="xlMessagesScreen">
+  <div class="app-ui messages-ui">
+
+    <!-- 목록 페이지 -->
+    <div class="messages-page messages-list-page active" id="messagesListPage">
+      <div class="messages-list-topbar">
+        <button class="back-home app-back-btn messages-home-back" type="button" aria-label="뒤로가기">
+          <span class="back-arrow"></span>
+        </button>
+
+        <button class="messages-top-circle-btn messages-filter-btn" type="button" aria-label="옵션">
+          <span class="messages-filter-icon"></span>
+        </button>
+      </div>
+
+      <div class="messages-list-scroll">
+        <div class="messages-list-head">
+          <h1>메시지</h1>
+        </div>
+
+        <div class="messages-thread-list" id="messagesThreadList"></div>
+      </div>
+
+  <div class="messages-bottom-bar">
+    <button class="messages-toolbar-image-btn" type="button" aria-label="검색 및 작성">
+      <img src="assets/icons/message_toolbar_bottom.png" alt="" class="messages-toolbar-image">
+    </button>
+  </div>
+</div>
+
+    <!-- 상세 페이지 -->
+    <div class="messages-page messages-detail-page" id="messagesDetailPage">
+      <div class="messages-detail-topbar">
+        <button class="messages-detail-back app-back-btn" type="button" aria-label="뒤로가기">
+          <span class="back-arrow"></span>
+        </button>
+
+        <div class="messages-detail-profile-wrap">
+          <div class="messages-detail-avatar" id="messagesDetailAvatar">
+            <span class="messages-detail-avatar-char" id="messagesDetailAvatarChar">김</span>
+            <span class="messages-detail-avatar-head"></span>
+            <span class="messages-detail-avatar-body"></span>
+          </div>
+
+          <div class="messages-detail-name-pill">
+            <span class="messages-detail-name" id="messagesDetailName">김준서 ALD1</span>
+            <span class="messages-detail-name-chevron"></span>
+          </div>
+        </div>
+
+    <button class="messages-image-top-btn messages-video-btn" type="button" aria-label="영상통화">
+      <img src="assets/icons/message_facetime.png" alt="" class="messages-video-image">
+    </button>
+        </div>
+
+      <div class="messages-detail-scroll" id="messagesDetailScroll">
+        <div class="messages-conversation" id="messagesConversation"></div>
+      </div>
+
+    <div class="messages-inputbar">
+      <button class="messages-keyboard-image-btn" type="button" aria-label="입력창">
+        <img src="assets/icons/message_keyboard.png" alt="" class="messages-keyboard-image">
+      </button>
+    </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- KAKAO APP -->
+<section class="screen app-screen kakao-screen" id="xlKakaoScreen">
+  <div class="app-ui kakao-ui">
+    <div class="kakao-topbar">
+      <button class="back-home app-back-btn kakao-back-btn" type="button" aria-label="뒤로가기">
+        <span class="back-arrow"></span>
+      </button>
+
+      <div class="kakao-top-title-wrap">
+        <h2 class="kakao-room-title">ALD1 8</h2>
+      </div>
+
+      <div class="kakao-top-actions">
+        <button class="kakao-top-icon-btn" type="button" aria-label="검색">
+          <img src="assets/icons/kakao_search.png" alt="" class="kakao-top-icon">
+        </button>
+        <button class="kakao-top-icon-btn" type="button" aria-label="메뉴">
+          <img src="assets/icons/kakao_drawer.png" alt="" class="kakao-top-icon">
+        </button>
+      </div>
+    </div>
+
+    <div class="kakao-scroll" id="kakaoScroll">
+      <div class="kakao-conversation" id="kakaoConversation"></div>
+    </div>
+
+    <div class="kakao-inputbar">
+      <button class="kakao-input-side-btn kakao-plus-btn" type="button" aria-label="추가">
+        <span class="kakao-plus-icon">+</span>
+      </button>
+
+      <div class="kakao-input-placeholder">메시지 입력</div>
+
+      <button class="kakao-input-side-btn" type="button" aria-label="이모티콘">
+        <img src="assets/icons/kakao_imoticon.png" alt="" class="kakao-input-icon">
+      </button>
+
+      <button class="kakao-input-side-btn" type="button" aria-label="샵">
+        <img src="assets/icons/kakao_hashtag.png" alt="" class="kakao-input-icon">
+      </button>
+    </div>
+  </div>
+</section>
+
+    <!-- 팝업 -->
+    <div class="notif-popup" id="glassPopup" aria-hidden="true">
+      <div class="notif-left">
+        <img src="assets/icons/messages.png" alt="" id="glassPopupIcon" class="notif-icon">
+      </div>
+
+      <div class="notif-center">
+        <div class="notif-topline">
+          <span class="notif-app" id="glassPopupTitle"></span>
+          <span class="notif-time" id="glassPopupTime"></span>
+        </div>
+        <div class="notif-text" id="glassPopupText"></div>
+      </div>
+    </div>
+  </main>
+  
   <script src="script.js"></script>
 </body>
 </html>
