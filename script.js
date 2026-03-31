@@ -5447,37 +5447,40 @@ return `assets/pictures/${CURRENT_PROFILE}/${XL_PHOTO_FILES[index - 1]}`;
     `;
   }
 
-  function openMemoDetail(memoId) {
-    const memo = xlMemoDetailData[memoId];
-    if (!memo || !xlMemoDetailTitle || !xlMemoDetailDate || !xlMemoDetailBody) return;
+function openXlMemoDetail(memoId) {
+  const memo = xlMemoDetailData[memoId];
+  if (!memo || !xlMemoDetailTitle || !xlMemoDetailDate || !xlMemoDetailBody) return;
 
-    xlMemoDetailDate.textContent = memo.date;
-    xlMemoDetailTitle.textContent = memo.title;
+  xlMemoDetailDate.textContent = memo.date;
+  xlMemoDetailTitle.textContent = memo.title;
 
-    if (memo.type === "checklist") {
-      xlMemoDetailBody.innerHTML = renderChecklist(memo.items) + (memo.extraHtml ? memo.extraHtml : "");
-    } else {
-      xlMemoDetailBody.innerHTML = memo.html;
-    }
-
-    xlMemoScreen.classList.add("detail-open");
+  if (memo.type === "checklist") {
+    xlMemoDetailBody.innerHTML = renderChecklist(memo.items) + (memo.extraHtml ? memo.extraHtml : "");
+  } else {
+    xlMemoDetailBody.innerHTML = memo.html;
   }
 
-  function closeMemoDetail(event) {
-    if (event) event.stopPropagation();
-    xlMemoScreen.classList.remove("detail-open");
-  }
+  xlMemoScreen.classList.add("detail-open");
+}
 
-  xlMemoScreen.addEventListener("click", (event) => {
-    const item = event.target.closest(".memo-list-item");
-    if (item && xlMemoScreen.classList.contains("active")) {
-      openMemoDetail(item.dataset.memoId);
-    }
-  });
+function closeXlMemoDetail(event) {
+  if (event) event.stopPropagation();
+  xlMemoScreen.classList.remove("detail-open");
+}
 
-  if (xlMemoDetailBack) {
-    xlMemoDetailBack.addEventListener("click", closeMemoDetail);
-  }
+xlMemoScreen.addEventListener("click", (event) => {
+  const item = event.target.closest(".memo-list-item");
+  if (!item || !xlMemoScreen.classList.contains("active")) return;
+
+  const memoId = item.dataset.memoId;
+  if (!memoId) return;
+
+  openXlMemoDetail(memoId);
+});
+
+if (xlMemoDetailBack) {
+  xlMemoDetailBack.addEventListener("click", closeXlMemoDetail);
+}
 
   renderMemoLists();
   
