@@ -5171,7 +5171,7 @@ return `assets/pictures/${CURRENT_PROFILE}/${XL_PHOTO_FILES[index - 1]}`;
 /* =========================
    MEMO APP
 ========================= */
-(function initMemoApp () {
+(function initXlMemoApp () {
   const xlMemoScreen = document.getElementById("xlMemoScreen");
   const xlMemoPinnedCard = document.getElementById("xlMemoPinnedCard");
   const xlMemo7DaysCard = document.getElementById("xlMemo7DaysCard");
@@ -5182,7 +5182,7 @@ return `assets/pictures/${CURRENT_PROFILE}/${XL_PHOTO_FILES[index - 1]}`;
   const xlMemoDetailTitle = document.getElementById("xlMemoDetailTitle");
   const xlMemoDetailDate = document.getElementById("xlMemoDetailDate");
   const xlMemoDetailBody = document.getElementById("xlMemoDetailBody");
-  const xlMemoDetailBack = document.querySelector(".memo-detail-back");
+  const xlMemoDetailBack = xlMemoScreen.querySelector(".memo-detail-back");
 
   if (!xlMemoScreen) return;
 
