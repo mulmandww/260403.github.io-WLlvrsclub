@@ -5464,7 +5464,11 @@ function openXlMemoDetail(memoId) {
 }
 
 function closeXlMemoDetail(event) {
-  if (event) event.stopPropagation();
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
   xlMemoScreen.classList.remove("detail-open");
 }
 
