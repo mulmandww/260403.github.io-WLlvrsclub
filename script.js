@@ -69,9 +69,10 @@ if (glassPopupTime) glassPopupTime.textContent = "";
 /* =========================
    비밀번호
 ========================= */
-const PASSWORD = "4399";
-let currentInput = "";
+const ENTRY_GATE_PASSWORD = "4399";
+const GW_LOCK_PASSWORD = "0411";
 
+let currentInput = "";
 /* =========================
    상태값
 ========================= */
@@ -219,7 +220,7 @@ function entryGatePressKey(num) {
 }
 
 function checkEntryGatePassword() {
-  if (entryGateInput === PASSWORD) {
+  if (entryGateInput === ENTRY_GATE_PASSWORD) {
     openEntrySelectScreen();
     return;
   }
@@ -402,7 +403,7 @@ function deleteKey() {
    비밀번호 검사
 ========================= */
 function checkPassword() {
-  if (currentInput === PASSWORD) {
+  if (currentInput === GW_LOCK_PASSWORD) {
     unlockToHome();
   } else {
     if (passcodeWrap) {
@@ -4120,7 +4121,7 @@ function syncPostSliderState() {
   };
 
   const xlState = {
-    password: "4399",
+    password: "0311",
     currentInput: "",
     isTransitioning: false,
     isAppAnimating: false,
