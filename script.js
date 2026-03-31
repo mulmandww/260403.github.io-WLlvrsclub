@@ -4388,8 +4388,8 @@ weather: {
 
     xlState.isAppAnimating = true;
 
-    if (targetScreen.id === 'xlMemoScreen') {
-      targetScreen.classList.remove('detail-open');
+    if (targetScreen.id === 'xlMemoScreen' && typeof window.resetXlMemoAppState === 'function') {
+      window.resetXlMemoAppState();
     }
 
     if (targetScreen.id === 'xlPhoneScreen' && typeof window.resetXlPhoneAppState === 'function') {
@@ -5165,4 +5165,324 @@ return `assets/pictures/${CURRENT_PROFILE}/${XL_PHOTO_FILES[index - 1]}`;
 
   renderxlPhotosGrid();
   scrollPhotosToBottom();
+})();
+
+
+/* =========================
+   MEMO APP
+========================= */
+(function initMemoApp () {
+  const xlMemoScreen = document.getElementById("xlMemoScreen");
+  const xlMemoPinnedCard = document.getElementById("xlMemoPinnedCard");
+  const xlMemo7DaysCard = document.getElementById("xlMemo7DaysCard");
+  const xlMemo30DaysCard = document.getElementById("xlMemo30DaysCard");
+  const xlMemoFebruaryCard = document.getElementById("xlMemoFebruaryCard");
+  const xlMemo2025Card = document.getElementById("xlMemo2025Card");
+
+  const xlMemoDetailTitle = document.getElementById("xlMemoDetailTitle");
+  const xlMemoDetailDate = document.getElementById("xlMemoDetailDate");
+  const xlMemoDetailBody = document.getElementById("xlMemoDetailBody");
+  const xlMemoDetailBack = document.querySelector(".memo-detail-back");
+
+  if (!xlMemoScreen) return;
+
+  const xlMemoData = {
+    pinned: [
+      { id: "idpw", title: "아이디/비번", meta: "2025. 11. 04.  티빙 네이버 로그인" },
+      { id: "cardnum", title: "카드번호", meta: "2025. 02. 20.  우리은행" }
+    ],
+    week7: [
+      { id: "guangzhou", title: "광저우", meta: "토요일  옷 / 아우터" }
+    ],
+    days30: [
+      { id: "shopping", title: "장보기", meta: "2026. 03. 24.  항정살" },
+      { id: "japan", title: "일본", meta: "2026. 03. 16.  돈키호테" },
+      { id: "longbirthday", title: "롱이생일!", meta: "2026. 03. 10  선물 후보" },
+      { id: "paris", title: "파리", meta: "2026.03.01  옷 / 아우터(+코트)" }
+    ],
+    february: [
+      { id: "shanghai", title: "상하이", meta: "2026. 02. 26.  옷" },
+      { id: "partyshopping", title: "막방 기념 파티-장보기", meta: "2025. 02. 08.  삼겹살 8인분 몇키로?" }
+    ],
+    year2025: [
+      { id: "mama2025", title: "MAMA2025", meta: "2025. 11. 24.  스킨케어(+브링그린)" },
+      { id: "aglio", title: "알리오올리오 레시피", meta: "2025. 10. 20.  올리브오일 / 면 / 마늘 / 페페론치노" },
+      { id: "todo", title: "할 것", meta: "2025. 9. 30.  보플 영상 모니터링? 다시 보기" },
+      { id: "packing", title: "숙소 짐싸기", meta: "2025. 09. 26.  침구? (이불/베개/매트리스-?)" }
+    ]
+  };
+
+  const xlMemoDetailData = {
+    guangzhou: {
+      date: "2026년 3월 28일 21:35",
+      title: "광저우",
+      type: "checklist",
+      items: [
+        { text: "옷 / 아우터", checked: true },
+        { text: "잠옷 / 양말 / 속옷", checked: true },
+        { text: "운동화 / 슬리퍼", checked: true },
+        { text: "츄리닝", checked: true },
+        { text: "모자", checked: true },
+        { text: "세면도구(쓰고 넣기)", checked: false },
+        { text: "스킨케어(쓰고 넣기)", checked: false },
+        { text: "붓기빼기", checked: true },
+        { text: "충전기 / 에어팟 / 맥스", checked: false },
+        { text: "영양제 / 약", checked: true },
+        { text: "입 테이프", checked: true },
+        { text: "악세사리(팔찌/반지 등 꺼내두기)", checked: true },
+        { text: "선글라스", checked: true },
+        { text: "기타 .. 생각나면 추가", checked: false }
+      ]
+    },
+    shopping: {
+      date: "2026년 3월 24일 13:31",
+      title: "장보기",
+      type: "checklist",
+      items: [
+        { text: "항정살", checked: false },
+        { text: "통마늘", checked: false },
+        { text: "청양고추", checked: false },
+        { text: "파스타면(링귀니)", checked: false },
+        { text: "과자", checked: false },
+        { text: "딸기(있나?)", checked: false },
+        { text: "우삼겹 팩", checked: false },
+        { text: "양파", checked: false },
+        { text: "바나나우유", checked: false },
+        { text: "콘푸라이트", checked: false },
+        { text: "칼빔면", checked: false }
+      ]
+    },
+    japan: {
+      date: "2026년 3월 16일 22:16",
+      title: "일본",
+      type: "text",
+      html: `
+        <div class="memo-text-block">
+          <p>- 돈키호테</p>
+          <p>안약 / 휴족시간 / 과자 유명한거 / 온열안대 / 컵라면</p>
+          <p>- 기념품?</p>
+          <p>인형 같은거</p>
+          <p><a href="#">https://youtu.be/1c7_NYeUF1g?si=9J2VeKzTrzUdON_g</a></p>
+          <p><a href="#">https://youtu.be/U_22eCKqBik?si=FXvPGkbMVdsAX2B-</a></p>
+        </div>
+      `
+    },
+    longbirthday: {
+      date: "2026년 3월 10일 13:43",
+      title: "롱이생일!",
+      type: "text",
+      html: `
+        <div class="memo-text-block">
+          <p>- 선물 후보</p>
+          <p>귀걸이<br>반지(너무티남)<br><strong>영양제?➡️홍삼(에브리타임)</strong><br><strong>+ 파리 가서 둘러보기</strong><br><strong>케이크 - 롱이한테 물어보기 딸기생크림케이크</strong></p>
+          <p>홍삼세트 주문 / 간식들이랑 같이 넣어두기</p>
+          <p>축하메시지<br>우리 씬롱이! 항상 어른스럽고 듬직한 아이지만<br>오늘만큼은 그 누구보다 환하게 웃는 네 모습을 보고싶다 :3<br>생일 너무너무 축하해!!</p>
+          <p>편지 따로 준비? 아니면 카톡으로?</p>
+          <p><strong>선물 챙겨서 자정 전에 롱이 방으로 가기!! 서프라이즈</strong><br>+ 낮에 어머님 연락 같이 드리기</p>
+          <p>점심 - 장수면 컨텐츠, 미역국 같이 끓여서 먹기<br>저녁 - 스케줄 끝나고 회사에서-시간 맞춰서 주문해두기</p>
+        </div>
+      `
+    },
+    paris: {
+      date: "2026년 3월 1일 00:26",
+      title: "파리",
+      type: "checklist",
+      items: [
+        { text: "옷 / 아우터(+코트)", checked: true },
+        { text: "잠옷 / 양말 / 속옷", checked: true },
+        { text: "운동화 / 슬리퍼", checked: true },
+        { text: "집업", checked: true },
+        { text: "모자 - ?", checked: true },
+        { text: "세면도구(쓰고 넣기)", checked: false },
+        { text: "스킨케어(쓰고 넣기)", checked: false },
+        { text: "붓기빼기", checked: true },
+        { text: "충전기 / 에어팟 / 맥스", checked: false },
+        { text: "영양제 / 약", checked: true },
+        { text: "입 테이프", checked: true },
+        { text: "선글라스", checked: true },
+        { text: "필름카메라", checked: true }
+      ],
+      extraHtml: `<p>도착해서 롱이랑 영통하기<br>+ 롱이 선물 찾아보기</p>`
+    },
+    shanghai: {
+      date: "2026년 2월 26일 23:10",
+      title: "상하이",
+      type: "checklist",
+      items: [
+        { text: "옷", checked: true },
+        { text: "잠옷 / 양말 / 속옷", checked: true },
+        { text: "운동화 / 슬리퍼", checked: true },
+        { text: "편한 옷 상하이", checked: true },
+        { text: "모자", checked: true },
+        { text: "세면도구(쓰고 넣기)", checked: false },
+        { text: "스킨케어(쓰고 넣기)", checked: false },
+        { text: "붓기빼기", checked: true },
+        { text: "충전기 / 에어팟 / 맥스", checked: false },
+        { text: "영양제 / 약", checked: true },
+        { text: "입 테이프", checked: true },
+        { text: "선글라스", checked: true },
+        { text: "목도리", checked: true }
+      ]
+    },
+    partyshopping: {
+      date: "2026년 2월 8일 16:13",
+      title: "막방 기념 파티-장보기",
+      type: "checklist",
+      items: [
+        { text: "삼겹살 8인분 몇키로?", checked: false },
+        { text: "통마늘", checked: false },
+        { text: "청양고추", checked: false },
+        { text: "쌈장", checked: false },
+        { text: "비빔면(or 칼빔면)", checked: false },
+        { text: "쌈채소/버섯/양파", checked: false },
+        { text: "제로콜라", checked: false },
+        { text: "맥주", checked: false },
+        { text: "바나나우유", checked: false },
+        { text: "콘푸라이트", checked: false },
+        { text: "딸기", checked: false },
+        { text: "불닭소스", checked: false },
+        { text: "훠궈 재료 - 청경채/목이버섯/", checked: false }
+      ]
+    },
+    mama2025: {
+      date: "2025년 11월 24일 20:41",
+      title: "MAMA2025",
+      type: "checklist",
+      items: [
+        { text: "스킨케어(+브링그린)", checked: false },
+        { text: "세면도구", checked: false },
+        { text: "운동화 / 슬리퍼", checked: false },
+        { text: "트레이닝복", checked: false },
+        { text: "모자", checked: false },
+        { text: "옷 / 겉옷", checked: false },
+        { text: "잠옷 / 양말 / 속옷", checked: false },
+        { text: "붓기빼기", checked: false },
+        { text: "충전기 / 에어팟 / 맥스", checked: false },
+        { text: "영양제 / 약", checked: false },
+        { text: "입 테이프", checked: false },
+        { text: "선글라스 / 안경", checked: false },
+        { text: "목도리", checked: false },
+        { text: "가방(메신저백/", checked: false }
+      ],
+      extraHtml: `<p>캐리어 싸는거 브이로그 찍기</p>`
+    },
+    aglio: {
+      date: "2025년 10월 20일 11:28",
+      title: "알리오올리오 레시피",
+      type: "text",
+      html: `
+        <div class="memo-text-block">
+          <p>올리브오일 / 면 / 마늘 / 페페론치노</p>
+          <p>면 8분 익히기(소금 살짝)<br>올리브오일 2/3컵(10큰술 정도), 다진마늘 1티스푼, 편마늘(4개 정도), 페페론치노 볶기<br>면, 면수 2국자 넣고 볶기 / 소금으로 간</p>
+          <p>1인분 기준</p>
+        </div>
+      `
+    },
+    todo: {
+      date: "2025년 9월 30일 23:45",
+      title: "할 것",
+      type: "checklist",
+      items: [
+        { text: "보플 영상 모니터링? 다시 보기", checked: true },
+        { text: "옷장 정리", checked: true },
+        { text: "챌린지, 신곡 안무 카피", checked: false },
+        { text: "PT", checked: false },
+        { text: "중국어 공부", checked: false },
+        { text: "보컬룸 - 발성연습", checked: false },
+        { text: "", checked: false }
+      ],
+      extraHtml: `
+        <p>보플-티빙<br>3회 후반 - 첫만남 롱이 파트<br>4회 후반 - 위플래쉬<br>7회 후반 - 락<br>9회 - 럭키마초 / 체인스<br>10회, 11회</p>
+        <p>유튜브 클립 모음<br><a href="#">https://youtube.com/playlist?list=PLTZxf74YKwfYCaAnRlOr3nDqvWD_2rvwm&si=pMevfXZR-hBa2bPc</a></p>
+      `
+    },
+    packing: {
+      date: "2025년 9월 26일 10:19",
+      title: "숙소 짐싸기",
+      type: "checklist",
+      items: [
+        { text: "침구? (이불/베개/매트리스-?)", checked: false },
+        { text: "옷", checked: true },
+        { text: "신발", checked: true },
+        { text: "악세사리/모자/목도리/안경/가방 등", checked: true },
+        { text: "화장품/스킨케어/헤어롤 등", checked: true },
+        { text: "세면도구/화장실", checked: false },
+        { text: "전자기기(에어팟, 맥스, 멀티탭, 충전기 등)", checked: false },
+        { text: "상비약, 영양제", checked: true },
+        { text: "텀블러", checked: true },
+        { text: "쓰레기통/돌돌이/", checked: false },
+        { text: "책(자료, 책, 앨범 등 지류)", checked: true },
+        { text: "가습기", checked: true }
+      ]
+    }
+  };
+
+  function createMemoListItems(items) {
+    return items.map((item) => `
+      <button class="memo-list-item" type="button" data-memo-id="${item.id}">
+        <div class="memo-item-title">${item.title}</div>
+        <div class="memo-item-meta">${item.meta}</div>
+      </button>
+    `).join("");
+  }
+
+  function renderMemoLists() {
+    if (xlMemoPinnedCard) xlMemoPinnedCard.innerHTML = createMemoListItems(xlMemoData.pinned);
+    if (xlMemo7DaysCard) xlMemo7DaysCard.innerHTML = createMemoListItems(xlMemoData.week7);
+    if (xlMemo30DaysCard) xlMemo30DaysCard.innerHTML = createMemoListItems(xlMemoData.days30);
+    if (xlMemoFebruaryCard) xlMemoFebruaryCard.innerHTML = createMemoListItems(xlMemoData.february);
+    if (xlMemo2025Card) xlMemo2025Card.innerHTML = createMemoListItems(xlMemoData.year2025);
+  }
+
+  function renderChecklist(items) {
+    return `
+      <div class="memo-checklist">
+        ${items.map((item) => `
+          <div class="memo-check-item ${item.checked ? "checked" : "unchecked"}">
+            <div class="memo-check-circle"></div>
+            <div class="memo-check-text">${item.text || "&nbsp;"}</div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  function openMemoDetail(memoId) {
+    const memo = xlMemoDetailData[memoId];
+    if (!memo || !xlMemoDetailTitle || !xlMemoDetailDate || !xlMemoDetailBody) return;
+
+    xlMemoDetailDate.textContent = memo.date;
+    xlMemoDetailTitle.textContent = memo.title;
+
+    if (memo.type === "checklist") {
+      xlMemoDetailBody.innerHTML = renderChecklist(memo.items) + (memo.extraHtml ? memo.extraHtml : "");
+    } else {
+      xlMemoDetailBody.innerHTML = memo.html;
+    }
+
+    xlMemoScreen.classList.add("detail-open");
+  }
+
+  function closeMemoDetail(event) {
+    if (event) event.stopPropagation();
+    xlMemoScreen.classList.remove("detail-open");
+  }
+
+  xlMemoScreen.addEventListener("click", (event) => {
+    const item = event.target.closest(".memo-list-item");
+    if (item && xlMemoScreen.classList.contains("active")) {
+      openMemoDetail(item.dataset.memoId);
+    }
+  });
+
+  if (xlMemoDetailBack) {
+    xlMemoDetailBack.addEventListener("click", closeMemoDetail);
+  }
+
+  renderMemoLists();
+  
+  window.resetXlMemoAppState = function () {
+  if (!xlMemoScreen) return;
+  xlMemoScreen.classList.remove("detail-open");
+};
 })();
