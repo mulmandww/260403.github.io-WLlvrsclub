@@ -4432,59 +4432,28 @@ weather: {
     xlState.isAppAnimating = false;
   }
 
-async function backToHomeFromXlApp() {
-  if (!xl.homeScreen) return;
-  if (xlState.isTransitioning || xlState.isAppAnimating) return;
+  async function backToHomeFromXlApp() {
+    if (!xl.homeScreen) return;
+    if (xlState.isTransitioning || xlState.isAppAnimating) return;
 
-  const currentAppScreen = xl.root.querySelector('.app-screen.active');
-  if (!currentAppScreen) return;
+    const currentAppScreen = xl.root.querySelector('.app-screen.active');
+    if (!currentAppScreen) return;
 
-  xlState.isAppAnimating = true;
+    xlState.isAppAnimating = true;
 
-  xl.homeScreen.classList.add('active');
+    currentAppScreen.classList.remove('active');
+    currentAppScreen.classList.add('closing');
 
-  currentAppScreen.classList.remove('active');
-  currentAppScreen.classList.add('closing');
+    await xlWait(180);
 
-  await xlWait(180);
+    currentAppScreen.classList.remove('closing');
+    xl.homeScreen.classList.add('active', 'opening');
 
-  currentAppScreen.classList.remove('closing');
-  xl.homeScreen.classList.add('opening');
+    await xlWait(260);
 
-  await xlWait(260);
-
-  xl.homeScreen.classList.remove('opening');
-
-  if (currentAppScreen.id === 'xlPhotosScreen' && typeof window.resetXlPhotosAppState === 'function') {
-    window.resetXlPhotosAppState();
+    xl.homeScreen.classList.remove('opening');
+    xlState.isAppAnimating = false;
   }
-
-  if (currentAppScreen.id === 'xlPhoneScreen' && typeof window.resetXlPhoneAppState === 'function') {
-    window.resetXlPhoneAppState();
-  }
-
-  if (currentAppScreen.id === 'xlMessagesScreen' && typeof window.resetXlMessagesAppState === 'function') {
-    window.resetXlMessagesAppState();
-  }
-
-  if (currentAppScreen.id === 'xlCalendarScreen' && typeof window.resetXlCalendarAppState === 'function') {
-    window.resetXlCalendarAppState();
-  }
-
-  if (currentAppScreen.id === 'xlKakaoScreen' && typeof window.resetXlKakaoAppState === 'function') {
-    window.resetXlKakaoAppState();
-  }
-
-  if (currentAppScreen.id === 'xlInstagramScreen' && typeof window.resetXlInstagramAppState === 'function') {
-    window.resetXlInstagramAppState();
-  }
-
-  if (currentAppScreen.id === 'xlMemoScreen') {
-    currentAppScreen.classList.remove('detail-open');
-  }
-
-  xlState.isAppAnimating = false;
-}
 
   function attachXlTouchFeedback(button, action) {
     button.addEventListener(
@@ -4564,7 +4533,17 @@ async function backToHomeFromXlApp() {
   window.addEventListener('mouseup', handleXlEnd);
 
   xl.backHomeButtons.forEach((button) => {
-    button.addEventListener('click', backToHomeFromXlApp);
+    button.addEventListener(
+      'click',
+      async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+
+        await backToHomeFromXlApp();
+      },
+      true
+    );
   });
 
   xl.openAppButtons.forEach((button) => {
