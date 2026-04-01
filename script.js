@@ -5192,21 +5192,21 @@ return `assets/pictures/${CURRENT_PROFILE}/${XL_PHOTO_FILES[index - 1]}`;
       { id: "xlcardnum", title: "支付信息", meta: "2025. 10. 03.  국민은행" }
     ],
     week7: [
-      { id: "xlgwbirthday", title: "광저우", meta: "어제  写好信（预约短信 / Kakao)" }
+      { id: "xlgwbirthday", title: "建宇哥生日", meta: "어제  写好信（预约短信 / Kakao)" }
     ],
     days30: [
-      { id: "xlpacking2", title: "일본", meta: "2026. 03. 26.  衣服" },
-      { id: "xldance", title: "롱이생일!", meta: "2026. 03. 23.  Ceremony" },
-      { id: "xljapanesestudy", title: "파리", meta: "2026. 03. 13.  今日はみなさんのおかげで本当に幸せでした。" }
+      { id: "xlpacking2", title: "行李", meta: "2026. 03. 26.  衣服" },
+      { id: "xldance", title: "Dance practice", meta: "2026. 03. 23.  Ceremony" },
+      { id: "xljapanesestudy", title: "日语感想背诵", meta: "2026. 03. 13.  今日はみなさんのおかげで本当に幸せでした。" }
     ],
     february: [
-      { id: "xlkoreanstudy", title: "상하이", meta: "2026. 02. 25.  육각형 六边形 / 六边形战士" },
-      { id: "xlrap", title: "막방 기념 파티-장보기", meta: "2026. 02. 21.  与TA们的差别呢差别呢?" }
+      { id: "xlkoreanstudy", title: "单词 / 发音练习", meta: "2026. 02. 25.  육각형 六边形 / 六边形战士" },
+      { id: "xlrap", title: "rap", meta: "2026. 02. 21.  与TA们的差别呢差别呢?" }
     ],
     year2025: [
-      { id: "xlmonitoring", title: "알리오올리오 레시피", meta: "2025. 10. 11.  https://youtube.com/playlist?list=···" },
-      { id: "xltodo", title: "할 것", meta: "2025. 10. 01.  整理行李" },
-      { id: "xlpacking", title: "숙소 짐싸기", meta: "2025. 09. 26.  枕头 / 被子 / 靠垫" }
+      { id: "xlmonitoring", title: "回看 BP 视频", meta: "2025. 10. 11.  https://youtube.com/playlist?list=···" },
+      { id: "xltodo", title: "待办事项", meta: "2025. 10. 01.  整理行李" },
+      { id: "xlpacking", title: "住宿行李清单", meta: "2025. 09. 26.  枕头 / 被子 / 靠垫" }
     ]
   };
 
