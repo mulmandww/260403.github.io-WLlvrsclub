@@ -5716,3 +5716,344 @@ if (xlMemoDetailBack) {
   renderCalendar();
   scrollXlCalendarToApril();
 })();
+
+
+/* =========================
+   XL PHONE APP
+========================= */
+(function initXlPhoneApp() {
+  const xlPhoneScreen = document.getElementById("xlPhoneScreen");
+  if (!xlPhoneScreen) return;
+
+  const xlPhonePages = xlPhoneScreen.querySelectorAll(".phone-page");
+  const xlPhoneTabButtons = xlPhoneScreen.querySelectorAll(".phone-tab-btn");
+  const xlPhoneKeyButtons = xlPhoneScreen.querySelectorAll(".phone-key-btn");
+  const xlPhoneContactsList = document.getElementById("xlPhoneContactsList");
+  const xlPhoneRecentsList = document.getElementById("xlPhoneRecentsList");
+  const phoneScrollAreas = xlPhoneScreen.querySelectorAll(".phone-scroll-area");
+
+  const xlPhoneDialDisplay = document.getElementById("xlPhoneDialDisplay");
+  const xlPhoneDialEasteregg = document.getElementById("xlPhoneDialEasteregg");
+  const xlPhoneClearBtn = document.getElementById("xlPhoneClearBtn");
+
+  let phoneDialValue = "";
+
+  const phoneEasterEggMap = {
+    "0311": "♡// •ω• //♡",
+    "0411": "♥／≥w≤＼♥",
+    "4399": "🍵🐯🐱💕",
+    "250828": "선물!  홍... 홍생?  홍삼>w<",
+    "250925": "꺼트릴수록 끝없이 Burn Burn",
+    "520": "我아이你",
+    "260112": "너희에게 행복이 늘 함께하길!",
+    "17171771": "시랑해❄️🩵",
+    "1004": "👼",
+    "504": "몇살이에요 형..히히힛",
+    "555": "한줄기... 후우웅... ｡･ﾟ( ·‿‿· )ﾟ･｡",
+    "530": "거누형이 보고 싶은 날..·‿‿·",
+    "486": "사롱해~💕 (...형은? 형은? 형은.)"
+  };
+
+const contactNames = [
+  "곽지석 형", "김민아", "김민철 선배", "김춘심 선배님", "박원준 형", "서민주 선배", "유지혜 선배", "정예준", "최경욱 형", "최성호 선배",
+  "준서형 ALD1", "리오형 ALD1", "豪哥 ALD1", "상원이형 ALD1", "잘생기고멋진거누형❤️ ALD1", "安信 ALD1", "상현이 ALD1", "B 贾宝", "B 祺祺", "B 小宇",
+  "B 苟苟", "B 漾宝宝", "BP2 준민이형", "BP2 유메키형", "BP2 이정이형", "BP2 립우 崔立于", "BP2 동규", "BP2 우진이", "BP2 윤서", "BP2 마사토",
+  "BP2 한음", "BP2 칭위 許謦宇", "BP2 孙亨裕哥", "BP2 胡瀚文哥", "BP2 해리준", "BP2 年博恒", "BP2 薛墨昀", "BP2 이첸형 金永先", "BP2 赵杨光旭哥", "BP2 陳博文",
+  "BP2 范哲逸", "DAY6 도운 선배님", "DAY6 성진 선배님", "DAY6 영케이 선배님", "DAY6 원필 선배님", "ITZY 예지 선배님", "ITZY 리아 선배님", "ITZY 류진 선배님", "ITZY 채령 선배님", "ITZY 유나 선배님",
+  "Kickplip 계훈 선배님", "SKZ 방찬 선배님", "SKZ 리노 선배님", "SKZ 창빈 선배님", "SKZ 현진 선배님", "SKZ 한 선배님", "SKZ 필릭스 선배님", "SKZ 승민 선배님", "SKZ 아이엔 선배님", "TWICE 나연 선배님",
+  "TWICE 정연 선배님", "TWICE 모모 선배님", "TWICE 사나 선배님", "TWICE 지효 선배님", "TWICE 미나 선배님", "TWICE 다현 선배님", "TWICE 채영 선배님", "TWICE 쯔위 선배님", "安浩然", "安宇航",
+  "白一鸣", "白俊豪", "鲍宇辰", "毕俊杰", "毕文博", "陈浩然", "陈俊杰", "陈文博", "陈宇航", "程俊豪",
+  "程一鸣", "邓浩然", "邓宇航", "丁一凡", "杜俊杰", "范一鸣", "冯子轩", "高俊豪", "高文博", "龚一凡",
+  "关俊杰", "韩宇航", "韩一鸣", "何俊豪", "何子轩", "胡俊杰", "胡宇航", "黄俊豪", "黄一鸣", "贾一凡",
+  "江子轩", "蒋俊杰", "金宇航", "李浩然", "李文博", "李宇航", "李子轩", "刘俊杰", "刘宇航", "刘子轩",
+  "卢俊豪", "马一凡", "马会文", "倪俊杰", "欧阳一鸣", "彭俊豪", "秦俊杰", "乔子轩", "任俊豪", "任一鸣",
+  "宋一凡", "孙俊杰", "孙一鸣", "谭宇航", "唐子轩", "王俊杰", "王文博", "王宇航", "王子轩", "吴俊杰",
+  "吴一鸣", "肖一凡", "谢子轩", "徐俊杰", "许一鸣", "杨子轩", "于俊杰", "张浩然", "张文博", "张宇航",
+  "张子轩", "赵俊杰", "赵一鸣", "周子轩", "❤️妈妈", "❤️爸爸", "❤️姐姐"
+];
+
+  const recentsData = [
+    { name: "잘생기고멋진거누형❤️ ALD1", sub: "↙ 휴대전화", date: "어제", missed: false },
+    { name: "잘생기고멋진거누형❤️ ALD1", sub: "↗ 휴대전화", date: "목요일", missed: false },
+    { name: "잘생기고멋진거누형❤️ ALD1", sub: "↗ 휴대전화", date: "수요일", missed: false },
+    { name: "상현이 ALD1", sub: "↗ 휴대전화 ", date: "수요일", missed: false },
+    { name: "상현이 ALD1", sub: "↙ 휴대전화", date: "수요일", missed: false },
+    { name: "잘생기고멋진거누형❤️ ALD1", sub: "↙ 휴대전화", date: "수요일", missed: false },
+    { name: "준서형 ALD1", sub: "↙ 휴대전화", date: "화요일", missed: false },
+    { name: "豪哥 ALD1", sub: "↙ 대한민국", date: "화요일", missed: true, defaultAvatar: true },
+    { name: "잘생기고멋진거누형❤️ ALD1", sub: "↙ 휴대전화 (3)", date: "일요일", missed: false }
+  ];
+
+  function getInitialChar(name) {
+    return name ? name.trim().charAt(0) : "";
+  }
+
+  function getGroupLabel(name) {
+    if (!name) return "#";
+    if (name.includes("ALD1")) return "A";
+
+    const first = name.trim().charAt(0);
+
+    if (/[가-힣]/.test(first)) {
+      const code = first.charCodeAt(0) - 44032;
+      const cho = Math.floor(code / 588);
+      const choMap = [
+        "ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ",
+        "ㅁ", "ㅂ", "ㅃ", "ㅅ", "ㅆ", "ㅇ",
+        "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
+      ];
+      return choMap[cho] || "#";
+    }
+
+    if (/[A-Za-z]/.test(first)) return first.toUpperCase();
+    return "#";
+  }
+
+  function formatName(name, missed = false) {
+    if (!name) return "";
+
+    if (name.includes("ALD1")) {
+      const plain = name.replace(/\s*ALD1/g, "").trim();
+      return `
+        <span class="phone-name-plain ${missed ? "is-missed" : ""}">${plain}</span>
+        <strong class="phone-name-tag ${missed ? "is-missed" : ""}">ALD1</strong>
+      `;
+    }
+
+    return `<span class="phone-name-plain ${missed ? "is-missed" : ""}">${name}</span>`;
+  }
+
+  function renderContacts() {
+    if (!xlPhoneContactsList) return;
+
+    let html = `
+      <div class="phone-my-card">
+        <div class="phone-avatar phone-avatar-my">
+          <span class="phone-mycard-head"></span>
+          <span class="phone-mycard-body"></span>
+        </div>
+        <div class="phone-my-card-text">내 카드</div>
+      </div>
+    `;
+
+    let currentGroup = "";
+
+    contactNames.forEach((name) => {
+      const group = getGroupLabel(name);
+
+      if (group !== currentGroup) {
+        currentGroup = group;
+        html += `<div class="phone-contact-group-label">${group}</div>`;
+      }
+
+      html += `
+        <div class="phone-contact-row">
+          <div class="phone-avatar">
+            <span class="phone-avatar-char">${getInitialChar(name)}</span>
+          </div>
+          <div class="phone-contact-main">
+            <div class="phone-contact-name">${formatName(name)}</div>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `
+      <div class="phone-contacts-count-row">
+        <div class="phone-contacts-count-inline">155개의 연락처</div>
+      </div>
+    `;
+
+    xlPhoneContactsList.innerHTML = html;
+  }
+
+  function renderRecents() {
+    if (!xlPhoneRecentsList) return;
+
+    xlPhoneRecentsList.innerHTML = recentsData.map((item) => {
+      const avatarHtml = item.defaultAvatar
+        ? `
+          <div class="phone-avatar phone-avatar-my">
+            <span class="phone-mycard-head"></span>
+            <span class="phone-mycard-body"></span>
+          </div>
+        `
+        : `
+          <div class="phone-avatar">
+            <span class="phone-avatar-char">${getInitialChar(item.name)}</span>
+          </div>
+        `;
+
+      return `
+        <div class="phone-recents-row">
+          ${avatarHtml}
+          <div class="phone-recents-main">
+            <div class="phone-recents-name">${formatName(item.name, item.missed)}</div>
+            <div class="phone-recents-sub">${item.sub}</div>
+          </div>
+          <div class="phone-recents-date">${item.date}</div>
+          <button class="phone-recent-call-btn" type="button" aria-label="통화">
+            <img src="assets/icons/icon_call_blue.png" alt="" class="phone-recent-call-icon">
+          </button>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function updatePhoneDialUI() {
+    if (xlPhoneDialDisplay) {
+      xlPhoneDialDisplay.textContent = phoneDialValue;
+    }
+
+    if (xlPhoneDialEasteregg) {
+      xlPhoneDialEasteregg.textContent = phoneEasterEggMap[phoneDialValue] || "";
+    }
+
+    if (xlPhoneClearBtn) {
+      if (phoneDialValue.length > 0) {
+        xlPhoneClearBtn.classList.add("is-visible");
+      } else {
+        xlPhoneClearBtn.classList.remove("is-visible");
+      }
+    }
+  }
+
+  function appendPhoneDialValue(value) {
+    if (!value) return;
+    if (phoneDialValue.length >= 12) return;
+    phoneDialValue += value;
+    updatePhoneDialUI();
+  }
+
+  function clearPhoneDialValue() {
+    if (!phoneDialValue.length) return;
+    phoneDialValue = phoneDialValue.slice(0, -1);
+    updatePhoneDialUI();
+  }
+
+  function resetPhoneDialValue() {
+    phoneDialValue = "";
+    updatePhoneDialUI();
+  }
+
+  function setPhonePage(pageName) {
+    xlPhonePages.forEach((page) => {
+      page.classList.toggle("active", page.dataset.phonePage === pageName);
+    });
+
+    xlPhoneTabButtons.forEach((button) => {
+      button.classList.toggle("active", button.dataset.phoneTab === pageName);
+    });
+
+    xlPhoneScreen.dataset.phonePage = pageName;
+  }
+
+  xlPhoneTabButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      setPhonePage(button.dataset.phoneTab);
+    });
+  });
+
+  xlPhoneKeyButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      const value = button.dataset.phoneValue || "";
+
+      button.classList.remove("tap");
+      void button.offsetWidth;
+      button.classList.add("tap");
+
+      appendPhoneDialValue(value);
+
+      setTimeout(() => {
+        button.classList.remove("tap");
+      }, 140);
+    });
+  });
+
+  if (xlPhoneClearBtn) {
+    let clearHoldTimer = null;
+    let clearRepeatTimer = null;
+    let clearHoldTriggered = false;
+
+    const stopClearHold = () => {
+      if (clearHoldTimer) {
+        clearTimeout(clearHoldTimer);
+        clearHoldTimer = null;
+      }
+
+      if (clearRepeatTimer) {
+        clearInterval(clearRepeatTimer);
+        clearRepeatTimer = null;
+      }
+    };
+
+    xlPhoneClearBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      if (clearHoldTriggered) {
+        clearHoldTriggered = false;
+        return;
+      }
+
+      clearPhoneDialValue();
+    });
+
+    xlPhoneClearBtn.addEventListener("mousedown", (event) => {
+      event.stopPropagation();
+
+      clearHoldTriggered = false;
+      stopClearHold();
+
+      clearHoldTimer = setTimeout(() => {
+        clearHoldTriggered = true;
+
+        clearRepeatTimer = setInterval(() => {
+          if (!phoneDialValue.length) {
+            stopClearHold();
+            return;
+          }
+          clearPhoneDialValue();
+        }, 80);
+      }, 350);
+    });
+
+    xlPhoneClearBtn.addEventListener("touchstart", (event) => {
+      event.stopPropagation();
+
+      clearHoldTriggered = false;
+      stopClearHold();
+
+      clearHoldTimer = setTimeout(() => {
+        clearHoldTriggered = true;
+
+        clearRepeatTimer = setInterval(() => {
+          if (!phoneDialValue.length) {
+            stopClearHold();
+            return;
+          }
+          clearPhoneDialValue();
+        }, 80);
+      }, 350);
+    }, { passive: true });
+
+    ["mouseup", "mouseleave", "touchend", "touchcancel"].forEach((eventName) => {
+      xlPhoneClearBtn.addEventListener(eventName, stopClearHold);
+    });
+  }
+
+  window.resetXlPhoneAppState = function () {
+    setPhonePage("keypad");
+    phoneScrollAreas.forEach((area) => {
+      area.scrollTop = 0;
+    });
+    resetPhoneDialValue();
+  };
+
+  renderContacts();
+  renderRecents();
+  setPhonePage("keypad");
+  updatePhoneDialUI();
+})();
