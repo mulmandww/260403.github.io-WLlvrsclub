@@ -5574,7 +5574,7 @@ if (xlMemoDetailBack) {
 { month: 3, day: 11, title: "생일 라이브", time: "22:00" },
 { month: 3, day: 12, title: "东京" },
 { month: 3, day: 28, title: "深圳" },
-{ month: 4, day: 11, title: "건우형🎂🩵" },
+{ month: 4, day: 11, title: "🎂🩵" },
 { month: 4, day: 19, title: "重庆" },
 
 
@@ -5670,7 +5670,7 @@ if (xlMemoDetailBack) {
     xlCalendarMonths.innerHTML = CALENDAR_MONTHS.map(createMonthHTML).join("");
   }
 
-  function scrollCalendarToApril() {
+  function scrollXlCalendarToApril() {
     const aprilSection = document.getElementById("calendarMonth4");
     if (!aprilSection) return;
 
@@ -5695,7 +5695,7 @@ if (xlMemoDetailBack) {
   }
 
   function resetXlCalendarAppState() {
-    scrollCalendarToApril();
+    scrollXlCalendarToApril();
   }
 
   xlCalendarScroll.addEventListener("scroll", () => {
@@ -5704,12 +5704,12 @@ if (xlMemoDetailBack) {
 
   if (calendarTodayBtn) {
     calendarTodayBtn.addEventListener("click", () => {
-      scrollCalendarToApril();
+      scrollXlCalendarToApril();
     });
   }
 
   window.resetXlCalendarAppState = resetXlCalendarAppState;
 
   renderCalendar();
-  scrollCalendarToApril();
+  scrollXlCalendarToApril();
 })();
