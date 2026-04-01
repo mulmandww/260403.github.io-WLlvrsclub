@@ -5276,33 +5276,27 @@ return `assets/pictures/${CURRENT_PROFILE}/${XL_PHOTO_FILES[index - 1]}`;
           <p>今日はみなさんのおかげで本当に幸せでした。</p>
           <p>今天多亏了大家，我真的觉得很幸福。</p>
           <p><strong>kyo wa mina sang no okage de hontou ni xia wa se de xi ta</strong></p>
-          <p> </p>
-          <p> </p>
+          <br><br>
           <p>今日のショーケースは終わりましたが、これからが僕たちの始まりだと思います。</p>
           <p>今天的 showcase 虽然结束了，但我觉得从现在开始才是我们的开始。</p>
           <p><strong>kyou no showcase wa o wa ri ma xi ta ga, kore kara ga boku tachi no ha ji ma ri da to o mo i ma si</strong></p>
-          <p> </p>
-          <p> </p>
+          <br><br>
           <p>これからもたくさん会えたらいいですね。</p>
           <p>希望以后也能经常见面。</p>
           <p><strong>kore kara mo ta ku sang a e ta ra ii de si ne</strong></p>
-          <p> </p>
-          <p> </p>
+          <br><br>
           <p>会えないときもお互いのことを思いましょう。</p>
           <p>就算见不到的时候, 也请彼此想着对方吧。</p>
           <p><strong>a e nai to ki mo, o ta gai no ko to o o mo i ma shou</strong></p>
-          <p> </p>
-          <p> </p>
+          <br><br>
           <p>応援してくれてありがとうございます。</p>
           <p>谢谢大家一直以来的支持</p>
           <p><strong>ou en xi te ku re te a ri ga tou go za i ma si</strong></p>
-          <p> </p>
-          <p> </p>
+          <br><br>
           <p>気をつけて帰ってください。</p>
           <p>回去的时候要注意安全。</p>
           <p><strong>ki o ciu ke te ka e tte ku da sai</strong></p>
-          <p> </p>
-          <p> </p>
+          <br><br>
           <p>愛してる。</p>
           <p>我爱你们。</p>
           <p><strong>ai shiteru</strong></p>
@@ -5336,14 +5330,14 @@ return `assets/pictures/${CURRENT_PROFILE}/${XL_PHOTO_FILES[index - 1]}`;
           <p>与TA们的差别呢差别呢</p>
           <p>标签被踩扁了踩扁了</p>
           <p>就像向日葵的执着是 我们的风格</p>
-          <p></p>
-          <p></p>
+          <br><br>
+          <br><br>
           <p>满分的试卷也有烦恼 you know</p>
           <p>做太完美了 也总会被取笑oh god</p>
           <p>再多诋毁对我也没影响</p>
           <p>麻烦您见我别太过紧张</p>
-          <p></p>
-          <p></p>
+          <br><br>
+          <br><br>
           <p>像在比赛 只在乎我的 KD</p>
           <p>红了眼让身上</p>
           <p>的铁链又松了点</p>
@@ -5353,30 +5347,30 @@ return `assets/pictures/${CURRENT_PROFILE}/${XL_PHOTO_FILES[index - 1]}`;
           <p>They call me crazy</p>
           <p>要疯就疯的彻底</p>
           <p>你听了我的目的地会觉得合理</p>
-          <p></p>
-          <p></p>
+          <br><br>
+          <br><br>
           <p>约定的未来 变成了老旧照片</p>
           <p>放进了相册 当作纪念</p>
           <p>电影的散场 还没排练</p>
           <p>挥手是问好也是再见</p>
-          <p></p>
-          <p></p>
+          <br><br>
+          <br><br>
           <p>Uh 소리쳐 DJ turn it up</p>
           <p>거침이 가장 아름다운 법</p>
           <p>We gon' bounce wiggle</p>
           <p>따라와 나의 스텝을</p>
-          <p></p>
-          <p></p>
+          <br><br>
+          <br><br>
           <p>Born to be 좀 더 뜨겁게 넘겨</p>
           <p>자꾸만 원해 짜릿함 난 원래 그런 Gritty type</p>
           <p>존재 자체로 Make em hot</p>
-          <p></p>
-          <p></p>
+          <br><br>
+          <br><br>
           <p>너무 달콤해 자꾸만 끌리지만</p>
           <p>Cinnamon 맛 Rapper vanilla 음색에</p>
           <p>취향 따윈 부시듯 다 반하게 만들래</p>
-          <p></p>
-          <p></p>
+          <br><br>
+          <br><br>
           <p>다들 말해 난 좀 Low key</p>
           <p>근데 말야 넌 좀 High key</p>
           <p>달라서 더 완벽한 걸</p>
