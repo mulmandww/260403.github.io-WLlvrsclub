@@ -4404,9 +4404,6 @@ weather: {
       window.resetXlPhotosAppState();
     }
 
-    if (targetScreen.id === 'xlCalendarScreen' && typeof window.resetXlCalendarAppState === 'function') {
-      window.resetXlCalendarAppState();
-    }
 
     if (targetScreen.id === 'xlKakaoScreen' && typeof window.resetXlKakaoAppState === 'function') {
       window.resetXlKakaoAppState();
@@ -4425,6 +4422,12 @@ weather: {
     hideAllXlAppScreens();
     targetScreen.classList.add('active', 'opening');
 
+    if (targetScreen.id === 'xlCalendarScreen' && typeof window.resetXlCalendarAppState === 'function') {
+      requestAnimationFrame(() => {
+        window.resetXlCalendarAppState();
+      });
+    }
+    
     await xlWait(360);
 
     button.classList.remove('launching', 'touching');
