@@ -5276,27 +5276,33 @@ return `assets/pictures/${CURRENT_PROFILE}/${XL_PHOTO_FILES[index - 1]}`;
           <p>今日はみなさんのおかげで本当に幸せでした。</p>
           <p>今天多亏了大家，我真的觉得很幸福。</p>
           <p><strong>kyo wa mina sang no okage de hontou ni xia wa se de xi ta</strong></p>
-          <p></p>
+          <p> </p>
+          <p> </p>
           <p>今日のショーケースは終わりましたが、これからが僕たちの始まりだと思います。</p>
           <p>今天的 showcase 虽然结束了，但我觉得从现在开始才是我们的开始。</p>
           <p><strong>kyou no showcase wa o wa ri ma xi ta ga, kore kara ga boku tachi no ha ji ma ri da to o mo i ma si</strong></p>
-          <p></p>
+          <p> </p>
+          <p> </p>
           <p>これからもたくさん会えたらいいですね。</p>
           <p>希望以后也能经常见面。</p>
           <p><strong>kore kara mo ta ku sang a e ta ra ii de si ne</strong></p>
-          <p></p>
+          <p> </p>
+          <p> </p>
           <p>会えないときもお互いのことを思いましょう。</p>
           <p>就算见不到的时候, 也请彼此想着对方吧。</p>
           <p><strong>a e nai to ki mo, o ta gai no ko to o o mo i ma shou</strong></p>
-          <p></p>
+          <p> </p>
+          <p> </p>
           <p>応援してくれてありがとうございます。</p>
           <p>谢谢大家一直以来的支持</p>
           <p><strong>ou en xi te ku re te a ri ga tou go za i ma si</strong></p>
-          <p></p>
+          <p> </p>
+          <p> </p>
           <p>気をつけて帰ってください。</p>
           <p>回去的时候要注意安全。</p>
           <p><strong>ki o ciu ke te ka e tte ku da sai</strong></p>
-          <p></p>
+          <p> </p>
+          <p> </p>
           <p>愛してる。</p>
           <p>我爱你们。</p>
           <p><strong>ai shiteru</strong></p>
