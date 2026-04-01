@@ -6856,7 +6856,7 @@ const contactNames = [
 고객님의 소중한 상품이 배송 예정입니다.
 
 · 보내는분 : CHICGROOV
-· 상품명 : [PCCVISION]—피그먼트—프린팅—디스트로이드—오픈넥—후드—티셔츠
+· 상품명 : [PCCVISION]_피그먼트_프린팅_디스트로이드_오픈넥_후드_티셔츠
 · 배송예정시간 : 13-15시
 
 ※ 위탁장소 선택, 실시간 배송정보
@@ -6886,7 +6886,7 @@ CJ대한통운 매일오네(O-NE)
 
 고객님의 상품이 배송 완료되었습니다.
 ㆍ보내는분 : CHICGROOV
-ㆍ상품명 : [PCCVISION]—피그먼트—프린팅—디스트로이드—오픈넥—후드—티셔츠
+ㆍ상품명 : [PCCVISION]_피그먼트_프린팅_디스트로이드_오픈넥_후드_티셔츠
 ㆍ인수자(위탁장소) : 문앞
 ㆍ운송장번호 : 993482082110
 
@@ -7108,4 +7108,246 @@ window.resetXlMessagesAppState = function () {
 };
 
   renderThreadList();
+})();
+
+
+
+/* =========================
+   XL KAKAO APP
+========================= */
+(function initXlKakaoApp() {
+  const xlKakaoScreen = document.getElementById("xlKakaoScreen");
+  const xlKakaoScroll = document.getElementById("xlKakaoScroll");
+  const xlKakaoConversation = document.getElementById("xlKakaoConversation");
+
+  if (!xlKakaoScreen || !xlKakaoScroll || !xlKakaoConversation) return;
+
+  const XL_KAKAO_PROFILES = {
+    "준서": {
+      name: "준서형 ALD1",
+      image: "assets/icons/kakao_profile_js.jpg"
+    },
+    "아르노": {
+      name: "豪哥 ALD1",
+      image: "assets/icons/kakao_profile_arno.jpg"
+    },
+    "리오": {
+      name: "리오형 ALD1",
+      image: "assets/icons/kakao_profile_leo.jpg"
+    },
+    "상원": {
+      name: "상원이형 ALD1",
+      image: "assets/icons/kakao_profile_sw.jpg"
+    },
+    "씬롱": {
+      name: "me",
+      image: "assets/icons/kakao_profile_xl.jpg"
+    },
+    "안신": {
+      name: "安信 ALD1",
+      image: "assets/icons/kakao_profile_ax.jpg"
+    },
+    "상현": {
+      name: "상현이 ALD1",
+      image: "assets/icons/kakao_profile_sh.jpg"
+    },
+    "건우": {
+      name: "잘생기고멋진거누형❤️ ALD1",
+      image: "assets/icons/kakao_profile_gw.jpg"
+    }
+  };
+
+  const XL_KAKAO_CHAT_DATA = KAKAO_CHAT_DATA;
+
+  function getXlSenderKey(sender) {
+    if (sender === "나") return "건우";
+    return sender;
+  }
+
+  function getXlProfileData(sender) {
+    const mappedSender = getXlSenderKey(sender);
+
+    return XL_KAKAO_PROFILES[mappedSender] || {
+      name: `${mappedSender} ALD1`,
+      image: ""
+    };
+  }
+
+  function getXlMessageImageSrc(filename) {
+    return `assets/pictures/${filename}`;
+  }
+
+  function createXlAvatarHTML(sender) {
+    const profile = getXlProfileData(sender);
+
+    if (profile.image) {
+      return `
+        <div class="kakao-avatar">
+          <img
+            src="${profile.image}"
+            alt="${profile.name}"
+            onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=&quot;kakao-avatar-placeholder&quot;></div>';"
+          >
+        </div>
+      `;
+    }
+
+    return `
+      <div class="kakao-avatar">
+        <div class="kakao-avatar-placeholder"></div>
+      </div>
+    `;
+  }
+
+  function createXlDateDividerHTML(label) {
+    return `
+      <div class="kakao-date-divider">
+        <div class="kakao-date-pill">
+          <img src="assets/icons/kakao_calendar.png" alt="" class="kakao-date-icon">
+          <span>${label}</span>
+          <span class="kakao-date-chevron">›</span>
+        </div>
+      </div>
+    `;
+  }
+
+  function createXlBubbleHTML(message, isMe, isFirstInGroup) {
+    const bubbleClass = [
+      "kakao-bubble",
+      isMe ? "is-me" : "",
+      isFirstInGroup ? "is-first" : ""
+    ].filter(Boolean).join(" ");
+
+    return `<div class="${bubbleClass}">${message.text}</div>`;
+  }
+
+  function createXlMediaGroupHTML(files) {
+    const layoutClass = `is-${Math.min(files.length, 4)}`;
+    return `
+      <div class="kakao-media-group ${layoutClass}">
+        ${files.map((file) => `
+          <div class="kakao-media-item">
+            <img src="${getXlMessageImageSrc(file)}" alt="" loading="lazy">
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  function groupXlMessages(items) {
+    const groups = [];
+    let currentGroup = null;
+
+    items.forEach((item) => {
+      if (item.type === "date") {
+        groups.push({ type: "date", label: item.label });
+        currentGroup = null;
+        return;
+      }
+
+      const canJoin =
+        currentGroup &&
+        currentGroup.type === "messageGroup" &&
+        currentGroup.sender === item.sender &&
+        currentGroup.time === item.time;
+
+      if (!canJoin) {
+        currentGroup = {
+          type: "messageGroup",
+          sender: item.sender,
+          time: item.time,
+          messages: [item]
+        };
+        groups.push(currentGroup);
+        return;
+      }
+
+      currentGroup.messages.push(item);
+    });
+
+    return groups;
+  }
+
+  function createXlMessageGroupHTML(group) {
+    const isMe = group.sender === "씬롱";
+    const profile = getXlProfileData(group.sender);
+    const rowClass = isMe ? "kakao-message-row is-me" : "kakao-message-row";
+
+    let bodyHTML = "";
+
+    group.messages.forEach((message, index) => {
+      const isLast = index === group.messages.length - 1;
+
+      if (message.type === "text") {
+        bodyHTML += `
+          <div class="kakao-bubble-line">
+            ${createXlBubbleHTML(message, isMe, false)}
+            ${isLast ? `<span class="kakao-time">${group.time}</span>` : ""}
+          </div>
+        `;
+        return;
+      }
+
+      if (message.type === "image") {
+        bodyHTML += `
+          <div class="kakao-media-block">
+            <div class="kakao-media-wrap">
+              ${createXlMediaGroupHTML(message.files)}
+              ${!isMe ? `
+                <button class="kakao-share-btn" type="button" aria-label="공유">
+                  <img src="assets/icons/kakao_share.png" alt="" class="kakao-share-icon">
+                </button>
+              ` : ""}
+            </div>
+            ${isLast ? `
+              <div class="kakao-media-time-line">
+                <span class="kakao-time">${group.time}</span>
+              </div>
+            ` : ""}
+          </div>
+        `;
+      }
+    });
+
+    return `
+      <div class="${rowClass}">
+        ${!isMe ? createXlAvatarHTML(group.sender) : ""}
+        <div class="kakao-message-main">
+          ${!isMe ? `<div class="kakao-sender-name">${profile.name}</div>` : ""}
+          <div class="kakao-bubble-stack">
+            ${bodyHTML}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderXlKakaoConversation() {
+    const groups = groupXlMessages(XL_KAKAO_CHAT_DATA);
+    xlKakaoConversation.innerHTML = groups.map((group) => {
+      if (group.type === "date") {
+        return createXlDateDividerHTML(group.label);
+      }
+      return createXlMessageGroupHTML(group);
+    }).join("");
+  }
+
+  function scrollXlKakaoToBottom() {
+    const setBottom = () => {
+      xlKakaoScroll.scrollTop = xlKakaoScroll.scrollHeight;
+    };
+
+    requestAnimationFrame(setBottom);
+    setTimeout(setBottom, 0);
+    setTimeout(setBottom, 120);
+    setTimeout(setBottom, 320);
+    setTimeout(setBottom, 700);
+  }
+
+  window.resetXlKakaoAppState = function () {
+    scrollXlKakaoToBottom();
+  };
+
+  renderXlKakaoConversation();
+  scrollXlKakaoToBottom();
 })();
