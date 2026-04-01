@@ -5656,14 +5656,14 @@ if (xlMemoDetailBack) {
     }
 
     return `
-      <section class="calendar-month" id="calendarMonth${month}" data-month="${month}">
-        <h2 class="calendar-month-title">${month}월</h2>
-        ${createWeekdaysHTML()}
-        <div class="calendar-month-grid">
-          ${cellsHTML}
-        </div>
-      </section>
-    `;
+  <section class="calendar-month" id="xlCalendarMonth${month}" data-month="${month}">
+    <h2 class="calendar-month-title">${month}월</h2>
+    ${createWeekdaysHTML()}
+    <div class="calendar-month-grid">
+      ${cellsHTML}
+    </div>
+  </section>
+`;
   }
 
   function renderCalendar() {
@@ -5671,28 +5671,28 @@ if (xlMemoDetailBack) {
   }
 
   function scrollXlCalendarToApril() {
-    const aprilSection = document.getElementById("calendarMonth4");
-    if (!aprilSection) return;
+  const aprilSection = document.getElementById("xlCalendarMonth4");
+  if (!aprilSection) return;
 
-    const targetTop = aprilSection.offsetTop - 6;
+  const targetTop = aprilSection.offsetTop - 6;
+  xlCalendarScroll.scrollTop = targetTop;
+  lastxlCalendarScrollTop = targetTop;
+
+  requestAnimationFrame(() => {
     xlCalendarScroll.scrollTop = targetTop;
     lastxlCalendarScrollTop = targetTop;
+  });
 
-    requestAnimationFrame(() => {
-      xlCalendarScroll.scrollTop = targetTop;
-      lastxlCalendarScrollTop = targetTop;
-    });
+  setTimeout(() => {
+    xlCalendarScroll.scrollTop = targetTop;
+    lastxlCalendarScrollTop = targetTop;
+  }, 120);
 
-    setTimeout(() => {
-      xlCalendarScroll.scrollTop = targetTop;
-      lastxlCalendarScrollTop = targetTop;
-    }, 120);
-
-    setTimeout(() => {
-      xlCalendarScroll.scrollTop = targetTop;
-      lastxlCalendarScrollTop = targetTop;
-    }, 320);
-  }
+  setTimeout(() => {
+    xlCalendarScroll.scrollTop = targetTop;
+    lastxlCalendarScrollTop = targetTop;
+  }, 320);
+}
 
   function resetXlCalendarAppState() {
     scrollXlCalendarToApril();
