@@ -724,8 +724,8 @@ dummyAppButtons.forEach((button) => {
     days30: [
       { id: "shopping", title: "장보기", meta: "2026. 03. 24.  항정살" },
       { id: "japan", title: "일본", meta: "2026. 03. 16.  돈키호테" },
-      { id: "longbirthday", title: "롱이생일!", meta: "2026. 03. 10  선물 후보" },
-      { id: "paris", title: "파리", meta: "2026.03.01  옷 / 아우터(+코트)" }
+      { id: "longbirthday", title: "롱이생일!", meta: "2026. 03. 10.  선물 후보" },
+      { id: "paris", title: "파리", meta: "2026.03.01.  옷 / 아우터(+코트)" }
     ],
     february: [
       { id: "shanghai", title: "상하이", meta: "2026. 02. 26.  옷" },
@@ -839,7 +839,7 @@ dummyAppButtons.forEach((button) => {
         { text: "옷", checked: true },
         { text: "잠옷 / 양말 / 속옷", checked: true },
         { text: "운동화 / 슬리퍼", checked: true },
-        { text: "편한 옷 상하이", checked: true },
+        { text: "편한 옷 상하의", checked: true },
         { text: "모자", checked: true },
         { text: "세면도구(쓰고 넣기)", checked: false },
         { text: "스킨케어(쓰고 넣기)", checked: false },
@@ -5188,231 +5188,233 @@ return `assets/pictures/${CURRENT_PROFILE}/${XL_PHOTO_FILES[index - 1]}`;
 
   const xlMemoData = {
     pinned: [
-      { id: "idpw", title: "아이디/비번", meta: "2025. 11. 04.  티빙 네이버 로그인" },
-      { id: "cardnum", title: "카드번호", meta: "2025. 02. 20.  우리은행" }
+      { id: "xladdress", title: "地址信息", meta: "2025. 09. 27.  숙소" },
+      { id: "xlcardnum", title: "支付信息", meta: "2025. 10. 03.  국민은행" }
     ],
     week7: [
-      { id: "guangzhou", title: "광저우", meta: "토요일  옷 / 아우터" }
+      { id: "xlgwbirthday", title: "광저우", meta: "어제  写好信（预约短信 / Kakao)" }
     ],
     days30: [
-      { id: "shopping", title: "장보기", meta: "2026. 03. 24.  항정살" },
-      { id: "japan", title: "일본", meta: "2026. 03. 16.  돈키호테" },
-      { id: "longbirthday", title: "롱이생일!", meta: "2026. 03. 10  선물 후보" },
-      { id: "paris", title: "파리", meta: "2026.03.01  옷 / 아우터(+코트)" }
+      { id: "xlpacking2", title: "일본", meta: "2026. 03. 26.  衣服" },
+      { id: "xldance", title: "롱이생일!", meta: "2026. 03. 23.  Ceremony" },
+      { id: "xljapanesestudy", title: "파리", meta: "2026. 03. 13.  今日はみなさんのおかげで本当に幸せでした。" }
     ],
     february: [
-      { id: "shanghai", title: "상하이", meta: "2026. 02. 26.  옷" },
-      { id: "partyshopping", title: "막방 기념 파티-장보기", meta: "2025. 02. 08.  삼겹살 8인분 몇키로?" }
+      { id: "xlkoreanstudy", title: "상하이", meta: "2026. 02. 25.  육각형 六边形 / 六边形战士" },
+      { id: "xlrap", title: "막방 기념 파티-장보기", meta: "2026. 02. 21.  与TA们的差别呢差别呢?" }
     ],
     year2025: [
-      { id: "mama2025", title: "MAMA2025", meta: "2025. 11. 24.  스킨케어(+브링그린)" },
-      { id: "aglio", title: "알리오올리오 레시피", meta: "2025. 10. 20.  올리브오일 / 면 / 마늘 / 페페론치노" },
-      { id: "todo", title: "할 것", meta: "2025. 9. 30.  보플 영상 모니터링? 다시 보기" },
-      { id: "packing", title: "숙소 짐싸기", meta: "2025. 09. 26.  침구? (이불/베개/매트리스-?)" }
+      { id: "xlmonitoring", title: "알리오올리오 레시피", meta: "2025. 10. 11.  https://youtube.com/playlist?list=···" },
+      { id: "xltodo", title: "할 것", meta: "2025. 10. 01.  整理行李" },
+      { id: "xlpacking", title: "숙소 짐싸기", meta: "2025. 09. 26.  枕头 / 被子 / 靠垫" }
     ]
   };
 
   const xlMemoDetailData = {
-    guangzhou: {
-      date: "2026년 3월 28일 21:35",
-      title: "광저우",
-      type: "checklist",
-      items: [
-        { text: "옷 / 아우터", checked: true },
-        { text: "잠옷 / 양말 / 속옷", checked: true },
-        { text: "운동화 / 슬리퍼", checked: true },
-        { text: "츄리닝", checked: true },
-        { text: "모자", checked: true },
-        { text: "세면도구(쓰고 넣기)", checked: false },
-        { text: "스킨케어(쓰고 넣기)", checked: false },
-        { text: "붓기빼기", checked: true },
-        { text: "충전기 / 에어팟 / 맥스", checked: false },
-        { text: "영양제 / 약", checked: true },
-        { text: "입 테이프", checked: true },
-        { text: "악세사리(팔찌/반지 등 꺼내두기)", checked: true },
-        { text: "선글라스", checked: true },
-        { text: "기타 .. 생각나면 추가", checked: false }
-      ]
-    },
-    shopping: {
-      date: "2026년 3월 24일 13:31",
-      title: "장보기",
-      type: "checklist",
-      items: [
-        { text: "항정살", checked: false },
-        { text: "통마늘", checked: false },
-        { text: "청양고추", checked: false },
-        { text: "파스타면(링귀니)", checked: false },
-        { text: "과자", checked: false },
-        { text: "딸기(있나?)", checked: false },
-        { text: "우삼겹 팩", checked: false },
-        { text: "양파", checked: false },
-        { text: "바나나우유", checked: false },
-        { text: "콘푸라이트", checked: false },
-        { text: "칼빔면", checked: false }
-      ]
-    },
-    japan: {
-      date: "2026년 3월 16일 22:16",
-      title: "일본",
+    xlgwbirthday: {
+      date: "어제 23:43",
+      title: "建宇哥生日",
       type: "text",
       html: `
         <div class="memo-text-block">
-          <p>- 돈키호테</p>
-          <p>안약 / 휴족시간 / 과자 유명한거 / 온열안대 / 컵라면</p>
-          <p>- 기념품?</p>
-          <p>인형 같은거</p>
-          <p><a href="#">https://youtu.be/1c7_NYeUF1g?si=9J2VeKzTrzUdON_g</a></p>
-          <p><a href="#">https://youtu.be/U_22eCKqBik?si=FXvPGkbMVdsAX2B-</a></p>
+          <p>写好信（预约短信 / Kakao)</p>
+          <p>礼物……送什么比较好呢</p>
         </div>
       `
     },
-    longbirthday: {
-      date: "2026년 3월 10일 13:43",
-      title: "롱이생일!",
-      type: "text",
-      html: `
-        <div class="memo-text-block">
-          <p>- 선물 후보</p>
-          <p>귀걸이<br>반지(너무티남)<br><strong>영양제?➡️홍삼(에브리타임)</strong><br><strong>+ 파리 가서 둘러보기</strong><br><strong>케이크 - 롱이한테 물어보기 딸기생크림케이크</strong></p>
-          <p>홍삼세트 주문 / 간식들이랑 같이 넣어두기</p>
-          <p>축하메시지<br>우리 씬롱이! 항상 어른스럽고 듬직한 아이지만<br>오늘만큼은 그 누구보다 환하게 웃는 네 모습을 보고싶다 :3<br>생일 너무너무 축하해!!</p>
-          <p>편지 따로 준비? 아니면 카톡으로?</p>
-          <p><strong>선물 챙겨서 자정 전에 롱이 방으로 가기!! 서프라이즈</strong><br>+ 낮에 어머님 연락 같이 드리기</p>
-          <p>점심 - 장수면 컨텐츠, 미역국 같이 끓여서 먹기<br>저녁 - 스케줄 끝나고 회사에서-시간 맞춰서 주문해두기</p>
-        </div>
-      `
-    },
-    paris: {
-      date: "2026년 3월 1일 00:26",
-      title: "파리",
+    xlpacking2: {
+      date: "2026년 3월 26일 21:14",
+      title: "行李",
       type: "checklist",
       items: [
-        { text: "옷 / 아우터(+코트)", checked: true },
-        { text: "잠옷 / 양말 / 속옷", checked: true },
-        { text: "운동화 / 슬리퍼", checked: true },
-        { text: "집업", checked: true },
-        { text: "모자 - ?", checked: true },
-        { text: "세면도구(쓰고 넣기)", checked: false },
-        { text: "스킨케어(쓰고 넣기)", checked: false },
-        { text: "붓기빼기", checked: true },
-        { text: "충전기 / 에어팟 / 맥스", checked: false },
-        { text: "영양제 / 약", checked: true },
-        { text: "입 테이프", checked: true },
-        { text: "선글라스", checked: true },
-        { text: "필름카메라", checked: true }
+        { text: "衣服", checked: true },
+        { text: "鞋子", checked: true },
+        { text: "帽子", checked: true },
+        { text: "眼镜", checked: true },
+        { text: "洗漱用品", checked: true },
+        { text: "护肤品", checked: true },
+        { text: "AirPods", checked: true },
+        { text: "充电器", checked: true },
+        { text: "营养品", checked: true },
+        { text: "꼬박꼬밥", checked: true },
+        { text: "戒指", checked: true },
+        { text: "拖鞋", checked: false },
+        { text: "太阳镜", checked: false }
       ],
-      extraHtml: `<p>도착해서 롱이랑 영통하기<br>+ 롱이 선물 찾아보기</p>`
     },
-    shanghai: {
-      date: "2026년 2월 26일 23:10",
-      title: "상하이",
+    xldance: {
+      date: "2026년 3월 23일 14:10",
+      title: "Dance practice",
       type: "checklist",
       items: [
-        { text: "옷", checked: true },
-        { text: "잠옷 / 양말 / 속옷", checked: true },
-        { text: "운동화 / 슬리퍼", checked: true },
-        { text: "편한 옷 상하이", checked: true },
-        { text: "모자", checked: true },
-        { text: "세면도구(쓰고 넣기)", checked: false },
-        { text: "스킨케어(쓰고 넣기)", checked: false },
-        { text: "붓기빼기", checked: true },
-        { text: "충전기 / 에어팟 / 맥스", checked: false },
-        { text: "영양제 / 약", checked: true },
-        { text: "입 테이프", checked: true },
-        { text: "선글라스", checked: true },
-        { text: "목도리", checked: true }
-      ]
-    },
-    partyshopping: {
-      date: "2026년 2월 8일 16:13",
-      title: "막방 기념 파티-장보기",
-      type: "checklist",
-      items: [
-        { text: "삼겹살 8인분 몇키로?", checked: false },
-        { text: "통마늘", checked: false },
-        { text: "청양고추", checked: false },
-        { text: "쌈장", checked: false },
-        { text: "비빔면(or 칼빔면)", checked: false },
-        { text: "쌈채소/버섯/양파", checked: false },
-        { text: "제로콜라", checked: false },
-        { text: "맥주", checked: false },
-        { text: "바나나우유", checked: false },
-        { text: "콘푸라이트", checked: false },
-        { text: "딸기", checked: false },
-        { text: "불닭소스", checked: false },
-        { text: "훠궈 재료 - 청경채/목이버섯/", checked: false }
-      ]
-    },
-    mama2025: {
-      date: "2025년 11월 24일 20:41",
-      title: "MAMA2025",
-      type: "checklist",
-      items: [
-        { text: "스킨케어(+브링그린)", checked: false },
-        { text: "세면도구", checked: false },
-        { text: "운동화 / 슬리퍼", checked: false },
-        { text: "트레이닝복", checked: false },
-        { text: "모자", checked: false },
-        { text: "옷 / 겉옷", checked: false },
-        { text: "잠옷 / 양말 / 속옷", checked: false },
-        { text: "붓기빼기", checked: false },
-        { text: "충전기 / 에어팟 / 맥스", checked: false },
-        { text: "영양제 / 약", checked: false },
-        { text: "입 테이프", checked: false },
-        { text: "선글라스 / 안경", checked: false },
-        { text: "목도리", checked: false },
-        { text: "가방(메신저백/", checked: false }
-      ],
-      extraHtml: `<p>캐리어 싸는거 브이로그 찍기</p>`
-    },
-    aglio: {
-      date: "2025년 10월 20일 11:28",
-      title: "알리오올리오 레시피",
-      type: "text",
-      html: `
-        <div class="memo-text-block">
-          <p>올리브오일 / 면 / 마늘 / 페페론치노</p>
-          <p>면 8분 익히기(소금 살짝)<br>올리브오일 2/3컵(10큰술 정도), 다진마늘 1티스푼, 편마늘(4개 정도), 페페론치노 볶기<br>면, 면수 2국자 넣고 볶기 / 소금으로 간</p>
-          <p>1인분 기준</p>
-        </div>
-      `
-    },
-    todo: {
-      date: "2025년 9월 30일 23:45",
-      title: "할 것",
-      type: "checklist",
-      items: [
-        { text: "보플 영상 모니터링? 다시 보기", checked: true },
-        { text: "옷장 정리", checked: true },
-        { text: "챌린지, 신곡 안무 카피", checked: false },
-        { text: "PT", checked: false },
-        { text: "중국어 공부", checked: false },
-        { text: "보컬룸 - 발성연습", checked: false },
+        { text: "Ceremony", checked: true },
+        { text: "Sting", checked: true },
+        { text: "Pretty boy swag", checked: true },
+        { text: "Crown", checked: true },
+        { text: "Knife", checked: true },
+        { text: "Mono", checked: true },
+        { text: "Hypnotize", checked: true },
+        { text: "404", checked: true },
+        { text: "Rock the nation", checked: true },
+        { text: "Bang bang", checked: true },
+        { text: "다시 만난 오늘", checked: true },
+        { text: "Both sides", checked: true },
+        { text: "Rude!", checked: true },
+        { text: "내가 살아있다는 증거", checked: true },
+        { text: "Twenty", checked: true },
+        { text: "Catch catch", checked: true },
+        { text: "That's a no no", checked: true },
         { text: "", checked: false }
-      ],
-      extraHtml: `
-        <p>보플-티빙<br>3회 후반 - 첫만남 롱이 파트<br>4회 후반 - 위플래쉬<br>7회 후반 - 락<br>9회 - 럭키마초 / 체인스<br>10회, 11회</p>
-        <p>유튜브 클립 모음<br><a href="#">https://youtube.com/playlist?list=PLTZxf74YKwfYCaAnRlOr3nDqvWD_2rvwm&si=pMevfXZR-hBa2bPc</a></p>
+      ]
+    },
+    xljapanesestudy: {
+      date: "2026년 3월 13일 20:36",
+      title: "日语感想背诵",
+      type: "text",
+      html: `
+        <div class="memo-text-block">
+          <p>今日はみなさんのおかげで本当に幸せでした。</p>
+          <p>今天多亏了大家，我真的觉得很幸福。</p>
+          <p><strong>kyo wa mina sang no okage de hontou ni xia wa se de xi ta</strong></p>
+          <p></p>
+          <p>今日のショーケースは終わりましたが、これからが僕たちの始まりだと思います。</p>
+          <p>今天的 showcase 虽然结束了，但我觉得从现在开始才是我们的开始。</p>
+          <p><strong>kyou no showcase wa o wa ri ma xi ta ga, kore kara ga boku tachi no ha ji ma ri da to o mo i ma si</strong></p>
+          <p></p>
+          <p>これからもたくさん会えたらいいですね。</p>
+          <p>希望以后也能经常见面。</p>
+          <p><strong>kore kara mo ta ku sang a e ta ra ii de si ne</strong></p>
+          <p></p>
+          <p>会えないときもお互いのことを思いましょう。</p>
+          <p>就算见不到的时候, 也请彼此想着对方吧。</p>
+          <p><strong>a e nai to ki mo, o ta gai no ko to o o mo i ma shou</strong></p>
+          <p></p>
+          <p>応援してくれてありがとうございます。</p>
+          <p>谢谢大家一直以来的支持</p>
+          <p><strong>ou en xi te ku re te a ri ga tou go za i ma si</strong></p>
+          <p></p>
+          <p>気をつけて帰ってください。</p>
+          <p>回去的时候要注意安全。</p>
+          <p><strong>ki o ciu ke te ka e tte ku da sai</strong></p>
+          <p></p>
+          <p>愛してる。</p>
+          <p>我爱你们。</p>
+          <p><strong>ai shiteru</strong></p>
+        </div>
       `
     },
-    packing: {
-      date: "2025년 9월 26일 10:19",
-      title: "숙소 짐싸기",
+    xlkoreanstudy: {
+      date: "2026년 2월 25일 17:36",
+      title: "单词 / 发音练习",
+      type: "text",
+      html: `
+        <div class="memo-text-block">
+          <p>육각형 六边形 / 六边形战士</p>
+          <p>보조개 酒窝</p>
+          <p>성숙 成熟</p>
+          <p>아름다운 ‘ㅁ’</p>
+          <p>좋아해주셨으면 해주셨</p>
+          <p>화제가 되고 있습니다 引发热议</p>
+          <p>잇따라 接连</p>
+          <p>섬세하다 细腻</p>
+          <p>이끌어주셔서 주셔서</p>
+        </div>
+      `
+    },
+    xlrap: {
+      date: "2026년 2월 21일 22:32",
+      title: "rap",
+      type: "text",
+      html: `
+        <div class="memo-text-block">
+          <p>与TA们的差别呢差别呢</p>
+          <p>标签被踩扁了踩扁了</p>
+          <p>就像向日葵的执着是 我们的风格</p>
+          <p></p>
+          <p></p>
+          <p>满分的试卷也有烦恼 you know</p>
+          <p>做太完美了 也总会被取笑oh god</p>
+          <p>再多诋毁对我也没影响</p>
+          <p>麻烦您见我别太过紧张</p>
+          <p></p>
+          <p></p>
+          <p>像在比赛 只在乎我的 KD</p>
+          <p>红了眼让身上</p>
+          <p>的铁链又松了点</p>
+          <p>把你的歪道理丢到垃圾桶里面</p>
+          <p>贪婪的欲望就当作跳板</p>
+          <p>跳到理想的高度是早晚</p>
+          <p>They call me crazy</p>
+          <p>要疯就疯的彻底</p>
+          <p>你听了我的目的地会觉得合理</p>
+          <p></p>
+          <p></p>
+          <p>约定的未来 变成了老旧照片</p>
+          <p>放进了相册 当作纪念</p>
+          <p>电影的散场 还没排练</p>
+          <p>挥手是问好也是再见</p>
+          <p></p>
+          <p></p>
+          <p>Uh 소리쳐 DJ turn it up</p>
+          <p>거침이 가장 아름다운 법</p>
+          <p>We gon' bounce wiggle</p>
+          <p>따라와 나의 스텝을</p>
+          <p></p>
+          <p></p>
+          <p>Born to be 좀 더 뜨겁게 넘겨</p>
+          <p>자꾸만 원해 짜릿함 난 원래 그런 Gritty type</p>
+          <p>존재 자체로 Make em hot</p>
+          <p></p>
+          <p></p>
+          <p>너무 달콤해 자꾸만 끌리지만</p>
+          <p>Cinnamon 맛 Rapper vanilla 음색에</p>
+          <p>취향 따윈 부시듯 다 반하게 만들래</p>
+          <p></p>
+          <p></p>
+          <p>다들 말해 난 좀 Low key</p>
+          <p>근데 말야 넌 좀 High key</p>
+          <p>달라서 더 완벽한 걸</p>
+          <p>Yeah we will become one</p>
+        </div>
+      `
+    },
+    xlmonitoring: {
+      date: "2025년 10월 11일 21:38",
+      title: "回看 BP 视频",
+      type: "text",
+      html: `
+        <div class="memo-text-block">
+          <p><a href="#">https://youtube.com/playlist?list=PLTZxf74YKwfYCaAnRlOr3nDqvWD_2rvwm&si=eKrZWk3Xo5bWM31M</a></p>
+        </div>
+      `
+    },
+    xltodo: {
+      date: "2025년 10월 1일 15:45",
+      title: "待办事项",
       type: "checklist",
       items: [
-        { text: "침구? (이불/베개/매트리스-?)", checked: false },
-        { text: "옷", checked: true },
-        { text: "신발", checked: true },
-        { text: "악세사리/모자/목도리/안경/가방 등", checked: true },
-        { text: "화장품/스킨케어/헤어롤 등", checked: true },
-        { text: "세면도구/화장실", checked: false },
-        { text: "전자기기(에어팟, 맥스, 멀티탭, 충전기 등)", checked: false },
-        { text: "상비약, 영양제", checked: true },
-        { text: "텀블러", checked: true },
-        { text: "쓰레기통/돌돌이/", checked: false },
-        { text: "책(자료, 책, 앨범 등 지류)", checked: true },
-        { text: "가습기", checked: true }
+        { text: "整理行李", checked: false },
+        { text: "回看 BP 视频", checked: false },
+        { text: "练习新歌舞蹈", checked: false },
+        { text: "购买营养品和蛋白奶昔", checked: true }
+      ]
+    },
+    xlpacking: {
+      date: "2025년 9월 26일 13:41",
+      title: "住宿行李清单",
+      type: "checklist",
+      items: [
+        { text: "枕头 / 被子 / 靠垫", checked: true },
+        { text: "衣服 / 鞋子", checked: true },
+        { text: "化妆品", checked: true },
+        { text: "洗漱用品", checked: true },
+        { text: "帽子", checked: true },
+        { text: "饰品", checked: true },
+        { text: "包", checked: true },
+        { text: "眼镜 / 太阳镜", checked: true },
+        { text: "充电器 / AirPods", checked: true },
+        { text: "药 / 保健品", checked: true },
+        { text: "", checked: false }
       ]
     }
   };
