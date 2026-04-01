@@ -6074,7 +6074,7 @@ const contactNames = [
 
   const xlMessagesDetailBack = xlMessagesScreen.querySelector(".messages-detail-back");
   const xlMessagesDetailName = document.getElementById("xlMessagesDetailName");
-  const xlMessagesDetailAvatar= document.getElementById("messagesDetailAvatar");
+  const xlMessagesDetailAvatar = document.getElementById("xlMessagesDetailAvatar");
   const xlMessagesDetailAvatarChar = document.getElementById("xlMessagesDetailAvatarChar");
   const xlMessagesInputPlaceholder = document.getElementById("xlMessagesInputPlaceholder");
 
@@ -6971,25 +6971,25 @@ function getThreadPreview(thread) {
     `).join("");
   }
 
-  function setDetailHeader(thread) {
-    if (xlMessagesDetailName) {
-      xlMessagesDetailName.textContent = thread.name;
-    }
-
-    if (xlMessagesInputPlaceholder) {
-      xlMessagesInputPlaceholder.textContent = thread.inputType || "iMessage";
-    }
-
-    if (messagesDetailAvatar) {
-      messagesDetailAvatar.classList.toggle("is-default", !!thread.defaultAvatar);
-    }
-
-    if (messagesDetailAvatarChar) {
-      messagesDetailAvatarChar.textContent = thread.defaultAvatar ? "" : (thread.avatar || "");
-    }
+  function setXlDetailHeader(thread) {
+  if (xlMessagesDetailName) {
+    xlMessagesDetailName.textContent = thread.name;
   }
 
-  function renderMessageItem(message) {
+  if (xlMessagesInputPlaceholder) {
+    xlMessagesInputPlaceholder.textContent = thread.inputType || "iMessage";
+  }
+
+  if (xlMessagesDetailAvatar) {
+    xlMessagesDetailAvatar.classList.toggle("is-default", !!thread.defaultAvatar);
+  }
+
+  if (xlMessagesDetailAvatarChar) {
+    xlMessagesDetailAvatarChar.textContent = thread.defaultAvatar ? "" : (thread.avatar || "");
+  }
+}
+
+ function renderXlMessageItem(message) {
     if (message.type === "meta-center") {
       return `<div class="messages-meta-center">${message.text}</div>`;
     }
