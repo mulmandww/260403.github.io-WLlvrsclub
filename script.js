@@ -1304,7 +1304,7 @@ dummyAppButtons.forEach((button) => {
   time: "어제",
   inputType: "iMessage",
   messages: [
-    { type: "meta-center", text: "3월 23일 (월) 21:22" },
+    { type: "meta-center", text: "3월 23일 (월) 21:52" },
 
     { type: "text-me", text: "윗층에 있던 오징어집" },
     { type: "text-me", text: "너가 먹었냐 상현아" },
@@ -1401,7 +1401,7 @@ dummyAppButtons.forEach((button) => {
   time: "어제",
   inputType: "iMessage",
   messages: [
-    { type: "meta-center", text: "3월 23일 (월) 21:52" },
+    { type: "meta-center", text: "3월 23일 (월) 21:32" },
 
     { type: "text-me", text: "안신아 롱이 뭐해" },
     { type: "text-you", text: "???" },
@@ -1417,7 +1417,7 @@ dummyAppButtons.forEach((button) => {
     { type: "text-you", text: ";;" },
     { type: "text-me", text: "쎼쎼..ㅎㅎ" },
 
-    { type: "meta-center", text: "3월 24일 (화) 16:48" },
+    { type: "meta-center", text: "3월 25일 (수) 16:48" },
 
     { type: "text-me", text: "안신아" },
     { type: "text-me", text: "상현이 아직도 너희 방에 있니" },
@@ -1524,7 +1524,7 @@ dummyAppButtons.forEach((button) => {
   id: "leeleo",
   name: "이리오 ALD1",
   avatar: "이",
-  time: "화요일",
+  time: "수요일",
   inputType: "iMessage",
   messages: [
     { type: "meta-center", text: "3월 22일 (일) 15:08" },
@@ -1745,7 +1745,7 @@ dummyAppButtons.forEach((button) => {
 고객님의 소중한 상품이 배송 예정입니다.
 
 · 보내는분 : 정관장
-· 상품명 : 정관장_에브리타임_10ml_100포_1개[원산지:상세설명에_표시]_정관장브랜드스토어
+· 상품명 : 정관장_에브리타임_10ml_100포_1개[원산지:상세설명에_표시]
 · 배송예정시간 : 13-15시
 
 ※ 위탁장소 선택, 실시간 배송정보
@@ -1775,7 +1775,7 @@ CJ대한통운 매일오네(O-NE)
 
 고객님의 상품이 배송 완료되었습니다.
 ㆍ보내는분 : 정관장
-ㆍ상품명 : 정관장 에브리타임 10ml 100포, 1개
+ㆍ상품명 : 정관장_에브리타임_10ml_100포_1개[원산지:상세설명에_표시]
 ㆍ인수자(위탁장소) : 문앞
 ㆍ운송장번호 : 211082089934
 
@@ -5755,7 +5755,7 @@ if (xlMemoDetailBack) {
   };
 
 const contactNames = [
-  "곽지석 형", "김민아", "김민철 선배", "김춘심 선배님", "박원준 형", "서민주 선배", "유지혜 선배", "정예준", "최경욱 형", "최성호 선배",
+  "곽지석 형", "김민아", "김민철 선배", "김춘심 선배님", "박성훈 형", "박원준 형", "서민주 선배", "유지혜 선배", "윤현수 형", "이수찬 형", "정예준", "최경욱 형", "최성호 선배",
   "준서형 ALD1", "리오형 ALD1", "豪哥 ALD1", "상원이형 ALD1", "잘생기고멋진거누형❤️ ALD1", "安信 ALD1", "상현이 ALD1", "B 贾宝", "B 祺祺", "B 小宇",
   "B 苟苟", "B 漾宝宝", "BP2 준민이형", "BP2 유메키형", "BP2 이정이형", "BP2 립우 崔立于", "BP2 동규", "BP2 우진이", "BP2 윤서", "BP2 마사토",
   "BP2 한음", "BP2 칭위 許謦宇", "BP2 孙亨裕哥", "BP2 胡瀚文哥", "BP2 해리준", "BP2 年博恒", "BP2 薛墨昀", "BP2 이첸형 金永先", "BP2 赵杨光旭哥", "BP2 陳博文",
@@ -5860,7 +5860,7 @@ const contactNames = [
 
     html += `
       <div class="phone-contacts-count-row">
-        <div class="phone-contacts-count-inline">155개의 연락처</div>
+        <div class="phone-contacts-count-inline">150개의 연락처</div>
       </div>
     `;
 
@@ -6056,4 +6056,1056 @@ const contactNames = [
   renderRecents();
   setPhonePage("keypad");
   updatePhoneDialUI();
+})();
+
+
+/* =========================
+   XL MESSAGES APP
+========================= */
+(function initXlMessagesApp() {
+  const xlMessagesScreen = document.getElementById("xlMessagesScreen");
+  if (!xlMessagesScreen) return;
+
+  const xlMessagesThreadList = document.getElementById("xlMessagesThreadList");
+  const xlMessagesDetailPage = document.getElementById("xlMessagesDetailPage");
+  const xlMessagesConversation = document.getElementById("xlMessagesConversation");
+  const xlMessagesDetailScroll = document.getElementById("xlMessagesDetailScroll");
+  const xlMessagesListScroll = xlMessagesScreen.querySelector(".messages-list-scroll");
+
+  const xlMessagesDetailBack = xlMessagesScreen.querySelector(".messages-detail-back");
+  const xlMessagesDetailName = document.getElementById("xlMessagesDetailName");
+  const xlMessagesDetailAvatar= document.getElementById("messagesDetailAvatar");
+  const xlMessagesDetailAvatarChar = document.getElementById("xlMessagesDetailAvatarChar");
+  const xlMessagesInputPlaceholder = document.getElementById("xlMessagesInputPlaceholder");
+
+  if (!xlMessagesThreadList || !xlMessagesDetailPage || !xlMessagesConversation) return;
+
+  const xlMessageThreads = [
+{
+  id: "gwhyung",
+  name: "잘생기고멋진거누형❤️ ALD1",
+  avatar: "잘",
+  time: "00:13",
+  inputType: "iMessage",
+  messages: [
+    { type: "meta-center", text: "2월 26일 (목) 23:43" },
+
+    { type: "voice-you" },
+    { type: "text-me", text: "몇살이에요 형" },
+    { type: "text-you", text: "스물넷이다 이제." },
+    { type: "text-me", text: "天哪;;" },
+
+    { type: "meta-center", text: "3월 1일 (일) 11:20" },
+
+    { type: "text-you", text: "롱이보고싶따~~~~~" },
+    { type: "text-you", text: "ㅠㅠ" },
+    { type: "text-you", text: "롱아 나 안 보고싶어????" },
+    { type: "text-me", text: "형 아직 한국이자나요..;;" },
+    { type: "text-me", text: "비행기도 안탔는데 ㅋㅋㅋ" },
+    { type: "text-you", text: "같이 가고 싶었는데ㅠㅠ" },
+    { type: "text-me", text: "me too 근데 어쩔수없어요" },
+    { type: "text-me", text: "저 대신 잘하고 와용 ㅜ.ㅜ" },
+    { type: "text-you", text: "너가없는데어떻게해" },
+    { type: "text-you", text: "아 롱이보고싶다아아아~~~~" },
+    { type: "text-me", text: "😬😬😬" },
+    { type: "image-me", src: "assets/pictures/message_image_1.JPEG" },
+    { type: "text-you", text: "롱아아아아❤️❤️❤️❤️❤️" },
+    { type: "text-you", text: "조금만 참아 알았지????? :3" },
+    { type: "text-me", text: "형이나 좀 참아봐요.. ;;" },
+    { type: "text-me", text: "너무 着急了" },
+    { type: "text-me", text: "ㅋㅋ" },
+    { type: "voice-me" },
+    { type: "text-me", text: "조심히 다녀와요 530" },
+    { type: "text-me", text: "我想你😬😬" },
+
+    { type: "meta-center", text: "3월 4일 (수) 21:14" },
+
+    { type: "image-you", src: "assets/pictures/message_image_2.jpg" },
+    { type: "text-you", text: "아~롱이보고싶은날" },
+    { type: "text-you", text: "롱이가 없으니까 즐겁지가 않네" },
+    { type: "text-you", text: "ㅠ.ㅠ ❤️❤️" },
+    { type: "text-me", text: "ㅋㅋ" },
+    { type: "image-me", src: "assets/pictures/message_image_3.JPEG" },
+    { type: "text-me", text: "상원형이 보내줬는데" },
+    { type: "text-me", text: "되게 신나보이는데요" },
+    { type: "text-me", text: "😬😬😬😬" },
+    { type: "text-you", text: "아 뭐야" },
+    { type: "text-you", text: "아니야" },
+    { type: "text-you", text: "오해야 저거는" },
+    { type: "text-you", text: "와 되게 절묘하게 찍혔네" },
+    { type: "text-you", text: "ㅋㅋ" },
+    { type: "text-me", text: "농담" },
+    { type: "text-me", text: "더 즐겁게 보고와용" },
+    { type: "text-me", text: "~~~~😬😎😎" },
+    { type: "text-you", text: "🥹🥹내일 봐 롱아" },
+    { type: "text-you", text: "형 없다고 울지 말구~~~~ㅋㅋ" },
+    { type: "text-you", text: "스물넷이다." },
+    { type: "text-me", text: "몇사리에요" },
+    { type: "text-me", text: "wow" },
+    { type: "text-me", text: "ㅋㅋ" },
+    { type: "text-me", text: "통했네~" },
+    { type: "text-you", text: "❤️❤️❤️❤️❤️" },
+
+    { type: "meta-center", text: "3월 6일 (금) 20:19" },
+
+    { type: "text-you", text: "롱아" },
+    { type: "text-you", text: "생일 선물 뭐 갖고싶은 거 있어?" },
+    { type: "text-me", text: "에" },
+    { type: "text-me", text: "괜찮아용" },
+    { type: "text-me", text: "다 갖고 잇어서 没关系~" },
+    { type: "text-you", text: "아아아아아아롱아아아..........." },
+    { type: "text-you", text: "형이 진짜진짜꼭ㄲ꼭 챙기고 싶어서 그래" },
+    { type: "text-you", text: "내가 잘 챙겨주기로 했잖아" },
+    { type: "text-me", text: "건우형 이미 너~~~~무 잘 챙겨줘서" },
+    { type: "text-me", text: "갠찮아요 ㅎㅎ" },
+    { type: "text-me", text: "진짜 really fine" },
+    { type: "text-me", text: "스케줄 끝나고 맛있는거 먹으러가용" },
+    { type: "text-me", text: "신난다야~~~~" },
+    { type: "text-you", text: "롱아아아아................." },
+    { type: "text-you", text: "나 눈물날 것 같애" },
+    { type: "text-you", text: "ㅠ.ㅠ" },
+    { type: "text-you", text: "내가 앞으로도 더더더더더더ㅓ더" },
+    { type: "text-you", text: "잘 챙길게" },
+    { type: "text-you", text: "알았지??!?!?????" },
+    { type: "text-me", text: "넹.. 숙소가서 통화해용" },
+    { type: "text-me", text: "加油!" },
+    { type: "text-you", text: "❤️❤️❤️❤️❤️" },
+
+    { type: "meta-center", text: "3월 9일 (월) 14:02" },
+
+    { type: "text-me", text: "형" },
+    { type: "text-me", text: "횽" },
+    { type: "text-me", text: "집 앞에 붕어빵 가게? 왔어용" },
+    { type: "text-me", text: "!!!!!!" },
+    { type: "text-you", text: "오 날 풀렸는데도 아직 하시나보네?" },
+    { type: "text-me", text: "근데 저 현금이 없어서 못샀어요" },
+    { type: "text-me", text: "sorry" },
+    { type: "text-me", text: "오다가 사와줘용" },
+    { type: "text-you", text: "내가 배달의민족 라이더야??" },
+    { type: "text-me", text: "형이랑 같이 나눠먹고 시펐는데" },
+    { type: "text-you", text: "아주 형을 막 부려먹ㅇ" },
+    { type: "text-you", text: "아아아앙롱아 형이랑 같이 먹고싶어서" },
+    { type: "text-you", text: "형 생각한거야???????❤️❤️❤️❤️❤️" },
+    { type: "text-you", text: "팥으로 다 사갈게에에에~~~~" },
+    { type: "text-you", text: "❤️❤️❤️❤️❤️❤️" },
+    { type: "text-you", text: "우리롱이 따뜻한거 먹여줘야지" },
+    { type: "text-you", text: "품에 넣고 뛴다 이제" },
+    { type: "text-me", text: "天哪" },
+    { type: "text-me", text: "몇살이에요 대체;;" },
+
+    { type: "meta-center", text: "3월 12일 (목) 00:00" },
+
+    { type: "text-you", text: "생일 진짜진짜진짜 축하해" },
+    { type: "text-you", text: "내가 처음 마지막 둘 다 축하해줌" },
+    { type: "text-you", text: "맞지?????" },
+    { type: "text-you", text: "잘 자고 내 꿈 꿔야 돼~~ :3" },
+    { type: "text-you", text: "사롱롱해❤️❤️❤️" },
+    { type: "text-me", text: "ㅋㅋㅋ챙겨줘서고마워요" },
+    { type: "text-me", text: "형도 잘자용~" },
+    { type: "text-me", text: "晚安" },
+    { type: "text-me", text: "520😬" },
+    { type: "text-you", text: "❤️❤️❤️❤️❤️❤️" },
+    { type: "text-you", text: "나도 486~~~~" },
+    { type: "text-you", text: "486 = 520 같은 뜻" },
+    { type: "text-me", text: "oh 486 새로 알앗어요!! 신기하다" },
+    { type: "text-me", text: "😬😬😬😬😬❤️" },
+
+    { type: "meta-center", text: "3월 15일 (일) 21:35" },
+
+    { type: "text-me", text: "키키치? 형" },
+    { type: "text-you", text: "롱아" },
+    { type: "text-you", text: "너도 이러기야........?" },
+    { type: "text-you", text: "ㅠㅠㅠㅠㅠㅠㅠㅠ" },
+    { type: "text-me", text: "형은 이거 닮았어요ㅋㅋ" },
+    { type: "image-me", src: "assets/pictures/message_image_4.jpg" },
+    { type: "text-you", text: "아아앙롱아내가왜저거야 ㅜ.ㅜ" },
+    { type: "text-me", text: "상혀니가 보낸것중에 닮았어용 ㅎㅎ" },
+    { type: "text-me", text: "물론 키키치 그 노란원숭이도 쫌" },
+    { type: "text-you", text: "야 씬롱아" },
+    { type: "text-you", text: "노란원숭이안닮았어나ㅠㅠㅠㅠㅠㅠㅠㅠ" },
+    { type: "text-me", text: "아니아니아니" },
+    { type: "text-me", text: "저 pink 닮았ㅅ어용" },
+    { type: "text-you", text: "..그건쫌귀엽네ㅋㅋ" },
+    { type: "text-you", text: "왜닮았는데??????" },  
+    { type: "text-you", text: "형생각해준거야??저거보면앞으로도쭉내생각하겠네" },  
+    { type: "text-you", text: "ㅎㅎㅎㅎㅎㅎ❤️❤️" },  
+    { type: "text-me", text: "😬😬..." },
+    { type: "text-you", text: "넌 완전 이거" },  
+    { type: "image-you", src: "assets/pictures/message_image_5.jpg" },
+    { type: "text-me", text: "....저 진짜 이거 닮앗어요?" },
+    { type: "text-me", text: "진짜???" },
+    { type: "text-you", text: "?????" },
+    { type: "text-me", text: "天哪.." },
+    { type: "text-me", text: "카톡사진바꿧네~ ㅋㅋㅋㅋㅋ" },
+
+    { type: "meta-center", text: "3월 22일 (일) 20:15" },
+    { type: "text-you", text: "롱아..... 다시 한 번 미안해" },
+    { type: "text-you", text: "포장이 너무 비슷해서 헷갈렸ㅅ어ㅠㅠㅠ" },
+    { type: "text-you", text: "괜찮아이제??" },
+    { type: "text-me", text: "하.." },
+    { type: "text-me", text: "됏어요.. 진짜매워" },
+    { type: "text-me", text: "太辣了" },
+    { type: "text-me", text: ";;;" },
+    { type: "text-you", text: "ㅠㅠㅠㅠㅠㅠ미안해" },
+    { type: "text-you", text: "真的对不起ㅠㅠㅠ" },
+    { type: "text-me", text: "됐어요.." },
+    { type: "text-me", text: "괜찮아졋어요 이제" },
+    { type: "text-me", text: "ㅡㅡ" },
+    { type: "text-you", text: "....🥹❤️❤️" },
+
+    { type: "meta-center", text: "3월 23일 (월) 21:22" },
+
+    { type: "text-you", text: "롱아" },
+    { type: "text-you", text: "롱아아~~~~~" },
+    { type: "text-you", text: "롱" },
+    { type: "text-you", text: "아" },
+    { type: "text-you", text: "롱롱" },
+    { type: "text-you", text: "롱거야" },
+    { type: "text-you", text: "롱띠야" },
+    { type: "text-you", text: "ㅋㅋ" },
+    { type: "text-you", text: "뭐해" },
+    { type: "text-you", text: "왜안읽는데" },
+    { type: "text-you", text: "?????????????????" },
+    { type: "text-me", text: "형...몇살이에요 진짜" },
+    { type: "text-me", text: "너무 시끄러" },
+    { type: "text-you", text: "아아아아 롱아 나 지금 올라간다???" },
+    { type: "text-me", text: "넹" },
+    { type: "text-me", text: "재밌는거 봐요" },
+    { type: "text-me", text: "오징어집 식탁에 있는거 갖고와용" },
+    { type: "text-me", text: "신난다야~~~~~~" },
+
+    { type: "meta-center", text: "3월 25일 (수) 23:35" },
+
+    { type: "text-you", text: "롱아 잘 자 오늘도 내 꿈 꿔" },
+    { type: "text-you", text: "롱쿨러~~~" },
+    { type: "text-you", text: "롱나잇~~~~❤️❤️" },
+    { type: "text-me", text: "晚安😬😬❤️" },
+
+    { type: "meta-center", text: "3월 26일 (목) 21:25" },
+    { type: "text-me", text: "거누형" },
+    { type: "text-me", text: "저도 형 옛날사진 보고싶어요" },
+    { type: "text-me", text: "저는 옛날사진 넘 많은데" },
+    { type: "text-me", text: "형은 별로 없잖아요" },
+    { type: "text-me", text: "이거 좀 불공평 이라고 생각해요" },
+    { type: "text-me", text: "!!!!" },
+    { type: "image-you", src: "assets/pictures/message_image_6.jpg" },
+    { type: "text-you", text: "..선물🎁" },
+    { type: "text-you", text: "ㅋㅋ" },
+    { type: "text-me", text: "형 카페에서 일했었어요???" },
+    { type: "text-me", text: "Wow 멋있다!" },
+    { type: "text-you", text: "응 나 예전에 잠깐 알바..ㅎㅎ" },
+    { type: "text-you", text: "내가 아아 만들어줄게 롱아🥰❤️" },
+    { type: "text-me", text: "Oh 전 단게좋아요" },
+    { type: "text-you", text: ".....나 딸기라떼도 잘 만들어." },
+    { type: "text-me", text: "지짜요????" },
+    { type: "text-me", text: "딸기 맛있겠다야~~~" },
+    { type: "text-me", text: "딸기~ 딸기~🍓" },
+
+
+    { type: "meta-center", text: "(어제) 19:34" },
+
+    { type: "text-me", text: "형 저 못내려가용" },
+    { type: "text-me", text: "상혀니 우리 방 온대요" },
+    { type: "text-me", text: "동생들 놀아줘야 돼~~😎😎" },
+    { type: "text-you", text: "헐" },
+    { type: "text-you", text: "형은?" },
+    { type: "text-you", text: "형은" },
+    { type: "text-you", text: "형은." },
+    { type: "text-you", text: "오기로 약속했잖아" },
+    { type: "text-you", text: "진짜 완전 기대했는데" },
+    { type: "text-you", text: "동생들만 놀아주고 형은 거들떠도 안보고" },
+    { type: "text-you", text: "롱아 너무하다" },
+    { type: "text-you", text: "너 우선순위가 누구야" },
+    { type: "text-you", text: "오늘 이 시간만을 기다렸는데............" },
+    { type: "text-me", text: "형 오버 좀 stop" },
+    { type: "text-me", text: "어제도 내가 갔잖아요 ㅡㅡ" },
+    { type: "text-you", text: "오늘도 내가 먼저 약속한거잖아" },
+    { type: "text-you", text: "표에 먼저 적은거잖아" },
+    { type: "text-you", text: "진짜 형을 이렇게 바람맞히고ㅠㅠ" },
+    { type: "text-me", text: "바람맞히고?" },
+    { type: "text-me", text: "그게 뭐ㅔ요" },
+    { type: "text-me", text: "sorry" },
+    { type: "text-me", text: "이따가 편의점 간다고 나올게용" },
+    { type: "text-me", text: "😬😬😬" },
+    { type: "text-you", text: "너 이러면 내가 풀릴 줄 알ㄱ" },
+    { type: "text-me", text: "❤️❤️❤️" },
+    { type: "text-you", text: "..연락해 맞춰서 나와있을게" },
+    { type: "text-you", text: "롱이 좋아하는 과자 다 사줄게~~~" },
+    { type: "text-you", text: "ㅎㅎ❤️" },
+
+    { type: "meta-center", text: "(오늘) 00:00" },
+
+    { type: "text-you", text: "롱아 오늘도 잘자고" },
+    { type: "text-me", text: "네 형꿈꿀게요" },
+    { type: "read-status", text: "읽음: 00:05" },
+    { type: "text-you", text: "뭐야" },
+    { type: "text-you", text: "그래..." },
+    { type: "text-you", text: "그럼 내가 晚安~~❤️" },
+    { type: "text-me", text: "ㅋㅋㅋ잘자용 형도" }
+    ]
+},
+     
+{
+  id: "sanghyunald1",
+  name: "상현이 ALD1",
+  avatar: "상",
+  time: "어제",
+  inputType: "iMessage",
+  messages: [
+    { type: "meta-center", text: "3월 23일 (월) 21:30" },
+
+    { type: "text-you", text: "형 미안해요 ...." },
+    { type: "text-you", text: "제가 오징어집 먹었어요 ㅠㅠ" },
+    { type: "text-me", text: "어떻게 알았어??" },
+    { type: "text-you", text: "ㅠㅠ" },
+    { type: "text-you", text: "죄송해요 형" },
+    { type: "text-me", text: "ㅋㅋㅋㅋㅋㅋ" },
+    { type: "text-me", text: "괜찮아 상현ㅎㅎ" },
+    { type: "text-you", text: "제가 또 사올게용..." },
+    { type: "text-you", text: "sorry bro🥹🥹" },
+    { type: "text-me", text: "괜찮아" },
+    { type: "text-me", text: "거누형이 사왔어 ㅎㅎ" },
+    { type: "text-you", text: "이미 리필됐어요??" },
+    { type: "text-you", text: "그럼 전 내일 오땅 채워놓을게요~~" },
+    { type: "text-you", text: "헤헤" },
+    { type: "text-me", text: "괜찮은데" },
+    { type: "text-me", text: "내일 같이 먹자~" },
+
+    { type: "meta-center", text: "3월 24일 (화) 15:40" },
+
+    { type: "text-you", text: "롱거~~~🥰🥰🥰" },
+    { type: "text-you", text: "머해요" },
+    { type: "text-you", text: "방이에요??" },
+    { type: "text-me", text: "응" },
+    { type: "text-me", text: "안신이랑 그냥 있지~" },
+    { type: "text-you", text: "오" },
+    { type: "text-you", text: "갈게용~ㅎㅎ" },
+    { type: "text-me", text: "ㅋㅋㅋㅋ" },
+    { type: "text-me", text: "조심히 와 ㅎㅎ" },
+    { type: "text-you", text: "형" },
+    { type: "text-you", text: "저 진짜 가도 돼요?" },
+    { type: "text-me", text: "맨날 오잖아" },
+    { type: "text-you", text: "그래도" },
+    { type: "text-you", text: "미리 물어보긴 해야죠" },
+    { type: "text-me", text: "..?" },
+    { type: "text-me", text: "착하다 막내 ㅎㅎ" },
+    { type: "text-me", text: "와도 돼" },
+    { type: "text-you", text: "형 뭐 하고 있었어요??" },
+    { type: "text-me", text: "그냥 누워있었어" },
+    { type: "text-me", text: "폰 보고" },
+    { type: "text-you", text: "그럼 저 가서 떠들어도 돼요..?" },
+    { type: "text-me", text: "이미 알고 있어" },
+    { type: "text-me", text: "익숙해 이미 ㅎㅎ" },
+    { type: "text-you", text: "아니에요" },
+    { type: "text-you", text: "저 조용할 수 있어요" },
+    { type: "text-me", text: "3분?" },
+    { type: "text-you", text: "?????" },
+    { type: "text-you", text: "에이!!!!!!!!" },
+    { type: "text-me", text: "2분?" },
+    { type: "text-you", text: "형" },
+    { type: "text-you", text: "저 진짜 상처받았어요" },
+    { type: "text-me", text: "농담이지 상혀니 귀여워서~ㅎㅎ" },
+    { type: "text-you", text: "므에엥" },
+    { type: "text-you", text: "저 지금 출발~!!" },
+    { type: "text-me", text: "벌써?" },
+    { type: "text-me", text: "조심히 와~" },
+
+    { type: "meta-center", text: "(어제) 22:54" },
+
+    { type: "text-me", text: "상혀나" },
+    { type: "text-me", text: "너 우리 방에 립밤 두고 갔어 ㅋㅋㅋ" },
+    { type: "text-you", text: "아어쩐지!!!!" },
+    { type: "text-you", text: "안보이더라구요" },
+    { type: "text-me", text: "ㅋㅋㅋㅋㅋㅋ" },
+    { type: "text-me", text: "침대 옆에 있엇어" },
+    { type: "text-you", text: "그거 제가 진짜 찾던 거예요" },
+    { type: "text-me", text: "다행이네~" },
+    { type: "text-you", text: "땡큐 롱~~~🥰🥰🥰🥰" },
+    { type: "text-me", text: "나중에 가져가" },
+    { type: "text-you", text: "네에" },
+    { type: "text-you", text: "립밤은 꼭 제일 필요할 때만 없어져" },
+    { type: "text-me", text: "그건 너가 놓고가서.." },
+    { type: "text-you", text: "에이" },
+    { type: "text-you", text: "그건 실수 ㅎㅎ" },
+    { type: "text-me", text: "여기 너 머리핀? 도 있어" },
+    { type: "text-you", text: "헐" },
+    { type: "text-you", text: "그것도 찾고 있었어요" },
+    { type: "text-me", text: "그리고" },
+    { type: "text-me", text: "충전기도" },
+    { type: "text-you", text: "......." },
+    { type: "text-me", text: "내일 다 줄게 ㅋㅋㅋ" },
+    { type: "read-status", text: "읽음: 어제" },
+    { type: "text-you", text: "네에...." }
+  ]
+},
+
+{
+  id: "sangwonald1",
+  name: "상원이형 ALD1",
+  avatar: "상",
+  time: "어제",
+  inputType: "iMessage",
+  messages: [
+    { type: "meta-center", text: "3월 25일 (수) 15:03" },
+
+    { type: "text-you", text: "롱아 준서형이랑 거실에서 영화 볼건데" },
+    { type: "text-you", text: "너랑 안신이도 같이 볼래?" },
+    { type: "text-me", text: "좋아요!" },
+    { type: "text-me", text: "뭐 봐용??" },
+    { type: "text-you", text: "call me by your name이라고 알아?" },
+    { type: "text-you", text: "로맨스 영화인데" },
+    { type: "text-you", text: "내 최애영화" },
+    { type: "text-me", text: "오 궁금해용" },
+    { type: "text-me", text: "슬픈 거예요??" },
+    { type: "text-you", text: "음" },
+    { type: "text-you", text: "좀 잔잔하고" },
+    { type: "text-you", text: "예쁘고" },
+    { type: "text-you", text: "약간 마음 아픈 영화..?" },
+    { type: "text-me", text: "저 그런 것도 좋아해요" },
+    { type: "text-you", text: "그럴 것 같았어 ㅎㅎ" },
+    { type: "text-me", text: "언제 봐요??" },
+    { type: "text-you", text: "방 정리 좀 하고" },
+    { type: "text-you", text: "한 30분 뒤?" },
+    { type: "text-me", text: "오케이" },
+    { type: "text-me", text: "거실에서 봐요~" },
+    { type: "text-you", text: "응응" },
+    { type: "text-you", text: "편한 거 입고 와" },
+    { type: "text-me", text: "이미 잠옷 입고 있어요.." },
+    { type: "text-you", text: "ㅋㅋㅋㅋㅋㅋ" },
+    { type: "text-me", text: "형 근데" },
+    { type: "text-me", text: "많이 슬퍼요?" },
+    { type: "text-you", text: "음" },
+    { type: "text-you", text: "조금" },
+    { type: "text-you", text: "보고 나면 여운 남는 정도?" },
+    { type: "text-me", text: "기대돼용😬😬😬" },
+    { type: "text-you", text: "나도 ㅎㅎ" },
+
+    { type: "meta-center", text: "(어제) 22:15" },
+
+    { type: "text-you", text: "롱아 너 팔찌도 많이 해?" },
+    { type: "text-me", text: "저는 악세사리 다 좋아하죠" },
+    { type: "text-me", text: "왜용??" },
+    { type: "text-you", text: "정리하다가" },
+    { type: "text-you", text: "너한테 잘 어울릴 것 같은 게 몇 개 있어서" },
+    { type: "text-you", text: "괜찮으면 방 와서 몇 개 골라~" },
+    { type: "text-me", text: "오!!!!" },
+    { type: "text-me", text: "상원형 고마워용ㅠㅠㅠㅠㅠ" },
+    { type: "text-you", text: "ㅋㅋㅋㅋㅋㅋ" },
+    { type: "text-you", text: "그렇게까지 좋아해?" },
+    { type: "text-me", text: "네!!!!" },
+    { type: "text-me", text: "저 이런 거 진짜 좋아해요" },
+    { type: "text-you", text: "잘됐다" },
+    { type: "text-me", text: "진짜 예쁠 것 같아용...." },
+    { type: "text-you", text: "음" },
+    { type: "text-you", text: "너무 기대하면 안되는데" },
+    { type: "text-me", text: "아니에요" },
+    { type: "text-me", text: "저번에 받은 목걸이도" },
+    { type: "text-me", text: "너무너무너무 좋았ㅓ요!!!!!" },
+    { type: "text-you", text: "ㅎㅎ" },
+    { type: "text-me", text: "저 씻고 30분뒤에 갈게용 !!" },
+    { type: "read-status", text: "읽음: 어제" },
+    { type: "text-you", text: "응 천천히 와~" }
+  ]
+},
+
+{
+  id: "leoald1",
+  name: "리오형 ALD1",
+  avatar: "리",
+  time: "어제",
+  inputType: "iMessage",
+  messages: [
+    { type: "meta-center", text: "3월 26일 (수) 16:24" },
+
+    { type: "text-me", text: "형 저희 저녁 또 훠궈에요??" },
+    { type: "text-you", text: "왜 싫어?" },
+    { type: "text-me", text: "아닉그건 아닌데" },
+    { type: "text-me", text: "형 훠궈 너무 좋아해요" },
+    { type: "text-you", text: "ㅋㅋㅋㅋㅋㅋ" },
+    { type: "text-you", text: "너무 중독적이야" },
+    { type: "text-you", text: "맨날 먹을 수 있어 진짜" },
+    { type: "text-me", text: "진짜 중국인보다 많이 먹어요 😬😬..." },
+    { type: "text-you", text: "왜 맛있잖아..ㅜㅜ" },
+    { type: "text-me", text: "맞긴 한데" },
+    { type: "text-me", text: "저번주에도 먹었잖아요" },
+    { type: "text-you", text: "그건 저번주고" },
+    { type: "text-you", text: "오늘은 오늘이지" },
+    { type: "text-me", text: "와.." },
+    { type: "text-you", text: "ㅎㅎ" },
+    { type: "text-you", text: "너도 맨날 같이 먹잖아" },
+    { type: "text-me", text: "저는" },
+    { type: "text-me", text: "그냥 같이 먹으니까 먹는 거" },
+    { type: "text-you", text: "제일 좋아하던데?" },
+    { type: "text-me", text: "…" },
+    { type: "text-me", text: "형보다는 아니에요" },
+    { type: "text-you", text: "ㅋㅋㅋㅋㅋㅋㅋㅋ" },
+    { type: "text-me", text: "다같이 먹어요?" },
+    { type: "text-you", text: "윗층 한 번 물어볼래?" },
+    { type: "text-me", text: "방금 물어봣어요" },
+    { type: "text-me", text: "좋대용.." },
+    { type: "text-me", text: "진짜 훠궈 중독" },
+    { type: "text-you", text: "빨리 와" },
+    { type: "text-you", text: "세팅해둘게 ㅎㅎ" },
+    { type: "text-me", text: "네~~😬😬" },
+
+    { type: "meta-center", text: "3월 29일 (일) 22:56" },
+
+    { type: "text-me", text: "형 오늘 고생많았어용!!!" },
+    { type: "text-you", text: "왜 갑자기 ㅎㅎ" },
+    { type: "text-me", text: "리더 일 하느라 수고 너무 많아용 ㅠㅠ" },
+    { type: "text-you", text: "롱아.." },
+    { type: "text-you", text: "힘이 난다 덕분에" },
+    { type: "text-me", text: "진짜에요" },
+    { type: "text-me", text: "오늘도 형 계속 이것저것 다 챙기고" },
+    { type: "text-me", text: "대형 같은거 맞추고" },
+    { type: "text-me", text: "너무 고생햇어요.." },
+    { type: "text-you", text: "너희가 다 도와줘서 괜찮아" },
+    { type: "text-you", text: "롱이가 많이 도와주잖아~" },
+    { type: "text-me", text: "에이아니에용" },
+    { type: "text-me", text: "형이 다 해줘서 저희 다 잘할 수 있어요" },
+    { type: "text-you", text: "아니야" },
+    { type: "text-you", text: "다 같이 한 거지" },
+    { type: "text-me", text: "형이 중심 잡아줘용 ㅎㅎ" },
+    { type: "text-you", text: "ㅠㅠ" },
+    { type: "text-you", text: "그런 말 들으면 진짜 힘난다ㅜㅜ" },
+    { type: "text-you", text: "그래도 리더는 원래 그런 거야" },
+    { type: "text-me", text: "I love you leo~🤟🤟" },
+    { type: "text-you", text: "ㅋㅋㅋㅋㅋㅋㅋㅋ" },
+    { type: "text-you", text: "love you long~" },
+
+    { type: "meta-center", text: "(어제) 21:08" },
+
+    { type: "text-me", text: "형 편의점 뭐 필요한거 있어용??" },
+    { type: "text-me", text: "음료수 사러 나왔어요!!" },
+    { type: "text-you", text: "아~~~~" },
+    { type: "text-you", text: "나 이제 관리해야되는데 진짜" },
+    { type: "text-me", text: "?????" },
+    { type: "text-me", text: "비슷한데용..?" },
+    { type: "text-you", text: "아냐" },
+    { type: "text-you", text: "나 좀 쉬었더니 다시 큰일난 것 같애 ㅠㅠ" },
+    { type: "text-me", text: "에이 괜찮아요" },
+    { type: "text-me", text: "춤 조금만 많이 추면 돼요" },
+    { type: "text-you", text: "그건맞지..ㅋㅋ" },
+    { type: "text-me", text: "ㅋㅋㅋㅋㅋㅋ" },
+    { type: "text-you", text: "….." },
+    { type: "text-you", text: "나 그럼" },
+    { type: "text-you", text: "몽쉘 하나만..ㅎㅎ" },
+    { type: "text-you", text: "Thanks bro~" },
+    { type: "text-me", text: "곧 도착😬" },
+    { type: "read-status", text: "읽음: 어제" },
+    { type: "text-you", text: "조심히 와~" }
+  ]
+},
+
+{
+  id: "anxin",
+  name: "安信 ALD1",
+  avatar: "安",
+  time: "화요일",
+  inputType: "iMessage",
+  messages: [
+    { type: "meta-center", text: "3월 23일 (월) 18:40" },
+
+    { type: "text-you", text: "隆隆" },
+    { type: "text-you", text: "你进来的时候顺便帮我拿下快递呗" },
+    { type: "text-me", text: "ok~" },
+    { type: "text-you", text: "谢啦隆～" },
+    { type: "text-me", text: "你又买啥了？" },
+    { type: "text-you", text: "我买的衣服到了" },
+    { type: "text-me", text: "又来？" },
+    { type: "text-you", text: "干嘛" },
+    { type: "text-me", text: "你怎么老有快递" },
+    { type: "text-you", text: "哪有" },
+    { type: "text-you", text: "这次真的是必需品" },
+    { type: "text-me", text: "你买啥了" },
+    { type: "text-you", text: "裤子和T恤" },
+    { type: "text-you", text: "还有一顶帽子" },
+    { type: "text-me", text: "那倒也是……" },
+    { type: "text-you", text: "要是有两个的话" },
+    { type: "text-you", text: "你都帮我拿上来呗" },
+    { type: "text-me", text: "行吧……" },
+    { type: "text-me", text: "我快到了" },
+    { type: "text-you", text: "辛苦啦～谢啦 😸😸" },
+
+    { type: "meta-center", text: "3월 27일 (금) 15:27" },
+
+    { type: "text-me", text: "安信" },
+    { type: "text-me", text: "你行李都收好了吗？" },
+    { type: "text-you", text: "嗯" },
+    { type: "text-you", text: "咋了？" },
+    { type: "text-me", text: "你带了什么衣服啊？" },
+    { type: "text-you", text: "就随便带了点" },
+    { type: "text-you", text: "几件T恤还有裤子" },
+    { type: "text-me", text: "外套呢？" },
+    { type: "text-you", text: "带了连帽外套和牛仔外套这种" },
+    { type: "text-me", text: "谢啦" },
+    { type: "text-me", text: "我有点拿不准外套该带多少……" },
+    { type: "text-you", text: "其实我也不太知道" },
+    { type: "text-me", text: "天气会一直都还行吗？" },
+    { type: "text-you", text: "不知道" },
+    { type: "text-you", text: "反正我先多带了点 😸😸" },
+    { type: "text-you", text: "不带够我会不安心" },
+    { type: "text-me", text: "这个我也是" },
+    { type: "text-you", text: "你不是每次都最后才收吗" },
+    { type: "text-you", text: "而且还总会漏带一个东西" },
+    { type: "text-me", text: "……" },
+    { type: "text-me", text: "一件夹克加一件连帽外套够吗" },
+    { type: "text-you", text: "我觉得晚上再多带一件卫衣会比较好" },
+    { type: "text-me", text: "ok 谢啦嘿嘿" },
+
+    { type: "meta-center", text: "3월 31일 (화) 20:28" },
+
+    { type: "text-you", text: "隆" },
+    { type: "text-you", text: "你是不是又没带充电器" },
+    { type: "text-me", text: "啊？" },
+    { type: "text-me", text: "我没带？？？" },
+    { type: "text-you", text: "嗯" },
+    { type: "text-you", text: "还原封不动放在床上呢" },
+    { type: "text-me", text: "还真是" },
+    { type: "text-you", text: "哈哈哈哈哈哈" },
+    { type: "text-you", text: "我帮你带出去" },
+    { type: "text-me", text: "你救了我啊安信 呜呜" },
+    { type: "text-you", text: "我就知道会这样" },
+    { type: "text-me", text: "真的差点完蛋……" },
+    { type: "text-you", text: "你每次都这样" },
+    { type: "text-me", text: "不是 我今天真的以为我带了" },
+    { type: "text-me", text: "我的恩人安信" },
+    { type: "text-me", text: "真的谢谢你" },
+    { type: "text-you", text: "嘿嘿" },
+    { type: "read-status", text: "읽음: 화요일" }
+  ]
+},
+
+{
+  id: "junseoald1",
+  name: "준서형 ALD1",
+  avatar: "준",
+  time: "화요일",
+  inputType: "iMessage",
+  messages: [
+    { type: "meta-center", text: "3월 24일 (수) 20:31" },
+
+    { type: "text-you", text: "롱아 배달 시킨 거 먹을래?" },
+    { type: "text-me", text: "뭐에요??" },
+    { type: "text-you", text: "뼈찜~" },
+    { type: "text-me", text: "오" },
+    { type: "text-me", text: "저번에 시켰던 그거예요?" },
+    { type: "text-you", text: "응 그거" },
+    { type: "text-me", text: "헐" },
+    { type: "text-me", text: "조아요" },
+    { type: "text-me", text: "나갈게용 ㅎㅎ" },
+    { type: "text-you", text: "식기 전에 빨리 와" },
+    { type: "text-me", text: "저 아직 머리 안 말렸어요" },
+    { type: "text-you", text: "그럼 더 빨리 와" },
+    { type: "text-me", text: "ㅋㅋㅋㅋㅋㅋ" },
+    { type: "text-me", text: "안신이도 같이 가요" },
+    { type: "text-you", text: "안신이도 먹는대?" },
+    { type: "text-me", text: "방금 물어봤는데" },
+    { type: "text-me", text: "왜이럭게 느리냐고 뭐라고 해요.." },
+    { type: "text-you", text: "역시" },
+    { type: "text-me", text: "형 매운맛 몇 단계예요" },
+    { type: "text-you", text: "보통" },
+    { type: "text-me", text: "에이" },
+    { type: "text-me", text: "형 왜 맨날 약하게 먹어요~ㅋㅋ" },
+    { type: "text-you", text: "너 지난번에 맵다고 물 4컵 마셨잖아" },
+    { type: "text-me", text: "그건 컨디션이 안좋앗어요. ;;" },
+    { type: "text-you", text: "그래 롱아가~" },
+    { type: "text-me", text: "....." },
+
+    { type: "meta-center", text: "3월 31일 (화) 10:47" },
+
+    { type: "text-you", text: "헬스장 갈 건데 같이 갈래?" },
+    { type: "text-me", text: "???" },
+    { type: "text-me", text: "지금용??" },
+    { type: "text-you", text: "응" },
+    { type: "text-me", text: "…" },
+    { type: "text-me", text: "오늘은 쉴래요.." },
+    { type: "text-you", text: "왜" },
+    { type: "text-you", text: "피곤해?" },
+    { type: "text-you", text: "늦게 잤어?" },
+    { type: "text-me", text: "그건 아닌데" },
+    { type: "text-me", text: "피곤해요ㅠㅠ" },
+    { type: "text-you", text: "어제도 쉰다고 하지 않았어 롱아?ㅎㅎ" },
+    { type: "text-me", text: "어제는 진짜 쉬는 날이고" },
+    { type: "text-me", text: "오늘은" },
+    { type: "text-me", text: "마음이 쉬고 싶어요" },
+    { type: "text-you", text: "너 한국어 왜 이렇게 잘해" },
+    { type: "text-you", text: "순간뽀짝 다시 나갈래..?" },
+    { type: "text-me", text: "ㅎㅎㅎㅎ" },
+    { type: "text-me", text: "같이 쉬어요 형~~~" },
+    { type: "text-you", text: "그럼 오늘은 쉬고" },
+    { type: "text-you", text: "내일은 같이 가자 ㅎㅎ" },
+    { type: "text-me", text: "…" },
+    { type: "text-me", text: "노력해볼게요" },
+    { type: "text-you", text: "왜 이렇게 자신이 없어" },
+    { type: "text-me", text: "형이 가자는 시간 너무 빨라요" },
+    { type: "text-you", text: "11시가 뭐가 빨라" },
+    { type: "text-me", text: "제 기준 아침" },
+    { type: "text-you", text: "에이 솔직히 11시면 이제 곧 점심인데" },
+    { type: "text-me", text: "아니아니아니" },
+    { type: "text-me", text: "요즘 다들 늦게 자니깐.." },
+    { type: "text-you", text: "안되겠네" },
+    { type: "text-me", text: "그래도" },
+    { type: "text-me", text: "형이랑 운동하면 좋긴 해용 ㅎㅎ" },
+    { type: "text-me", text: "전문 느낌" },
+    { type: "text-you", text: "그럼 같이 가자 ㅎㅎ" },
+    { type: "text-me", text: "형" },
+    { type: "text-me", text: "잘 다녀와요" },
+    { type: "text-you", text: "...." },
+    { type: "text-me", text: "조심히 해용 ㅎㅎ😬😬" },
+    { type: "read-status", text: "읽음: 화요일" },
+    { type: "text-you", text: "그려..ㅎㅎ" }
+  ]
+},
+
+{
+  id: "haogeald1",
+  name: "豪哥 ALD1",
+  avatar: "豪",
+  time: "금요일",
+  inputType: "iMessage",
+  messages: [
+    { type: "meta-center", text: "3월 25일 (수) 20:28" },
+
+    { type: "text-you", text: "https://youtube.com/shorts/" },
+    { type: "text-you", text: "这个你知道吧？" },
+    { type: "text-me", text: "嗯" },
+    { type: "text-me", text: "大概知道" },
+    { type: "text-you", text: "大概哈哈" },
+    { type: "text-you", text: "那明天练一下对一对吧" },
+    { type: "text-me", text: "哦" },
+    { type: "text-me", text: "好呀" },
+    { type: "text-me", text: "哥你舞都记完了吗？" },
+    { type: "text-you", text: "差不多吧" },
+    { type: "text-you", text: "感觉把细节顺一顺就差不多了" },
+    { type: "text-me", text: "也太快了吧……" },
+    { type: "text-me", text: "果然是神" },
+    { type: "text-you", text: "哈哈哈哈哈" },
+    { type: "text-you", text: "你不也在神身边嘛👼👼" },
+    { type: "text-me", text: "😬😬..." },
+    { type: "text-me", text: "不过这个比想象中细节还挺多的" },
+    { type: "text-you", text: "嗯" },
+    { type: "text-you", text: "手的角度还有踩点 timing 对上了应该会挺好看" },
+    { type: "text-me", text: "什么时候拍啊？" },
+    { type: "text-you", text: "明天练完之后？" },
+    { type: "text-you", text: "隆隆，你明天啥时候去练习室？" },
+    { type: "text-me", text: "明天起床了就直接去呗？" },
+    { type: "text-me", text: "还是先吃个午饭再去啊" },
+    { type: "text-you", text: "嗯" },
+    { type: "text-you", text: "那吃完午饭一起去吧" },
+    { type: "text-me", text: "那就明天在团体练习之前先提前练一下" },
+    { type: "text-me", text: "把细节对一对再拍？" },
+    { type: "text-you", text: "可以" },
+    { type: "text-me", text: "我会在神身边努力学习的👼" },
+    { type: "text-you", text: "哈哈哈哈哈" },
+
+    { type: "meta-center", text: "3월 27일 (금) 20:28" },
+
+    { type: "text-me", text: "豪哥终于要去哥老家了诶～" },
+    { type: "text-you", text: "哈哈对啊" },
+    { type: "text-you", text: "终于要去了" },
+    { type: "text-me", text: "哥是不是有点激动？？" },
+    { type: "text-you", text: "说实话有一点" },
+    { type: "text-you", text: "毕竟挺久没回去了，应该会有点奇妙" },
+    { type: "text-me", text: "没有时间回家看看吗？" },
+    { type: "text-you", text: "应该没有吧" },
+    { type: "text-you", text: "因为马上就要直接去广州了" },
+    { type: "text-me", text: "啊啊" },
+    { type: "text-me", text: "那有点可惜" },
+    { type: "text-you", text: "嗯" },
+    { type: "text-you", text: "哪怕就见一面也挺好的" },
+    { type: "text-me", text: "家里人会来吗？" },
+    { type: "text-you", text: "不会" },
+    { type: "text-you", text: "感觉时间对不上" },
+    { type: "text-me", text: "哎呀……" },
+    { type: "text-me", text: "那哥应该会有点遗憾吧" },
+    { type: "text-you", text: "没事" },
+    { type: "text-you", text: "以后再单独见就好了" },
+    { type: "text-me", text: "也是" },
+    { type: "text-you", text: "你呢？" },
+    { type: "text-me", text: "我妈和我姐说会来哦" },
+    { type: "text-me", text: "而且还说要把狗狗也带来哈哈" },
+    { type: "text-you", text: "狗狗也来？" },
+    { type: "text-me", text: "对哈哈" },
+    { type: "text-you", text: "那也太可爱了吧" },
+    { type: "text-you", text: "到时候给我看看" },
+    { type: "text-me", text: "那肯定 😬😬" },
+    { type: "read-status", text: "읽음: 금요일" }
+  ]
+},
+
+{
+  id: "delivery",
+  name: "+82 10-1140-5290",
+  avatar: "",
+  defaultAvatar: true,
+  time: "2026. 3. 9.",
+  inputType: "문자 메시지 · RCS",
+  messages: [
+    {
+      type: "meta-center",
+      text: "3월 9일 (월) 10:21"
+    },
+    {
+      type: "text-you",
+      text:
+`[CJ대한통운]
+[Web발신][CJ대한통운_배송출발]
+
+반갑습니다, 고객님.
+고객님의 소중한 상품이 배송 예정입니다.
+
+· 보내는분 : CHICGROOV
+· 상품명 : [PCCVISION]—피그먼트—프린팅—디스트로이드—오픈넥—후드—티셔츠
+· 배송예정시간 : 13-15시
+
+※ 위탁장소 선택, 실시간 배송정보
+https://www.cjlogistics.com/
+
+※ 무인락커 사용안내
+https://www.cjlogistics.com/
+
+일요일에도 신속하게!!
+모두를 위한 매일매일 배송
+CJ대한통운 매일오네(O-NE)`
+    },
+
+    {
+      type: "meta-center",
+      text: "3월 9일 (월) 14:38"
+    },
+    {
+      type: "text-you",
+      text:
+`[CJ대한통운]
+[Web발신][CJ대한통운_배송완료]
+
+일요일에도 신속하게!!
+모두를 위한 매일매일 배송
+CJ대한통운 매일오네(O-NE)
+
+고객님의 상품이 배송 완료되었습니다.
+ㆍ보내는분 : CHICGROOV
+ㆍ상품명 : [PCCVISION]—피그먼트—프린팅—디스트로이드—오픈넥—후드—티셔츠
+ㆍ인수자(위탁장소) : 문앞
+ㆍ운송장번호 : 993482082110
+
+모두를 위한 단 하나의 배송!
+CJ대한통운 오네
+
+※ CJ대한통운 고객센터 : 1588-1255`
+    }
+  ]
+},
+     
+  {
+  id: "service0505",
+  name: "#0505",
+  avatar: "#",
+  time: "2026. 1. 24.",
+  inputType: "문자 메시지 · RCS",
+  messages: [
+    { type: "meta-center", text: "1월 24일 (토) 15:45" },
+    { type: "text-me", text: "ALPHA DRIVE ONE" }
+  ]
+}
+  ];
+
+  let xlCurrentThreadId = null;
+
+function getThreadPreview(thread) {
+  if (!thread.messages || !thread.messages.length) return "";
+
+  const last = thread.messages[thread.messages.length - 1];
+
+  let text = "";
+
+  if (last.type === "text-me" || last.type === "text-you") {
+    text = last.text;
+  } else if (last.type === "image-me" || last.type === "image-you") {
+    return "사진";
+  } else if (last.type === "voice-me" || last.type === "voice-you") {
+    return "음성 메시지";
+  } else if (last.type === "meta-center" || last.type === "read-status") {
+    const textMessage = [...thread.messages].reverse().find(
+      (item) => item.type === "text-me" || item.type === "text-you"
+    );
+    text = textMessage ? textMessage.text : "";
+  }
+
+  // 🔥 핵심: 줄 단위로 잘라서 2줄만 반환
+  const lines = text.split("\n").filter(line => line.trim() !== "");
+  return lines.slice(0, 2).join("\n");
+}
+
+  function createAvatarHTML(thread) {
+    if (thread.defaultAvatar) {
+      return `
+        <div class="messages-thread-avatar messages-thread-avatar-default">
+          <span class="messages-thread-avatar-head"></span>
+          <span class="messages-thread-avatar-body"></span>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="messages-thread-avatar">
+        <span class="messages-thread-avatar-char">${thread.avatar || ""}</span>
+      </div>
+    `;
+  }
+
+  function renderThreadList() {
+    xlMessagesThreadList.innerHTML = xlMessageThreads.map((thread) => `
+      <button class="messages-thread-row" type="button" data-thread-id="${thread.id}">
+        ${createAvatarHTML(thread)}
+
+        <div class="messages-thread-main">
+          <div class="messages-thread-name">${thread.name}</div>
+          <div class="messages-thread-preview">${getThreadPreview(thread)}</div>
+        </div>
+
+        <div class="messages-thread-time">${thread.time}</div>
+        <div class="messages-thread-chevron"></div>
+      </button>
+    `).join("");
+  }
+
+  function setDetailHeader(thread) {
+    if (xlMessagesDetailName) {
+      xlMessagesDetailName.textContent = thread.name;
+    }
+
+    if (xlMessagesInputPlaceholder) {
+      xlMessagesInputPlaceholder.textContent = thread.inputType || "iMessage";
+    }
+
+    if (messagesDetailAvatar) {
+      messagesDetailAvatar.classList.toggle("is-default", !!thread.defaultAvatar);
+    }
+
+    if (messagesDetailAvatarChar) {
+      messagesDetailAvatarChar.textContent = thread.defaultAvatar ? "" : (thread.avatar || "");
+    }
+  }
+
+  function renderMessageItem(message) {
+    if (message.type === "meta-center") {
+      return `<div class="messages-meta-center">${message.text}</div>`;
+    }
+
+    if (message.type === "read-status") {
+      return `<div class="messages-read-status">${message.text}</div>`;
+    }
+
+    if (message.type === "text-you") {
+      return `
+        <div class="messages-row you">
+          <div class="messages-bubble">${message.text}</div>
+        </div>
+      `;
+    }
+
+    if (message.type === "text-me") {
+      return `
+        <div class="messages-row me">
+          <div class="messages-bubble">${message.text}</div>
+        </div>
+      `;
+    }
+
+    if (message.type === "image-you") {
+      return `
+        <div class="messages-row you">
+          <div class="messages-bubble image-bubble">
+            <img src="${message.src}" alt="">
+          </div>
+        </div>
+      `;
+    }
+
+    if (message.type === "image-me") {
+      return `
+        <div class="messages-row me">
+          <div class="messages-bubble image-bubble">
+            <img src="${message.src}" alt="">
+          </div>
+        </div>
+      `;
+    }
+
+if (message.type === "voice-you") {
+  return `
+    <div class="messages-row you">
+      <div class="messages-bubble voice-bubble">
+        <img src="assets/icons/message_record_bubble_you.png" alt="">
+      </div>
+    </div>
+  `;
+}
+
+if (message.type === "voice-me") {
+  return `
+    <div class="messages-row me">
+      <div class="messages-bubble voice-bubble">
+        <img src="assets/icons/message_record_bubble_me.png" alt="">
+      </div>
+    </div>
+  `;
+}
+
+    return "";
+  }
+
+  function openXlThread(threadId) {
+  const thread = xlMessageThreads.find((item) => item.id === threadId);
+  if (!thread) return;
+
+  xlCurrentThreadId = threadId;
+  setXlDetailHeader(thread);
+  xlMessagesConversation.innerHTML = thread.messages.map(renderXlMessageItem).join("");
+  xlMessagesScreen.classList.add("detail-open");
+
+  requestAnimationFrame(() => {
+    if (xlMessagesDetailScroll) {
+      xlMessagesDetailScroll.scrollTop = xlMessagesDetailScroll.scrollHeight;
+    }
+  });
+}
+
+function closeXlThread() {
+  xlCurrentThreadId = null;
+  xlMessagesScreen.classList.remove("detail-open");
+
+  if (xlMessagesListScroll) {
+    xlMessagesListScroll.scrollTop = 0;
+  }
+}
+
+  xlMessagesThreadList.addEventListener("click", (event) => {
+  const row = event.target.closest(".messages-thread-row");
+  if (!row || !xlMessagesScreen.classList.contains("active")) return;
+  openXlThread(row.dataset.threadId);
+});
+
+if (xlMessagesDetailBack) {
+  xlMessagesDetailBack.addEventListener("click", (event) => {
+    event.stopPropagation();
+    closeXlThread();
+  });
+}
+
+window.resetXlMessagesAppState = function () {
+  closeXlThread();
+
+  if (xlMessagesListScroll) {
+    xlMessagesListScroll.scrollTop = 0;
+  }
+
+  if (xlMessagesDetailScroll) {
+    xlMessagesDetailScroll.scrollTop = 0;
+  }
+};
+
+  renderThreadList();
 })();
