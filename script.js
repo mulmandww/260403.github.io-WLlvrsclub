@@ -143,7 +143,7 @@ function hideAllAppScreens() {
 /* =========================
    REPLY PAGE
 ========================= */
-const REPLY_API_URL = "https://script.google.com/macros/s/AKfycbzA0TFWpQYVy9Y4qHOXdN_cI0glj0XbiAulaYEbaofAO-zjS-0V10trHvT5S-nx9Yf_/exec";
+const REPLY_API_URL = "https://script.google.com/macros/s/AKfycbyyE9oBLHmGfldWjyMU5tdk5ixQCcxFaellBdd4sSnK2Fz1YXiyewsDD5nTh4eUp_IAlw/exec";
 const REPLY_STORAGE_KEY = "woolong_reply_entries";
 
 const replyForbiddenWords = [
