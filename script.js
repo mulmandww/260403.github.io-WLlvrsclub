@@ -7661,3 +7661,484 @@ window.resetXlMessagesAppState = function () {
   renderXlKakaoConversation();
   scrollXlKakaoToBottom();
 })();
+
+
+
+/* =========================
+   XL INSTAGRAM APP
+========================= */
+(function initXlInstagramApp() {
+  const xlInstagramScreen = document.getElementById("xlInstagramScreen");
+  if (!xlInstagramScreen) return;
+
+  const xlInstagramProfilePage = document.getElementById("xlInstagramProfilePage");
+  const xlInstagramStoryPage = document.getElementById("xlInstagramStoryPage");
+  const xlInstagramPostDetailPage = document.getElementById("xlInstagramPostDetailPage");
+
+  const xlInstagramPostGrid = document.getElementById("xlInstagramPostGrid");
+
+  const xlInstagramStoryOpenBtn = document.getElementById("xlInstagramStoryOpenBtn");
+  const xlInstagramStoryCloseBtn = document.getElementById("xlInstagramStoryCloseBtn");
+  const xlInstagramStoryStage = document.getElementById("xlInstagramStoryStage");
+  const xlInstagramStoryProgress = document.getElementById("xlInstagramStoryProgress");
+  const xlInstagramStoryPrevHit = document.getElementById("xlInstagramStoryPrevHit");
+  const xlInstagramStoryNextHit = document.getElementById("xlInstagramStoryNextHit");
+
+  const xlInstagramPostDetailBack = document.getElementById("xlInstagramPostDetailBack");
+  const xlInstagramPostDetailScroll = document.getElementById("xlInstagramPostDetailScroll");
+  const xlInstagramPostSlider = document.getElementById("xlInstagramPostSlider");
+  const xlInstagramPostDots = document.getElementById("xlInstagramPostDots");
+  const xlInstagramPostCounter = document.getElementById("xlInstagramPostCounter");
+  const xlInstagramPostTimeAgo = document.getElementById("xlInstagramPostTimeAgo");
+  const xlInstagramPostCaption = document.getElementById("xlInstagramPostCaption");
+
+  const xlInstagramHeartToggleBtn = document.getElementById("xlInstagramHeartToggleBtn");
+  const xlInstagramHeartToggleIcon = document.getElementById("xlInstagramHeartToggleIcon");
+
+  if (
+    !xlInstagramProfilePage ||
+    !xlInstagramStoryPage ||
+    !xlInstagramPostDetailPage ||
+    !xlInstagramPostGrid ||
+    !xlInstagramStoryStage ||
+    !xlInstagramStoryProgress ||
+    !xlInstagramPostSlider ||
+    !xlInstagramPostDots ||
+    !xlInstagramPostCounter ||
+    !xlInstagramPostTimeAgo ||
+    !xlInstagramPostCaption ||
+    !xlInstagramHeartToggleBtn ||
+    !xlInstagramHeartToggleIcon
+  ) return;
+
+  let xlCurrentStoryIndex = 0;
+  let xlCurrentPost = null;
+  let xlCurrentPostIndex = 0;
+  let xlCurrentHeartFilled = false;
+
+  let xlIsSliderDragging = false;
+  let xlSuppressGridClick = false;
+  let xlDragStartX = 0;
+  let xlDragStartScrollLeft = 0;
+
+  function setActiveXlInstagramPage(targetPage) {
+    [
+      xlInstagramProfilePage,
+      xlInstagramStoryPage,
+      xlInstagramPostDetailPage
+    ].forEach((page) => {
+      if (!page) return;
+      page.classList.remove("active");
+    });
+
+    if (targetPage) {
+      targetPage.classList.add("active");
+    }
+  }
+
+  const XL_INSTAGRAM_BASE_PATH = "assets/pictures/ig/xl";
+
+const XL_INSTAGRAM_STORIES = [
+  { src: `${XL_INSTAGRAM_BASE_PATH}/insta_story_1.jpg`, timeAgo: "12시간 전" },
+  { src: `${XL_INSTAGRAM_BASE_PATH}/insta_story_2.jpg`, timeAgo: "8시간 전" },
+  { src: `${XL_INSTAGRAM_BASE_PATH}/insta_story_3.jpg`, timeAgo: "3분 전" }
+];
+
+const XL_INSTAGRAM_POSTS = [
+  { id: 16, type: "image", mediaCount: 13, timeAgo: "2026년 3월 22일", caption: "✈️" },
+  { id: 15, type: "image", mediaCount: 17, timeAgo: "2026년 3월 11일", caption: "🎂" },
+  { id: 14, type: "image", mediaCount: 7, timeAgo: "2026년 3월 4일", caption: "🌟✨🌟" },
+  { id: 13, type: "image", mediaCount: 4, timeAgo: "2026년 3월 2일", caption: "😬😬⚡️" },
+  { id: 12, type: "image", mediaCount: 4, timeAgo: "2026년 2월 26일", caption: "📸&🍓" },
+  { id: 11, type: "image", mediaCount: 6, timeAgo: "2026년 2월 18일", caption: "❤️" },
+  { id: 10, type: "image", mediaCount: 3, timeAgo: "2026년 2월 15일", caption: "👓" },
+  { id: 9, type: "image", mediaCount: 8, timeAgo: "2026년 2월 10일", caption: "🏆" },
+  { id: 8, type: "image", mediaCount: 5, timeAgo: "2026년 2월 8일", caption: "🤟" },
+  { id: 7, type: "image", mediaCount: 9, timeAgo: "2026년 2월 8일", caption: "🎞️" },
+  { id: 6, type: "image", mediaCount: 9, timeAgo: "2026년 1월 29일", caption: "📸" },
+  { id: 5, type: "image", mediaCount: 11, timeAgo: "2026년 1월 11일", caption: "💤" },
+  { id: 4, type: "image", mediaCount: 7, timeAgo: "2026년 1월 2일", caption: "💐" },
+  { id: 3, type: "image", mediaCount: 3, timeAgo: "2025년 12월 5일", caption: "❄️🌨️⛄️" },
+  { id: 2, type: "image", mediaCount: 3, timeAgo: "2025년 11월 29일", caption: "😎" },
+  { id: 1, type: "image", mediaCount: 4, timeAgo: "2025년 11월 6일", caption: "😬🕺" }
+
+];
+
+const xlInstagramStoryTime = xlInstagramStoryPage.querySelector(".instagram-story-time");
+
+function getXlFallbackPostMediaItems(post) {
+  return Array.from({ length: post.mediaCount }, (_, index) => ({
+    type: post.type,
+    index: index + 1
+  }));
+}
+
+function getXlPostMediaItems(post) {
+  if (Array.isArray(post.media) && post.media.length) {
+    return post.media.map((item, index) => ({
+      type: item.type || "image",
+      index: index + 1,
+      src: item.src || "",
+      poster: item.poster || ""
+    }));
+  }
+
+  return getXlFallbackPostMediaItems(post);
+}
+
+function getXlPostMediaPath(postId, media) {
+  if (media.src) return media.src;
+  const ext = media.type === "video" ? "mp4" : "jpg";
+  return `${XL_INSTAGRAM_BASE_PATH}/insta_post_${postId}-${media.index}.${ext}`;
+}
+
+function getXlPostMediaPosterPath(postId, media) {
+  if (media.poster) return media.poster;
+  return `${XL_INSTAGRAM_BASE_PATH}/insta_post_${postId}-${media.index}.jpg`;
+}
+
+function getXlGridCoverPath(post) {
+  const firstMedia = getXlPostMediaItems(post)[0];
+  if (!firstMedia) return "";
+
+  if (firstMedia.type === "video") {
+    return getXlPostMediaPosterPath(post.id, firstMedia);
+  }
+
+  return getXlPostMediaPath(post.id, firstMedia);
+}
+
+function getXlGridOverlayIconPath(post) {
+  const mediaItems = getXlPostMediaItems(post);
+  const hasVideo = mediaItems.some((item) => item.type === "video");
+
+  if (hasVideo) return "assets/icons/insta_post_video.png";
+  if (mediaItems.length > 1) return "assets/icons/insta_post_pictures.png";
+  return "";
+}
+
+function renderXlInstagramGrid() {
+  xlInstagramPostGrid.innerHTML = XL_INSTAGRAM_POSTS.map((post) => {
+    const coverPath = getXlGridCoverPath(post);
+    const overlayIconPath = getXlGridOverlayIconPath(post);
+
+    const overlayIcon = overlayIconPath
+      ? `
+        <span class="instagram-grid-stack-badge">
+          <img src="${overlayIconPath}" alt="" class="instagram-grid-stack-icon">
+        </span>
+      `
+      : "";
+
+    return `
+      <button class="instagram-grid-item" type="button" data-instagram-post-id="${post.id}">
+        <div class="instagram-grid-preview">
+          <img src="${coverPath}" alt="" loading="lazy" class="instagram-grid-media">
+        </div>
+        ${overlayIcon}
+      </button>
+    `;
+  }).join("");
+}
+
+function renderXlStoryProgress() {
+  xlInstagramStoryProgress.innerHTML = XL_INSTAGRAM_STORIES.map((_, index) => {
+    let stateClass = "";
+    if (index < xlCurrentStoryIndex) stateClass = "is-done";
+    if (index === xlCurrentStoryIndex) stateClass = "is-active";
+
+    return `
+      <div class="instagram-story-progress-bar ${stateClass}">
+        <div class="instagram-story-progress-fill"></div>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderXlStory() {
+  const story = XL_INSTAGRAM_STORIES[xlCurrentStoryIndex];
+  if (!story) return;
+
+  xlInstagramStoryStage.innerHTML = `<img src="${story.src}" alt="" class="instagram-story-image">`;
+
+  if (xlInstagramStoryTime) {
+    xlInstagramStoryTime.textContent = story.timeAgo;
+  }
+
+  renderXlStoryProgress();
+}
+
+function openXlStoryViewer() {
+  xlCurrentStoryIndex = 0;
+  renderXlStory();
+  setActiveXlInstagramPage(xlInstagramStoryPage);
+}
+
+function goToNextXlStory() {
+  if (xlCurrentStoryIndex >= XL_INSTAGRAM_STORIES.length - 1) {
+    setActiveXlInstagramPage(xlInstagramProfilePage);
+    return;
+  }
+
+  xlCurrentStoryIndex += 1;
+  renderXlStory();
+}
+
+function goToPrevXlStory() {
+  if (xlCurrentStoryIndex <= 0) return;
+  xlCurrentStoryIndex -= 1;
+  renderXlStory();
+}
+
+function renderXlPostDots(count, activeIndex) {
+  if (count <= 1) {
+    xlInstagramPostDots.innerHTML = "";
+    return;
+  }
+
+  xlInstagramPostDots.innerHTML = Array.from({ length: count }, (_, index) => `
+    <span class="instagram-post-dot ${index === activeIndex ? "active" : ""}"></span>
+  `).join("");
+}
+
+function updateXlPostCounter(count, activeIndex) {
+  xlInstagramPostCounter.textContent = `${activeIndex + 1}/${count}`;
+}
+
+function updateXlHeartIcon() {
+  xlInstagramHeartToggleIcon.src = xlCurrentHeartFilled
+    ? "assets/icons/insta_heart_fill.png"
+    : "assets/icons/insta_heart_empty.png";
+}
+
+function forceXlSliderToFirst() {
+  if (!xlInstagramPostSlider) return;
+
+  xlCurrentPostIndex = 0;
+  xlInstagramPostSlider.scrollLeft = 0;
+  xlInstagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
+
+  requestAnimationFrame(() => {
+    xlInstagramPostSlider.scrollLeft = 0;
+    xlInstagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
+  });
+
+  setTimeout(() => {
+    xlInstagramPostSlider.scrollLeft = 0;
+    xlInstagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
+    syncXlPostSliderState();
+  }, 0);
+
+  setTimeout(() => {
+    xlInstagramPostSlider.scrollLeft = 0;
+    xlInstagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
+    syncXlPostSliderState();
+  }, 120);
+}
+
+function renderXlPostDetail(postId) {
+  const post = XL_INSTAGRAM_POSTS.find((item) => item.id === Number(postId));
+  if (!post) return;
+
+  xlCurrentPost = post;
+  xlCurrentPostIndex = 0;
+  xlCurrentHeartFilled = false;
+
+  const mediaItems = getXlPostMediaItems(post);
+
+  const slidesHTML = mediaItems.map((media) => {
+    const src = getXlPostMediaPath(post.id, media);
+
+    if (media.type === "video") {
+      return `
+        <div class="instagram-post-slide">
+          <video
+            src="${src}"
+            poster="${getXlPostMediaPosterPath(post.id, media)}"
+            controls
+            playsinline
+            preload="metadata"
+          ></video>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="instagram-post-slide">
+        <img src="${src}" alt="" loading="lazy">
+      </div>
+    `;
+  }).join("");
+
+  xlInstagramPostSlider.innerHTML = slidesHTML;
+  xlInstagramPostTimeAgo.textContent = post.timeAgo;
+  xlInstagramPostCaption.innerHTML = post.caption
+    ? `<strong>wxcyrcl</strong> ${post.caption}`
+    : "";
+
+  updateXlHeartIcon();
+  renderXlPostDots(mediaItems.length, 0);
+  updateXlPostCounter(mediaItems.length, 0);
+
+  setActiveXlInstagramPage(xlInstagramPostDetailPage);
+
+  if (xlInstagramPostDetailScroll) {
+    xlInstagramPostDetailScroll.scrollTop = 0;
+  }
+
+  forceXlSliderToFirst();
+}
+
+function syncXlPostSliderState() {
+  if (!xlCurrentPost) return;
+
+  const mediaCount = getXlPostMediaItems(xlCurrentPost).length;
+  const slideWidth = xlInstagramPostSlider.clientWidth || 1;
+  const index = Math.round(xlInstagramPostSlider.scrollLeft / slideWidth);
+
+  xlCurrentPostIndex = Math.max(0, Math.min(index, mediaCount - 1));
+  renderXlPostDots(mediaCount, xlCurrentPostIndex);
+  updateXlPostCounter(mediaCount, xlCurrentPostIndex);
+}
+
+  function startXlSliderDrag(clientX) {
+    xlIsSliderDragging = true;
+    xlSuppressGridClick = false;
+    xlDragStartX = clientX;
+    xlDragStartScrollLeft = xlInstagramPostSlider.scrollLeft;
+    xlInstagramPostSlider.classList.add("dragging");
+  }
+
+  function moveXlSliderDrag(clientX) {
+    if (!xlIsSliderDragging) return;
+
+    const deltaX = clientX - xlDragStartX;
+    if (Math.abs(deltaX) > 4) {
+      xlSuppressGridClick = true;
+    }
+
+    xlInstagramPostSlider.scrollLeft = xlDragStartScrollLeft - deltaX;
+  }
+
+  function endXlSliderDrag() {
+    if (!xlIsSliderDragging) return;
+
+    xlIsSliderDragging = false;
+    xlInstagramPostSlider.classList.remove("dragging");
+    requestAnimationFrame(syncXlPostSliderState);
+
+    setTimeout(() => {
+      xlSuppressGridClick = false;
+    }, 60);
+  }
+
+  function resetXlInstagramAppState() {
+    setActiveXlInstagramPage(xlInstagramProfilePage);
+    xlCurrentStoryIndex = 0;
+    xlCurrentPost = null;
+    xlCurrentPostIndex = 0;
+    xlCurrentHeartFilled = false;
+    xlIsSliderDragging = false;
+    xlSuppressGridClick = false;
+
+    if (xlInstagramPostSlider) {
+      xlInstagramPostSlider.scrollLeft = 0;
+      xlInstagramPostSlider.scrollTo({ left: 0, behavior: "auto" });
+      xlInstagramPostSlider.innerHTML = "";
+      xlInstagramPostSlider.classList.remove("dragging");
+    }
+
+    if (xlInstagramPostDots) {
+      xlInstagramPostDots.innerHTML = "";
+    }
+
+    if (xlInstagramPostCounter) {
+      xlInstagramPostCounter.textContent = "1/1";
+    }
+
+    if (xlInstagramPostCaption) {
+      xlInstagramPostCaption.innerHTML = "";
+    }
+
+    updateXlHeartIcon();
+  }
+
+  xlInstagramPostGrid.addEventListener("click", (event) => {
+    if (xlSuppressGridClick) return;
+
+    const button = event.target.closest(".instagram-grid-item");
+    if (!button) return;
+    renderXlPostDetail(button.dataset.instagramPostId);
+  });
+
+  if (xlInstagramStoryOpenBtn) {
+    xlInstagramStoryOpenBtn.addEventListener("click", openXlStoryViewer);
+  }
+
+  if (xlInstagramStoryCloseBtn) {
+    xlInstagramStoryCloseBtn.addEventListener("click", () => {
+      setActiveXlInstagramPage(xlInstagramProfilePage);
+    });
+  }
+
+  if (xlInstagramStoryNextHit) {
+    xlInstagramStoryNextHit.addEventListener("click", goToNextXlStory);
+  }
+
+  if (xlInstagramStoryPrevHit) {
+    xlInstagramStoryPrevHit.addEventListener("click", goToPrevXlStory);
+  }
+
+  if (xlInstagramPostDetailBack) {
+    xlInstagramPostDetailBack.addEventListener("click", () => {
+      setActiveXlInstagramPage(xlInstagramProfilePage);
+    });
+  }
+
+  if (xlInstagramPostSlider) {
+    xlInstagramPostSlider.addEventListener("scroll", () => {
+      requestAnimationFrame(syncXlPostSliderState);
+    });
+
+    xlInstagramPostSlider.addEventListener("mousedown", (event) => {
+      startXlSliderDrag(event.clientX);
+    });
+
+    window.addEventListener("mousemove", (event) => {
+      moveXlSliderDrag(event.clientX);
+    });
+
+    window.addEventListener("mouseup", endXlSliderDrag);
+
+    xlInstagramPostSlider.addEventListener("mouseleave", endXlSliderDrag);
+
+    xlInstagramPostSlider.addEventListener("touchstart", (event) => {
+      if (!event.touches[0]) return;
+      startXlSliderDrag(event.touches[0].clientX);
+    }, { passive: true });
+
+    xlInstagramPostSlider.addEventListener("touchmove", (event) => {
+      if (!event.touches[0]) return;
+      moveXlSliderDrag(event.touches[0].clientX);
+    }, { passive: true });
+
+    xlInstagramPostSlider.addEventListener("touchend", endXlSliderDrag);
+    xlInstagramPostSlider.addEventListener("touchcancel", endXlSliderDrag);
+
+    xlInstagramPostSlider.addEventListener("dragstart", (event) => {
+      event.preventDefault();
+    });
+  }
+
+  if (xlInstagramHeartToggleBtn) {
+    xlInstagramHeartToggleBtn.addEventListener("click", () => {
+      xlCurrentHeartFilled = !xlCurrentHeartFilled;
+      updateXlHeartIcon();
+    });
+  }
+
+  window.resetXlInstagramAppState = resetXlInstagramAppState;
+
+  renderXlInstagramGrid();
+  resetXlInstagramAppState();
+})();
