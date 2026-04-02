@@ -7198,6 +7198,16 @@ messages-image-top-btn
   margin-left: auto;
 }
 
+.reply-submit-btn,
+.reply-refresh-btn {
+  font-size: 14px;
+  font-weight: 700;
+  color: #222;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 @media (max-width: 768px) {
   .reply-shell {

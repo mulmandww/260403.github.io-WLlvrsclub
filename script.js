@@ -143,12 +143,14 @@ function hideAllAppScreens() {
 /* =========================
    REPLY PAGE
 ========================= */
-const REPLY_API_URL = "https://script.google.com/macros/s/AKfycbzEb9p1NYAXZYHOzISmqZ1t4DtJvms8ei4z9Jq3frNfXzbTUC1apiisDm0IcbdvV4t6BQ/exec";
+const REPLY_API_URL = "https://script.google.com/macros/s/AKfycbzA0TFWpQYVy9Y4qHOXdN_cI0glj0XbiAulaYEbaofAO-zjS-0V10trHvT5S-nx9Yf_/exec";
 const REPLY_STORAGE_KEY = "woolong_reply_entries";
 
 const replyForbiddenWords = [
-  "씨발", "시발", "병신", "개새끼", "좆", "fuck", "bitch", "sex", "섹스",
-  "자살", "죽어", "뒤져", "꺼져", "미친놈", "미친년"
+  '씨발','시발','ㅅㅂ','ㅆㅂ','병신','븅신','빙신','ㅂㅅ','좆','존나','존내','조낸','ㅈㄴ',
+'지랄','ㅈㄹ','개새끼','개새','새끼','미친놈','미친년','미친새끼','또라이','또라이새끼',
+'씹새끼','씹년','씹놈','개병신','개같네','좆같','병신같','염병','쌍년','걸레','호로새끼',
+'닥쳐','꺼져','꺼져라','죽어','뒤져','뒤져라','엿먹어','fuck','bitch','자살','죽어','뒤져','꺼져','꺼졌','죽었','뒤졌'
 ];
 
 async function getReplyEntriesFromAPI() {
