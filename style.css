@@ -7217,8 +7217,10 @@ messages-image-top-btn
   .reply-frame {
     padding: 18px;
     border-radius: 28px;
+    transform: scale(0.9);
+    transform-origin: top center;
   }
-
+  
   .reply-top-card {
     flex-direction: column;
     gap: 16px;

@@ -187,32 +187,6 @@ function formatReplyDate(dateString) {
   return `${y}.${m}.${d}. ${hh}:${mm}`;
 }
 
-function getTodayReplyCount(entries) {
-  const now = new Date();
-  const y = now.getFullYear();
-  const m = now.getMonth();
-  const d = now.getDate();
-
-  return entries.filter((item) => {
-    const created = new Date(item.created_at);
-    return (
-      created.getFullYear() === y &&
-      created.getMonth() === m &&
-      created.getDate() === d
-    );
-  }).length;
-}
-
-function updateReplyCounts(entries = []) {
-  if (replyTodayCount) {
-    replyTodayCount.textContent = String(getTodayReplyCount(entries));
-  }
-
-  if (replyTotalCount) {
-    replyTotalCount.textContent = String(entries.length);
-  }
-}
-
 function createReplyItemHTML(item) {
   return `
     <article class="reply-item" data-reply-id="${item.id}">
