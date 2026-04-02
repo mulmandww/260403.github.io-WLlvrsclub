@@ -8224,7 +8224,7 @@ function renderXlPostDetail(postId) {
   xlInstagramPostSlider.innerHTML = slidesHTML;
   xlInstagramPostTimeAgo.textContent = post.timeAgo;
   xlInstagramPostCaption.innerHTML = post.caption
-    ? `<strong>wxcyrcl</strong> ${post.caption}`
+    ? `<strong>gnol.nixx</strong> ${post.caption}`
     : "";
 
   updateXlHeartIcon();
