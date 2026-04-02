@@ -214,14 +214,12 @@ async function renderReplyList() {
 
     if (!entries.length) {
       replyList.innerHTML = "";
-      updateReplyCounts(entries);
       return;
     }
 
     replyList.innerHTML = entries.map(createReplyItemHTML).join("");
-    updateReplyCounts(entries);
   } catch (error) {
-    console.error(error);
+    console.error("renderReplyList error:", error);
     replyList.innerHTML = "";
   }
 }
