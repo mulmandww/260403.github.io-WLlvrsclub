@@ -6948,3 +6948,318 @@ messages-image-top-btn
   filter: blur(12px);
   transform: scale(1.08);
 }
+
+
+/* =============================
+   방명록 분기
+============================= */
+.reply-page {
+  position: fixed;
+  inset: 0;
+  background: #efeded;
+  z-index: 9999;
+  display: none;
+  overflow-y: auto;
+}
+
+.reply-page.active {
+  display: block;
+}
+
+.reply-shell {
+  min-height: 100%;
+  padding: 48px 24px;
+  box-sizing: border-box;
+}
+
+.reply-frame {
+  max-width: 1180px;
+  margin: 0 auto;
+  border: 1.5px solid #7f7f7f;
+  border-radius: 36px;
+  background: #ece8e8;
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+.reply-top-card,
+.reply-board-card {
+  border: 1.5px solid #7f7f7f;
+  border-radius: 24px;
+  background: #efeded;
+}
+
+.reply-top-card {
+  display: flex;
+  gap: 28px;
+  padding: 28px;
+  margin-bottom: 20px;
+}
+
+.reply-profile-photo-wrap {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.reply-profile-photo {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+.reply-profile-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  color: #eb2e79;
+  font-weight: 700;
+}
+
+.reply-profile-date {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.reply-profile-title,
+.reply-profile-sub {
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.reply-profile-counts {
+  margin-top: auto;
+  color: #111;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.reply-profile-counts strong {
+  color: #eb2e79;
+}
+
+.reply-board-card {
+  padding: 24px;
+}
+
+.reply-board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  gap: 16px;
+}
+
+.reply-board-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111;
+}
+
+.reply-board-url {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+}
+
+.reply-write-box {
+  display: flex;
+  gap: 18px;
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 22px;
+}
+
+.reply-write-icon-wrap {
+  width: 128px;
+  flex-shrink: 0;
+}
+
+.reply-write-icon {
+  width: 100%;
+  display: block;
+}
+
+.reply-write-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.reply-notice {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.reply-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1.5px solid #a8a8a8;
+  border-radius: 8px;
+  background: #fff;
+  font: inherit;
+  padding: 12px 14px;
+}
+
+.reply-nickname-input {
+  margin-bottom: 10px;
+  height: 44px;
+}
+
+.reply-message-input {
+  min-height: 120px;
+  resize: none;
+}
+
+.reply-write-bottom {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reply-char-count {
+  font-size: 14px;
+  color: #666;
+}
+
+.reply-submit-btn,
+.reply-delete-btn,
+.reply-close-btn {
+  border: 1.5px solid #7f7f7f;
+  background: #fff;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reply-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.reply-item {
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.reply-item-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #222;
+}
+
+.reply-item-date {
+  color: #444;
+  font-weight: 600;
+}
+
+.reply-item-body {
+  display: flex;
+  gap: 18px;
+}
+
+.reply-item-icon-wrap {
+  width: 108px;
+  flex-shrink: 0;
+}
+
+.reply-item-icon {
+  width: 100%;
+  display: block;
+}
+
+.reply-item-message {
+  flex: 1;
+  min-height: 110px;
+  border: 1.5px solid #a8a8a8;
+  border-radius: 8px;
+  background: #fff;
+  padding: 14px;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 18px;
+  color: #222;
+}
+
+.reply-item-actions {
+  margin-left: auto;
+}
+
+
+@media (max-width: 768px) {
+  .reply-shell {
+    padding: 28px 16px 36px;
+  }
+
+  .reply-frame {
+    padding: 18px;
+    border-radius: 28px;
+  }
+
+  .reply-top-card {
+    flex-direction: column;
+    gap: 16px;
+    padding: 18px;
+  }
+
+  .reply-profile-photo-wrap {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .reply-profile-date,
+  .reply-profile-title,
+  .reply-profile-sub {
+    font-size: 18px;
+  }
+
+  .reply-profile-counts {
+    margin-top: 16px;
+    font-size: 16px;
+  }
+
+  .reply-board-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reply-board-title {
+    font-size: 20px;
+  }
+
+  .reply-board-url {
+    font-size: 14px;
+  }
+
+  .reply-write-box,
+  .reply-item-body {
+    flex-direction: column;
+  }
+
+  .reply-write-icon-wrap,
+  .reply-item-icon-wrap {
+    width: 120px;
+  }
+
+  .reply-message-input {
+    min-height: 100px;
+  }
+
+  .reply-item-message {
+    min-height: 90px;
+    font-size: 16px;
+  }
+}

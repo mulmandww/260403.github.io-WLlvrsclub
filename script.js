@@ -38,6 +38,17 @@ const entryGateDots = [
   document.getElementById("entryGateDot4")
 ].filter(Boolean);
 const entryGateKeyButtons = document.querySelectorAll(".entry-gate-key");
+const replyPage = document.getElementById("replyPage");
+const replyCloseBtn = document.getElementById("replyCloseBtn");
+
+const replyTodayCount = document.getElementById("replyTodayCount");
+const replyTotalCount = document.getElementById("replyTotalCount");
+
+const replyNicknameInput = document.getElementById("replyNicknameInput");
+const replyMessageInput = document.getElementById("replyMessageInput");
+const replyMessageCount = document.getElementById("replyMessageCount");
+const replySubmitBtn = document.getElementById("replySubmitBtn");
+const replyList = document.getElementById("replyList");
 
 
 /* 홈화면 앱 */
@@ -70,6 +81,7 @@ if (glassPopupTime) glassPopupTime.textContent = "";
    비밀번호
 ========================= */
 const ENTRY_GATE_PASSWORD = "4399";
+const REPLY_GATE_PASSWORD = "5121";
 const GW_LOCK_PASSWORD = "0411";
 
 let currentInput = "";
@@ -127,6 +139,236 @@ function hideAllAppScreens() {
     screen.classList.remove("active", "opening", "closing");
   });
 }
+
+/* =========================
+   REPLY PAGE
+========================= */
+const REPLY_API_URL = "https://script.google.com/macros/s/AKfycbzEb9p1NYAXZYHOzISmqZ1t4DtJvms8ei4z9Jq3frNfXzbTUC1apiisDm0IcbdvV4t6BQ/exec";
+const REPLY_STORAGE_KEY = "woolong_reply_entries";
+
+const replyForbiddenWords = [
+  "씨발", "시발", "병신", "개새끼", "좆", "fuck", "bitch", "sex", "섹스",
+  "자살", "죽어", "뒤져", "꺼져", "미친놈", "미친년"
+];
+
+async function getReplyEntriesFromAPI() {
+  const response = await fetch(`${REPLY_API_URL}?action=list`);
+  const data = await response.json();
+
+  if (!data.ok) {
+    throw new Error(data.error || "댓글 목록 불러오기 실패");
+  }
+
+  return Array.isArray(data.items) ? data.items : [];
+}
+
+function saveReplyEntries(entries) {
+  localStorage.setItem(REPLY_STORAGE_KEY, JSON.stringify(entries));
+}
+
+function escapeHTML(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function formatReplyDate(dateString) {
+  const date = new Date(dateString);
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  const hh = String(date.getHours()).padStart(2, "0");
+  const mm = String(date.getMinutes()).padStart(2, "0");
+  return `${y}.${m}.${d}. ${hh}:${mm}`;
+}
+
+function getTodayReplyCount(entries) {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = now.getMonth();
+  const d = now.getDate();
+
+  return entries.filter((item) => {
+    const created = new Date(item.created_at);
+    return (
+      created.getFullYear() === y &&
+      created.getMonth() === m &&
+      created.getDate() === d
+    );
+  }).length;
+}
+
+function updateReplyCounts(entries = []) {
+  if (replyTodayCount) {
+    replyTodayCount.textContent = String(getTodayReplyCount(entries));
+  }
+
+  if (replyTotalCount) {
+    replyTotalCount.textContent = String(entries.length);
+  }
+}
+
+function createReplyItemHTML(item) {
+  return `
+    <article class="reply-item" data-reply-id="${item.id}">
+      <div class="reply-item-head">
+        <div class="reply-item-author">${escapeHTML(item.nickname)}</div>
+        <div class="reply-item-date">(${formatReplyDate(item.created_at)})</div>
+      </div>
+
+      <div class="reply-item-body">
+        <div class="reply-item-icon-wrap">
+          <img src="assets/icons/reply_icon.jpg" alt="" class="reply-item-icon">
+        </div>
+
+        <div class="reply-item-message">${escapeHTML(item.message)}</div>
+      </div>
+    </article>
+  `;
+}
+
+async function renderReplyList() {
+  if (!replyList) return;
+
+  try {
+    const entries = (await getReplyEntriesFromAPI()).slice().reverse();
+
+    if (!entries.length) {
+      replyList.innerHTML = "";
+      updateReplyCounts(entries);
+      return;
+    }
+
+    replyList.innerHTML = entries.map(createReplyItemHTML).join("");
+    updateReplyCounts(entries);
+  } catch (error) {
+    console.error(error);
+    replyList.innerHTML = "";
+  }
+}
+
+function updateReplyCharCount() {
+  if (!replyMessageInput || !replyMessageCount) return;
+  replyMessageCount.textContent = String(replyMessageInput.value.length);
+}
+
+function containsForbiddenWord(text) {
+  const normalized = String(text || "").toLowerCase();
+  return replyForbiddenWords.some((word) => normalized.includes(word.toLowerCase()));
+}
+
+function resetReplyForm() {
+  if (replyNicknameInput) replyNicknameInput.value = "";
+  if (replyMessageInput) replyMessageInput.value = "";
+  updateReplyCharCount();
+}
+
+function openReplyPage() {
+  if (!replyPage) return;
+
+  closeEntryFlow();
+  replyPage.classList.add("active");
+  replyPage.setAttribute("aria-hidden", "false");
+
+  renderReplyList();
+  updateReplyCharCount();
+
+  setTimeout(() => {
+    if (replyNicknameInput) {
+      replyNicknameInput.focus();
+    }
+  }, 60);
+}
+
+async function closeReplyPage() {
+  if (!replyPage) return;
+
+  replyPage.classList.remove("active");
+  replyPage.setAttribute("aria-hidden", "true");
+
+  if (entryFlow) {
+    entryFlow.classList.add("active");
+  }
+
+  entryGateResetInput();
+  await setActiveEntryScreen(entryGatePasscodeScreen);
+}
+
+async function submitReplyEntry() {
+  if (!replyNicknameInput || !replyMessageInput) return;
+
+  const nickname = replyNicknameInput.value.trim();
+  const message = replyMessageInput.value.trim();
+
+  if (!nickname) {
+    alert("닉네임을 입력해주세요.");
+    replyNicknameInput.focus();
+    return;
+  }
+
+  if (!message) {
+    alert("내용을 입력해주세요.");
+    replyMessageInput.focus();
+    return;
+  }
+
+  if (containsForbiddenWord(nickname) || containsForbiddenWord(message)) {
+    alert("사용할 수 없는 표현이 포함되어 있습니다.");
+    return;
+  }
+
+  try {
+    const response = await fetch(REPLY_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify({
+        action: "create",
+        nickname,
+        message
+      })
+    });
+
+    const data = await response.json();
+
+    if (!data.ok) {
+      alert(data.error || "댓글 등록에 실패했습니다.");
+      return;
+    }
+
+    resetReplyForm();
+    await renderReplyList();
+  } catch (error) {
+    console.error(error);
+    alert("댓글 등록 중 오류가 발생했습니다.");
+  }
+}
+
+if (replyMessageInput) {
+  replyMessageInput.addEventListener("input", updateReplyCharCount);
+}
+
+if (replySubmitBtn) {
+  replySubmitBtn.addEventListener("click", submitReplyEntry);
+}
+
+if (replyMessageInput) {
+  replyMessageInput.addEventListener("keydown", (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+      event.preventDefault();
+      submitReplyEntry();
+    }
+  });
+}
+
+if (replyCloseBtn) {
+  replyCloseBtn.addEventListener("click", closeReplyPage);
+}
+
 
 /* =========================
    ENTRY FLOW
@@ -225,6 +467,12 @@ function checkEntryGatePassword() {
     return;
   }
 
+  if (entryGateInput === REPLY_GATE_PASSWORD) {
+    openReplyPage();
+    entryGateResetInput();
+    return;
+  }
+
   if (entryGatePasscodeWrap) {
     entryGatePasscodeWrap.classList.add("shake");
   }
@@ -286,6 +534,8 @@ setTimeout(() => {
   openEntryFlow();
 }, 40);
 
+renderReplyList();
+updateReplyCharCount();
 
 /* =========================
    잠금화면 -> 암호입력
@@ -2696,7 +2946,11 @@ window.resetMessagesAppState = function () {
 "320.jpeg",
 "321.JPG",
 "322.jpeg",
-"323.JPG"
+"323.JPG",
+"324.jpeg",
+"325.jpeg",
+"326.jpeg",
+"327.jpeg"
 
     // 여기에 계속 추가
     // "004.png",
@@ -5035,7 +5289,29 @@ weather: {
 "379.jpg",
 "380.jpg",
 "381.jpg",
-"382.jpg"
+"382.jpg",
+"382_1.jpg",
+"382_2.jpg",
+"383.jpg",
+"384.jpeg",
+"385.jpeg",
+"386.JPG",
+"387.JPG",
+"388.JPG",
+"389.jpeg",
+"390.jpeg",
+"391.jpeg",
+"392.jpeg",
+"393.jpeg",
+"394.JPG",
+"395.JPG",
+"396.jpeg",
+"397.jpeg",
+"398.jpeg",
+"399.jpeg",
+"400.JPG",
+"401.jpeg",
+"402.JPG"
 
 
     // 여기에 계속 추가
