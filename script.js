@@ -197,7 +197,7 @@ function createReplyItemHTML(item) {
 
       <div class="reply-item-body">
         <div class="reply-item-icon-wrap">
-          <img src="assets/icons/reply_icon.jpg" alt="" class="reply-item-icon">
+          <img src="assets/icons/reply_icon.png" alt="" class="reply-item-icon">
         </div>
 
         <div class="reply-item-message">${escapeHTML(item.message)}</div>
