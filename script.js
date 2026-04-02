@@ -7741,7 +7741,8 @@ window.resetXlMessagesAppState = function () {
 const XL_INSTAGRAM_STORIES = [
   { src: `${XL_INSTAGRAM_BASE_PATH}/insta_story_1.jpg`, timeAgo: "12시간 전" },
   { src: `${XL_INSTAGRAM_BASE_PATH}/insta_story_2.jpg`, timeAgo: "8시간 전" },
-  { src: `${XL_INSTAGRAM_BASE_PATH}/insta_story_3.jpg`, timeAgo: "3분 전" }
+  { src: `${XL_INSTAGRAM_BASE_PATH}/insta_story_3.jpg`, timeAgo: "3시간 전" },
+  { src: `${XL_INSTAGRAM_BASE_PATH}/insta_story_4.jpg`, timeAgo: "3분 전" }
 ];
 
 const XL_INSTAGRAM_POSTS = [
