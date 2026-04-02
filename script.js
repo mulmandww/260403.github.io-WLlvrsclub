@@ -8395,3 +8395,31 @@ function syncXlPostSliderState() {
   renderXlInstagramGrid();
   resetXlInstagramAppState();
 })();
+
+
+/* =========================
+   DOUBLE TAP ZOOM BLOCK
+========================= */
+let lastTouchEnd = 0;
+
+document.addEventListener("touchend", (event) => {
+  const now = Date.now();
+  if (now - lastTouchEnd <= 300) {
+    event.preventDefault();
+  }
+  lastTouchEnd = now;
+}, { passive: false });
+
+
+/* =========================
+   IMAGE SAVE / RIGHT CLICK BLOCK
+========================= */
+document.addEventListener("contextmenu", (event) => {
+  event.preventDefault();
+});
+
+document.addEventListener("dragstart", (event) => {
+  if (event.target.closest("img")) {
+    event.preventDefault();
+  }
+});
